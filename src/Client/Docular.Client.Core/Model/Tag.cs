@@ -13,6 +13,16 @@ namespace Docular.Client.Core.Model
     public class Tag : DocularObject
     {
         /// <summary>
+        /// The <see cref="Tag"/>'s name.
+        /// </summary>
+        public String Name { get; private set; }
+
+        /// <summary>
+        /// The <see cref="Tag"/>'s name.
+        /// </summary>
+        public String Description { get; private set; }
+
+        /// <summary>
         /// Gets all <see cref="Document"/>s with the <see cref="Tag"/>.
         /// </summary>
         /// <returns>An array of <see cref="Document"/>s that are tagged with the <see cref="Tag"/>.</returns>

@@ -13,6 +13,16 @@ namespace Docular.Client.Core.Model
     public class Category : DocularObject
     {
         /// <summary>
+        /// The <see cref="Category"/>'s name.
+        /// </summary>
+        public String Name { get; private set; }
+
+        /// <summary>
+        /// The <see cref="Category"/>'s description.
+        /// </summary>
+        public String Description { get; private set; }
+
+        /// <summary>
         /// Gets all <see cref="Document"/>s within the <see cref="Category"/>.
         /// </summary>
         /// <returns>An array of <see cref="Document"/>s that are within the <see cref="Category"/>.</returns>

@@ -11,5 +11,8 @@ namespace Docular.Client.Core.Model
     /// </summary>
     public class Document : DocularObject
     {
+        public String ThumbnailPath { get; private set; }
+
+        public String PayloadPath { get; private set; }
     }
 }

@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\CustomField.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\DocularObject.cs" />
     <Compile Include="Model\Tag.cs" />
