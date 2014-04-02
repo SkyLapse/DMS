@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMS.Client.Core.Model
+namespace Docular.Client.Core.Model
 {
     /// <summary>
     /// Represents a category.
     /// </summary>
-    public class Category : DmsObject
+    public class Category : DocularObject
     {
         /// <summary>
         /// Gets all <see cref="Document"/>s within the <see cref="Category"/>.

@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMS.Client.Core.Model
+namespace Docular.Client.Core.Model
 {
     /// <summary>
-    /// Represents an object in the DMS database.
+    /// Represents an object in the Docular database.
     /// </summary>
-    public class DmsObject
+    public class DocularObject
     {
         /// <summary>
         /// The ID. See remarks.
@@ -20,9 +20,9 @@ namespace DMS.Client.Core.Model
         public int Id { get; protected set; }
 
         /// <summary>
-        /// Initializes a new <see cref="DmsObject"/>.
+        /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
-        protected DmsObject()
+        protected DocularObject()
         {
             this.Id = -1;
         }

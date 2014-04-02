@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DMS.Client.Core.Model
+namespace Docular.Client.Core.Model
 {
     /// <summary>
     /// Represents a tag.
     /// </summary>
-    public class Tag : DmsObject
+    public class Tag : DocularObject
     {
         /// <summary>
         /// Gets all <see cref="Document"/>s with the <see cref="Tag"/>.
