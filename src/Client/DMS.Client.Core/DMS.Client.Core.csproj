@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Document.cs" />
+    <Compile Include="Model\DmsObject.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

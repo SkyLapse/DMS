@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DMS.Client.Core.Model
 {
-    public class User
+    /// <summary>
+    /// Represents a user.
+    /// </summary>
+    public class User : DmsObject
     {
     }
 }

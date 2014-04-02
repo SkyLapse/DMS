@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DMS.Client.Core.Model
 {
-    public class Document
+    /// <summary>
+    /// Represents a stored document.
+    /// </summary>
+    public class Document : DmsObject
     {
     }
 }
