@@ -14,25 +14,22 @@ namespace Docular.Client.Core.Model
     public class DocularObject
     {
         /// <summary>
-        /// The ID. See remarks.
+        /// The unique Id.
         /// </summary>
-        /// <remarks>May not be smaller than -1.</remarks>
-        public int Id { get; protected set; }
+        public String Id { get; protected set; }
 
         /// <summary>
         /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
-        protected DocularObject()
-        {
-            this.Id = -1;
-        }
+        protected DocularObject() { }
 
         /// <summary>
-        /// Contains Contract.Invariant definitions.
+        /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
-        private void ObjectInvariant()
+        /// <param name="id">The unique Id.</param>
+        protected DocularObject(String id)
         {
-            Contract.Invariant(this.Id >= -1);
+            this.Id = id;
         }
     }
 }
