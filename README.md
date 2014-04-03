@@ -7,6 +7,7 @@ A distributed document management system, released under [MIT license] (https://
 - See the [Python coding standard](http://legacy.python.org/dev/peps/pep-0008/#a-foolish-consistency-is-the-hobgoblin-of-little-minds) for further information
 
 ### C#-Coding Standard
+- Mostly regular C# coding conventions
 - Allman indentation style
  - Single-line auto-properties, multi-line manually implemented properties
  - Don't nest consecutive IDisposable-using statements, [see this] (http://stackoverflow.com/a/9396092/2000501) instead
