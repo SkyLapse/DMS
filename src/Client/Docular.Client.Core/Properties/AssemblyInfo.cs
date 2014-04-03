@@ -7,12 +7,12 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("Docular.Client.Core")]
-[assembly: AssemblyDescription("The core worker library for the Docular Docular.")]
+[assembly: AssemblyDescription("The core worker library for the Docular DMS.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SkyLapse")]
 [assembly: AssemblyProduct("Docular.Client.Core")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("Docular")]
+[assembly: AssemblyTrademark("Docular DMS")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("de")]
 
