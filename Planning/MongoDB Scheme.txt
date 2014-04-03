@@ -1,0 +1,38 @@
+MongoDB Schema
+==============
+
+## Collections:
+- Documents
+- Categories
+- Tags
+- Users
+
+### Documents
+
+```
+{
+    _id: ObjectId(<id>),
+    name: "Title",
+    documentPath: "<path">,
+    thumbnailPath: "<path>",
+    createInfo: {
+        date: Date(),
+        user: ObjectId(<user._id>)
+    },
+    editInfo: {
+        date: Date(),
+        user: ObjectId(<user._id>)
+    },
+    content: "<extracted content>",
+    category: ObjectId(<category._id>),
+    tags: [ ObjectId(<tag._id>), ... ]
+    buzzwords: [ 
+        { text: "<buzzword", commonness: 0.XX },
+        ...
+    ],
+    customFields: [
+        { name: "<name>", value: "<value>" },
+        ...
+    ]
+}
+```
