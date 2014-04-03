@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Docular.Client.Core.Rest
 {
-    interface IDocularClient
+    /// <summary>
+    /// Defines the way to work with a docular database.
+    /// </summary>
+    public interface IDocularClient
     {
+
     }
 }

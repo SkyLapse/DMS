@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Docular.Client.Core.Rest;
 
 namespace Docular.Client.Core.Model
 {
@@ -11,8 +13,107 @@ namespace Docular.Client.Core.Model
     /// </summary>
     public class Document : DocularObject
     {
-        public String ThumbnailPath { get; private set; }
+        /// <summary>
+        /// Contains all repeatedly occuring words in the extracted content.
+        /// </summary>
+        public String[] Buzzwords { get; private set; }
 
-        public String PayloadPath { get; private set; }
+        /// <summary>
+        /// Gets the <see cref="Category"/> the <see cref="Document"/> belongs to.
+        /// </summary>
+        public Category Category { get; set; }
+
+        /// <summary>
+        /// Gets information about the creation of the <see cref="Document"/>.
+        /// </summary>
+        public MetaInfo CreateInfo { get; private set; }
+
+        /// <summary>
+        /// Gets information about the last edit of the <see cref="Document"/>.
+        /// </summary>
+        public MetaInfo EditInfo { get; private set; }
+
+        /// <summary>
+        /// Contains the extracted content that was read via OCR or some other content recognition method.
+        /// </summary>
+        public String ExtractedContent { get; private set; }
+
+        /// <summary>
+        /// The <see cref="Uri"/> of the payload.
+        /// </summary>
+        public Uri PayloadPath { get; private set; }
+
+        /// <summary>
+        /// The <see cref="Uri"/> of the thumbnail image.
+        /// </summary>
+        public Uri ThumbnailPath { get; private set; }
+
+        /// <summary>
+        /// Gets all <see cref="Tag"/>s associated with the <see cref="Document"/>.
+        /// </summary>
+        public Tag[] Tags { get; set; }
+
+        /// <summary>
+        /// Initializes a new <see cref="Document"/>.
+        /// </summary>
+        private Document() 
+        {
+            this.Buzzwords = Enumerable.Empty<String>().ToArray();
+            this.ExtractedContent = String.Empty;
+            this.PayloadPath = new Uri(String.Empty);
+            this.ThumbnailPath = new Uri(String.Empty);
+        }
+
+        /// <summary>
+        /// Initializes a new <see cref="Document"/>.
+        /// </summary>
+        /// <param name="buzzwords">All repeatedly occuring words in the extracted content.</param>
+        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Document"/>.</param>
+        /// <param name="createInfo">Information about the creation of the <see cref="Document"/>.</param>
+        /// <param name="editInfo">Information about the last edit of the <see cref="Document"/>.</param>
+        /// <param name="extractedContent">Extracted content that was read via OCR or some other content recognition method.</param>
+        /// <param name="payloadPath">The <see cref="Uri"/> of the payload.</param>
+        /// <param name="thumbnailPath">The <see cref="Uri"/> of the thumbnail image.</param>
+        public Document(
+                    IDocularClient client,
+                    MetaInfo createInfo,
+                    MetaInfo editInfo,
+                    String[] buzzwords,
+                    String extractedContent,
+                    Uri payloadPath,
+                    Uri thumbnailPath
+                )
+            : base(client)
+        {
+            Contract.Requires<ArgumentNullException>(client != null);
+            Contract.Requires<ArgumentNullException>(buzzwords != null && extractedContent != null);
+            Contract.Requires<ArgumentNullException>(payloadPath != null && thumbnailPath != null);
+
+            this.CreateInfo = createInfo;
+            this.EditInfo = editInfo;
+            this.PayloadPath = payloadPath;
+            this.ThumbnailPath = thumbnailPath;
+        }
+
+        /// <summary>
+        /// Saves the document to the server.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
+        public Task Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Contains Contract.Invariant definitions.
+        /// </summary>
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(this.Buzzwords != null);
+            Contract.Invariant(this.ExtractedContent != null);
+            Contract.Invariant(this.PayloadPath != null);
+            Contract.Invariant(this.ThumbnailPath != null);
+        }
     }
 }
