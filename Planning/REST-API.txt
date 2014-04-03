@@ -4,20 +4,22 @@ REST-API
 Every specified URL is prefixed by http://_yoursite.com_/api/
 
 ### Documents:
-- Retreive: documents/$id (GET)
+- Retreive: documents/$objectid (GET)
 - Add: documents/new (POST)
-- Edit: documents/$id (PUT)
-- Delete: documents/$id (DELETE)
-- Thumbnail-Path: documents/$id/thumbnail (GET)
-- Payload-Path: documents/$id/payload (GET)
+- Edit: documents/$objectid (PUT)
+- Delete: documents/$objectid (DELETE)
+- Thumbnail-Path: documents/$objectid/thumbnail (GET)
+- Payload-Path: documents/$objectid/payload (GET)
 
 ### Tags:
+- Retreive: tags/$id/documents (GET)
 - Retreive: tags/$id (GET)
 - Add: tags/new (POST)
 - Edit: tags/$id (PUT)
 - Delete tags/$id (DELETE)
 
 ### Categories:
+- Retreive: categories/$id/documents (GET)
 - Retreive: categories/$id (GET)
 - Add: categories/new (POST)
 - Edit: categories/$id (PUT)
