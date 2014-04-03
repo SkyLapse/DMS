@@ -109,11 +109,12 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Buzzword.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\CustomField.cs" />
     <Compile Include="Model\Document.cs" />
     <Compile Include="Model\DocularObject.cs" />
-    <Compile Include="Model\MetaInfo.cs" />
+    <Compile Include="Model\ChangeInfo.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

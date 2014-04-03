@@ -16,7 +16,7 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Contains all repeatedly occuring words in the extracted content.
         /// </summary>
-        public String[] Buzzwords { get; private set; }
+        public Buzzword[] Buzzwords { get; private set; }
 
         /// <summary>
         /// Gets the <see cref="Category"/> the <see cref="Document"/> belongs to.
@@ -26,12 +26,12 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Gets information about the creation of the <see cref="Document"/>.
         /// </summary>
-        public MetaInfo CreateInfo { get; private set; }
+        public ChangeInfo CreateInfo { get; private set; }
 
         /// <summary>
         /// Gets information about the last edit of the <see cref="Document"/>.
         /// </summary>
-        public MetaInfo EditInfo { get; private set; }
+        public ChangeInfo EditInfo { get; private set; }
 
         /// <summary>
         /// Contains the extracted content that was read via OCR or some other content recognition method.
@@ -58,7 +58,7 @@ namespace Docular.Client.Core.Model
         /// </summary>
         private Document() 
         {
-            this.Buzzwords = Enumerable.Empty<String>().ToArray();
+            this.Buzzwords = Enumerable.Empty<Buzzword>().ToArray();
             this.ExtractedContent = String.Empty;
             this.PayloadPath = new Uri(String.Empty);
             this.ThumbnailPath = new Uri(String.Empty);
@@ -76,9 +76,9 @@ namespace Docular.Client.Core.Model
         /// <param name="thumbnailPath">The <see cref="Uri"/> of the thumbnail image.</param>
         public Document(
                     IDocularClient client,
-                    MetaInfo createInfo,
-                    MetaInfo editInfo,
-                    String[] buzzwords,
+                    ChangeInfo createInfo,
+                    ChangeInfo editInfo,
+                    Buzzword[] buzzwords,
                     String extractedContent,
                     Uri payloadPath,
                     Uri thumbnailPath

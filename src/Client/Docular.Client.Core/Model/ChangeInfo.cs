@@ -9,7 +9,7 @@ namespace Docular.Client.Core.Model
     /// <summary>
     /// Contains information about a change of an item.
     /// </summary>
-    public struct MetaInfo
+    public struct ChangeInfo
     {
         /// <summary>
         /// The <see cref="User"/> who made the change.
@@ -22,11 +22,11 @@ namespace Docular.Client.Core.Model
         public DateTime Date { get; private set; }
 
         /// <summary>
-        /// Initializes a new <see cref="MetaInfo"/>.
+        /// Initializes a new <see cref="ChangeInfo"/>.
         /// </summary>
         /// <param name="user">The <see cref="User"/> who made the change.</param>
         /// <param name="date">The date and time of the change.</param>
-        public MetaInfo(User user, DateTime date)
+        public ChangeInfo(User user, DateTime date)
             : this()
         {
             this.User = user;
