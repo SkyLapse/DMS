@@ -4,7 +4,7 @@ Docular DMS
 A distributed document management system, released under [MIT license] (https://github.com/SkyLapse/DMS/blob/master/LICENSE.md).
 
 ### Python-Coding Standard
-- Coming soon!
+- See the [Python coding standard](http://legacy.python.org/dev/peps/pep-0008/#a-foolish-consistency-is-the-hobgoblin-of-little-minds) for further information
 
 ### C#-Coding Standard
 - Allman indentation style
