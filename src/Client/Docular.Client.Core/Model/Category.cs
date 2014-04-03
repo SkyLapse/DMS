@@ -28,7 +28,7 @@ namespace Docular.Client.Core.Model
         /// <returns>An array of <see cref="Document"/>s that are within the <see cref="Category"/>.</returns>
         public Task<Document[]> GetDocumentsAsync()
         {
-            Contract.Ensures(Contract.Result<Document[]>() != null);
+            Contract.Ensures(Contract.Result<Task<Document[]>>() != null);
 
             throw new NotImplementedException();
         }

@@ -1,24 +1,33 @@
 REST-API
 ===
 
-Every specified URL is prefixed by http://_yoursite.com_/api/
+Every specified URL is prefixed by http://_yoursite.com_/api/$key/
 
 ### Documents:
-- Retreive: documents/$id (GET)
-- Add: documents/new (POST)
+- Retreive document info: documents/$id (GET)
+ - GET-Parameters: user=userID, category=categoryID, tag=tagID, shared=true/false
+- Add: documents (POST)
 - Edit: documents/$id (PUT)
 - Delete: documents/$id (DELETE)
-- Thumbnail-Path: documents/$id/thumbnail (GET)
-- Payload-Path: documents/$id/payload (GET)
-
-### Tags:
-- Retreive: tags/$id (GET)
-- Add: tags/new (POST)
-- Edit: tags/$id (PUT)
-- Delete tags/$id (DELETE)
+- Thumbnail: documents/$id/thumbnail (GET)
+- Payload: documents/$id/download (GET)
 
 ### Categories:
 - Retreive: categories/$id (GET)
-- Add: categories/new (POST)
+ - GET-Parameters: user=userID
+- Add: categories (POST)
 - Edit: categories/$id (PUT)
-- Delete categories/$id (DELETE)
+- Delete: categories/$id (DELETE)
+
+### Tags:
+- Retreive: tags/$id (GET)
+ - GET-Parameters: user=userID
+- Add: tags (POST)
+- Edit: tags/$id (PUT)
+- Delete: tags/$id (DELETE)
+
+### Users:
+- Retreive: users/$id (GET)
+- Add: users (POST)
+- Edit: users/$id (PUT)
+- Delete: users/$id (DELETE)

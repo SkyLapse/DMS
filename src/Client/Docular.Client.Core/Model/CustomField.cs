@@ -6,14 +6,31 @@ using System.Threading.Tasks;
 
 namespace Docular.Client.Core.Model
 {
+    /// <summary>
+    /// Represents a custom field of some arbitrary data.
+    /// </summary>
     public class CustomField : DocularObject
     {
+        /// <summary>
+        /// Gets the custom field's key.
+        /// </summary>
         public String Key { get; private set; }
 
+        /// <summary>
+        /// Gets the custom field's value.
+        /// </summary>
         public String Value { get; private set; }
 
+        /// <summary>
+        /// Initializes a new <see cref="CustomField"/>.
+        /// </summary>
         private CustomField() { }
 
+        /// <summary>
+        /// Initializes a new <see cref="CustomField"/>.
+        /// </summary>
+        /// <param name="key">The custom field's key.</param>
+        /// <param name="value">The custom field's value.</param>
         public CustomField(String key, String value)
         {
             this.Key = key;
