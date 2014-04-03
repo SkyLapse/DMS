@@ -96,6 +96,41 @@ namespace Docular.Client.Core.Model
         }
 
         /// <summary>
+        /// Initializes a new <see cref="Document"/>.
+        /// </summary>
+        /// <param name="buzzwords">All repeatedly occuring words in the extracted content.</param>
+        /// <param name="category">All repeatedly occuring words in the extracted content.</param>
+        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Document"/>.</param>
+        /// <param name="createInfo">Information about the creation of the <see cref="Document"/>.</param>
+        /// <param name="editInfo">Information about the last edit of the <see cref="Document"/>.</param>
+        /// <param name="extractedContent">Extracted content that was read via OCR or some other content recognition method.</param>
+        /// <param name="payloadPath">The <see cref="Uri"/> of the payload.</param>
+        /// <param name="thumbnailPath">The <see cref="Uri"/> of the thumbnail image.</param>
+        /// <param name="tags">All <see cref="Tag"/>s associated with the <see cref="Document"/>.</param>
+        public Document(
+                    IDocularClient client,
+                    ChangeInfo createInfo,
+                    ChangeInfo editInfo,
+                    Category category,
+                    Buzzword[] buzzwords,
+                    String extractedContent,
+                    Uri payloadPath,
+                    Uri thumbnailPath,
+                    Tag[] tags
+                )
+            : this(client, createInfo, editInfo, buzzwords, extractedContent, payloadPath, thumbnailPath)
+        {
+            Contract.Requires<ArgumentNullException>(client != null);
+            Contract.Requires<ArgumentNullException>(buzzwords != null && extractedContent != null);
+            Contract.Requires<ArgumentNullException>(payloadPath != null && thumbnailPath != null);
+            Contract.Requires<ArgumentNullException>(category != null);
+            Contract.Requires<ArgumentNullException>(tags != null);
+
+            this.Category = category;
+            this.Tags = tags;
+        }
+
+        /// <summary>
         /// Saves the document to the server.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
