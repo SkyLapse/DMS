@@ -91,6 +91,8 @@ namespace Docular.Client.Core.Model
 
             this.CreateInfo = createInfo;
             this.EditInfo = editInfo;
+            this.Buzzwords = buzzwords;
+            this.ExtractedContent = extractedContent;
             this.PayloadPath = payloadPath;
             this.ThumbnailPath = thumbnailPath;
         }
@@ -123,8 +125,7 @@ namespace Docular.Client.Core.Model
             Contract.Requires<ArgumentNullException>(client != null);
             Contract.Requires<ArgumentNullException>(buzzwords != null && extractedContent != null);
             Contract.Requires<ArgumentNullException>(payloadPath != null && thumbnailPath != null);
-            Contract.Requires<ArgumentNullException>(category != null);
-            Contract.Requires<ArgumentNullException>(tags != null);
+            Contract.Requires<ArgumentNullException>(category != null && tags != null);
 
             this.Category = category;
             this.Tags = tags;
