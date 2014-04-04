@@ -67,7 +67,7 @@ namespace Docular.Client.Core.Controller
     /// Contains contract definitions.
     /// </summary>
     [ContractClassFor(typeof(ITagManager))]
-    abstract class TagManagerContracts
+    abstract class TagManagerContracts : ITagManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.
@@ -97,7 +97,7 @@ namespace Docular.Client.Core.Controller
         Task<Tag> ITagManager.GetTagAsync(String id)
         {
             Contract.Requires<ArgumentNullException>(id != null);
-            Contract.Ensures(Contract.Result<Tag>() != null);
+            Contract.Ensures(Contract.Result<Task<Tag>>() != null);
 
             return null;
         }
@@ -107,8 +107,7 @@ namespace Docular.Client.Core.Controller
         /// </summary>
         Task<Tag[]> ITagManager.GetTagsAsync(User user)
         {
-            Contract.Requires<ArgumentNullException>(user != null);
-            Contract.Ensures(Contract.Result<Tag[]>() != null);
+            Contract.Ensures(Contract.Result<Task<Tag[]>>() != null);
 
             return null;
         }
@@ -118,8 +117,7 @@ namespace Docular.Client.Core.Controller
         /// </summary>
         Task<Tag[]> ITagManager.GetTagsAsync(String userId)
         {
-            Contract.Requires<ArgumentNullException>(userId != null);
-            Contract.Ensures(Contract.Result<Tag[]>() != null);
+            Contract.Ensures(Contract.Result<Task<Tag[]>>() != null);
 
             return null;
         }

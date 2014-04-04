@@ -53,7 +53,7 @@ namespace Docular.Client.Core.Controller
     /// Contains contract definitions.
     /// </summary>
     [ContractClassFor(typeof(IUserManager))]
-    abstract class UserManagerContracts
+    abstract class UserManagerContracts : IUserManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.

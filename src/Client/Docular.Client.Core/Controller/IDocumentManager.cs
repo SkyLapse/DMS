@@ -125,7 +125,7 @@ namespace Docular.Client.Core.Controller
     /// Contains contract definitions.
     /// </summary>
     [ContractClassFor(typeof(IDocumentManager))]
-    abstract class DocumentManagerContracts
+    abstract class DocumentManagerContracts : IDocumentManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.
@@ -154,7 +154,7 @@ namespace Docular.Client.Core.Controller
         Task<System.IO.Stream> IDocumentManager.GetContentAsync(Document document)
         {
             Contract.Requires<ArgumentNullException>(document != null);
-            Contract.Ensures(Contract.Result<System.IO.Stream>() != null);
+            Contract.Ensures(Contract.Result<Task<System.IO.Stream>>() != null);
 
             return null;
         }
@@ -165,7 +165,7 @@ namespace Docular.Client.Core.Controller
         Task<System.IO.Stream> IDocumentManager.GetContentAsync(String documentId)
         {
             Contract.Requires<ArgumentNullException>(documentId != null);
-            Contract.Ensures(Contract.Result<System.IO.Stream>() != null);
+            Contract.Ensures(Contract.Result<Task<System.IO.Stream>>() != null);
 
             return null;
         }
@@ -176,7 +176,7 @@ namespace Docular.Client.Core.Controller
         Task<Document> IDocumentManager.GetDocumentAsync(String id)
         {
             Contract.Requires<ArgumentNullException>(id != null);
-            Contract.Ensures(Contract.Result<Document>() != null);
+            Contract.Ensures(Contract.Result<Task<Document>>() != null);
 
             return null;
         }
@@ -186,10 +186,7 @@ namespace Docular.Client.Core.Controller
         /// </summary>
         Task<Document[]> IDocumentManager.GetDocumentsAsync(User user, Category category, Tag tag)
         {
-            Contract.Requires<ArgumentNullException>(user != null);
-            Contract.Requires<ArgumentNullException>(category != null);
-            Contract.Requires<ArgumentNullException>(tag != null);
-            Contract.Ensures(Contract.Result<Document[]>() != null);
+            Contract.Ensures(Contract.Result<Task<Document[]>>() != null);
 
             return null;
         }
@@ -199,10 +196,7 @@ namespace Docular.Client.Core.Controller
         /// </summary>
         Task<Document[]> IDocumentManager.GetDocumentsAsync(String userId, String categoryId, String tagId)
         {
-            Contract.Requires<ArgumentNullException>(userId != null);
-            Contract.Requires<ArgumentNullException>(categoryId != null);
-            Contract.Requires<ArgumentNullException>(tagId != null);
-            Contract.Ensures(Contract.Result<Document[]>() != null);
+            Contract.Ensures(Contract.Result<Task<Document[]>>() != null);
 
             return null;
         }
@@ -223,7 +217,7 @@ namespace Docular.Client.Core.Controller
         Task<System.IO.Stream> IDocumentManager.GetThumbnailAsync(Document document)
         {
             Contract.Requires<ArgumentNullException>(document != null);
-            Contract.Ensures(Contract.Result<System.IO.Stream>() != null);
+            Contract.Ensures(Contract.Result<Task<System.IO.Stream>>() != null);
 
             return null;
         }
@@ -234,7 +228,7 @@ namespace Docular.Client.Core.Controller
         Task<System.IO.Stream> IDocumentManager.GetThumbnailAsync(String documentId)
         {
             Contract.Requires<ArgumentNullException>(documentId != null);
-            Contract.Ensures(Contract.Result<System.IO.Stream>() != null);
+            Contract.Ensures(Contract.Result<Task<System.IO.Stream>>() != null);
 
             return null;
         }

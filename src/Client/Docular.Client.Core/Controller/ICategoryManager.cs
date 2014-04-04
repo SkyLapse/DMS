@@ -73,7 +73,7 @@ namespace Docular.Client.Core.Controller
     /// Contains contract definitions.
     /// </summary>
     [ContractClassFor(typeof(ICategoryManager))]
-    abstract class CategoryManagerContracts
+    abstract class CategoryManagerContracts : ICategoryManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.
@@ -103,7 +103,7 @@ namespace Docular.Client.Core.Controller
         Task<Category> ICategoryManager.GetCategoryAsync(String id)
         {
             Contract.Requires<ArgumentNullException>(id != null);
-            Contract.Ensures(Contract.Result<Category[]>() != null);
+            Contract.Ensures(Contract.Result<Task<Category>>() != null);
 
             return null;
         }
@@ -113,9 +113,7 @@ namespace Docular.Client.Core.Controller
         /// </summary>
         Task<Category[]> ICategoryManager.GetCategoriesAsync(User user, Category parent)
         {
-            Contract.Requires<ArgumentNullException>(user != null);
-            Contract.Requires<ArgumentNullException>(parent != null);
-            Contract.Ensures(Contract.Result<Category[]>() != null);
+            Contract.Ensures(Contract.Result<Task<Category[]>>() != null);
 
             return null;
         }
@@ -125,9 +123,7 @@ namespace Docular.Client.Core.Controller
         /// </summary>
         Task<Category[]> ICategoryManager.GetCategoriesAsync(String userId, String parentId)
         {
-            Contract.Requires<ArgumentNullException>(userId != null);
-            Contract.Requires<ArgumentNullException>(parentId != null);
-            Contract.Ensures(Contract.Result<Category[]>() != null);
+            Contract.Ensures(Contract.Result<Task<Category[]>>() != null);
 
             return null;
         }
