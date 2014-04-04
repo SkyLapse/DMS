@@ -109,11 +109,15 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\DocularClient.cs" />
-    <Compile Include="Controller\ICategoryManager.cs" />
-    <Compile Include="Controller\IDocumentManager.cs" />
-    <Compile Include="Controller\ITagManager.cs" />
-    <Compile Include="Controller\IUserManager.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Model\Rest\DocularAuthenticator.cs" />
+    <Compile Include="Model\Rest\DocularClient.cs" />
+    <Compile Include="Model\Rest\HttpException.cs" />
+    <Compile Include="Model\Rest\ICategoryManager.cs" />
+    <Compile Include="Model\Rest\IDocumentManager.cs" />
+    <Compile Include="Model\Rest\IKeyStore.cs" />
+    <Compile Include="Model\Rest\ITagManager.cs" />
+    <Compile Include="Model\Rest\IUserManager.cs" />
     <Compile Include="Model\Buzzword.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\CustomField.cs" />
@@ -123,7 +127,7 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controller\IDocularClient.cs" />
+    <Compile Include="Model\Rest\IDocularClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">

@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model;
+using RestSharp.Portable;
 
-namespace Docular.Client.Core.Controller
+namespace Docular.Client.Core.Model.Rest
 {
     /// <summary>
     /// Represents a client for working with a docular DB.
     /// </summary>
     public class DocularClient : IDocularClient
     {
+        /// <summary>
+        /// The <see cref="RestClient"/> used to perform the REST requests.
+        /// </summary>
+        private RestClient restClient = new RestClient();
+
         /// <summary>
         /// The adress of the the remote host.
         /// </summary>
@@ -23,8 +31,9 @@ namespace Docular.Client.Core.Controller
         /// Initializes a new <see cref="DocularClient"/>.
         /// </summary>
         /// <param name="docularUri">The adress of the remote host.</param>
-        public DocularClient(String docularUri)
-            : this(new Uri(docularUri)) 
+        /// <param name="keyStore">A <see cref="IKeyStore"/> used to obtain the key.</param>
+        public DocularClient(String docularUri, IKeyStore keyStore)
+            : this(new Uri(docularUri), keyStore) 
         {
             Contract.Requires<ArgumentNullException>(docularUri != null);
         }
@@ -33,9 +42,10 @@ namespace Docular.Client.Core.Controller
         /// Initializes a new <see cref="DocularClient"/>.
         /// </summary>
         /// <param name="docularUri">The adress of the remote host.</param>
-        public DocularClient(Uri docularUri)
+        /// <param name="keyStore">A <see cref="IKeyStore"/> used to obtain the key.</param>
+        public DocularClient(Uri docularUri, IKeyStore keyStore)
         {
-            Contract.Requires<ArgumentNullException>(docularUri != null);
+            Contract.Requires<ArgumentNullException>(docularUri != null && keyStore != null);
             Contract.Requires<ArgumentException>(!docularUri.IsFile);
             Contract.Requires<ArgumentException>(docularUri.AbsoluteUri.EndsWith("api") || docularUri.AbsoluteUri.EndsWith("api/"));
             
@@ -44,24 +54,31 @@ namespace Docular.Client.Core.Controller
                 Uri result;
                 if (!Uri.TryCreate(docularUri, "/", out result))
                 {
-                    throw new Exception("An unknown error occured when appending '/' to the docular URI.");
+                    throw new Exception("An error occured while appending '/' to the docular API URI.");
                 }
-                this.DocularUri = result;
+                docularUri = result;
             }
-            else
-            {
-                this.DocularUri = docularUri;
-            }
+
+            this.DocularUri = docularUri;
+            this.restClient.BaseUrl = this.DocularUri;
+            this.restClient.Authenticator = new DocularAuthenticator(keyStore);
         }
+
+        #region Documents
 
         public Task DeleteDocumentAsync(Document document)
         {
             return this.DeleteDocumentAsync(document.Id);
         }
 
-        public Task DeleteDocumentAsync(String documentId)
+        public async Task DeleteDocumentAsync(String documentId)
         {
-            throw new NotImplementedException();
+            RestRequest deleteRequest = new RestRequest(this.CreateApiUri("documents/" + documentId), HttpMethod.Delete);
+            IRestResponse response = await this.restClient.Execute(deleteRequest);
+            if (response.StatusCode.IsError())
+            {
+                throw new HttpException(response.StatusDescription, response.StatusCode);
+            }
         }
 
         public Task<Stream> GetContentAsync(Document document)
@@ -71,12 +88,13 @@ namespace Docular.Client.Core.Controller
 
         public Task<Stream> GetContentAsync(String documentId)
         {
-            throw new NotImplementedException();
+            return new HttpClient().GetStreamAsync(this.CreateApiUri("documents/" + documentId + "/content"));
         }
 
-        public Task<Document> GetDocumentAsync(String id)
+        public async Task<Document> GetDocumentAsync(String id)
         {
-            throw new NotImplementedException();
+            RestRequest documentRequest = new RestRequest(this.CreateApiUri("documents/" + id), HttpMethod.Get);
+            return (await this.restClient.Execute<Document>(documentRequest)).Data;
         }
 
         public Task<Document[]> GetDocumentsAsync(User user = null, Category category = null, Tag tag = null)
@@ -84,14 +102,20 @@ namespace Docular.Client.Core.Controller
             return this.GetDocumentsAsync((user != null) ? user.Id : null, (category != null) ? category.Id : null, (tag != null) ? tag.Id : null);
         }
 
-        public Task<Document[]> GetDocumentsAsync(String userId = null, String categoryId = null, String tagId = null)
+        public async Task<Document[]> GetDocumentsAsync(String userId = null, String categoryId = null, String tagId = null)
         {
-            throw new NotImplementedException();
+            RestRequest documentRequest = new RestRequest(this.CreateApiUri("documents"), HttpMethod.Get);
+            documentRequest.AddParameter("user", userId, ParameterType.GetOrPost);
+            documentRequest.AddParameter("category", categoryId, ParameterType.GetOrPost);
+            documentRequest.AddParameter("tag", tagId, ParameterType.GetOrPost);
+
+            return (await this.restClient.Execute<Document[]>(documentRequest)).Data;
         }
 
-        public Task<int> GetDocumentCountAsync()
+        public async Task<int> GetDocumentCountAsync()
         {
-            throw new NotImplementedException();
+            RestRequest countRequest = new RestRequest(this.CreateApiUri("documents/count"), HttpMethod.Get);
+            return (await this.restClient.Execute<int>(countRequest)).Data;
         }
 
         public Task<Stream> GetThumbnailAsync(Document document)
@@ -101,7 +125,7 @@ namespace Docular.Client.Core.Controller
 
         public Task<Stream> GetThumbnailAsync(String documentId)
         {
-            throw new NotImplementedException();
+            return new HttpClient().GetStreamAsync(this.CreateApiUri("documents/" + documentId + "/thumbnail"));
         }
 
         public Task PostDocumentAsync(Document document)
@@ -114,10 +138,20 @@ namespace Docular.Client.Core.Controller
             throw new NotImplementedException();
         }
 
-        public Task UploadContentAsync(String documentId, System.IO.Stream content)
+        public async Task UploadContentAsync(String documentId, System.IO.Stream content)
         {
-            throw new NotImplementedException();
+            RestRequest uploadRequest = new RestRequest(this.CreateApiUri("documents/" + documentId + "/content"), HttpMethod.Post);
+            uploadRequest.AddFile("content", content, "TEST");
+            IRestResponse response = await this.restClient.Execute(uploadRequest);
+            if (response.StatusCode.IsError())
+            {
+                throw new HttpException(response.StatusDescription, response.StatusCode);
+            }
         }
+
+        #endregion
+
+        #region Categories
 
         public Task DeleteCategoryAsync(Category category)
         {
@@ -154,6 +188,10 @@ namespace Docular.Client.Core.Controller
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region Tags
+
         public Task DeleteTagAsync(Tag tag)
         {
             return this.DeleteTagAsync(tag.Id);
@@ -189,6 +227,10 @@ namespace Docular.Client.Core.Controller
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region Users
+
         public Task DeleteUserAsync(User user)
         {
             return this.DeleteUserAsync(user.Id);
@@ -212,6 +254,33 @@ namespace Docular.Client.Core.Controller
         public Task PostUserAsync(User user)
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Creates an API <see cref="Uri"/> from the <see cref="Uri"/> the <see cref="DocularClient"/> was initialized with and the specified one.
+        /// </summary>
+        /// <param name="apiUri">The sub <see cref="Uri"/> for the specified API function.</param>
+        /// <returns>The combined <see cref="Uri"/>.</returns>
+        private Uri CreateApiUri(String apiUri)
+        {
+            return this.CreateApiUri(new Uri(apiUri));
+        }
+
+        /// <summary>
+        /// Creates an API <see cref="Uri"/> from the <see cref="Uri"/> the <see cref="DocularClient"/> was initialized with and the specified one.
+        /// </summary>
+        /// <param name="apiUri">The sub <see cref="Uri"/> for the specified API function.</param>
+        /// <returns>The combined <see cref="Uri"/>.</returns>
+        private Uri CreateApiUri(Uri apiUri)
+        {
+            Uri result;
+            if (!Uri.TryCreate(this.DocularUri, apiUri, out result))
+            {
+                throw new InvalidOperationException("There was an error combining the URIs.");
+            }
+            return result;
         }
     }
 }

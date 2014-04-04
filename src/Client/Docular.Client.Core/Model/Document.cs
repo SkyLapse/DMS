@@ -4,7 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Controller;
+using Docular.Client.Core.Model.Rest;
 
 namespace Docular.Client.Core.Model
 {
@@ -129,6 +129,15 @@ namespace Docular.Client.Core.Model
 
             this.Category = category;
             this.Tags = tags;
+        }
+
+        /// <summary>
+        /// Refreshes the <see cref="Document"/> fetching all changes from the remote DB.
+        /// </summary>
+        /// <returns>The modified <see cref="Document"/>.</returns>
+        public Task<Document> Refresh()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

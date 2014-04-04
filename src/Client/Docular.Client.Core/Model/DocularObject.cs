@@ -5,7 +5,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Controller;
+using Docular.Client.Core.Model.Rest;
 
 namespace Docular.Client.Core.Model
 {

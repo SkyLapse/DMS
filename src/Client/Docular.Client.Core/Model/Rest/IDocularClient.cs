@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model;
 
-namespace Docular.Client.Core.Controller
+namespace Docular.Client.Core.Model.Rest
 {
     /// <summary>
     /// Defines the way to work with a remote or local docular database.
