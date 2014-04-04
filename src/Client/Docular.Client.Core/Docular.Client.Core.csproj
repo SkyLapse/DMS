@@ -109,6 +109,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\DocularClient.cs" />
     <Compile Include="Controller\ICategoryManager.cs" />
     <Compile Include="Controller\IDocumentManager.cs" />
     <Compile Include="Controller\ITagManager.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Docular.Client.Core.Controller
     /// <summary>
     /// Defines a mechanism for interacting with docular categories.
     /// </summary>
+    [ContractClass(typeof(CategoryManagerContracts))]
     public interface ICategoryManager
     {
         /// <summary>
@@ -47,7 +49,7 @@ namespace Docular.Client.Core.Controller
         /// <param name="userId">
         /// The ID of the <see cref="User"/> who created the <see cref="Category"/>. If null is specified, there will be no filtering.
         /// </param>
-        /// <param name="parentiD">
+        /// <param name="parentId">
         /// The ID of the parent <see cref="Category"/> it has to be a child of. If null is specified, there will be no filtering.
         /// </param>
         /// <returns></returns>
@@ -65,5 +67,90 @@ namespace Docular.Client.Core.Controller
         /// <param name="category">The <see cref="Category"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         Task PostCategoryAsync(Category category);
+    }
+
+    /// <summary>
+    /// Contains contract definitions.
+    /// </summary>
+    [ContractClassFor(typeof(ICategoryManager))]
+    abstract class CategoryManagerContracts
+    {
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task ICategoryManager.DeleteCategoryAsync(Category category)
+        {
+            Contract.Requires<ArgumentNullException>(category != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task ICategoryManager.DeleteCategoryAsync(String categoryId)
+        {
+            Contract.Requires<ArgumentNullException>(categoryId != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Category> ICategoryManager.GetCategoryAsync(String id)
+        {
+            Contract.Requires<ArgumentNullException>(id != null);
+            Contract.Ensures(Contract.Result<Category[]>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Category[]> ICategoryManager.GetCategoriesAsync(User user, Category parent)
+        {
+            Contract.Requires<ArgumentNullException>(user != null);
+            Contract.Requires<ArgumentNullException>(parent != null);
+            Contract.Ensures(Contract.Result<Category[]>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Category[]> ICategoryManager.GetCategoriesAsync(String userId, String parentId)
+        {
+            Contract.Requires<ArgumentNullException>(userId != null);
+            Contract.Requires<ArgumentNullException>(parentId != null);
+            Contract.Ensures(Contract.Result<Category[]>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<int> ICategoryManager.GetCategoryCountAsync()
+        {
+            Contract.Ensures(Contract.Result<Task<int>>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task ICategoryManager.PostCategoryAsync(Category category)
+        {
+            Contract.Requires<ArgumentNullException>(category != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
     }
 }

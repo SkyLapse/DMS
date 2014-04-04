@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Docular.Client.Core.Controller
     /// <summary>
     /// Defines a mechanism to work with docular users.
     /// </summary>
+    [ContractClass(typeof(UserManagerContracts))]
     public interface IUserManager
     {
         /// <summary>
@@ -45,5 +47,66 @@ namespace Docular.Client.Core.Controller
         /// <param name="user">The <see cref="User"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         Task PostUserAsync(User user);
+    }
+
+    /// <summary>
+    /// Contains contract definitions.
+    /// </summary>
+    [ContractClassFor(typeof(IUserManager))]
+    abstract class UserManagerContracts
+    {
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IUserManager.DeleteUserAsync(User user)
+        {
+            Contract.Requires<ArgumentNullException>(user != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IUserManager.DeleteUserAsync(String userId)
+        {
+            Contract.Requires<ArgumentNullException>(userId != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<User> IUserManager.GetUserAsync(String id)
+        {
+            Contract.Requires<ArgumentNullException>(id != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<int> IUserManager.GetUserCountAsync()
+        {
+            Contract.Ensures(Contract.Result<Task<int>>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IUserManager.PostUserAsync(User user)
+        {
+            Contract.Requires<ArgumentNullException>(user != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
     }
 }

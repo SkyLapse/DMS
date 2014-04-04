@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Docular.Client.Core.Controller
     /// <summary>
     /// Defines a mechanism to work with docular tags.
     /// </summary>
+    [ContractClass(typeof(TagManagerContracts))]
     public interface ITagManager
     {
         /// <summary>
@@ -22,7 +24,7 @@ namespace Docular.Client.Core.Controller
         /// <summary>
         /// Deletes a <see cref="Tag"/> from the DB.
         /// </summary>
-        /// <param name="tag">The ID of the <see cref="Tag"/> to delete.</param>
+        /// <param name="tagId">The ID of the <see cref="Tag"/> to delete.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous deleting process.</returns>
         Task DeleteTagAsync(String tagId);
 
@@ -43,7 +45,7 @@ namespace Docular.Client.Core.Controller
         /// <summary>
         /// Gets a filtered collection of <see cref="Tag"/>s.
         /// </summary>
-        /// <param name="user">The ID of the <see cref="User"/> who created the <see cref="Tag"/>.</param>
+        /// <param name="userId">The ID of the <see cref="User"/> who created the <see cref="Tag"/>.</param>
         /// <returns>The <see cref="Tag"/>s that matched the search criteria.</returns>
         Task<Tag[]> GetTagsAsync(String userId = null);
 
@@ -59,5 +61,88 @@ namespace Docular.Client.Core.Controller
         /// <param name="tag">The <see cref="Tag"/> to upload.</param>
         /// <returns>A <see cref="Task"/> describing the asynchronous uploading process.</returns>
         Task PostTagAsync(Tag tag);
+    }
+
+    /// <summary>
+    /// Contains contract definitions.
+    /// </summary>
+    [ContractClassFor(typeof(ITagManager))]
+    abstract class TagManagerContracts
+    {
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task ITagManager.DeleteTagAsync(Tag tag)
+        {
+            Contract.Requires<ArgumentNullException>(tag != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task ITagManager.DeleteTagAsync(String tagId)
+        {
+            Contract.Requires<ArgumentNullException>(tagId != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Tag> ITagManager.GetTagAsync(String id)
+        {
+            Contract.Requires<ArgumentNullException>(id != null);
+            Contract.Ensures(Contract.Result<Tag>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Tag[]> ITagManager.GetTagsAsync(User user)
+        {
+            Contract.Requires<ArgumentNullException>(user != null);
+            Contract.Ensures(Contract.Result<Tag[]>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Tag[]> ITagManager.GetTagsAsync(String userId)
+        {
+            Contract.Requires<ArgumentNullException>(userId != null);
+            Contract.Ensures(Contract.Result<Tag[]>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<int> ITagManager.GetTagCountAsync()
+        {
+            Contract.Ensures(Contract.Result<Task<int>>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task ITagManager.PostTagAsync(Tag tag)
+        {
+            Contract.Requires<ArgumentNullException>(tag != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
     }
 }

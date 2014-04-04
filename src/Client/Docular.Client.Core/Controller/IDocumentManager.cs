@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Docular.Client.Core.Controller
     /// <summary>
     /// Defines a mechanism to work with docular documents.
     /// </summary>
+    [ContractClass(typeof(DocumentManagerContracts))]
     public interface IDocumentManager
     {
         /// <summary>
@@ -117,5 +119,158 @@ namespace Docular.Client.Core.Controller
         /// </remarks>
         /// <exception cref="InvalidOperationException">The <see cref="Document"/>'s content path does not point to a local file.</exception>
         Task UploadContentAsync(String documentId, Stream content);
+    }
+
+    /// <summary>
+    /// Contains contract definitions.
+    /// </summary>
+    [ContractClassFor(typeof(IDocumentManager))]
+    abstract class DocumentManagerContracts
+    {
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IDocumentManager.DeleteDocumentAsync(Document document)
+        {
+            Contract.Requires<ArgumentNullException>(document != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IDocumentManager.DeleteDocumentAsync(String documentId)
+        {
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<System.IO.Stream> IDocumentManager.GetContentAsync(Document document)
+        {
+            Contract.Requires<ArgumentNullException>(document != null);
+            Contract.Ensures(Contract.Result<System.IO.Stream>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<System.IO.Stream> IDocumentManager.GetContentAsync(String documentId)
+        {
+            Contract.Requires<ArgumentNullException>(documentId != null);
+            Contract.Ensures(Contract.Result<System.IO.Stream>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Document> IDocumentManager.GetDocumentAsync(String id)
+        {
+            Contract.Requires<ArgumentNullException>(id != null);
+            Contract.Ensures(Contract.Result<Document>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Document[]> IDocumentManager.GetDocumentsAsync(User user, Category category, Tag tag)
+        {
+            Contract.Requires<ArgumentNullException>(user != null);
+            Contract.Requires<ArgumentNullException>(category != null);
+            Contract.Requires<ArgumentNullException>(tag != null);
+            Contract.Ensures(Contract.Result<Document[]>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Document[]> IDocumentManager.GetDocumentsAsync(String userId, String categoryId, String tagId)
+        {
+            Contract.Requires<ArgumentNullException>(userId != null);
+            Contract.Requires<ArgumentNullException>(categoryId != null);
+            Contract.Requires<ArgumentNullException>(tagId != null);
+            Contract.Ensures(Contract.Result<Document[]>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<int> IDocumentManager.GetDocumentCountAsync()
+        {
+            Contract.Ensures(Contract.Result<Task<int>>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<System.IO.Stream> IDocumentManager.GetThumbnailAsync(Document document)
+        {
+            Contract.Requires<ArgumentNullException>(document != null);
+            Contract.Ensures(Contract.Result<System.IO.Stream>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<System.IO.Stream> IDocumentManager.GetThumbnailAsync(String documentId)
+        {
+            Contract.Requires<ArgumentNullException>(documentId != null);
+            Contract.Ensures(Contract.Result<System.IO.Stream>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IDocumentManager.PostDocumentAsync(Document document)
+        {
+            Contract.Requires<ArgumentNullException>(document != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IDocumentManager.UploadContentAsync(Document document)
+        {
+            Contract.Requires<ArgumentNullException>(document != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IDocumentManager.UploadContentAsync(String documentId, System.IO.Stream content)
+        {
+            Contract.Requires<ArgumentNullException>(documentId != null);
+            Contract.Requires<ArgumentNullException>(content != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
     }
 }
