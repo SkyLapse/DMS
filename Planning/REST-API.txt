@@ -7,15 +7,17 @@ Every specified URL is prefixed by http://_yoursite.com_/api/$key/
 - Retreive document info: documents/$id (GET)
  - GET-Parameters: user=userID, category=categoryID, tag=tagID, shared=true/false
 - Add: documents (POST)
+- Count: documents/count (GET)
 - Edit: documents/$id (PUT)
 - Delete: documents/$id (DELETE)
+- Content: documents/$id/content (GET)
 - Thumbnail: documents/$id/thumbnail (GET)
-- Payload: documents/$id/download (GET)
 
 ### Categories:
 - Retreive: categories/$id (GET)
- - GET-Parameters: user=userID
+ - GET-Parameters: user=userID, parent=parentId
 - Add: categories (POST)
+- Count: categories/count (GET)
 - Edit: categories/$id (PUT)
 - Delete: categories/$id (DELETE)
 
@@ -23,11 +25,13 @@ Every specified URL is prefixed by http://_yoursite.com_/api/$key/
 - Retreive: tags/$id (GET)
  - GET-Parameters: user=userID
 - Add: tags (POST)
+- Count: tags/count (GET)
 - Edit: tags/$id (PUT)
 - Delete: tags/$id (DELETE)
 
 ### Users:
-- Retreive: users/$id (GET)
 - Add: users (POST)
+- Retreive: users/$id (GET)
+- Count: users/count (GET)
 - Edit: users/$id (PUT)
 - Delete: users/$id (DELETE)
