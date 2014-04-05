@@ -15,11 +15,6 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// The <see cref="Tag"/>'s name.
         /// </summary>
-        public String Name { get; private set; }
-
-        /// <summary>
-        /// The <see cref="Tag"/>'s name.
-        /// </summary>
         public String Description { get; private set; }
 
         /// <summary>

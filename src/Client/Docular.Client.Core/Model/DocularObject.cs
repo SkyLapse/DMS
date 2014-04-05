@@ -20,6 +20,11 @@ namespace Docular.Client.Core.Model
         public String Id { get; protected set; }
 
         /// <summary>
+        /// The <see cref="DocularObject"/>s name.
+        /// </summary>
+        public String Name { get; set; }
+
+        /// <summary>
         /// Gets or sets the <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>.
         /// </summary>
         protected IDocularClient Client { get; set; }
