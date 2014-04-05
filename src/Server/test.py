@@ -22,6 +22,7 @@ if __name__ == '__main__':
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
 
+    workers.initialize_workers(app)
+
     app.run()
 
-    workers.initialize_workers(app)
