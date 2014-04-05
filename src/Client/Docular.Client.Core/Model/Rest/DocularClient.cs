@@ -33,9 +33,9 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="docularUri">The adress of the remote host.</param>
         /// <param name="keyStore">A <see cref="IKeyStore"/> used to obtain the key.</param>
         public DocularClient(String docularUri, IKeyStore keyStore)
-            : this(new Uri(docularUri), keyStore) 
+            : this(new Uri(docularUri), keyStore)
         {
-            Contract.Requires<ArgumentNullException>(docularUri != null);
+            Contract.Requires<ArgumentNullException>(docularUri != null && keyStore != null);
         }
 
         /// <summary>
@@ -47,17 +47,7 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(docularUri != null && keyStore != null);
             Contract.Requires<ArgumentException>(!docularUri.IsFile);
-            Contract.Requires<ArgumentException>(docularUri.AbsoluteUri.EndsWith("api") || docularUri.AbsoluteUri.EndsWith("api/"));
-            
-            if (docularUri.AbsoluteUri.EndsWith("api"))
-            {
-                Uri result;
-                if (!Uri.TryCreate(docularUri, "/", out result))
-                {
-                    throw new Exception("An error occured while appending '/' to the docular API URI.");
-                }
-                docularUri = result;
-            }
+            Contract.Requires<ArgumentException>(docularUri.AbsoluteUri.EndsWith("/api") || docularUri.AbsoluteUri.EndsWith("/api/"));
 
             this.DocularUri = docularUri;
             this.restClient.BaseUrl = this.DocularUri;
@@ -66,66 +56,34 @@ namespace Docular.Client.Core.Model.Rest
 
         #region Documents
 
-        public Task DeleteDocumentAsync(Document document)
+        public Task DeleteDocumentAsync(String documentId)
         {
-            return this.DeleteDocumentAsync(document.Id);
-        }
-
-        public async Task DeleteDocumentAsync(String documentId)
-        {
-            RestRequest deleteRequest = new RestRequest(this.CreateApiUri("documents/" + documentId), HttpMethod.Delete);
-            IRestResponse response = await this.restClient.Execute(deleteRequest);
-            if (response.StatusCode.IsError())
-            {
-                throw new HttpException(response.StatusDescription, response.StatusCode);
-            }
-        }
-
-        public Task<Stream> GetContentAsync(Document document)
-        {
-            return this.GetContentAsync(document.Id);
+            throw new NotImplementedException();
         }
 
         public Task<Stream> GetContentAsync(String documentId)
         {
-            return new HttpClient().GetStreamAsync(this.CreateApiUri("documents/" + documentId + "/content"));
+            throw new NotImplementedException();
         }
 
-        public async Task<Document> GetDocumentAsync(String id)
+        public Task<Document> GetDocumentAsync(String id)
         {
-            RestRequest documentRequest = new RestRequest(this.CreateApiUri("documents/" + id), HttpMethod.Get);
-            return (await this.restClient.Execute<Document>(documentRequest)).Data;
+            throw new NotImplementedException();
         }
 
-        public Task<Document[]> GetDocumentsAsync(User user = null, Category category = null, Tag tag = null)
+        public Task<Document[]> GetDocumentsAsync(String userId = null, String categoryId = null, String tagId = null)
         {
-            return this.GetDocumentsAsync((user != null) ? user.Id : null, (category != null) ? category.Id : null, (tag != null) ? tag.Id : null);
+            throw new NotImplementedException();
         }
 
-        public async Task<Document[]> GetDocumentsAsync(String userId = null, String categoryId = null, String tagId = null)
+        public Task<int> GetDocumentCountAsync()
         {
-            RestRequest documentRequest = new RestRequest(this.CreateApiUri("documents"), HttpMethod.Get);
-            documentRequest.AddParameter("user", userId, ParameterType.GetOrPost);
-            documentRequest.AddParameter("category", categoryId, ParameterType.GetOrPost);
-            documentRequest.AddParameter("tag", tagId, ParameterType.GetOrPost);
-
-            return (await this.restClient.Execute<Document[]>(documentRequest)).Data;
-        }
-
-        public async Task<int> GetDocumentCountAsync()
-        {
-            RestRequest countRequest = new RestRequest(this.CreateApiUri("documents/count"), HttpMethod.Get);
-            return (await this.restClient.Execute<int>(countRequest)).Data;
-        }
-
-        public Task<Stream> GetThumbnailAsync(Document document)
-        {
-            return this.GetThumbnailAsync(document.Id);
+            throw new NotImplementedException();
         }
 
         public Task<Stream> GetThumbnailAsync(String documentId)
         {
-            return new HttpClient().GetStreamAsync(this.CreateApiUri("documents/" + documentId + "/thumbnail"));
+            throw new NotImplementedException();
         }
 
         public Task PostDocumentAsync(Document document)
@@ -133,30 +91,14 @@ namespace Docular.Client.Core.Model.Rest
             throw new NotImplementedException();
         }
 
-        public Task UploadContentAsync(Document document)
+        public Task UploadContentAsync(String documentId, System.IO.Stream content)
         {
             throw new NotImplementedException();
-        }
-
-        public async Task UploadContentAsync(String documentId, System.IO.Stream content)
-        {
-            RestRequest uploadRequest = new RestRequest(this.CreateApiUri("documents/" + documentId + "/content"), HttpMethod.Post);
-            uploadRequest.AddFile("content", content, "TEST");
-            IRestResponse response = await this.restClient.Execute(uploadRequest);
-            if (response.StatusCode.IsError())
-            {
-                throw new HttpException(response.StatusDescription, response.StatusCode);
-            }
         }
 
         #endregion
 
         #region Categories
-
-        public Task DeleteCategoryAsync(Category category)
-        {
-            return this.DeleteCategoryAsync(category.Id);
-        }
 
         public Task DeleteCategoryAsync(String categoryId)
         {
@@ -166,11 +108,6 @@ namespace Docular.Client.Core.Model.Rest
         public Task<Category> GetCategoryAsync(String id)
         {
             throw new NotImplementedException();
-        }
-
-        public Task<Category[]> GetCategoriesAsync(User user = null, Category parent = null)
-        {
-            return this.GetCategoriesAsync((user != null) ? user.Id : null, (parent != null) ? parent.Id : null);
         }
 
         public Task<Category[]> GetCategoriesAsync(String userId = null, String parentId = null)
@@ -192,11 +129,6 @@ namespace Docular.Client.Core.Model.Rest
 
         #region Tags
 
-        public Task DeleteTagAsync(Tag tag)
-        {
-            return this.DeleteTagAsync(tag.Id);
-        }
-
         public Task DeleteTagAsync(String tagId)
         {
             throw new NotImplementedException();
@@ -205,11 +137,6 @@ namespace Docular.Client.Core.Model.Rest
         public Task<Tag> GetTagAsync(String id)
         {
             throw new NotImplementedException();
-        }
-
-        public Task<Tag[]> GetTagsAsync(User user = null)
-        {
-            return this.GetTagsAsync((user != null) ? user.Id : null);
         }
 
         public Task<Tag[]> GetTagsAsync(String userId = null)
@@ -230,11 +157,6 @@ namespace Docular.Client.Core.Model.Rest
         #endregion
 
         #region Users
-
-        public Task DeleteUserAsync(User user)
-        {
-            return this.DeleteUserAsync(user.Id);
-        }
 
         public Task DeleteUserAsync(String userId)
         {
@@ -257,30 +179,5 @@ namespace Docular.Client.Core.Model.Rest
         }
 
         #endregion
-
-        /// <summary>
-        /// Creates an API <see cref="Uri"/> from the <see cref="Uri"/> the <see cref="DocularClient"/> was initialized with and the specified one.
-        /// </summary>
-        /// <param name="apiUri">The sub <see cref="Uri"/> for the specified API function.</param>
-        /// <returns>The combined <see cref="Uri"/>.</returns>
-        private Uri CreateApiUri(String apiUri)
-        {
-            return this.CreateApiUri(new Uri(apiUri));
-        }
-
-        /// <summary>
-        /// Creates an API <see cref="Uri"/> from the <see cref="Uri"/> the <see cref="DocularClient"/> was initialized with and the specified one.
-        /// </summary>
-        /// <param name="apiUri">The sub <see cref="Uri"/> for the specified API function.</param>
-        /// <returns>The combined <see cref="Uri"/>.</returns>
-        private Uri CreateApiUri(Uri apiUri)
-        {
-            Uri result;
-            if (!Uri.TryCreate(this.DocularUri, apiUri, out result))
-            {
-                throw new InvalidOperationException("There was an error combining the URIs.");
-            }
-            return result;
-        }
     }
 }

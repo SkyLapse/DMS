@@ -17,13 +17,6 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Deletes a <see cref="Tag"/> from the DB.
         /// </summary>
-        /// <param name="tag">The <see cref="Tag"/> to delete.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous deleting process.</returns>
-        Task DeleteTagAsync(Tag tag);
-
-        /// <summary>
-        /// Deletes a <see cref="Tag"/> from the DB.
-        /// </summary>
         /// <param name="tagId">The ID of the <see cref="Tag"/> to delete.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous deleting process.</returns>
         Task DeleteTagAsync(String tagId);
@@ -34,13 +27,6 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="id">The ID of the <see cref="Tag"/> to get.</param>
         /// <returns>The <see cref="Task"/> with the ID, or <c>null</c> if the <see cref="Tag"/> could not be found.</returns>
         Task<Tag> GetTagAsync(String id);
-
-        /// <summary>
-        /// Gets a filtered collection of <see cref="Tag"/>s.
-        /// </summary>
-        /// <param name="user">The <see cref="User"/> who created the <see cref="Tag"/>.</param>
-        /// <returns>The <see cref="Tag"/>s that matched the search criteria.</returns>
-        Task<Tag[]> GetTagsAsync(User user = null);
 
         /// <summary>
         /// Gets a filtered collection of <see cref="Tag"/>s.
@@ -72,17 +58,6 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task ITagManager.DeleteTagAsync(Tag tag)
-        {
-            Contract.Requires<ArgumentNullException>(tag != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
-
-            return null;
-        }
-
-        /// <summary>
-        /// Contains contract definitions, not for actual use.
-        /// </summary>
         Task ITagManager.DeleteTagAsync(String tagId)
         {
             Contract.Requires<ArgumentNullException>(tagId != null);
@@ -98,16 +73,6 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(id != null);
             Contract.Ensures(Contract.Result<Task<Tag>>() != null);
-
-            return null;
-        }
-
-        /// <summary>
-        /// Contains contract definitions, not for actual use.
-        /// </summary>
-        Task<Tag[]> ITagManager.GetTagsAsync(User user)
-        {
-            Contract.Ensures(Contract.Result<Task<Tag[]>>() != null);
 
             return null;
         }

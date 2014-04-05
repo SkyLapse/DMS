@@ -57,5 +57,15 @@ namespace Docular.Client.Core.Model
         {
             this.Client = client;
         }
+
+        /// <summary>
+        /// Implictly gets the <see cref="DocularObject"/>'s ID.
+        /// </summary>
+        /// <param name="docularObject">The <see cref="DocularObject"/> to get the ID of.</param>
+        /// <returns>The <see cref="DocularObject"/>'s ID.</returns>
+        public static implicit operator String(DocularObject docularObject)
+        {
+            return (docularObject != null) ? docularObject.Id : null;
+        }
     }
 }

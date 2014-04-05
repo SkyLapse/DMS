@@ -17,13 +17,6 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Deletes a <see cref="User"/> from the DB.
         /// </summary>
-        /// <param name="user">The <see cref="User"/> to delete.</param>
-        /// <returns>A <see cref="Task"/> describing the asynchronous deleting process.</returns>
-        Task DeleteUserAsync(User user);
-
-        /// <summary>
-        /// Deletes a <see cref="User"/> from the DB.
-        /// </summary>
         /// <param name="userId">The ID of the <see cref="User"/> to delete.</param>
         /// <returns>A <see cref="Task"/> describing the asynchronous deleting process.</returns>
         Task DeleteUserAsync(String userId);
@@ -55,17 +48,6 @@ namespace Docular.Client.Core.Model.Rest
     [ContractClassFor(typeof(IUserManager))]
     abstract class UserManagerContracts : IUserManager
     {
-        /// <summary>
-        /// Contains contract definitions, not for actual use.
-        /// </summary>
-        Task IUserManager.DeleteUserAsync(User user)
-        {
-            Contract.Requires<ArgumentNullException>(user != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
-
-            return null;
-        }
-
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
