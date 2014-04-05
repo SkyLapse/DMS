@@ -70,7 +70,7 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// The sub path for tags.
         /// </summary>
-        public const String Tags = "ags";
+        public const String Tags = "tags";
 
         /// <summary>
         /// The sub path for a tag by ID.
