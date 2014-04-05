@@ -5,6 +5,7 @@ A distributed document management system, released under [MIT license] (https://
 
 ### General
 - When referring to Docular DMS (Namespaces, Class names, etc.), simply use "Docular" (without DMS-suffix)
+- Every piece of code shall be documented
 
 ### Python-Coding Standard
 - See the [Python coding standard](http://legacy.python.org/dev/peps/pep-0008/#a-foolish-consistency-is-the-hobgoblin-of-little-minds) for further information

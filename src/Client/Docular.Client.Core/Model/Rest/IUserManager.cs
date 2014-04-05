@@ -35,11 +35,18 @@ namespace Docular.Client.Core.Model.Rest
         Task<int> GetUserCountAsync();
 
         /// <summary>
-        /// Uploads a new / changed <see cref="User"/> to the DB.
+        /// Uploads a new <see cref="User"/> to the DB.
         /// </summary>
         /// <param name="user">The <see cref="User"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         Task PostUserAsync(User user);
+
+        /// <summary>
+        /// Uploads a changed <see cref="User"/> to the DB.
+        /// </summary>
+        /// <param name="user">The <see cref="User"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
+        Task PutUserAsync(User user);
     }
 
     /// <summary>
@@ -86,6 +93,18 @@ namespace Docular.Client.Core.Model.Rest
         Task IUserManager.PostUserAsync(User user)
         {
             Contract.Requires<ArgumentNullException>(user != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IUserManager.PutUserAsync(User user)
+        {
+            Contract.Requires<ArgumentNullException>(user != null);
+            Contract.Requires<ArgumentNullException>(user.Id != null);
             Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;

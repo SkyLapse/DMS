@@ -47,11 +47,18 @@ namespace Docular.Client.Core.Model.Rest
         Task<int> GetCategoryCountAsync();
 
         /// <summary>
-        /// Uploads a new / changed <see cref="Category"/> to the server.
+        /// Uploads a new <see cref="Category"/> to the server.
         /// </summary>
         /// <param name="category">The <see cref="Category"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         Task PostCategoryAsync(Category category);
+
+        /// <summary>
+        /// Uploads a changed <see cref="Category"/> to the server.
+        /// </summary>
+        /// <param name="category">The <see cref="Category"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
+        Task PutCategoryAsync(Category category);
     }
 
     /// <summary>
@@ -108,6 +115,18 @@ namespace Docular.Client.Core.Model.Rest
         Task ICategoryManager.PostCategoryAsync(Category category)
         {
             Contract.Requires<ArgumentNullException>(category != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task ICategoryManager.PutCategoryAsync(Category category)
+        {
+            Contract.Requires<ArgumentNullException>(category != null);
+            Contract.Requires<ArgumentNullException>(category.Id != null);
             Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;

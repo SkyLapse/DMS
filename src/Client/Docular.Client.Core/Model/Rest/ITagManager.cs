@@ -42,11 +42,18 @@ namespace Docular.Client.Core.Model.Rest
         Task<int> GetTagCountAsync();
 
         /// <summary>
-        /// Uploads a new / changed <see cref="Tag"/> to the server.
+        /// Uploads a new <see cref="Tag"/> to the server.
         /// </summary>
         /// <param name="tag">The <see cref="Tag"/> to upload.</param>
         /// <returns>A <see cref="Task"/> describing the asynchronous uploading process.</returns>
         Task PostTagAsync(Tag tag);
+
+        /// <summary>
+        /// Uploads a changed <see cref="Tag"/> to the server.
+        /// </summary>
+        /// <param name="tag">The <see cref="Tag"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> describing the asynchronous uploading process.</returns>
+        Task PutTagAsync(Tag tag);
     }
 
     /// <summary>
@@ -103,6 +110,18 @@ namespace Docular.Client.Core.Model.Rest
         Task ITagManager.PostTagAsync(Tag tag)
         {
             Contract.Requires<ArgumentNullException>(tag != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task ITagManager.PutTagAsync(Tag tag)
+        {
+            Contract.Requires<ArgumentNullException>(tag != null);
+            Contract.Requires<ArgumentNullException>(tag.Id != null);
             Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;

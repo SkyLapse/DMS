@@ -25,7 +25,7 @@ MongoDB Schema
     },
     content: "<extracted content>",
     category: ObjectId(<category._id>),
-    tags: [ ObjectId(<tag._id>), ... ]
+    tags: [ ObjectId(<tag._id>), ... ],
     buzzwords: [ 
         { text: "<buzzword", commonness: 0.XX },
         ...

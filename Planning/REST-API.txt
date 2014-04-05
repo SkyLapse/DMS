@@ -15,7 +15,7 @@ Every specified URL is prefixed by http://_yoursite.com_/api/$key/
 
 ### Categories:
 - Retreive: categories/$id (GET)
- - GET-Parameters: user=userID, parent=parentId
+ - GET-Parameters: user=userID, category=parentId
 - Add: categories (POST)
 - Count: categories/count (GET)
 - Edit: categories/$id (PUT)

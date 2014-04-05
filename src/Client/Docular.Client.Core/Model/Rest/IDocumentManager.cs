@@ -59,24 +59,18 @@ namespace Docular.Client.Core.Model.Rest
         Task<Stream> GetThumbnailAsync(String documentId);
 
         /// <summary>
-        /// Uploads the specified new / changed <see cref="Document"/> to the server.
+        /// Uploads the specified new <see cref="Document"/> to the server.
         /// </summary>
         /// <param name="document">The <see cref="Document"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         Task PostDocumentAsync(Document document);
 
         /// <summary>
-        /// Uploads the specified <see cref="Document"/>'s content to the server. See remarks.
+        /// Uploads the specified changed <see cref="Document"/> to the server.
         /// </summary>
-        /// <param name="documentId">The ID of the <see cref="Document"/> to upload the contents from.</param>
-        /// <param name="content">The <see cref="Document"/>'s content.</param>
-        /// <returns>A <see cref="Task"/> describing the asynchronous uploading process.</returns>
-        /// <remarks>
-        /// The content path of the <see cref="Document"/> has to be local, otherwise a <see cref="InvalidOperationException"/>
-        /// will be thrown.
-        /// </remarks>
-        /// <exception cref="InvalidOperationException">The <see cref="Document"/>'s content path does not point to a local file.</exception>
-        Task UploadContentAsync(String documentId, Stream content);
+        /// <param name="document">The <see cref="Document"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
+        Task PutDocumentAsync(Document document);
     }
 
     /// <summary>
@@ -162,10 +156,10 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task IDocumentManager.UploadContentAsync(String documentId, System.IO.Stream content)
+        Task IDocumentManager.PutDocumentAsync(Document document)
         {
-            Contract.Requires<ArgumentNullException>(documentId != null);
-            Contract.Requires<ArgumentNullException>(content != null);
+            Contract.Requires<ArgumentNullException>(document != null);
+            Contract.Requires<ArgumentNullException>(document.Id != null);
             Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;

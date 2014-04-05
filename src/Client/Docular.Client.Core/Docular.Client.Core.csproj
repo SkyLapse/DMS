@@ -113,7 +113,12 @@
     <Compile Include="Model\Rest\DocularAuthenticator.cs" />
     <Compile Include="Model\Rest\DocularClient.cs" />
     <Compile Include="Model\Rest\HttpException.cs" />
+    <Compile Include="Model\Rest\HttpInternalServerErrorException.cs" />
+    <Compile Include="Model\Rest\HttpForbiddenException.cs" />
+    <Compile Include="Model\Rest\HttpNotFoundException.cs" />
+    <Compile Include="Model\Rest\HttpUnauthorizedException.cs" />
     <Compile Include="Model\Rest\ICategoryManager.cs" />
+    <Compile Include="Model\Rest\IContentReceiver.cs" />
     <Compile Include="Model\Rest\IDocumentManager.cs" />
     <Compile Include="Model\Rest\IKeyStore.cs" />
     <Compile Include="Model\Rest\ITagManager.cs" />
