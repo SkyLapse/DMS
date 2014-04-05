@@ -39,6 +39,11 @@ namespace Docular.Client.Core.Model
         public String ExtractedContent { get; private set; }
 
         /// <summary>
+        /// The document's mime type.
+        /// </summary>
+        public String Mime { get; private set; }
+
+        /// <summary>
         /// The <see cref="Uri"/> of the payload.
         /// </summary>
         public Uri PayloadPath { get; private set; }
@@ -47,6 +52,11 @@ namespace Docular.Client.Core.Model
         /// The <see cref="Uri"/> of the thumbnail image.
         /// </summary>
         public Uri ThumbnailPath { get; private set; }
+
+        /// <summary>
+        /// The size of the content in bytes.
+        /// </summary>
+        public int Size { get; private set; }
 
         /// <summary>
         /// Gets all <see cref="Tag"/>s associated with the <see cref="Document"/>.
@@ -69,6 +79,8 @@ namespace Docular.Client.Core.Model
         /// </summary>
         /// <param name="buzzwords">All repeatedly occuring words in the extracted content.</param>
         /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Document"/>.</param>
+        /// <param name="mime">The document's mime type.</param>
+        /// <param name="size">The size of the content in bytes.</param>
         /// <param name="createInfo">Information about the creation of the <see cref="Document"/>.</param>
         /// <param name="editInfo">Information about the last edit of the <see cref="Document"/>.</param>
         /// <param name="extractedContent">Extracted content that was read via OCR or some other content recognition method.</param>
@@ -78,22 +90,28 @@ namespace Docular.Client.Core.Model
                     IDocularClient client,
                     ChangeInfo createInfo,
                     ChangeInfo editInfo,
+                    String mime,
                     Buzzword[] buzzwords,
                     String extractedContent,
                     Uri payloadPath,
-                    Uri thumbnailPath
+                    Uri thumbnailPath,
+                    int size
                 )
             : base(client)
         {
             Contract.Requires<ArgumentNullException>(client != null);
+            Contract.Requires<ArgumentNullException>(mime != null);
             Contract.Requires<ArgumentNullException>(buzzwords != null && extractedContent != null);
             Contract.Requires<ArgumentNullException>(payloadPath != null && thumbnailPath != null);
+            Contract.Requires<ArgumentException>(size >= 0);
 
+            this.Buzzwords = buzzwords;
             this.CreateInfo = createInfo;
             this.EditInfo = editInfo;
-            this.Buzzwords = buzzwords;
             this.ExtractedContent = extractedContent;
+            this.Mime = mime;
             this.PayloadPath = payloadPath;
+            this.Size = size;
             this.ThumbnailPath = thumbnailPath;
         }
 
@@ -113,14 +131,16 @@ namespace Docular.Client.Core.Model
                     IDocularClient client,
                     ChangeInfo createInfo,
                     ChangeInfo editInfo,
+                    String mime,
                     Category category,
                     Buzzword[] buzzwords,
                     String extractedContent,
                     Uri payloadPath,
                     Uri thumbnailPath,
+                    int size,
                     Tag[] tags
                 )
-            : this(client, createInfo, editInfo, buzzwords, extractedContent, payloadPath, thumbnailPath)
+            : this(client, createInfo, editInfo, mime, buzzwords, extractedContent, payloadPath, thumbnailPath, size)
         {
             Contract.Requires<ArgumentNullException>(client != null);
             Contract.Requires<ArgumentNullException>(buzzwords != null && extractedContent != null);

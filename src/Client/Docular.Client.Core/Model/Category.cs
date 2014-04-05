@@ -13,11 +13,6 @@ namespace Docular.Client.Core.Model
     public class Category : DocularObject
     {
         /// <summary>
-        /// The <see cref="Category"/>'s name.
-        /// </summary>
-        public String Name { get; private set; }
-
-        /// <summary>
         /// The <see cref="Category"/>'s description.
         /// </summary>
         public String Description { get; private set; }

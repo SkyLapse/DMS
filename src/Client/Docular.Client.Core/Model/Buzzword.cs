@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace Docular.Client.Core.Model
         public Buzzword(String value, float commonness)
             : this()
         {
+            Contract.Requires<ArgumentException>(!value.Contains(" "));
+
             this.Commonness = commonness;
             this.Value = value;
         }
