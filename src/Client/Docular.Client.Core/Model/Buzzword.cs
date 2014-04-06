@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Docular.Client.Core.Model
 {
@@ -15,11 +16,13 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// The commonness of the word inside the text.
         /// </summary>
+        [JsonProperty("commonness")]
         public float Commonness { get; private set; }
 
         /// <summary>
         /// The buzzword itself.
         /// </summary>
+        [JsonProperty("value")]
         public String Value { get; private set; }
         
         /// <summary>

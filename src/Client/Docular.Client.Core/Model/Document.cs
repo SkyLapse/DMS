@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
+using Newtonsoft.Json;
 
 namespace Docular.Client.Core.Model
 {
@@ -16,51 +17,61 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Contains all repeatedly occuring words in the extracted content.
         /// </summary>
+        [JsonProperty("buzzwords")]
         public Buzzword[] Buzzwords { get; private set; }
 
         /// <summary>
         /// Gets the <see cref="Category"/> the <see cref="Document"/> belongs to.
         /// </summary>
+        [JsonProperty("category")]
         public Category Category { get; set; }
 
         /// <summary>
         /// Gets information about the creation of the <see cref="Document"/>.
         /// </summary>
+        [JsonProperty("createInfo")]
         public ChangeInfo CreateInfo { get; private set; }
 
         /// <summary>
         /// Gets information about the last edit of the <see cref="Document"/>.
         /// </summary>
+        [JsonProperty("editInfo")]
         public ChangeInfo EditInfo { get; private set; }
 
         /// <summary>
         /// Contains the extracted content that was read via OCR or some other content recognition method.
         /// </summary>
+        [JsonProperty("content")]
         public String ExtractedContent { get; private set; }
 
         /// <summary>
         /// The document's mime type.
         /// </summary>
+        [JsonProperty("mime")]
         public String Mime { get; private set; }
 
         /// <summary>
         /// The <see cref="Uri"/> of the payload.
         /// </summary>
+        [JsonProperty("documentPath")]
         public Uri PayloadPath { get; private set; }
 
         /// <summary>
         /// The <see cref="Uri"/> of the thumbnail image.
         /// </summary>
+        [JsonProperty("thumbnailPath")]
         public Uri ThumbnailPath { get; private set; }
 
         /// <summary>
         /// The size of the content in bytes.
         /// </summary>
+        [JsonProperty("size")]
         public int Size { get; private set; }
 
         /// <summary>
         /// Gets all <see cref="Tag"/>s associated with the <see cref="Document"/>.
         /// </summary>
+        [JsonProperty("tags")]
         public Tag[] Tags { get; set; }
 
         /// <summary>

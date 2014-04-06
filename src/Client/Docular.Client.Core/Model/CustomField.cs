@@ -9,7 +9,7 @@ namespace Docular.Client.Core.Model
     /// <summary>
     /// Represents a custom field of some arbitrary data.
     /// </summary>
-    public class CustomField : DocularObject
+    public struct CustomField
     {
         /// <summary>
         /// Gets the custom field's key.
@@ -24,14 +24,10 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Initializes a new <see cref="CustomField"/>.
         /// </summary>
-        private CustomField() { }
-
-        /// <summary>
-        /// Initializes a new <see cref="CustomField"/>.
-        /// </summary>
         /// <param name="key">The custom field's key.</param>
         /// <param name="value">The custom field's value.</param>
         public CustomField(String key, String value)
+            : this()
         {
             this.Key = key;
             this.Value = value;

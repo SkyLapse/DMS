@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Docular.Client.Core.Model
 {
@@ -14,11 +15,13 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// The <see cref="User"/> who made the change.
         /// </summary>
+        [JsonProperty("user")]
         public User User { get; private set; }
 
         /// <summary>
         /// The date and time of the change.
         /// </summary>
+        [JsonProperty("date")]
         public DateTime Date { get; private set; }
 
         /// <summary>

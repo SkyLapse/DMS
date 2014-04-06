@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Docular.Client.Core.Model
 {
@@ -15,6 +16,7 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// The <see cref="Category"/>'s description.
         /// </summary>
+        [JsonProperty("description")]
         public String Description { get; private set; }
 
         /// <summary>

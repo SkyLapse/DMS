@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
+using Newtonsoft.Json;
 
 namespace Docular.Client.Core.Model
 {
@@ -15,18 +16,27 @@ namespace Docular.Client.Core.Model
     public class DocularObject
     {
         /// <summary>
+        /// Contains all custom fields.
+        /// </summary>
+        [JsonProperty("customFields")]
+        public CustomField[] CustomFields { get; set; }
+
+        /// <summary>
         /// The unique Id.
         /// </summary>
+        [JsonProperty("_id")]
         public String Id { get; protected set; }
 
         /// <summary>
         /// The <see cref="DocularObject"/>s name.
         /// </summary>
+        [JsonProperty("name")]
         public String Name { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>.
         /// </summary>
+        [JsonIgnore]
         protected IDocularClient Client { get; set; }
 
         /// <summary>

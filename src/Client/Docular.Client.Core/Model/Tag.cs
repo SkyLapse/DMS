@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Docular.Client.Core.Model
 {
@@ -15,7 +16,8 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// The <see cref="Tag"/>'s name.
         /// </summary>
-        public String Description { get; private set; }
+        [JsonProperty("description")]
+        public String Description { get; set; }
 
         /// <summary>
         /// Gets all <see cref="Document"/>s with the <see cref="Tag"/>.
