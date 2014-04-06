@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -40,9 +41,15 @@ namespace Docular.Client.Core.Test
             //    requestBody
             //);
 
-            Document response = client.GetDocumentAsync("53402d959f2225e0d5a33882").Result;
+            //Document response = client.GetDocumentAsync("53402d959f2225e0d5a33882").Result;
 
-            new Newtonsoft.Json.JsonSerializer().Serialize(Console.Out, response);
+            //new Newtonsoft.Json.JsonSerializer().Serialize(Console.Out, response);
+
+            using (MemoryStream ms = new MemoryStream(new RestClient("http://62.143.158.178:5002/api/").Execute(new RestRequest("documents/53402d959f2225e0d5a33882", HttpMethod.Get)).Result.RawBytes))
+            using (StreamReader sr = new StreamReader(ms))
+            {
+                Console.WriteLine(sr.ReadToEnd());
+            }
 
             Console.WriteLine("Finished!");
             Console.ReadLine();
