@@ -30,6 +30,7 @@ namespace Docular.Client.Core.Model
         public Buzzword(String value, float commonness)
             : this()
         {
+            Contract.Requires<ArgumentNullException>(value != null);
             Contract.Requires<ArgumentException>(!value.Contains(" "));
 
             this.Commonness = commonness;

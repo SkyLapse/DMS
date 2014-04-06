@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model;
+using RestSharp.Portable;
 
 namespace Docular.Client.Core.Model.Rest
 {
@@ -31,14 +32,9 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Gets all <see cref="Category"/>s that match the specified criteria.
         /// </summary>
-        /// <param name="userId">
-        /// The ID of the <see cref="User"/> who created the <see cref="Category"/>. If null is specified, there will be no filtering.
-        /// </param>
-        /// <param name="parentId">
-        /// The ID of the parent <see cref="Category"/> it has to be a child of. If null is specified, there will be no filtering.
-        /// </param>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
         /// <returns></returns>
-        Task<Category[]> GetCategoriesAsync(String userId = null, String parentId = null);
+        Task<Category[]> GetCategoriesAsync(params Parameter[] filterParameters);
 
         /// <summary>
         /// Gets the amount of <see cref="Category"/>s.
@@ -92,8 +88,10 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<Category[]> ICategoryManager.GetCategoriesAsync(String userId, String parentId)
+        Task<Category[]> ICategoryManager.GetCategoriesAsync(params Parameter[] filterParameters)
         {
+            Contract.Requires<ArgumentNullException>(filterParameters != null);
+            Contract.Requires<ArgumentException>(filterParameters.All(filterParam => filterParam.Type == ParameterType.GetOrPost));
             Contract.Ensures(Contract.Result<Task<Category[]>>() != null);
 
             return null;

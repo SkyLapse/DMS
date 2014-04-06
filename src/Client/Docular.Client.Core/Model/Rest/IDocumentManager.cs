@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model;
+using RestSharp.Portable;
 
 namespace Docular.Client.Core.Model.Rest
 {
@@ -39,11 +40,9 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Gets a filtered list of <see cref="Document"/>s that match the specified criteria.
         /// </summary>
-        /// <param name="userId">The ID of the <see cref="User"/> who created the <see cref="Document"/>.</param>
-        /// <param name="categoryId">The ID of the <see cref="Category"/> the <see cref="Document"/> belongs to.</param>
-        /// <param name="tagId">The ID of a <see cref="Tag"/> of the <see cref="Document"/>.</param>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
         /// <returns>A collection of <see cref="Document"/>s that match the criteria.</returns>
-        Task<Document[]> GetDocumentsAsync(String userId = null, String categoryId = null, String tagId = null);
+        Task<Document[]> GetDocumentsAsync(params Parameter[] filterParameters);
 
         /// <summary>
         /// Gets the amount of stored <see cref="Document"/>s.
@@ -114,8 +113,10 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<Document[]> IDocumentManager.GetDocumentsAsync(String userId, String categoryId, String tagId)
+        Task<Document[]> IDocumentManager.GetDocumentsAsync(params Parameter[] filterParameters)
         {
+            Contract.Requires<ArgumentNullException>(filterParameters != null);
+            Contract.Requires<ArgumentException>(filterParameters.All(filterParam => filterParam.Type == ParameterType.GetOrPost));
             Contract.Ensures(Contract.Result<Task<Document[]>>() != null);
 
             return null;

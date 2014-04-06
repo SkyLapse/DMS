@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model;
+using RestSharp.Portable;
 
 namespace Docular.Client.Core.Model.Rest
 {
@@ -31,9 +32,9 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Gets a filtered collection of <see cref="Tag"/>s.
         /// </summary>
-        /// <param name="userId">The ID of the <see cref="User"/> who created the <see cref="Tag"/>.</param>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
         /// <returns>The <see cref="Tag"/>s that matched the search criteria.</returns>
-        Task<Tag[]> GetTagsAsync(String userId = null);
+        Task<Tag[]> GetTagsAsync(params Parameter[] filterParameters);
 
         /// <summary>
         /// Gets the amount of <see cref="Tag"/>s.
@@ -87,8 +88,10 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<Tag[]> ITagManager.GetTagsAsync(String userId)
+        Task<Tag[]> ITagManager.GetTagsAsync(params Parameter[] filterParameters)
         {
+            Contract.Requires<ArgumentNullException>(filterParameters != null);
+            Contract.Requires<ArgumentException>(filterParameters.All(filterParam => filterParam.Type == ParameterType.GetOrPost));
             Contract.Ensures(Contract.Result<Task<Tag[]>>() != null);
 
             return null;

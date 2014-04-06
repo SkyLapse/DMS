@@ -70,6 +70,7 @@ namespace Docular.Client.Core.Model
         {
             this.Buzzwords = Enumerable.Empty<Buzzword>().ToArray();
             this.ExtractedContent = String.Empty;
+            this.Mime = String.Empty;
             this.PayloadPath = new Uri(String.Empty);
             this.ThumbnailPath = new Uri(String.Empty);
         }
@@ -126,6 +127,8 @@ namespace Docular.Client.Core.Model
         /// <param name="extractedContent">Extracted content that was read via OCR or some other content recognition method.</param>
         /// <param name="payloadPath">The <see cref="Uri"/> of the payload.</param>
         /// <param name="thumbnailPath">The <see cref="Uri"/> of the thumbnail image.</param>
+        /// <param name="mime">The document's mime type.</param>
+        /// <param name="size">The size of the content in bytes.</param>
         /// <param name="tags">All <see cref="Tag"/>s associated with the <see cref="Document"/>.</param>
         public Document(
                     IDocularClient client,
@@ -143,9 +146,11 @@ namespace Docular.Client.Core.Model
             : this(client, createInfo, editInfo, mime, buzzwords, extractedContent, payloadPath, thumbnailPath, size)
         {
             Contract.Requires<ArgumentNullException>(client != null);
+            Contract.Requires<ArgumentNullException>(mime != null);
             Contract.Requires<ArgumentNullException>(buzzwords != null && extractedContent != null);
             Contract.Requires<ArgumentNullException>(payloadPath != null && thumbnailPath != null);
             Contract.Requires<ArgumentNullException>(category != null && tags != null);
+            Contract.Requires<ArgumentException>(size >= 0);
 
             this.Category = category;
             this.Tags = tags;
@@ -177,7 +182,9 @@ namespace Docular.Client.Core.Model
         {
             Contract.Invariant(this.Buzzwords != null);
             Contract.Invariant(this.ExtractedContent != null);
+            Contract.Invariant(this.Mime != null);
             Contract.Invariant(this.PayloadPath != null);
+            Contract.Invariant(this.Size >= 0);
             Contract.Invariant(this.ThumbnailPath != null);
         }
     }

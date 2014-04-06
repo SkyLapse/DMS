@@ -119,30 +119,18 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Initializes a new <see cref="DocularClient"/>.
         /// </summary>
-        /// <param name="docularUri">The adress of the remote host.</param>
+        /// <param name="apiUri">The adress of the remote host. <example>http://example.com/api/</example></param>
         /// <param name="keyStore">A <see cref="IKeyStore"/> used to obtain the key.</param>
         /// <param name="contentReceiver">The <see cref="IContentReceiver"/> used to obtain a <see cref="Document"/>s content.</param>
-        public DocularClient(String docularUri, IKeyStore keyStore, IContentReceiver contentReceiver)
-            : this(new Uri(docularUri), keyStore, contentReceiver)
+        public DocularClient(Uri apiUri, IKeyStore keyStore, IContentReceiver contentReceiver)
         {
-            Contract.Requires<ArgumentNullException>(docularUri != null && keyStore != null && contentReceiver != null);
-        }
-
-        /// <summary>
-        /// Initializes a new <see cref="DocularClient"/>.
-        /// </summary>
-        /// <param name="docularUri">The adress of the remote host.</param>
-        /// <param name="keyStore">A <see cref="IKeyStore"/> used to obtain the key.</param>
-        /// <param name="contentReceiver">The <see cref="IContentReceiver"/> used to obtain a <see cref="Document"/>s content.</param>
-        public DocularClient(Uri docularUri, IKeyStore keyStore, IContentReceiver contentReceiver)
-        {
-            Contract.Requires<ArgumentNullException>(docularUri != null && keyStore != null && contentReceiver != null);
-            Contract.Requires<ArgumentException>(!docularUri.IsFile);
-            Contract.Requires<ArgumentException>(docularUri.AbsoluteUri.EndsWith("/api") || docularUri.AbsoluteUri.EndsWith("/api/"));
-            Contract.Requires<ArgumentException>(docularUri.Scheme == "https");
+            Contract.Requires<ArgumentNullException>(apiUri != null && keyStore != null && contentReceiver != null);
+            Contract.Requires<ArgumentException>(!apiUri.IsFile);
+            Contract.Requires<ArgumentException>(apiUri.AbsoluteUri.EndsWith("/api") || apiUri.AbsoluteUri.EndsWith("/api/"));
+            Contract.Requires<ArgumentException>(apiUri.Scheme == "https");
 
             this.contentReceiver = contentReceiver;
-            this.DocularUri = docularUri;
+            this.DocularUri = apiUri;
             this.restClient.BaseUrl = this.DocularUri;
             this.restClient.Authenticator = new DocularAuthenticator(keyStore);
         }
@@ -184,13 +172,11 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Gets a filtered list of <see cref="Document"/>s that match the specified criteria.
         /// </summary>
-        /// <param name="userId">The ID of the <see cref="User"/> who created the <see cref="Document"/>.</param>
-        /// <param name="categoryId">The ID of the <see cref="Category"/> the <see cref="Document"/> belongs to.</param>
-        /// <param name="tagId">The ID of a <see cref="Tag"/> of the <see cref="Document"/>.</param>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
         /// <returns>A collection of <see cref="Document"/>s that match the criteria.</returns>
-        public Task<Document[]> GetDocumentsAsync(String userId = null, String categoryId = null, String tagId = null)
+        public Task<Document[]> GetDocumentsAsync(params Parameter[] filterParameters)
         {
-            return this.PerformFilteredRetreiveRequest<Document>(Documents, userId: userId, categoryId: categoryId, tagId: tagId);
+            return this.PerformFilteredRetreiveRequest<Document>(Documents, filterParameters);
         }
 
         /// <summary>
@@ -219,9 +205,12 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         /// <param name="document">The <see cref="Document"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
-        public Task PostDocumentAsync(Document document)
+        public async Task PostDocumentAsync(Document document)
         {
-            return this.PerformPostRequest(document, Documents);
+            RestRequest categoryRequest = new RestRequest(Documents, HttpMethod.Post);
+            await Task.Run(() => categoryRequest.AddBody(document));
+            await Task.Run(() => categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document)));
+            await this.ThrowIfErroneous(this.restClient.Execute(categoryRequest));
         }
 
         /// <summary>
@@ -229,13 +218,16 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         /// <param name="document">The <see cref="Document"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
-        public Task PutDocumentAsync(Document document)
+        public async Task PutDocumentAsync(Document document)
         {
             RestRequest categoryRequest = new RestRequest(DocumentsId, HttpMethod.Put);
             categoryRequest.AddUrlSegment("id", document.Id);
-            categoryRequest.AddBody(document);
-            categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document));
-            return this.ThrowIfErroneous(this.restClient.Execute(categoryRequest));
+            await Task.Run(() =>
+            {
+                categoryRequest.AddBody(document);
+                categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document));
+            });
+            await this.ThrowIfErroneous(this.restClient.Execute(categoryRequest));
         }
 
         #endregion
@@ -265,16 +257,11 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Gets all <see cref="Category"/>s that match the specified criteria.
         /// </summary>
-        /// <param name="userId">
-        /// The ID of the <see cref="User"/> who created the <see cref="Category"/>. If null is specified, there will be no filtering.
-        /// </param>
-        /// <param name="parentId">
-        /// The ID of the parent <see cref="Category"/> it has to be a child of. If null is specified, there will be no filtering.
-        /// </param>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
         /// <returns></returns>
-        public Task<Category[]> GetCategoriesAsync(String userId = null, String parentId = null)
+        public Task<Category[]> GetCategoriesAsync(params Parameter[] filterParameters)
         {
-            return this.PerformFilteredRetreiveRequest<Category>(Categories, userId: userId, categoryId: parentId);
+            return this.PerformFilteredRetreiveRequest<Category>(Categories, filterParameters);
         }
 
         /// <summary>
@@ -333,11 +320,11 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Gets a filtered collection of <see cref="Tag"/>s.
         /// </summary>
-        /// <param name="userId">The ID of the <see cref="User"/> who created the <see cref="Tag"/>.</param>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
         /// <returns>The <see cref="Tag"/>s that matched the search criteria.</returns>
-        public Task<Tag[]> GetTagsAsync(String userId = null)
+        public Task<Tag[]> GetTagsAsync(params Parameter[] filterParameters)
         {
-            return this.PerformFilteredRetreiveRequest<Tag>(Tags, userId: userId);
+            return this.PerformFilteredRetreiveRequest<Tag>(Tags, filterParameters);
         }
 
         /// <summary>
@@ -434,6 +421,8 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>A <see cref="Task"/> describing the asynchronous request.</returns>
         private Task PerformDeleteRequest(String id, String apiUrl)
         {
+            Contract.Requires<ArgumentNullException>(id != null && apiUrl != null);
+
             RestRequest deleteRequest = new RestRequest(UsersId, HttpMethod.Get);
             deleteRequest.AddUrlSegment("id", id);
             return this.ThrowIfErroneous(this.restClient.Execute(deleteRequest));
@@ -447,6 +436,8 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>A <see cref="Task{T}"/> describing the asynchronous request.</returns>
         private Task<T> PerformSingleRetreiveRequest<T>(String id, String apiUrl)
         {
+            Contract.Requires<ArgumentNullException>(id != null && apiUrl != null);
+
             RestRequest retreiveRequest = new RestRequest(apiUrl, HttpMethod.Get);
             retreiveRequest.AddUrlSegment("id", id);
             return this.ThrowIfErroneous(this.restClient.Execute<T>(retreiveRequest));
@@ -455,17 +446,18 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Performs a GET request to the specified URL with the specified ID.
         /// </summary>
-        /// <param name="userId">The ID of the <see cref="User"/> who created the item.</param>
-        /// <param name="categoryId">The ID of the <see cref="Category"/> the item belongs to.</param>
-        /// <param name="tagId">The ID of a <see cref="Tag"/> of the item.</param>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
         /// <param name="apiUrl">The URL to send the request to.</param>
         /// <returns>A <see cref="Task"/> describing the asynchronous request.</returns>
-        private Task<T[]> PerformFilteredRetreiveRequest<T>(String apiUrl, String userId = null, String categoryId = null, String tagId = null)
+        private Task<T[]> PerformFilteredRetreiveRequest<T>(String apiUrl, params Parameter[] filterParameters)
         {
+            Contract.Requires<ArgumentNullException>(apiUrl != null);
+
             RestRequest filteredRequest = new RestRequest(apiUrl, HttpMethod.Get);
-            filteredRequest.AddParameter("user", userId, ParameterType.GetOrPost);
-            filteredRequest.AddParameter("category", categoryId, ParameterType.GetOrPost);
-            filteredRequest.AddParameter("tag", tagId, ParameterType.GetOrPost);
+            foreach (Parameter param in filterParameters)
+            {
+                filteredRequest.AddParameter(param);
+            }
             return this.ThrowIfErroneous(this.restClient.Execute<T[]>(filteredRequest));
         }
 
@@ -476,6 +468,8 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>The item count..</returns>
         private Task<int> PerformCountRequest(String apiUrl)
         {
+            Contract.Requires<ArgumentNullException>(apiUrl != null);
+
             RestRequest countRequest = new RestRequest(apiUrl, HttpMethod.Get);
             return this.ThrowIfErroneous(this.restClient.Execute<int>(countRequest));
         }
@@ -488,6 +482,8 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>A <see cref="Task"/> describing the asynchronous POSTing process.</returns>
         private Task PerformPostRequest(DocularObject value, String apiUrl)
         {
+            Contract.Requires<ArgumentNullException>(value != null && apiUrl != null);
+
             RestRequest postRequest = new RestRequest(apiUrl, HttpMethod.Post);
             postRequest.AddBody(value);
             return this.ThrowIfErroneous(this.restClient.Execute(postRequest));
@@ -501,6 +497,8 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>A <see cref="Task"/> describing the asynchronous PUTting process.</returns>
         private Task PerformPutRequest(DocularObject value, String apiUrl)
         {
+            Contract.Requires<ArgumentNullException>(value != null && apiUrl != null);
+
             RestRequest categoryRequest = new RestRequest(apiUrl, HttpMethod.Put);
             categoryRequest.AddUrlSegment("id", value.Id);
             categoryRequest.AddBody(value);
@@ -515,7 +513,7 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="responseTask">The <see cref="IRestResponse"/> to check for errors.</param>
         private async Task ThrowIfErroneous(Task<IRestResponse> responseTask)
         {
-            Contract.Requires<ArgumentNullException>(responseTask != null);
+            Contract.Assume(responseTask != null);
 
             IRestResponse response = await responseTask;
             if (response.StatusCode.IsError())
@@ -543,11 +541,22 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>The <see cref="IRestResponse{T}"/>s data.</returns>
         private async Task<T> ThrowIfErroneous<T>(Task<IRestResponse<T>> responseTask)
         {
-            Contract.Requires<ArgumentNullException>(responseTask != null);
+            Contract.Assume(responseTask != null);
 
             IRestResponse<T> response = await responseTask;
             await this.ThrowIfErroneous(Task.FromResult((IRestResponse)response));
             return response.Data;
+        }
+
+        /// <summary>
+        /// Contains Contract.Invariant definitions.
+        /// </summary>
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(this.contentReceiver != null);
+            Contract.Invariant(this.DocularUri != null);
+            Contract.Invariant(this.restClient != null);
         }
     }
 }
