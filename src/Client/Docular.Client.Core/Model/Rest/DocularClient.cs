@@ -208,8 +208,11 @@ namespace Docular.Client.Core.Model.Rest
         public async Task PostDocumentAsync(Document document)
         {
             RestRequest categoryRequest = new RestRequest(Documents, HttpMethod.Post);
-            await Task.Run(() => categoryRequest.AddBody(document));
-            await Task.Run(() => categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document)));
+            await Task.Run(() =>
+            {
+                categoryRequest.AddBody(document);
+                categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document));
+            });
             await this.restClient.Execute(categoryRequest);
         }
 
