@@ -69,7 +69,6 @@ namespace Docular.Client.Core.Model.Rest
         Task IUserManager.DeleteUserAsync(String userId)
         {
             Contract.Requires<ArgumentNullException>(userId != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }
@@ -80,7 +79,6 @@ namespace Docular.Client.Core.Model.Rest
         Task<User> IUserManager.GetUserAsync(String id)
         {
             Contract.Requires<ArgumentNullException>(id != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }
@@ -92,7 +90,6 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(filterParameters != null);
             Contract.Requires<ArgumentException>(filterParameters.All(filterParameter => filterParameter.Type == ParameterType.GetOrPost));
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }
@@ -102,8 +99,6 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         Task<int> IUserManager.GetUserCountAsync()
         {
-            Contract.Ensures(Contract.Result<Task<int>>() != null);
-
             return null;
         }
 
@@ -113,7 +108,6 @@ namespace Docular.Client.Core.Model.Rest
         Task IUserManager.PostUserAsync(User user)
         {
             Contract.Requires<ArgumentNullException>(user != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }
@@ -125,7 +119,6 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(user != null);
             Contract.Requires<ArgumentNullException>(user.Id != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }

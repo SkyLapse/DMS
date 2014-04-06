@@ -83,9 +83,9 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         Task IDocumentManager.DeleteDocumentAsync(String documentId)
         {
-            Contract.Ensures(Contract.Result<Task>() != null);
+            Contract.Requires<ArgumentNullException>(documentId != null);
 
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>
@@ -94,7 +94,6 @@ namespace Docular.Client.Core.Model.Rest
         Task<System.IO.Stream> IDocumentManager.GetContentAsync(String documentId)
         {
             Contract.Requires<ArgumentNullException>(documentId != null);
-            Contract.Ensures(Contract.Result<Task<System.IO.Stream>>() != null);
 
             return null;
         }
@@ -105,7 +104,6 @@ namespace Docular.Client.Core.Model.Rest
         Task<Document> IDocumentManager.GetDocumentAsync(String id)
         {
             Contract.Requires<ArgumentNullException>(id != null);
-            Contract.Ensures(Contract.Result<Task<Document>>() != null);
 
             return null;
         }
@@ -117,7 +115,6 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(filterParameters != null);
             Contract.Requires<ArgumentException>(filterParameters.All(filterParam => filterParam.Type == ParameterType.GetOrPost));
-            Contract.Ensures(Contract.Result<Task<Document[]>>() != null);
 
             return null;
         }
@@ -127,8 +124,6 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         Task<int> IDocumentManager.GetDocumentCountAsync()
         {
-            Contract.Ensures(Contract.Result<Task<int>>() != null);
-
             return null;
         }
 
@@ -138,7 +133,6 @@ namespace Docular.Client.Core.Model.Rest
         Task<System.IO.Stream> IDocumentManager.GetThumbnailAsync(String documentId)
         {
             Contract.Requires<ArgumentNullException>(documentId != null);
-            Contract.Ensures(Contract.Result<Task<System.IO.Stream>>() != null);
 
             return null;
         }
@@ -149,8 +143,7 @@ namespace Docular.Client.Core.Model.Rest
         Task IDocumentManager.PostDocumentAsync(Document document)
         {
             Contract.Requires<ArgumentNullException>(document != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
-
+            
             return null;
         }
 
@@ -161,8 +154,7 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(document != null);
             Contract.Requires<ArgumentNullException>(document.Id != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
-
+            
             return null;
         }
     }

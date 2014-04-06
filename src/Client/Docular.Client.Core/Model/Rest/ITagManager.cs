@@ -69,7 +69,6 @@ namespace Docular.Client.Core.Model.Rest
         Task ITagManager.DeleteTagAsync(String tagId)
         {
             Contract.Requires<ArgumentNullException>(tagId != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }
@@ -80,7 +79,6 @@ namespace Docular.Client.Core.Model.Rest
         Task<Tag> ITagManager.GetTagAsync(String id)
         {
             Contract.Requires<ArgumentNullException>(id != null);
-            Contract.Ensures(Contract.Result<Task<Tag>>() != null);
 
             return null;
         }
@@ -92,8 +90,6 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(filterParameters != null);
             Contract.Requires<ArgumentException>(filterParameters.All(filterParam => filterParam.Type == ParameterType.GetOrPost));
-            Contract.Ensures(Contract.Result<Task<Tag[]>>() != null);
-
             return null;
         }
 
@@ -102,8 +98,6 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         Task<int> ITagManager.GetTagCountAsync()
         {
-            Contract.Ensures(Contract.Result<Task<int>>() != null);
-
             return null;
         }
 
@@ -113,7 +107,6 @@ namespace Docular.Client.Core.Model.Rest
         Task ITagManager.PostTagAsync(Tag tag)
         {
             Contract.Requires<ArgumentNullException>(tag != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }
@@ -125,7 +118,6 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(tag != null);
             Contract.Requires<ArgumentNullException>(tag.Id != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }

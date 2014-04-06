@@ -69,8 +69,7 @@ namespace Docular.Client.Core.Model.Rest
         Task ICategoryManager.DeleteCategoryAsync(String categoryId)
         {
             Contract.Requires<ArgumentNullException>(categoryId != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
-
+            
             return null;
         }
 
@@ -80,7 +79,6 @@ namespace Docular.Client.Core.Model.Rest
         Task<Category> ICategoryManager.GetCategoryAsync(String id)
         {
             Contract.Requires<ArgumentNullException>(id != null);
-            Contract.Ensures(Contract.Result<Task<Category>>() != null);
 
             return null;
         }
@@ -92,7 +90,6 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(filterParameters != null);
             Contract.Requires<ArgumentException>(filterParameters.All(filterParam => filterParam.Type == ParameterType.GetOrPost));
-            Contract.Ensures(Contract.Result<Task<Category[]>>() != null);
 
             return null;
         }
@@ -102,8 +99,6 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         Task<int> ICategoryManager.GetCategoryCountAsync()
         {
-            Contract.Ensures(Contract.Result<Task<int>>() != null);
-
             return null;
         }
 
@@ -113,8 +108,7 @@ namespace Docular.Client.Core.Model.Rest
         Task ICategoryManager.PostCategoryAsync(Category category)
         {
             Contract.Requires<ArgumentNullException>(category != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
-
+            
             return null;
         }
 
@@ -125,8 +119,7 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(category != null);
             Contract.Requires<ArgumentNullException>(category.Id != null);
-            Contract.Ensures(Contract.Result<Task>() != null);
-
+            
             return null;
         }
     }

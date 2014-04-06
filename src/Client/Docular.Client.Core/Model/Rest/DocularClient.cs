@@ -119,13 +119,14 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// Initializes a new <see cref="DocularClient"/>.
         /// </summary>
-        /// <param name="apiUri">The adress of the remote host. <example>http://example.com/api/</example></param>
+        /// <param name="apiUri">The adress of the remote host. Has to end with a slash. <example>http://example.com/api/</example></param>
         /// <param name="keyStore">A <see cref="IKeyStore"/> used to obtain the key.</param>
         /// <param name="contentReceiver">The <see cref="IContentReceiver"/> used to obtain a <see cref="Document"/>s content.</param>
         public DocularClient(Uri apiUri, IKeyStore keyStore, IContentReceiver contentReceiver)
         {
             Contract.Requires<ArgumentNullException>(apiUri != null && keyStore != null && contentReceiver != null);
             Contract.Requires<ArgumentException>(!apiUri.IsFile);
+            Contract.Requires<ArgumentException>(apiUri.AbsolutePath.EndsWith("/"));
 
             this.contentReceiver = contentReceiver;
             this.DocularUri = apiUri;
