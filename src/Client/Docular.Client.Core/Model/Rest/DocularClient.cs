@@ -126,13 +126,12 @@ namespace Docular.Client.Core.Model.Rest
         {
             Contract.Requires<ArgumentNullException>(apiUri != null && keyStore != null && contentReceiver != null);
             Contract.Requires<ArgumentException>(!apiUri.IsFile);
-            Contract.Requires<ArgumentException>(apiUri.AbsoluteUri.EndsWith("/api") || apiUri.AbsoluteUri.EndsWith("/api/"));
-            Contract.Requires<ArgumentException>(apiUri.Scheme == "https");
 
             this.contentReceiver = contentReceiver;
             this.DocularUri = apiUri;
             this.restClient.BaseUrl = this.DocularUri;
             this.restClient.Authenticator = new DocularAuthenticator(keyStore);
+            this.restClient.AddDefaultParameter("nowrap", true, ParameterType.GetOrPost);
         }
 
         #region Documents
@@ -152,11 +151,11 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         /// <param name="documentId">The ID of the <see cref="Document"/> to obtain the content of.</param>
         /// <returns>The <see cref="Document"/>'s content.</returns>
-        public Task<Stream> GetContentAsync(String documentId)
+        public async Task<Stream> GetContentAsync(String documentId)
         {
             RestRequest contentRequest = new RestRequest(DocumentsIdContent, HttpMethod.Get);
             contentRequest.AddUrlSegment("id", documentId);
-            return this.ThrowIfErroneous(this.restClient.Execute<Stream>(contentRequest));
+            return (await this.restClient.Execute<Stream>(contentRequest)).Data;
         }
 
         /// <summary>
@@ -193,11 +192,11 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         /// <param name="documentId">The ID of the <see cref="Document"/> to obtain the thumbnail of.</param>
         /// <returns>The <see cref="Document"/>'s thumbnail.</returns>
-        public Task<Stream> GetThumbnailAsync(String documentId)
+        public async Task<Stream> GetThumbnailAsync(String documentId)
         {
             RestRequest thumbnailRequest = new RestRequest(DocumentsIdThumbnail, HttpMethod.Get);
             thumbnailRequest.AddUrlSegment("id", documentId);
-            return this.ThrowIfErroneous(this.restClient.Execute<Stream>(thumbnailRequest));
+            return (await this.restClient.Execute<Stream>(thumbnailRequest)).Data;
         }
 
         /// <summary>
@@ -210,7 +209,7 @@ namespace Docular.Client.Core.Model.Rest
             RestRequest categoryRequest = new RestRequest(Documents, HttpMethod.Post);
             await Task.Run(() => categoryRequest.AddBody(document));
             await Task.Run(() => categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document)));
-            await this.ThrowIfErroneous(this.restClient.Execute(categoryRequest));
+            await this.restClient.Execute(categoryRequest);
         }
 
         /// <summary>
@@ -227,7 +226,7 @@ namespace Docular.Client.Core.Model.Rest
                 categoryRequest.AddBody(document);
                 categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document));
             });
-            await this.ThrowIfErroneous(this.restClient.Execute(categoryRequest));
+            await this.restClient.Execute(categoryRequest);
         }
 
         #endregion
@@ -435,7 +434,7 @@ namespace Docular.Client.Core.Model.Rest
 
             RestRequest deleteRequest = new RestRequest(UsersId, HttpMethod.Get);
             deleteRequest.AddUrlSegment("id", id);
-            return this.ThrowIfErroneous(this.restClient.Execute(deleteRequest));
+            return this.restClient.Execute(deleteRequest);
         }
 
         /// <summary>
@@ -444,13 +443,13 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="id">The ID of the item to get.</param>
         /// <param name="apiUrl">The URL to send the request to.</param>
         /// <returns>A <see cref="Task{T}"/> describing the asynchronous request.</returns>
-        private Task<T> PerformSingleRetreiveRequest<T>(String id, String apiUrl)
+        private async Task<T> PerformSingleRetreiveRequest<T>(String id, String apiUrl)
         {
             Contract.Requires<ArgumentNullException>(id != null && apiUrl != null);
 
             RestRequest retreiveRequest = new RestRequest(apiUrl, HttpMethod.Get);
             retreiveRequest.AddUrlSegment("id", id);
-            return this.ThrowIfErroneous(this.restClient.Execute<T>(retreiveRequest));
+            return (await this.restClient.Execute<T>(retreiveRequest)).Data;
         }
 
         /// <summary>
@@ -459,7 +458,7 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
         /// <param name="apiUrl">The URL to send the request to.</param>
         /// <returns>A <see cref="Task"/> describing the asynchronous request.</returns>
-        private Task<T[]> PerformFilteredRetreiveRequest<T>(String apiUrl, params Parameter[] filterParameters)
+        private async Task<T[]> PerformFilteredRetreiveRequest<T>(String apiUrl, params Parameter[] filterParameters)
         {
             Contract.Requires<ArgumentNullException>(apiUrl != null);
 
@@ -468,7 +467,7 @@ namespace Docular.Client.Core.Model.Rest
             {
                 filteredRequest.AddParameter(param);
             }
-            return this.ThrowIfErroneous(this.restClient.Execute<T[]>(filteredRequest));
+            return (await this.restClient.Execute<T[]>(filteredRequest)).Data;
         }
 
         /// <summary>
@@ -476,12 +475,12 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         /// <param name="apiUrl">The API URL of the items to count.</param>
         /// <returns>The item count.</returns>
-        private Task<int> PerformCountRequest(String apiUrl)
+        private async Task<int> PerformCountRequest(String apiUrl)
         {
             Contract.Requires<ArgumentNullException>(apiUrl != null);
 
             RestRequest countRequest = new RestRequest(apiUrl, HttpMethod.Get);
-            return this.ThrowIfErroneous(this.restClient.Execute<int>(countRequest));
+            return (await this.restClient.Execute<int>(countRequest)).Data;
         }
 
         /// <summary>
@@ -496,7 +495,7 @@ namespace Docular.Client.Core.Model.Rest
 
             RestRequest postRequest = new RestRequest(apiUrl, HttpMethod.Post);
             postRequest.AddBody(value);
-            return this.ThrowIfErroneous(this.restClient.Execute(postRequest));
+            return this.restClient.Execute(postRequest);
         }
 
         /// <summary>
@@ -512,53 +511,10 @@ namespace Docular.Client.Core.Model.Rest
             RestRequest categoryRequest = new RestRequest(apiUrl, HttpMethod.Put);
             categoryRequest.AddUrlSegment("id", value.Id);
             categoryRequest.AddBody(value);
-            return this.ThrowIfErroneous(this.restClient.Execute(categoryRequest));
+            return this.restClient.Execute(categoryRequest);
         }
 
         #endregion
-
-        /// <summary>
-        /// Throws an <see cref="HttpException"/> if the specified <see cref="IRestResponse"/> represents an error.
-        /// </summary>
-        /// <param name="responseTask">The <see cref="IRestResponse"/> to check for errors.</param>
-        private async Task ThrowIfErroneous(Task<IRestResponse> responseTask)
-        {
-            Contract.Assume(responseTask != null);
-
-            IRestResponse response = await responseTask;
-            if (response.StatusCode.IsError())
-            {
-                switch (response.StatusCode)
-                {
-                    case HttpStatusCode.Unauthorized:
-                        throw new HttpUnauthorizedException();
-                    case HttpStatusCode.Forbidden:
-                        throw new HttpForbiddenException();
-                    case HttpStatusCode.InternalServerError:
-                        throw new HttpInternalServerErrorException();
-                    case HttpStatusCode.NotFound:
-                        throw new HttpNotFoundException();
-                    case HttpStatusCode.MethodNotAllowed:
-                        throw new HttpMethodNotAllowedException();
-                    default:
-                        throw new HttpException(response.StatusDescription, response.StatusCode);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Throws an <see cref="HttpException"/> if the specified <see cref="IRestResponse{T}"/> represents an error.
-        /// </summary>
-        /// <param name="responseTask">The <see cref="IRestResponse{T}"/> to check for errors.</param>
-        /// <returns>The <see cref="IRestResponse{T}"/>s data.</returns>
-        private async Task<T> ThrowIfErroneous<T>(Task<IRestResponse<T>> responseTask)
-        {
-            Contract.Assume(responseTask != null);
-
-            IRestResponse<T> response = await responseTask;
-            await this.ThrowIfErroneous(Task.FromResult((IRestResponse)response));
-            return response.Data;
-        }
 
         /// <summary>
         /// Contains Contract.Invariant definitions.

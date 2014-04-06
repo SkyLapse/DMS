@@ -14,30 +14,35 @@ namespace Docular.Client.Core.Test
     {
         static void Main(string[] args)
         {
-            DocularClient client = new DocularClient(new Uri("https://example.com/api"), new TestKeyStore(), new TestContentReceiver());
-            Document testDocument = new Document(
-                client,
-                new ChangeInfo(new User(), DateTime.Now),
-                new ChangeInfo(),
-                "image/jpeg",
-                new Category(),
-                new Buzzword[] { },
-                "Test ABC 123",
-                new Uri("https://example.com/api/download/Test.jpg"),
-                new Uri("https://example.com/api/download/Test-Thumbnail.jpg"),
-                1000,
-                new Tag[] { new Tag() { Name = "Tag1", Description = "Description of Tag1" } }
-            );
+            IDocularClient client = new DocularClient(new Uri("http://62.143.158.178:5002/api/"), new TestKeyStore(), new TestContentReceiver());
 
-            RestRequest testRequest = new RestRequest("https://example.com/api/documents", HttpMethod.Post);
-            testRequest.AddBody(testDocument);
+            //Document testDocument = new Document(
+            //    client,
+            //    new ChangeInfo(new User(), DateTime.Now),
+            //    new ChangeInfo(),
+            //    "image/jpeg",
+            //    new Category(),
+            //    new Buzzword[] { },
+            //    "Test ABC 123",
+            //    new Uri("https://example.com/api/download/Test.jpg"),
+            //    new Uri("https://example.com/api/download/Test-Thumbnail.jpg"),
+            //    1000,
+            //    new Tag[] { new Tag() { Name = "Tag1", Description = "Description of Tag1" } }
+            //);
 
-            String requestBody = testRequest.GetContent().ReadAsStringAsync().Result;
-            Console.WriteLine(requestBody);
-            System.IO.File.WriteAllText(
-                System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Request.json"),
-                requestBody
-            );
+            //RestRequest testRequest = new RestRequest("documents", HttpMethod.Post);
+            //testRequest.AddBody(testDocument);
+
+            //String requestBody = testRequest.GetContent().ReadAsStringAsync().Result;
+            //Console.WriteLine(requestBody);
+            //System.IO.File.WriteAllText(
+            //    System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Request.json"),
+            //    requestBody
+            //);
+
+            Document response = client.GetDocumentAsync("53402d959f2225e0d5a33882").Result;
+
+            new Newtonsoft.Json.JsonSerializer().Serialize(Console.Out, response);
 
             Console.WriteLine("Finished!");
             Console.ReadLine();

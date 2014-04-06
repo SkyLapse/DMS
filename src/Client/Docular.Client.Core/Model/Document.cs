@@ -82,8 +82,8 @@ namespace Docular.Client.Core.Model
             this.Buzzwords = Enumerable.Empty<Buzzword>().ToArray();
             this.ExtractedContent = String.Empty;
             this.Mime = String.Empty;
-            this.PayloadPath = new Uri(String.Empty);
-            this.ThumbnailPath = new Uri(String.Empty);
+            this.PayloadPath = new Uri("http://example.com/");
+            this.ThumbnailPath = new Uri("http://example.com/");
         }
 
         /// <summary>

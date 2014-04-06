@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Docular.Client.Core.Model
 {
@@ -14,11 +15,13 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Gets the custom field's key.
         /// </summary>
+        [JsonProperty("key")]
         public String Key { get; private set; }
 
         /// <summary>
         /// Gets the custom field's value.
         /// </summary>
+        [JsonProperty("value")]
         public String Value { get; private set; }
 
         /// <summary>
