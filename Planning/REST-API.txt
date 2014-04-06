@@ -3,9 +3,21 @@ REST-API
 
 Every specified URL is prefixed by http://_yoursite.com_/api/$key/
 
+### GET Collection Filtering Parameters (applies to all collections):
+- start=startIndex				// Starts searching at the specified collection index
+- count=count 					// Indicates the maximum amount of results, defaults to infinite
+- orderby=fieldName 			// Specifies the field the collection shall be sorted by before applying the query, defaults to the item creation time (createInfo.date)
+- order=a/d						// Orders the collection to be searched in ascending (a) or descending (d) order before applying the query, defaults to ascending (a)
+
 ### Documents:
 - Retreive document info: documents/$id (GET)
- - GET-Parameters: user=userID, category=categoryID, tag=tagID, shared=true/false
+- Retreive collection: documents (GET)
+	- GET-Parameters: 
+		- user=userID 			// Returns documents created by that given user only
+		- category=categoryID 	// Returns documents that belong into that specific category only
+		- tag=tagID 			// Returns documents that are tagged with the given tag only
+		- shared=true/false 	// Returns shared / non-shared documents only
+		- search=text			// Searches the documents extracted content for the text and returns the results only.
 - Add: documents (POST)
 - Count: documents/count (GET)
 - Edit: documents/$id (PUT)
@@ -15,7 +27,10 @@ Every specified URL is prefixed by http://_yoursite.com_/api/$key/
 
 ### Categories:
 - Retreive: categories/$id (GET)
- - GET-Parameters: user=userID, category=parentId
+- Retreive collection: categories (GET)
+	- GET-Parameters:
+		- user=userID 			// Returns documents created by that given user only
+		- category=parentId		// Returns categories with that specified parent only
 - Add: categories (POST)
 - Count: categories/count (GET)
 - Edit: categories/$id (PUT)
@@ -23,15 +38,18 @@ Every specified URL is prefixed by http://_yoursite.com_/api/$key/
 
 ### Tags:
 - Retreive: tags/$id (GET)
- - GET-Parameters: user=userID
+- Retreive collection: tags (GET)
+	- GET-Parameters:
+		- user=userID 			// Returns documents created by that given user only
 - Add: tags (POST)
 - Count: tags/count (GET)
 - Edit: tags/$id (PUT)
 - Delete: tags/$id (DELETE)
 
 ### Users:
-- Add: users (POST)
 - Retreive: users/$id (GET)
+- Retreive collection: users (GET)
+- Add: users (POST)
 - Count: users/count (GET)
 - Edit: users/$id (PUT)
 - Delete: users/$id (DELETE)

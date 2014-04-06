@@ -381,6 +381,16 @@ namespace Docular.Client.Core.Model.Rest
         }
 
         /// <summary>
+        /// Gets a filtered list of <see cref="User"/>s that match the specified criteria.
+        /// </summary>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
+        /// <returns>A collection of <see cref="User"/>s that match the criteria.</returns>
+        public Task<User[]> GetUsersAsync(params Parameter[] filterParameters)
+        {
+            return this.PerformFilteredRetreiveRequest<User>(Users, filterParameters);
+        }
+
+        /// <summary>
         /// Gets the amount of <see cref="User"/>s.
         /// </summary>
         /// <returns>The amount of <see cref="User"/>s.</returns>
@@ -465,7 +475,7 @@ namespace Docular.Client.Core.Model.Rest
         /// Counts the items whose API URL is <paramref name="apiUrl"/>.
         /// </summary>
         /// <param name="apiUrl">The API URL of the items to count.</param>
-        /// <returns>The item count..</returns>
+        /// <returns>The item count.</returns>
         private Task<int> PerformCountRequest(String apiUrl)
         {
             Contract.Requires<ArgumentNullException>(apiUrl != null);

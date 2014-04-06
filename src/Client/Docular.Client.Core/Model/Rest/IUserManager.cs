@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model;
+using RestSharp.Portable;
 
 namespace Docular.Client.Core.Model.Rest
 {
@@ -27,6 +28,13 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="id">The ID of the <see cref="User"/> to obtain.</param>
         /// <returns>The <see cref="User"/> with the specified ID, or <c>null</c> if the user was not found.</returns>
         Task<User> GetUserAsync(String id);
+
+        /// <summary>
+        /// Gets a filtered list of <see cref="User"/>s that match the specified criteria.
+        /// </summary>
+        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
+        /// <returns>A collection of <see cref="User"/>s that match the criteria.</returns>
+        Task<User[]> GetUsersAsync(params Parameter[] filterParameters);
 
         /// <summary>
         /// Gets the amount of <see cref="User"/>s.
@@ -72,6 +80,18 @@ namespace Docular.Client.Core.Model.Rest
         Task<User> IUserManager.GetUserAsync(String id)
         {
             Contract.Requires<ArgumentNullException>(id != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<User[]> IUserManager.GetUsersAsync(params Parameter[] filterParameters)
+        {
+            Contract.Requires<ArgumentNullException>(filterParameters != null);
+            Contract.Requires<ArgumentException>(filterParameters.All(filterParameter => filterParameter.Type == ParameterType.GetOrPost));
             Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
