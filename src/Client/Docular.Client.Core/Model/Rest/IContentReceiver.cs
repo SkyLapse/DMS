@@ -43,7 +43,7 @@ namespace Docular.Client.Core.Model.Rest
         Stream IContentReceiver.GetLocalContent(Document document)
         {
             Contract.Requires<ArgumentNullException>(document != null);
-            Contract.Ensures(Contract.Result<String>() != null);
+            Contract.Ensures(Contract.Result<Stream>() != null);
 
             return null;
         }

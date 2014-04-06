@@ -538,6 +538,8 @@ namespace Docular.Client.Core.Model.Rest
                         throw new HttpInternalServerErrorException();
                     case HttpStatusCode.NotFound:
                         throw new HttpNotFoundException();
+                    case HttpStatusCode.MethodNotAllowed:
+                        throw new HttpMethodNotAllowedException();
                     default:
                         throw new HttpException(response.StatusDescription, response.StatusCode);
                 }

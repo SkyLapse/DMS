@@ -73,5 +73,14 @@ namespace Docular.Client.Core.Model.Rest
 
             this.StatusCode = statusCode;
         }
+
+        /// <summary>
+        /// Contains Contract.Invariant definitions.
+        /// </summary>
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant((int)this.StatusCode >= 400);
+        }
     }
 }

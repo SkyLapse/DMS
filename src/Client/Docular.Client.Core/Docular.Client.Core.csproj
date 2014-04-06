@@ -115,6 +115,7 @@
     <Compile Include="Model\Rest\HttpException.cs" />
     <Compile Include="Model\Rest\HttpInternalServerErrorException.cs" />
     <Compile Include="Model\Rest\HttpForbiddenException.cs" />
+    <Compile Include="Model\Rest\HttpMethodNotAllowedException.cs" />
     <Compile Include="Model\Rest\HttpNotFoundException.cs" />
     <Compile Include="Model\Rest\HttpUnauthorizedException.cs" />
     <Compile Include="Model\Rest\ICategoryManager.cs" />
