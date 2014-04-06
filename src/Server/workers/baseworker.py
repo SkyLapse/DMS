@@ -1,8 +1,8 @@
+__author__ = 'leobernard'
+
 import multiprocessing
 import json
 import os
-
-__author__ = 'leobernard'
 
 
 class BaseWorker():
@@ -10,5 +10,5 @@ class BaseWorker():
         with open(os.path.dirname(__file__) + "/" + config_path) as data_file:
             data = json.load(data_file)
 
-        self.pool = multiprocessing.Pool(data['maxWorkers'])
+        self.pool = multiprocessing.Pool(multiprocessing.cpu_count() * data['maxWorkersPerCore'])
         self.config = data
