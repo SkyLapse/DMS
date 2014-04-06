@@ -37,7 +37,12 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="request">The <see cref="IRestRequest"/> to be authenticated.</param>
         public void Authenticate(IRestClient client, IRestRequest request)
         {
-            request.AddHeader("API-KEY", this.KeyStore.GetKey());
+            String key = this.KeyStore.GetKey();
+            if (key == null)
+            {
+                throw new NotSupportedException("Authentication was impossible, no key was found.");
+            }
+            request.AddHeader("API-KEY", key);
         }
     }
 }
