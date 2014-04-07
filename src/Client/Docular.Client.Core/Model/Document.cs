@@ -75,15 +75,14 @@ namespace Docular.Client.Core.Model
         public Tag[] Tags { get; set; }
 
         /// <summary>
-        /// Initializes a new <see cref="Document"/>.
+        /// Initializes a new <see cref="Document"/>. This constructor is used for deserialization.
         /// </summary>
-        private Document() 
+        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Document"/>.</param>
+        [JsonConstructor]
+        protected Document(IDocularClient client)
+            : base(client)
         {
-            this.Buzzwords = Enumerable.Empty<Buzzword>().ToArray();
-            this.ExtractedContent = String.Empty;
-            this.Mime = String.Empty;
-            this.PayloadPath = new Uri("http://example.com/");
-            this.ThumbnailPath = new Uri("http://example.com/");
+            Contract.Requires<ArgumentNullException>(client != null);
         }
 
         /// <summary>
@@ -183,20 +182,6 @@ namespace Docular.Client.Core.Model
         public Task Save()
         {
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Contains Contract.Invariant definitions.
-        /// </summary>
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(this.Buzzwords != null);
-            Contract.Invariant(this.ExtractedContent != null);
-            Contract.Invariant(this.Mime != null);
-            Contract.Invariant(this.PayloadPath != null);
-            Contract.Invariant(this.Size >= 0);
-            Contract.Invariant(this.ThumbnailPath != null);
         }
     }
 }

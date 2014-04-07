@@ -211,7 +211,7 @@ namespace Docular.Client.Core.Model.Rest
             await Task.Run(() =>
             {
                 categoryRequest.AddBody(document);
-                categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document));
+                categoryRequest.AddFile("file", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document));
             });
             await this.restClient.Execute(categoryRequest);
         }
@@ -228,7 +228,7 @@ namespace Docular.Client.Core.Model.Rest
             await Task.Run(() =>
             {
                 categoryRequest.AddBody(document);
-                categoryRequest.AddFile("content", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document));
+                categoryRequest.AddFile("file", this.contentReceiver.GetLocalContent(document), this.contentReceiver.GetFileName(document));
             });
             await this.restClient.Execute(categoryRequest);
         }

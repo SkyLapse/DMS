@@ -51,6 +51,8 @@ namespace Docular.Client.Core.Test
                 Console.WriteLine(sr.ReadToEnd());
             }
 
+            Document document = client.GetDocumentAsync("53402d959f2225e0d5a33882").Result;
+
             Console.WriteLine("Finished!");
             Console.ReadLine();
         }

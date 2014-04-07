@@ -56,7 +56,7 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
-        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>..</param>
+        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>.</param>
         protected DocularObject(IDocularClient client)
         {
             this.Client = client;
@@ -66,7 +66,7 @@ namespace Docular.Client.Core.Model
         /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
         /// <param name="id">The unique Id.</param>
-        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>..</param>
+        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>.</param>
         protected DocularObject(IDocularClient client, String id)
             : this(id)
         {
