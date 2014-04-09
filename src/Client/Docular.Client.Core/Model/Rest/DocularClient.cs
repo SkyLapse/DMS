@@ -62,7 +62,7 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// The sub path for a documents content by ID.
         /// </summary>
-        public const String DocumentsIdContent = DocumentsId + "/content";
+        public const String DocumentsIdPayload = DocumentsId + "/payload";
 
         /// <summary>
         /// The sub path for a documents thumbnail by ID.
@@ -167,7 +167,7 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>The <see cref="Document"/>'s content.</returns>
         public async Task<Stream> GetContentAsync(String documentId)
         {
-            RestRequest contentRequest = new RestRequest(DocumentsIdContent, HttpMethod.Get);
+            RestRequest contentRequest = new RestRequest(DocumentsIdPayload, HttpMethod.Get);
             contentRequest.Serializer = this.serializer;
             contentRequest.AddUrlSegment("id", documentId);
             return (await this.restClient.Execute<Stream>(contentRequest)).Data;
