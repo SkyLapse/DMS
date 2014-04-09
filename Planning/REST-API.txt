@@ -23,7 +23,7 @@ Every specified URL is prefixed by http://_yoursite.com_/api/$key/
 - Count: documents/count (GET)
 - Edit: documents/$id (PUT)
 - Delete: documents/$id (DELETE)
-- Content: documents/$id/content (GET)
+- Content: documents/$id/payload (GET)
 - Thumbnail: documents/$id/thumbnail (GET)
 
 ### Categories:
