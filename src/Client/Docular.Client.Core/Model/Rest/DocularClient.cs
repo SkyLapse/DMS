@@ -222,14 +222,14 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public async Task PostDocumentAsync(Document document)
         {
-            RestRequest categoryRequest = new RestRequest(Documents, HttpMethod.Post);
-            categoryRequest.Serializer = this.serializer;
+            RestRequest documentRequest = new RestRequest(Documents, HttpMethod.Post);
+            documentRequest.Serializer = this.serializer;
             await Task.Run(() =>
             {
-                categoryRequest.AddBody(document);
-                categoryRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
+                documentRequest.AddBody(document);
+                documentRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
             });
-            await this.restClient.Execute(categoryRequest);
+            await this.restClient.Execute(documentRequest);
         }
 
         /// <summary>
@@ -239,14 +239,29 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public async Task PutDocumentAsync(Document document)
         {
-            RestRequest categoryRequest = new RestRequest(DocumentsId, HttpMethod.Put);
-            categoryRequest.AddUrlSegment("id", document.Id);
+            RestRequest documentRequest = new RestRequest(DocumentsId, HttpMethod.Put);
+            documentRequest.Serializer = this.serializer;
+            documentRequest.AddUrlSegment("id", document.Id);
             await Task.Run(() =>
             {
-                categoryRequest.AddBody(document);
-                categoryRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
+                documentRequest.AddBody(document);
+                documentRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
             });
-            await this.restClient.Execute(categoryRequest);
+            await this.restClient.Execute(documentRequest);
+        }
+
+        /// <summary>
+        /// Uploads the specified changed <see cref="Document"/> content to the server.
+        /// </summary>
+        /// <param name="document">The <see cref="Document"/> of which the content to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
+        public async Task PutDocumentContentAsync(Document document)
+        {
+            RestRequest contentRequest = new RestRequest(DocumentsId, HttpMethod.Put);
+            contentRequest.Serializer = this.serializer;
+            contentRequest.AddUrlSegment("id", document.Id);
+            contentRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
+            await this.restClient.Execute(contentRequest);
         }
 
         #endregion

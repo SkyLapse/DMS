@@ -70,6 +70,13 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="document">The <see cref="Document"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         Task PutDocumentAsync(Document document);
+
+        /// <summary>
+        /// Uploads the specified changed <see cref="Document"/> content to the server.
+        /// </summary>
+        /// <param name="document">The <see cref="Document"/> of which the content to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
+        Task PutDocumentContentAsync(Document document);
     }
 
     /// <summary>
@@ -155,6 +162,17 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Requires<ArgumentNullException>(document != null);
             Contract.Requires<ArgumentNullException>(document.Id != null);
             
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IDocumentManager.PutDocumentContentAsync(Document document)
+        {
+            Contract.Requires<ArgumentNullException>(document != null);
+            Contract.Requires<ArgumentNullException>(document.Id != null);
+
             return null;
         }
     }

@@ -170,18 +170,46 @@ namespace Docular.Client.Core.Model
         /// Refreshes the <see cref="Document"/> fetching all changes from the remote DB.
         /// </summary>
         /// <returns>The modified <see cref="Document"/>.</returns>
-        public Task<Document> Refresh()
+        public async Task<Document> Refresh()
         {
-            throw new NotImplementedException();
+            Document document = await this.Client.GetDocumentAsync(this.Id);
+            if (document != null)
+            {
+                this.Buzzwords = document.Buzzwords;
+                this.Category = document.Category;
+                this.CustomFields = document.CustomFields;
+                this.EditInfo = document.EditInfo;
+                this.ExtractedContent = document.ExtractedContent;
+                this.Mime = document.Mime;
+                this.Name = document.Name;
+                this.PayloadPath = document.PayloadPath;
+                this.Size = document.Size;
+                this.Tags = document.Tags;
+                this.ThumbnailPath = document.ThumbnailPath;
+            }
+            return document;
+        }
+
+        /// <summary>
+        /// Saves the document to the server without updating the content.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
+        public Task Save()
+        {
+            return this.Save(false);
         }
 
         /// <summary>
         /// Saves the document to the server.
         /// </summary>
+        /// <param name="uploadContent"><c>true</c> if the content shall be updated / uploaded to the server, otherwise <c>false</c>.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
-        public Task Save()
+        public Task Save(bool uploadContent)
         {
-            throw new NotImplementedException();
+            return Task.WhenAll(
+                this.Client.PutDocumentAsync(this), 
+                uploadContent ? this.Client.PutDocumentContentAsync(this) : Task.FromResult<object>(null)
+            );
         }
     }
 }

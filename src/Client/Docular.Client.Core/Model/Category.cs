@@ -4,6 +4,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Docular.Client.Core.Model.Rest;
 using Newtonsoft.Json;
 using RestSharp.Portable;
 
@@ -19,6 +20,17 @@ namespace Docular.Client.Core.Model
         /// </summary>
         [JsonProperty("description")]
         public String Description { get; private set; }
+
+        /// <summary>
+        /// Initializes a new <see cref="Category"/>.
+        /// </summary>
+        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Category"/>.</param>
+        [JsonConstructor]
+        public Category(IDocularClient client)
+            : base(client)
+        {
+            Contract.Requires<ArgumentNullException>(client != null);
+        }
 
         /// <summary>
         /// Gets all <see cref="Document"/>s within the <see cref="Category"/>.

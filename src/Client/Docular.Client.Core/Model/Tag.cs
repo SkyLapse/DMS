@@ -25,7 +25,26 @@ namespace Docular.Client.Core.Model
         /// Initializes a new <see cref="Tag"/>.
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Tag"/>.</param>
-        public Tag(IDocularClient client) : base(client) { }
+        [JsonConstructor]
+        public Tag(IDocularClient client)
+            : base(client)
+        {
+            Contract.Requires<ArgumentNullException>(client != null);
+        }
+
+        /// <summary>
+        /// Initializes a new <see cref="Tag"/>.
+        /// </summary>
+        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Tag"/>.</param>
+        [JsonConstructor]
+        public Tag(IDocularClient client, String name, String description) 
+            : base(client) 
+        {
+            Contract.Requires<ArgumentNullException>(client != null);
+
+            this.Name = name;
+            this.Description = description;
+        }
 
         /// <summary>
         /// Gets all <see cref="Document"/>s with the <see cref="Tag"/>.
