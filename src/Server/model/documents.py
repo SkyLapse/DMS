@@ -2,6 +2,7 @@ __author__ = 'leobernard'
 from model.basemodel import BaseModel
 from datetime import datetime
 
+
 class Documents(BaseModel):
     def get_collection(self):
         return self.db['documents']
