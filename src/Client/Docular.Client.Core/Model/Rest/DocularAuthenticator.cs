@@ -40,7 +40,7 @@ namespace Docular.Client.Core.Model.Rest
             String key = this.KeyStore.GetKey();
             if (key == null)
             {
-                throw new NotSupportedException("Authentication was impossible, no key was found.");
+                throw new NotSupportedException("Authentication was impossible, no key was found. This *should not* occur when running the app, it's a design error.");
             }
             request.AddHeader("API-KEY", key);
         }
