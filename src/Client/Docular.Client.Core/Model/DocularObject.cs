@@ -21,7 +21,7 @@ namespace Docular.Client.Core.Model
         /// Gets information about the creation of the <see cref="DocularObject"/>.
         /// </summary>
         [JsonProperty("createInfo"), ProtoMember(3)]
-        public ChangeInfo CreateInfo { get; private set; }
+        public ChangeInfo CreateInfo { get; protected set; }
 
         /// <summary>
         /// Contains all custom fields.
@@ -39,7 +39,7 @@ namespace Docular.Client.Core.Model
         /// Gets information about the last (server side) edit of the <see cref="Document"/>.
         /// </summary>
         [JsonProperty("editInfo"), ProtoMember(4)]
-        public ChangeInfo EditInfo { get; private set; }
+        public ChangeInfo EditInfo { get; protected set; }
 
         /// <summary>
         /// The unique Id.
