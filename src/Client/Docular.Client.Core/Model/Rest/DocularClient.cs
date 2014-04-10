@@ -583,6 +583,7 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Invariant(this.KeyStore != null);
             Contract.Invariant(this.restClient != null);
             Contract.Invariant(this.jsonSerializer != null);
+            Contract.Invariant(this.pbufSerializer != null);
         }
     }
 }

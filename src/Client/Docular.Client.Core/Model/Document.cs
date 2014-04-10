@@ -31,37 +31,37 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Contains the extracted content that was read via OCR or some other content recognition method.
         /// </summary>
-        [JsonProperty("content"), ProtoMember(5)]
+        [JsonProperty("content"), ProtoMember(3)]
         public String ExtractedContent { get; private set; }
 
         /// <summary>
         /// The document's mime type.
         /// </summary>
-        [JsonProperty("mime"), ProtoMember(6)]
+        [JsonProperty("mime"), ProtoMember(4)]
         public String Mime { get; private set; }
 
         /// <summary>
         /// The <see cref="Uri"/> of the payload.
         /// </summary>
-        [JsonProperty("documentPath"), ProtoMember(7)]
+        [JsonProperty("documentPath"), ProtoMember(5)]
         public Uri PayloadPath { get; private set; }
 
         /// <summary>
         /// The <see cref="Uri"/> of the thumbnail image.
         /// </summary>
-        [JsonProperty("thumbnailPath"), ProtoMember(8)]
+        [JsonProperty("thumbnailPath"), ProtoMember(6)]
         public Uri ThumbnailPath { get; private set; }
 
         /// <summary>
         /// The size of the content in bytes.
         /// </summary>
-        [JsonProperty("size"), ProtoMember(9)]
+        [JsonProperty("size"), ProtoMember(7)]
         public int Size { get; private set; }
 
         /// <summary>
         /// Gets all <see cref="Tag"/>s associated with the <see cref="Document"/>.
         /// </summary>
-        [JsonProperty("tags"), ProtoMember(10)]
+        [JsonProperty("tags"), ProtoMember(8)]
         public Tag[] Tags { get; set; }
 
         /// <summary>

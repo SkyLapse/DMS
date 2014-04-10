@@ -1,4 +1,4 @@
-MongoDB Schema
+MongoDB Scheme
 ==============
 
 ## Collections:
@@ -7,15 +7,16 @@ MongoDB Schema
 - Tags
 - Users
 
-### Documents
+### Everything (others "derive" from that scheme)
 
 ```
 {
     _id: ObjectId(<id>),
     name: "Title",
-    documentPath: "<path">,
-    thumbnailPath: "<path>",
-	description: "<description>",
+    customFields: [
+        { name: "<name>", value: "<value>" },
+        ...
+    ],
     createInfo: {
         date: Date(),
         user: ObjectId(<user._id>)
@@ -24,16 +25,44 @@ MongoDB Schema
         date: Date(),
         user: ObjectId(<user._id>)
     },
+	description: "<description>"
+}
+```
+
+### Documents
+
+```
+{
+    documentPath: "<path">,
+    thumbnailPath: "<path>",
     content: "<extracted content>",
     category: ObjectId(<category._id>),
     tags: [ ObjectId(<tag._id>), ... ],
     buzzwords: [ 
         { text: "<buzzword", commonness: 0.XX },
         ...
-    ],
-    customFields: [
-        { name: "<name>", value: "<value>" },
-        ...
     ]
 }
 ```
+
+### Categories
+
+```
+{
+    parent: ObjectId(<parent._id>)
+}
+```
+
+### Tags
+
+```
+{
+	// Nothing additional here
+}
+
+### Categories
+
+```
+{
+    permissions: [ "<permission>", ... ]
+}

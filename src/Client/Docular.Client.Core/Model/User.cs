@@ -18,6 +18,12 @@ namespace Docular.Client.Core.Model
     public class User : DocularObject
     {
         /// <summary>
+        /// Gets the <see cref="User"/>s permission.
+        /// </summary>
+        [JsonProperty("permissions"), ProtoMember(1)]
+        public String[] Permissions { get; private set; }
+
+        /// <summary>
         /// Initializes a new <see cref="User"/>.
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> that created the user.</param>

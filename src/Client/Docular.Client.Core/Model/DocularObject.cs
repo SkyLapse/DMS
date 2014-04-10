@@ -20,19 +20,19 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Gets information about the creation of the <see cref="DocularObject"/>.
         /// </summary>
-        [JsonProperty("createInfo"), ProtoMember(3)]
+        [JsonProperty("createInfo"), ProtoMember(1)]
         public ChangeInfo CreateInfo { get; protected set; }
 
         /// <summary>
         /// Contains all custom fields.
         /// </summary>
-        [JsonProperty("customFields"), ProtoMember(1)]
+        [JsonProperty("customFields"), ProtoMember(2)]
         public CustomField[] CustomFields { get; set; }
 
         /// <summary>
         /// The <see cref="Category"/>'s description.
         /// </summary>
-        [JsonProperty("description"), ProtoMember(2)]
+        [JsonProperty("description"), ProtoMember(3)]
         public String Description { get; set; }
 
         /// <summary>
@@ -44,13 +44,13 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// The unique Id.
         /// </summary>
-        [JsonProperty("_id"), ProtoMember(3)]
+        [JsonProperty("_id"), ProtoMember(5)]
         public String Id { get; protected set; }
 
         /// <summary>
         /// The <see cref="DocularObject"/>s name.
         /// </summary>
-        [JsonProperty("name"), ProtoMember(4)]
+        [JsonProperty("name"), ProtoMember(6)]
         public String Name { get; set; }
 
         /// <summary>
