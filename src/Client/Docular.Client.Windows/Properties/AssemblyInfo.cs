@@ -8,12 +8,12 @@ using System.Windows;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("Docular.Client.Windows")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("The Docular DMS Windows client.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("SkyLapse")]
 [assembly: AssemblyProduct("Docular.Client.Windows")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © SkyLapse 2014")]
+[assembly: AssemblyTrademark("Docular DMS")]
 [assembly: AssemblyCulture("")]
 
 // Durch Festlegen von ComVisible auf "false" werden die Typen in dieser Assembly unsichtbar 
