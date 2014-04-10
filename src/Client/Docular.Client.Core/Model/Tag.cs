@@ -32,6 +32,8 @@ namespace Docular.Client.Core.Model
         /// Initializes a new <see cref="Tag"/>.
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Tag"/>.</param>
+        /// <param name="description">The <see cref="Tag"/>s description.</param>
+        /// <param name="name">The <see cref="Tag"/>s name.</param>
         [JsonConstructor]
         public Tag(IDocularClient client, String name, String description) 
             : base(client) 

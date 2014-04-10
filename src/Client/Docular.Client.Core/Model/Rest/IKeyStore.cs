@@ -16,7 +16,7 @@ namespace Docular.Client.Core.Model.Rest
         /// Retreives the API key for the current user.
         /// </summary>
         /// <returns>
-        /// The newly generated API key or <c>null</c> if retreival was absolutely impossible (no account & account-creation not allowed, etc.).
+        /// The newly generated API key or <c>null</c> if retreival was absolutely impossible (no account and account-creation not allowed, etc.).
         /// </returns>
         String GetKey();
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
@@ -151,7 +152,14 @@ namespace Docular.Client.Core.Model.Rest
             this.restClient.BaseUrl = this.DocularUri;
             this.restClient.Authenticator = new DocularAuthenticator(keyStore);
             this.restClient.AddDefaultParameter("nowrap", true, ParameterType.GetOrPost);
-            this.restClient.RemoveHandler("application/json").AddHandler("application/json", this.jsonSerializer);
+            this.restClient.RemoveHandler("application/json");
+            this.restClient.RemoveHandler("text/json");
+            this.restClient.RemoveHandler("text/x-json");
+            this.restClient.RemoveHandler("text/javascript");
+            this.restClient.AddHandler("application/json", this.jsonSerializer);
+            this.restClient.AddHandler("text/json", this.jsonSerializer);
+            this.restClient.AddHandler("text/x-json", this.jsonSerializer);
+            this.restClient.AddHandler("text/javascript", this.jsonSerializer);
             this.restClient.AddHandler("application/protobuf", this.pbufSerializer);
         }
 
