@@ -29,18 +29,6 @@ namespace Docular.Client.Core.Model
         public Category Category { get; set; }
 
         /// <summary>
-        /// Gets information about the creation of the <see cref="Document"/>.
-        /// </summary>
-        [JsonProperty("createInfo"), ProtoMember(3)]
-        public ChangeInfo CreateInfo { get; private set; }
-
-        /// <summary>
-        /// Gets information about the last edit of the <see cref="Document"/>.
-        /// </summary>
-        [JsonProperty("editInfo"), ProtoMember(4)]
-        public ChangeInfo EditInfo { get; private set; }
-
-        /// <summary>
         /// Contains the extracted content that was read via OCR or some other content recognition method.
         /// </summary>
         [JsonProperty("content"), ProtoMember(5)]
@@ -208,10 +196,12 @@ namespace Docular.Client.Core.Model
         /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
         public Task Save(bool uploadContent)
         {
-            return Task.WhenAll(
-                this.Client.PutDocumentAsync(this), 
-                uploadContent ? this.Client.PutDocumentContentAsync(this) : Task.FromResult<object>(null)
+            Task waitAllTask = Task.WhenAll(
+                this.Client.PutDocumentAsync(this),
+                (uploadContent ? this.Client.PutDocumentContentAsync(this) : Task.FromResult<object>(null))
             );
+            this.EditInfo = new ChangeInfo(this.EditInfo.User, DateTime.UtcNow);
+            return waitAllTask;
         }
     }
 }

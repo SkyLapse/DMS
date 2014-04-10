@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
 using Newtonsoft.Json;
+using ProtoBuf;
 using RestSharp.Portable;
 
 namespace Docular.Client.Core.Model
@@ -13,8 +14,15 @@ namespace Docular.Client.Core.Model
     /// <summary>
     /// Represents a category.
     /// </summary>
+    [ProtoContract]
     public class Category : DocularObject
     {
+        /// <summary>
+        /// The <see cref="Category"/>s parent.
+        /// </summary>
+        [JsonProperty("parent"), ProtoMember(1)]
+        public Category Parent { get; set; }
+
         /// <summary>
         /// Initializes a new <see cref="Category"/>.
         /// </summary>

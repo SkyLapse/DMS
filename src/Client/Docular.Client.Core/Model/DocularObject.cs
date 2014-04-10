@@ -18,6 +18,12 @@ namespace Docular.Client.Core.Model
     public class DocularObject
     {
         /// <summary>
+        /// Gets information about the creation of the <see cref="DocularObject"/>.
+        /// </summary>
+        [JsonProperty("createInfo"), ProtoMember(3)]
+        public ChangeInfo CreateInfo { get; private set; }
+
+        /// <summary>
         /// Contains all custom fields.
         /// </summary>
         [JsonProperty("customFields"), ProtoMember(1)]
@@ -28,6 +34,12 @@ namespace Docular.Client.Core.Model
         /// </summary>
         [JsonProperty("description"), ProtoMember(2)]
         public String Description { get; set; }
+
+        /// <summary>
+        /// Gets information about the last (server side) edit of the <see cref="Document"/>.
+        /// </summary>
+        [JsonProperty("editInfo"), ProtoMember(4)]
+        public ChangeInfo EditInfo { get; private set; }
 
         /// <summary>
         /// The unique Id.
