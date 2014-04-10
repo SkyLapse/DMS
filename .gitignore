@@ -225,3 +225,5 @@ pip-log.txt
 *.pfx
 
 src/Server/.idea/workspace.xml
+
+src/Server/.idea/workspace.xml
