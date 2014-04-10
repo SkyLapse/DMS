@@ -7,30 +7,38 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace Docular.Client.Core.Model
 {
     /// <summary>
     /// Represents an object in the Docular database.
     /// </summary>
+    [ProtoContract]
     public class DocularObject
     {
         /// <summary>
         /// Contains all custom fields.
         /// </summary>
-        [JsonProperty("customFields")]
+        [JsonProperty("customFields"), ProtoMember(1)]
         public CustomField[] CustomFields { get; set; }
+
+        /// <summary>
+        /// The <see cref="Category"/>'s description.
+        /// </summary>
+        [JsonProperty("description"), ProtoMember(2)]
+        public String Description { get; set; }
 
         /// <summary>
         /// The unique Id.
         /// </summary>
-        [JsonProperty("_id")]
+        [JsonProperty("_id"), ProtoMember(3)]
         public String Id { get; protected set; }
 
         /// <summary>
         /// The <see cref="DocularObject"/>s name.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name"), ProtoMember(4)]
         public String Name { get; set; }
 
         /// <summary>

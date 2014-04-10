@@ -6,72 +6,74 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace Docular.Client.Core.Model
 {
     /// <summary>
     /// Represents a stored document.
     /// </summary>
+    [ProtoContract]
     public class Document : DocularObject
     {
         /// <summary>
         /// Contains all repeatedly occuring words in the extracted content.
         /// </summary>
-        [JsonProperty("buzzwords")]
+        [JsonProperty("buzzwords"), ProtoMember(1)]
         public Buzzword[] Buzzwords { get; private set; }
 
         /// <summary>
         /// Gets the <see cref="Category"/> the <see cref="Document"/> belongs to.
         /// </summary>
-        [JsonProperty("category")]
+        [JsonProperty("category"), ProtoMember(2)]
         public Category Category { get; set; }
 
         /// <summary>
         /// Gets information about the creation of the <see cref="Document"/>.
         /// </summary>
-        [JsonProperty("createInfo")]
+        [JsonProperty("createInfo"), ProtoMember(3)]
         public ChangeInfo CreateInfo { get; private set; }
 
         /// <summary>
         /// Gets information about the last edit of the <see cref="Document"/>.
         /// </summary>
-        [JsonProperty("editInfo")]
+        [JsonProperty("editInfo"), ProtoMember(4)]
         public ChangeInfo EditInfo { get; private set; }
 
         /// <summary>
         /// Contains the extracted content that was read via OCR or some other content recognition method.
         /// </summary>
-        [JsonProperty("content")]
+        [JsonProperty("content"), ProtoMember(5)]
         public String ExtractedContent { get; private set; }
 
         /// <summary>
         /// The document's mime type.
         /// </summary>
-        [JsonProperty("mime")]
+        [JsonProperty("mime"), ProtoMember(6)]
         public String Mime { get; private set; }
 
         /// <summary>
         /// The <see cref="Uri"/> of the payload.
         /// </summary>
-        [JsonProperty("documentPath")]
+        [JsonProperty("documentPath"), ProtoMember(7)]
         public Uri PayloadPath { get; private set; }
 
         /// <summary>
         /// The <see cref="Uri"/> of the thumbnail image.
         /// </summary>
-        [JsonProperty("thumbnailPath")]
+        [JsonProperty("thumbnailPath"), ProtoMember(8)]
         public Uri ThumbnailPath { get; private set; }
 
         /// <summary>
         /// The size of the content in bytes.
         /// </summary>
-        [JsonProperty("size")]
+        [JsonProperty("size"), ProtoMember(9)]
         public int Size { get; private set; }
 
         /// <summary>
         /// Gets all <see cref="Tag"/>s associated with the <see cref="Document"/>.
         /// </summary>
-        [JsonProperty("tags")]
+        [JsonProperty("tags"), ProtoMember(10)]
         public Tag[] Tags { get; set; }
 
         /// <summary>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
 using Newtonsoft.Json;
+using ProtoBuf;
 using RestSharp.Portable;
 
 namespace Docular.Client.Core.Model
@@ -13,14 +14,9 @@ namespace Docular.Client.Core.Model
     /// <summary>
     /// Represents a tag.
     /// </summary>
+    [ProtoContract]
     public class Tag : DocularObject
     {
-        /// <summary>
-        /// The <see cref="Tag"/>'s name.
-        /// </summary>
-        [JsonProperty("description")]
-        public String Description { get; set; }
-
         /// <summary>
         /// Initializes a new <see cref="Tag"/>.
         /// </summary>

@@ -15,6 +15,7 @@ MongoDB Schema
     name: "Title",
     documentPath: "<path">,
     thumbnailPath: "<path>",
+	description: "<description>",
     createInfo: {
         date: Date(),
         user: ObjectId(<user._id>)

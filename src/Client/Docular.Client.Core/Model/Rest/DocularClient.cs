@@ -102,9 +102,14 @@ namespace Docular.Client.Core.Model.Rest
         #endregion
 
         /// <summary>
-        /// The <see cref="DocularSerializer"/> used to (de)serialize rest requests.
+        /// The <see cref="DocularJsonSerializer"/> used to (de)serialize rest requests.
         /// </summary>
-        private DocularSerializer serializer = null;
+        private DocularJsonSerializer jsonSerializer = null;
+
+        /// <summary>
+        /// The <see cref="DocularProtobufSerializer"/> used to (de)serialize rest requests.
+        /// </summary>
+        private DocularProtobufSerializer pbufSerializer = null;
 
         /// <summary>
         /// The <see cref="RestClient"/> used to perform the REST requests.
@@ -141,11 +146,13 @@ namespace Docular.Client.Core.Model.Rest
             this.ContentReceiver = contentReceiver;
             this.DocularUri = apiUri;
             this.KeyStore = keyStore;
-            this.serializer = new DocularSerializer();
+            this.jsonSerializer = new DocularJsonSerializer();
+            this.pbufSerializer = new DocularProtobufSerializer();
             this.restClient.BaseUrl = this.DocularUri;
             this.restClient.Authenticator = new DocularAuthenticator(keyStore);
             this.restClient.AddDefaultParameter("nowrap", true, ParameterType.GetOrPost);
-            this.restClient.RemoveHandler("application/json").AddHandler("application/json", this.serializer);
+            this.restClient.RemoveHandler("application/json").AddHandler("application/json", this.jsonSerializer);
+            this.restClient.AddHandler("application/protobuf", this.pbufSerializer);
         }
 
         #region Documents
@@ -168,7 +175,7 @@ namespace Docular.Client.Core.Model.Rest
         public async Task<Stream> GetContentAsync(String documentId)
         {
             RestRequest contentRequest = new RestRequest(DocumentsIdPayload, HttpMethod.Get);
-            contentRequest.Serializer = this.serializer;
+            contentRequest.Serializer = this.jsonSerializer;
             contentRequest.AddUrlSegment("id", documentId);
             return (await this.restClient.Execute<Stream>(contentRequest)).Data;
         }
@@ -210,7 +217,7 @@ namespace Docular.Client.Core.Model.Rest
         public async Task<Stream> GetThumbnailAsync(String documentId)
         {
             RestRequest thumbnailRequest = new RestRequest(DocumentsIdThumbnail, HttpMethod.Get);
-            thumbnailRequest.Serializer = this.serializer;
+            thumbnailRequest.Serializer = this.jsonSerializer;
             thumbnailRequest.AddUrlSegment("id", documentId);
             return (await this.restClient.Execute<Stream>(thumbnailRequest)).Data;
         }
@@ -223,7 +230,7 @@ namespace Docular.Client.Core.Model.Rest
         public async Task PostDocumentAsync(Document document)
         {
             RestRequest documentRequest = new RestRequest(Documents, HttpMethod.Post);
-            documentRequest.Serializer = this.serializer;
+            documentRequest.Serializer = this.jsonSerializer;
             await Task.Run(() =>
             {
                 documentRequest.AddBody(document);
@@ -240,7 +247,7 @@ namespace Docular.Client.Core.Model.Rest
         public async Task PutDocumentAsync(Document document)
         {
             RestRequest documentRequest = new RestRequest(DocumentsId, HttpMethod.Put);
-            documentRequest.Serializer = this.serializer;
+            documentRequest.Serializer = this.jsonSerializer;
             documentRequest.AddUrlSegment("id", document.Id);
             await Task.Run(() =>
             {
@@ -258,7 +265,7 @@ namespace Docular.Client.Core.Model.Rest
         public async Task PutDocumentContentAsync(Document document)
         {
             RestRequest contentRequest = new RestRequest(DocumentsId, HttpMethod.Put);
-            contentRequest.Serializer = this.serializer;
+            contentRequest.Serializer = this.jsonSerializer;
             contentRequest.AddUrlSegment("id", document.Id);
             contentRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
             await this.restClient.Execute(contentRequest);
@@ -468,7 +475,7 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Requires<ArgumentNullException>(id != null && apiUrl != null);
 
             RestRequest deleteRequest = new RestRequest(UsersId, HttpMethod.Get);
-            deleteRequest.Serializer = this.serializer;
+            deleteRequest.Serializer = this.jsonSerializer;
             deleteRequest.AddUrlSegment("id", id);
             return this.restClient.Execute(deleteRequest);
         }
@@ -484,7 +491,7 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Requires<ArgumentNullException>(id != null && apiUrl != null);
 
             RestRequest retreiveRequest = new RestRequest(apiUrl, HttpMethod.Get);
-            retreiveRequest.Serializer = this.serializer;
+            retreiveRequest.Serializer = this.jsonSerializer;
             retreiveRequest.AddUrlSegment("id", id);
             return (await this.restClient.Execute<T>(retreiveRequest)).Data;
         }
@@ -500,7 +507,7 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Requires<ArgumentNullException>(apiUrl != null);
 
             RestRequest filteredRequest = new RestRequest(apiUrl, HttpMethod.Get);
-            filteredRequest.Serializer = this.serializer;
+            filteredRequest.Serializer = this.jsonSerializer;
             foreach (Parameter param in filterParameters)
             {
                 filteredRequest.AddParameter(param);
@@ -518,7 +525,7 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Requires<ArgumentNullException>(apiUrl != null);
 
             RestRequest countRequest = new RestRequest(apiUrl, HttpMethod.Get);
-            countRequest.Serializer = this.serializer;
+            countRequest.Serializer = this.jsonSerializer;
             return (await this.restClient.Execute<int>(countRequest)).Data;
         }
 
@@ -533,7 +540,7 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Requires<ArgumentNullException>(value != null && apiUrl != null);
 
             RestRequest postRequest = new RestRequest(apiUrl, HttpMethod.Post);
-            postRequest.Serializer = this.serializer;
+            postRequest.Serializer = this.jsonSerializer;
             postRequest.AddBody(value);
             return this.restClient.Execute(postRequest);
         }
@@ -549,7 +556,7 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Requires<ArgumentNullException>(value != null && apiUrl != null);
 
             RestRequest categoryRequest = new RestRequest(apiUrl, HttpMethod.Put);
-            categoryRequest.Serializer = this.serializer;
+            categoryRequest.Serializer = this.jsonSerializer;
             categoryRequest.AddUrlSegment("id", value.Id);
             categoryRequest.AddBody(value);
             return this.restClient.Execute(categoryRequest);
@@ -567,7 +574,7 @@ namespace Docular.Client.Core.Model.Rest
             Contract.Invariant(this.DocularUri != null);
             Contract.Invariant(this.KeyStore != null);
             Contract.Invariant(this.restClient != null);
-            Contract.Invariant(this.serializer != null);
+            Contract.Invariant(this.jsonSerializer != null);
         }
     }
 }

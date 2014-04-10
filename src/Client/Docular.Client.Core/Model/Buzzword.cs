@@ -5,24 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace Docular.Client.Core.Model
 {
     /// <summary>
     /// Represents a buzzword in a text.
     /// </summary>
+    [ProtoContract]
     public struct Buzzword
     {
         /// <summary>
         /// The commonness of the word inside the text.
         /// </summary>
-        [JsonProperty("commonness")]
+        [JsonProperty("commonness"), ProtoMember(1)]
         public float Commonness { get; private set; }
 
         /// <summary>
         /// The buzzword itself.
         /// </summary>
-        [JsonProperty("value")]
+        [JsonProperty("value"), ProtoMember(2)]
         public String Value { get; private set; }
         
         /// <summary>

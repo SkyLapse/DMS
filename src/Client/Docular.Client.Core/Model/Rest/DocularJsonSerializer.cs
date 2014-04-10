@@ -11,9 +11,9 @@ using RestSharp.Portable.Serializers;
 namespace Docular.Client.Core.Model.Rest
 {
     /// <summary>
-    /// A custom RestSharp (de)serializer for proper date handling.
+    /// A custom RestSharp json (de)serializer for proper date handling.
     /// </summary>
-    public class DocularSerializer : ISerializer, IDeserializer
+    public class DocularJsonSerializer : ISerializer, IDeserializer
     {
         /// <summary>
         /// The content type.
@@ -21,9 +21,9 @@ namespace Docular.Client.Core.Model.Rest
         public System.Net.Http.Headers.MediaTypeHeaderValue ContentType { get; set; }
 
         /// <summary>
-        /// Initializes a new <see cref="DocularSerializer"/>.
+        /// Initializes a new <see cref="DocularJsonSerializer"/>.
         /// </summary>
-        public DocularSerializer()
+        public DocularJsonSerializer()
         {
             this.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json")
             {

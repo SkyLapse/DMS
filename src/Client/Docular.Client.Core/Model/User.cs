@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
 using Newtonsoft.Json;
+using ProtoBuf;
 using RestSharp.Portable;
 
 namespace Docular.Client.Core.Model
@@ -13,6 +14,7 @@ namespace Docular.Client.Core.Model
     /// <summary>
     /// Represents a user.
     /// </summary>
+    [ProtoContract]
     public class User : DocularObject
     {
         /// <summary>

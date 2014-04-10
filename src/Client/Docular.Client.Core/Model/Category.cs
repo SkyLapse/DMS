@@ -16,12 +16,6 @@ namespace Docular.Client.Core.Model
     public class Category : DocularObject
     {
         /// <summary>
-        /// The <see cref="Category"/>'s description.
-        /// </summary>
-        [JsonProperty("description")]
-        public String Description { get; private set; }
-
-        /// <summary>
         /// Initializes a new <see cref="Category"/>.
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Category"/>.</param>

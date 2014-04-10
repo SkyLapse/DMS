@@ -4,24 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace Docular.Client.Core.Model
 {
     /// <summary>
     /// Represents a custom field of some arbitrary data.
     /// </summary>
+    [ProtoContract]
     public struct CustomField
     {
         /// <summary>
         /// Gets the custom field's key.
         /// </summary>
-        [JsonProperty("key")]
+        [JsonProperty("key"), ProtoMember(1)]
         public String Key { get; private set; }
 
         /// <summary>
         /// Gets the custom field's value.
         /// </summary>
-        [JsonProperty("value")]
+        [JsonProperty("value"), ProtoMember(2)]
         public String Value { get; private set; }
 
         /// <summary>

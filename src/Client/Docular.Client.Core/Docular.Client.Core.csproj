@@ -112,7 +112,8 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Model\Rest\DocularAuthenticator.cs" />
     <Compile Include="Model\Rest\DocularClient.cs" />
-    <Compile Include="Model\Rest\DocularSerializer.cs" />
+    <Compile Include="Model\Rest\DocularJsonSerializer.cs" />
+    <Compile Include="Model\Rest\DocularProtobufSerializer.cs" />
     <Compile Include="Model\Rest\ICategoryManager.cs" />
     <Compile Include="Model\Rest\IContentReceiver.cs" />
     <Compile Include="Model\Rest\IDocumentManager.cs" />
@@ -139,6 +140,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\portable-sl4+net40+wp7+windows8\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp.Portable">
       <HintPath>..\packages\FubarCoder.RestSharp.Portable.1.6.1\lib\portable-net40+sl50+wp80+win\RestSharp.Portable.dll</HintPath>

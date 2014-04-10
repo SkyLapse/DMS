@@ -4,24 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace Docular.Client.Core.Model
 {
     /// <summary>
     /// Contains information about a change of an item.
     /// </summary>
+    [ProtoContract]
     public struct ChangeInfo
     {
         /// <summary>
         /// The <see cref="User"/> who made the change.
         /// </summary>
-        [JsonProperty("user")]
+        [JsonProperty("user"), ProtoMember(1)]
         public User User { get; private set; }
 
         /// <summary>
         /// The date and time of the change.
         /// </summary>
-        [JsonProperty("date")]
+        [JsonProperty("date"), ProtoMember(2)]
         public DateTime Date { get; private set; }
 
         /// <summary>
