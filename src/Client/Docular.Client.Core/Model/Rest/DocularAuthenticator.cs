@@ -10,7 +10,7 @@ using RestSharp.Portable.Authenticators;
 namespace Docular.Client.Core.Model.Rest
 {
     /// <summary>
-    /// Authenticates a REST-request with the docular DB.
+    /// Authenticates a REST-request with the Docular DB.
     /// </summary>
     public class DocularAuthenticator : IAuthenticator
     {
