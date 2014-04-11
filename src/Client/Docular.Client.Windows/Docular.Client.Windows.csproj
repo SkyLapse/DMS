@@ -168,6 +168,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WindowsKeyStore.cs" />
     <Page Include="Resources\Styles\ButtonStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -200,7 +201,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Configuration\DocularClientConfigurationSection.cs" />
+    <Compile Include="DocularClientConfigurationSection.cs" />
     <Compile Include="Resources\Strings\SettingsMenu.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

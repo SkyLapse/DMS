@@ -51,7 +51,8 @@
         <Button x:Name="btnDoLogin"
                 Content="{x:Static s:UserMenu.LoginCaption}" 
                 Style="{DynamicResource ButtonStyleRegular}"
-                Grid.Column="1" Grid.Row="7"/>
+                Grid.Column="1" Grid.Row="7"
+                Click="btnDoLogin_Click"/>
         
         <!-- Forgot password? -->
         <TextBlock x:Name="tblForgotPassword"
@@ -60,6 +61,7 @@
                    Grid.Row="8" Grid.ColumnSpan="3"
                    TextDecorations="Underline"
                    Foreground="#FF0645AD"
-                   Height="20"/>
+                   Height="20" 
+                   MouseDown="tblForgotPassword_MouseDown"/>
     </Grid>
 </UserControl>

@@ -26,12 +26,7 @@ namespace Docular.Client.Windows
             Contract.Requires<ArgumentNullException>(skinUri != null);
             Contract.Requires<ArgumentException>(!skinUri.IsAbsoluteUri);
 
-            Uri skinResourceDictionaryUri = new Uri("Resources/Skins");
-            foreach (ResourceDictionary dict in this.Resources.MergedDictionaries.Where(mergedDict => skinResourceDictionaryUri.IsBaseOf(mergedDict.Source)))
-            {
-                this.Resources.MergedDictionaries.Remove(dict);
-            }
-            this.Resources.MergedDictionaries.Add((ResourceDictionary)Application.LoadComponent(skinUri));
+            throw new NotImplementedException();
         }
     }
 }
