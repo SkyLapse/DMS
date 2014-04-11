@@ -1,6 +1,7 @@
-﻿<Window x:Class="Docular.Client.Windows.MainWindow"
+﻿<Window x:Class="Docular.Client.Windows.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:l="clr-namespace:Infralution.Localization.Wpf;assembly=Infralution.Localization.Wpf"
         Title="Docular DMS" 
         WindowStyle="None" ResizeMode="NoResize"
         Width="1280" Height="720">
