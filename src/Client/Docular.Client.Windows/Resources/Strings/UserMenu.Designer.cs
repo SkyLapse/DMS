@@ -90,14 +90,14 @@ namespace Docular.Client.Windows.Resources.Strings {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Log out ähnelt.
         /// </summary>
-        public static string Logout {
+        public static string LogoutCaption {
             get {
-                return ResourceManager.GetString("Logout", resourceCulture);
+                return ResourceManager.GetString("LogoutCaption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Password: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Password ähnelt.
         /// </summary>
         public static string Password {
             get {
@@ -115,7 +115,7 @@ namespace Docular.Client.Windows.Resources.Strings {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Username: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Username ähnelt.
         /// </summary>
         public static string Username {
             get {

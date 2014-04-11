@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
+             xmlns:xwt="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              d:DesignHeight="425" d:DesignWidth="350"
-             Background="{DynamicResource WindowBackgroundBrush}"
-             BorderBrush="{DynamicResource WindowBorderBrush}" BorderThickness="1"
+             Height="425" Width="350"
+             Style="{DynamicResource ContentControlStyleBordered}"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,12 +16,11 @@
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="58*"/>
             <RowDefinition Height="106*"/>
             <RowDefinition Height="27*"/>
             <RowDefinition Height="26*"/>
             <RowDefinition Height="37*"/>
-            <RowDefinition Height="26*"/>
+            <RowDefinition Height="15*"/>
             <RowDefinition Height="37*"/>
             <RowDefinition Height="30*"/>
             <RowDefinition Height="50*"/>
@@ -30,28 +30,36 @@
         <!-- Captions -->
         <Label Content="{x:Static s:UserMenu.LoginCaption}" 
                Style="{DynamicResource LabelStyleLoginMenuCaption}" 
-               Grid.Row="1" Grid.ColumnSpan="3"/>
+               Grid.Row="0" Grid.ColumnSpan="3"/>
         <Label Content="{x:Static s:UserMenu.EnterCredentials}"
                Style="{DynamicResource LabelStyleRegular}" 
-               Grid.Row="2" Grid.ColumnSpan="3"/>
+               Grid.Row="1" Grid.ColumnSpan="3"/>
 
         <!-- Text boxes -->
-        <Label Content="{x:Static s:UserMenu.Username}" 
-               Style="{DynamicResource LabelStyleLoginMenuUsernamePassword}" 
-               Grid.Row="4" Grid.ColumnSpan="2" Margin="0,1,170,0"/>
-        <TextBox Style="{DynamicResource TextBoxStyleCredentials}"
-                 Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"
-                 Margin="0,4,10,4"/>
-        <Label Content="{x:Static s:UserMenu.Password}" 
-               Style="{DynamicResource LabelStyleLoginMenuUsernamePassword}" 
-               Grid.Row="6" Grid.ColumnSpan="2" Margin="0,0,170,1"/>
-        <TextBox Style="{DynamicResource TextBoxStyleCredentials}"
-                 Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2"
-                 Margin="0,4,10,4"/>
+        <xwt:WatermarkTextBox x:Name="tbUsername"
+                              Style="{DynamicResource TextBoxStyleCredentials}" 
+                              Watermark="{x:Static s:UserMenu.Username}"
+                              Grid.Row="3" Grid.ColumnSpan="3"
+                              Margin="20,4" Width="Auto" HorizontalAlignment="Stretch"/>
+        <xwt:WatermarkTextBox x:Name="tbPassword" 
+                              Style="{DynamicResource TextBoxStyleCredentials}" 
+                              Watermark="{x:Static s:UserMenu.Password}"
+                              Grid.Row="5" Grid.ColumnSpan="3"
+                              Margin="20,4" HorizontalAlignment="Stretch" Width="Auto"/>
 
         <!-- Big fat login button -->
-        <Button Content="{x:Static s:UserMenu.LoginCaption}" 
+        <Button x:Name="btnDoLogin"
+                Content="{x:Static s:UserMenu.LoginCaption}" 
                 Style="{DynamicResource ButtonStyleRegular}"
-                Grid.Column="1" Grid.Row="8"/>
+                Grid.Column="1" Grid.Row="7"/>
+        
+        <!-- Forgot password? -->
+        <TextBlock x:Name="tblForgotPassword"
+                   Text="{x:Static s:UserMenu.ForgotPassword}"
+                   Style="{DynamicResource TextBlockStyleRegular}"
+                   Grid.Row="8" Grid.ColumnSpan="3"
+                   TextDecorations="Underline"
+                   Foreground="#FF0645AD"
+                   Height="20"/>
     </Grid>
 </UserControl>

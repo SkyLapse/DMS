@@ -8,12 +8,15 @@
     
     <Style x:Key="LabelStyleLoginMenuCaption" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
         <Setter Property="FontSize" Value="48"/>
-        <Setter Property="Foreground" Value="Blue"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource CaptionTextBrush}"/>
     </Style>
 
-    <Style x:Key="LabelStyleLoginMenuUsernamePassword" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
+    <Style x:Key="LabelStyleLoginMenuCredentials" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
         <Setter Property="FontSize" Value="18"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
     </Style>
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Skins/Default.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
