@@ -5,6 +5,10 @@
              xmlns:g="clr-namespace:System.Drawing;assembly=System.Drawing"
              StartupUri="UI/MainWindow.xaml">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Skins/Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

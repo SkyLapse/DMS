@@ -22,14 +22,14 @@ namespace Docular.Client.Windows.Resources.Strings {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DocumentDisplay {
+    public class UserMenu {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DocumentDisplay() {
+        internal UserMenu() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Docular.Client.Windows.Resources.Strings {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Docular.Client.Windows.Resources.Strings.DocumentDisplay", typeof(DocumentDisplay).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Docular.Client.Windows.Resources.Strings.UserMenu", typeof(UserMenu).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,65 @@ namespace Docular.Client.Windows.Resources.Strings {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Created on: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter your login credentials below... ähnelt.
         /// </summary>
-        public static string DocumentCreateDate {
+        public static string EnterCredentials {
             get {
-                return ResourceManager.GetString("DocumentCreateDate", resourceCulture);
+                return ResourceManager.GetString("EnterCredentials", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Created by: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Forgot password? ähnelt.
         /// </summary>
-        public static string DocumentCreateUser {
+        public static string ForgotPassword {
             get {
-                return ResourceManager.GetString("DocumentCreateUser", resourceCulture);
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Last edited on: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Log in ähnelt.
         /// </summary>
-        public static string DocumentEditDate {
+        public static string LoginCaption {
             get {
-                return ResourceManager.GetString("DocumentEditDate", resourceCulture);
+                return ResourceManager.GetString("LoginCaption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Last edited by: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Log out ähnelt.
         /// </summary>
-        public static string DocumentEditUser {
+        public static string Logout {
             get {
-                return ResourceManager.GetString("DocumentEditUser", resourceCulture);
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die File size: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Password: ähnelt.
         /// </summary>
-        public static string DocumentSize {
+        public static string Password {
             get {
-                return ResourceManager.GetString("DocumentSize", resourceCulture);
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Documents ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die User ähnelt.
         /// </summary>
-        public static string DocumentsTitle {
+        public static string UserCaption {
             get {
-                return ResourceManager.GetString("DocumentsTitle", resourceCulture);
+                return ResourceManager.GetString("UserCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Username: ähnelt.
+        /// </summary>
+        public static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
             }
         }
     }

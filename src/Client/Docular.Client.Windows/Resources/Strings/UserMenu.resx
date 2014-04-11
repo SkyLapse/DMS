@@ -117,28 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DocumentCreateDate" xml:space="preserve">
-    <value>Created on:</value>
-    <comment>Used in the UI to show a documents creation time.</comment>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot password?</value>
+    <comment>The title for the "forgot password" field.</comment>
   </data>
-  <data name="DocumentCreateUser" xml:space="preserve">
-    <value>Created by:</value>
-    <comment>Used in the UI to show the user who created a document.</comment>
+  <data name="LoginCaption" xml:space="preserve">
+    <value>Log in</value>
+    <comment>The caption for a login control.</comment>
   </data>
-  <data name="DocumentEditDate" xml:space="preserve">
-    <value>Last edited on:</value>
-    <comment>Used in the UI to show a documents last edit time.</comment>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
+    <comment>The button title for the log out button.</comment>
   </data>
-  <data name="DocumentEditUser" xml:space="preserve">
-    <value>Last edited by:</value>
-    <comment>Used in the UI to show a documents last edit user.</comment>
+  <data name="Password" xml:space="preserve">
+    <value>Password:</value>
+    <comment>The title for the text box for the user password.</comment>
   </data>
-  <data name="DocumentSize" xml:space="preserve">
-    <value>File size:</value>
-    <comment>Used in the UI to show a documents file size.</comment>
+  <data name="Username" xml:space="preserve">
+    <value>Username:</value>
+    <comment>The title for the text box for the username.</comment>
   </data>
-  <data name="DocumentsTitle" xml:space="preserve">
-    <value>Documents</value>
-    <comment>The title for the documents view.</comment>
+  <data name="UserCaption" xml:space="preserve">
+    <value>User</value>
+    <comment>The settings menu sub title for all settings regarding the user.</comment>
+  </data>
+  <data name="EnterCredentials" xml:space="preserve">
+    <value>Enter your login credentials below...</value>
+    <comment>The caption for the credentials label.</comment>
   </data>
 </root>

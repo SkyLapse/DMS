@@ -4,7 +4,10 @@
         xmlns:l="clr-namespace:Infralution.Localization.Wpf;assembly=Infralution.Localization.Wpf"
         Title="Docular DMS" 
         WindowStyle="None" ResizeMode="NoResize"
-        Width="1280" Height="720">
+        Width="1280" Height="720"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        BorderBrush="{DynamicResource WindowBorderBrush}" BorderThickness="1"> <!-- Some nice border for coolness -->
     <Grid>
         
     </Grid>

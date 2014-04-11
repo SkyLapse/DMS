@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="LabelStyleRegular" TargetType="Label">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+    
+    <Style x:Key="LabelStyleLoginMenuCaption" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
+        <Setter Property="FontSize" Value="48"/>
+        <Setter Property="Foreground" Value="Blue"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="LabelStyleLoginMenuUsernamePassword" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+</ResourceDictionary>

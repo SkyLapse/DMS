@@ -117,28 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ForgotPassword" xml:space="preserve">
-    <value>Forgot password</value>
-    <comment>The title for the "forgot password" field.</comment>
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value>Log out</value>
-    <comment>The button title for the log out button.</comment>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-    <comment>The title for the text box for the user password.</comment>
-  </data>
   <data name="SettingsMenuTitle" xml:space="preserve">
     <value>Settings</value>
     <comment>The window title for the settings menu.</comment>
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value>Username</value>
-    <comment>The title for the text box for the username.</comment>
-  </data>
-  <data name="UserSection" xml:space="preserve">
-    <value>User</value>
-    <comment>The settings menu sub title for all settings regarding the user.</comment>
   </data>
 </root>

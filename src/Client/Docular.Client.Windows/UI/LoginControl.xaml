@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="Docular.Client.Windows.UI.LoginControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
+             d:DesignHeight="425" d:DesignWidth="350"
+             Background="{DynamicResource WindowBackgroundBrush}"
+             BorderBrush="{DynamicResource WindowBorderBrush}" BorderThickness="1"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="245*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="58*"/>
+            <RowDefinition Height="106*"/>
+            <RowDefinition Height="27*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="26*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Captions -->
+        <Label Content="{x:Static s:UserMenu.LoginCaption}" 
+               Style="{DynamicResource LabelStyleLoginMenuCaption}" 
+               Grid.Row="1" Grid.ColumnSpan="3"/>
+        <Label Content="{x:Static s:UserMenu.EnterCredentials}"
+               Style="{DynamicResource LabelStyleRegular}" 
+               Grid.Row="2" Grid.ColumnSpan="3"/>
+
+        <!-- Text boxes -->
+        <Label Content="{x:Static s:UserMenu.Username}" 
+               Style="{DynamicResource LabelStyleLoginMenuUsernamePassword}" 
+               Grid.Row="4" Grid.ColumnSpan="2" Margin="0,1,170,0"/>
+        <TextBox Style="{DynamicResource TextBoxStyleCredentials}"
+                 Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"
+                 Margin="0,4,10,4"/>
+        <Label Content="{x:Static s:UserMenu.Password}" 
+               Style="{DynamicResource LabelStyleLoginMenuUsernamePassword}" 
+               Grid.Row="6" Grid.ColumnSpan="2" Margin="0,0,170,1"/>
+        <TextBox Style="{DynamicResource TextBoxStyleCredentials}"
+                 Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2"
+                 Margin="0,4,10,4"/>
+
+        <!-- Big fat login button -->
+        <Button Content="{x:Static s:UserMenu.LoginCaption}" 
+                Style="{DynamicResource ButtonStyleRegular}"
+                Grid.Column="1" Grid.Row="8"/>
+    </Grid>
+</UserControl>

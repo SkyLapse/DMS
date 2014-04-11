@@ -79,5 +79,14 @@ namespace Docular.Client.Windows.Configuration
             this.SectionInformation.AllowExeDefinition = ConfigurationAllowExeDefinition.MachineToLocalUser;
             this.SectionInformation.AllowOverride = true;
         }
+
+        /// <summary>
+        /// Indicates whether the <see cref="DocularClientConfigurationSection"/> is read-only.
+        /// </summary>
+        /// <returns><c>false</c>, the section is always writable.</returns>
+        public override bool IsReadOnly()
+        {
+            return false;
+        }
     }
 }
