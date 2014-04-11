@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Docular.Client.Core.Model;
 using Docular.Client.Core.Model.Rest;
+using Docular.Client.Windows.Configuration;
 
 namespace Docular.Client.Windows.UI
 {
