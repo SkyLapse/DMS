@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model;
+using Newtonsoft.Json;
 using RestSharp.Portable;
 
 namespace Docular.Client.Core.Model.Rest
@@ -100,6 +101,11 @@ namespace Docular.Client.Core.Model.Rest
         /// </summary>
         public const String UsersCount = Categories + CountUrlPath;
 
+        /// <summary>
+        /// The part of the REST API to obtain an API key.
+        /// </summary>
+        private const String Keys = "keys";
+
         #endregion
 
         /// <summary>
@@ -164,6 +170,19 @@ namespace Docular.Client.Core.Model.Rest
         }
 
         #region Documents
+
+        /// <summary>
+        /// Authorizes the current app.
+        /// </summary>
+        /// <param name="authData"><see cref="AuthorizationData"/> containing the required authing parameters.</param>
+        /// <returns>The API key.</returns>
+        public async Task<String> Authorize(AuthorizationData authData)
+        {
+            RestRequest authRequest = new RestRequest(Keys, HttpMethod.Post);
+            authRequest.Serializer = this.jsonSerializer;
+            authRequest.AddBody(authData);
+            return (await this.restClient.Execute<String>(authRequest)).Data;
+        }
 
         /// <summary>
         /// Deletes the specified <see cref="Document"/> from the docular DB.

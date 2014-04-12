@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Model\AuthorizationData.cs" />
     <Compile Include="Model\Rest\DocularAuthenticator.cs" />
     <Compile Include="Model\Rest\DocularClient.cs" />
     <Compile Include="Model\Rest\DocularJsonSerializer.cs" />

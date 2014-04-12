@@ -16,6 +16,13 @@ namespace Docular.Client.Core.Model.Rest
     public interface IUserManager
     {
         /// <summary>
+        /// Authorizes the current app.
+        /// </summary>
+        /// <param name="authData"><see cref="AuthorizationData"/> containing the required authing parameters.</param>
+        /// <returns>The API key.</returns>
+        Task<String> Authorize(AuthorizationData authData);
+
+        /// <summary>
         /// Deletes a <see cref="User"/> from the DB.
         /// </summary>
         /// <param name="userId">The ID of the <see cref="User"/> to delete.</param>
@@ -63,6 +70,14 @@ namespace Docular.Client.Core.Model.Rest
     [ContractClassFor(typeof(IUserManager))]
     abstract class UserManagerContracts : IUserManager
     {
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<String> IUserManager.Authorize(AuthorizationData authData)
+        {
+            return null;
+        }
+
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
