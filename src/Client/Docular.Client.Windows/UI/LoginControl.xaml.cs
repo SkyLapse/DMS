@@ -26,7 +26,7 @@ namespace Docular.Client.Windows.UI
         /// <summary>
         /// The Uri of the forgot password link.
         /// </summary>
-        private String forgotPasswordUri = null;
+        private String forgotPasswordUri { get; set; }
 
         /// <summary>
         /// Initializes a new <see cref="LoginControl"/>.

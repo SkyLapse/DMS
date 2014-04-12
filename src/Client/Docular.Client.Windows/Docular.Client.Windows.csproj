@@ -168,21 +168,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Resources\Strings\DocumentDisplay.de.Designer.cs">
-      <DependentUpon>DocumentDisplay.de.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Strings\SettingsMenu.de.Designer.cs">
-      <DependentUpon>SettingsMenu.de.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Resources\Strings\UserMenu.de.Designer.cs">
-      <DependentUpon>UserMenu.de.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="WindowsKeyStore.cs" />
     <Page Include="Resources\Styles\ButtonStyles.xaml">
       <SubType>Designer</SubType>
@@ -262,14 +247,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\DocumentDisplay.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DocumentDisplay.de.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\SettingsMenu.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SettingsMenu.de.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings\SettingsMenu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SettingsMenu.Designer.cs</LastGenOutput>
@@ -277,10 +254,6 @@
     <EmbeddedResource Include="Resources\Strings\DocumentDisplay.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DocumentDisplay.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\UserMenu.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UserMenu.de.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings\UserMenu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
