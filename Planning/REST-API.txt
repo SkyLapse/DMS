@@ -1,7 +1,7 @@
 REST-API
 ========
 
-Every specified URL is prefixed by http://_yoursite.com_/api/$key/
+Every specified URL is prefixed by http://_yoursite.com_/api/
 
 ### GET Collection Filtering Parameters (applies to all collections):
 - start=startIndex				// Starts searching at the specified collection index
