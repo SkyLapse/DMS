@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,7 @@ namespace Docular.Client.Windows.UI
         /// <param name="e"><see cref="MouseButtonEventArgs"/>.</param>
         private void tblForgotPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            Contract.Assume(forgotPasswordUri != null);
             Process.Start(forgotPasswordUri);
         }
     }

@@ -67,7 +67,7 @@ namespace Docular.Client.Windows
         {
             get
             {
-                return (String)this["DocularUri"] ?? "http://example.com/";
+                return (String)this["DocularUri"];
             }
             set
             {
@@ -82,7 +82,8 @@ namespace Docular.Client.Windows
         {
             get
             {
-                return new Uri(DocularUri).Combine("api/").ToString();
+                String docularUri = this.DocularUri;
+                return (docularUri != null) ? new Uri(docularUri).Combine("api/").ToString() : null;
             }
         }
 
@@ -93,7 +94,8 @@ namespace Docular.Client.Windows
         {
             get
             {
-                return new Uri(DocularUri).Combine("resetpassword/").ToString();
+                String docularUri = this.DocularUri;
+                return (docularUri != null) ? new Uri(docularUri).Combine("resetpassword/").ToString() : null;
             }
         }
 
