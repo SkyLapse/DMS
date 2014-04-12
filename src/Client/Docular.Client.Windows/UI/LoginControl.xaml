@@ -60,7 +60,7 @@
                    Style="{DynamicResource TextBlockStyleRegular}"
                    Grid.Row="8" Grid.ColumnSpan="3"
                    TextDecorations="Underline"
-                   Foreground="{DynamicResource LinkColor}"
+                   Foreground="{DynamicResource LinkColorBrush}"
                    Height="20" 
                    MouseDown="tblForgotPassword_MouseDown"/>
     </Grid>

@@ -8,7 +8,7 @@
     
     <Style x:Key="LabelStyleLoginMenuCaption" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
         <Setter Property="FontSize" Value="48"/>
-        <Setter Property="Foreground" Value="{DynamicResource CaptionTextBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource LinkColorBrush}"/>
     </Style>
 
     <Style x:Key="LabelStyleLoginMenuCredentials" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">

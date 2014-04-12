@@ -3,5 +3,5 @@
     <SolidColorBrush x:Key="WindowBorderBrush" Color="#FF007ACC"/>
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="White"/>
     <SolidColorBrush x:Key="CaptionTextBrush" Color="Blue"/>
-    <SolidColorBrush x:Key="LinkColor" Color="#FF0645AD"/>
+    <SolidColorBrush x:Key="LinkColorBrush" Color="#FF0645AD"/>
 </ResourceDictionary>
