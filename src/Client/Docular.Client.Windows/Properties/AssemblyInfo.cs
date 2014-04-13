@@ -8,7 +8,7 @@ using System.Windows;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("Docular.Client.Windows")]
-[assembly: AssemblyDescription("The Docular DMS Windows client.")]
+[assembly: AssemblyDescription("The official Docular DMS Windows client.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SkyLapse")]
 [assembly: AssemblyProduct("Docular.Client.Windows")]

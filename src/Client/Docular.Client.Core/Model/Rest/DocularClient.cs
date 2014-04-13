@@ -172,19 +172,6 @@ namespace Docular.Client.Core.Model.Rest
         #region Documents
 
         /// <summary>
-        /// Authorizes the current app.
-        /// </summary>
-        /// <param name="authData"><see cref="AuthorizationData"/> containing the required authing parameters.</param>
-        /// <returns>The API key.</returns>
-        public async Task<String> Authorize(AuthorizationData authData)
-        {
-            RestRequest authRequest = new RestRequest(Keys, HttpMethod.Post);
-            authRequest.Serializer = this.jsonSerializer;
-            authRequest.AddBody(authData);
-            return (await this.restClient.Execute<String>(authRequest)).Data;
-        }
-
-        /// <summary>
         /// Deletes the specified <see cref="Document"/> from the docular DB.
         /// </summary>
         /// <param name="documentId">The ID of the <see cref="Document"/> to delete.</param>

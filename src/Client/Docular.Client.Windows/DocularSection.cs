@@ -14,8 +14,13 @@ namespace Docular.Client.Windows
     /// <summary>
     /// Contains configuration data for the docular windows client.
     /// </summary>
-    public class DocularClientConfigurationSection : ConfigurationSection
+    public class DocularSection : ConfigurationSection
     {
+        /// <summary>
+        /// The key used to identify the default <see cref="DocularSection"/> instance in the configuration XML file.
+        /// </summary>
+        public const String SectionXmlKey = "ClientConfiguration";
+
         /// <summary>
         /// A "random" salt. ;-)
         /// </summary>
@@ -67,7 +72,7 @@ namespace Docular.Client.Windows
         {
             get
             {
-                return (String)this["DocularUri"];
+                return (String)this["DocularUri"] ?? "http://example.com/";
             }
             set
             {
@@ -117,17 +122,17 @@ namespace Docular.Client.Windows
         }
 
         /// <summary>
-        /// Initializes a new <see cref="DocularClientConfigurationSection"/>.
+        /// Initializes a new <see cref="DocularSection"/>.
         /// </summary>
-        public DocularClientConfigurationSection()
+        public DocularSection()
         {
             this.SectionInformation.AllowDefinition = ConfigurationAllowDefinition.Everywhere;
-            this.SectionInformation.AllowExeDefinition = ConfigurationAllowExeDefinition.MachineToLocalUser;
+            this.SectionInformation.AllowExeDefinition = ConfigurationAllowExeDefinition.MachineToRoamingUser;
             this.SectionInformation.AllowOverride = true;
         }
 
         /// <summary>
-        /// Indicates whether the <see cref="DocularClientConfigurationSection"/> is read-only.
+        /// Indicates whether the <see cref="DocularSection"/> is read-only.
         /// </summary>
         /// <returns><c>false</c>, the section is always writable.</returns>
         public override bool IsReadOnly()

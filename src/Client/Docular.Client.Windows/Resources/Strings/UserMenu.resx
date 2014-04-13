@@ -130,11 +130,11 @@
     <comment>The button title for the log out button.</comment>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Password:</value>
     <comment>The title for the text box for the user password.</comment>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Username</value>
+    <value>Username:</value>
     <comment>The title for the text box for the username.</comment>
   </data>
   <data name="UserCaption" xml:space="preserve">

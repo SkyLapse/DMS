@@ -6,8 +6,7 @@
         WindowStyle="None" ResizeMode="NoResize"
         Width="1280" Height="720"
         Style="{DynamicResource ContentControlStyleBordered}"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"> <!-- Some nice border for coolness -->
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <dms:LoginControl/>
     </Grid>
 </Window>

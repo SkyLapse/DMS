@@ -12,8 +12,8 @@
     </Style>
 
     <Style x:Key="LabelStyleLoginMenuCredentials" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
 
     <ResourceDictionary.MergedDictionaries>

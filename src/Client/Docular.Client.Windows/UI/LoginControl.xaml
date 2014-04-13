@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
-             xmlns:xwt="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
              d:DesignHeight="425" d:DesignWidth="350"
-             Height="425" Width="350"
+             Height="425" Width="350" MinHeight="425" MinWidth="350"
              Style="{DynamicResource ContentControlStyleBordered}"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
@@ -16,14 +15,14 @@
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="106*"/>
+            <RowDefinition Height="100*"/>
             <RowDefinition Height="27*"/>
             <RowDefinition Height="26*"/>
             <RowDefinition Height="37*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="26*"/>
             <RowDefinition Height="37*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="50*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="45*"/>
             <RowDefinition Height="26*"/>
         </Grid.RowDefinitions>
 
@@ -32,20 +31,26 @@
                Style="{DynamicResource LabelStyleLoginMenuCaption}" 
                Grid.Row="0" Grid.ColumnSpan="3"/>
         <Label Content="{x:Static s:UserMenu.EnterCredentials}"
-               Style="{DynamicResource LabelStyleRegular}" 
+               Style="{DynamicResource LabelStyleLoginMenuCredentials}" 
                Grid.Row="1" Grid.ColumnSpan="3"/>
 
         <!-- Text boxes -->
-        <xwt:WatermarkTextBox x:Name="tbUsername"
-                              Style="{DynamicResource TextBoxStyleCredentials}" 
-                              Watermark="{x:Static s:UserMenu.Username}"
-                              Grid.Row="3" Grid.ColumnSpan="3"
-                              Margin="20,4" Width="Auto" HorizontalAlignment="Stretch"/>
-        <xwt:WatermarkTextBox x:Name="tbPassword" 
-                              Style="{DynamicResource TextBoxStyleCredentials}" 
-                              Watermark="{x:Static s:UserMenu.Password}"
-                              Grid.Row="5" Grid.ColumnSpan="3"
-                              Margin="20,4" HorizontalAlignment="Stretch" Width="Auto"/>
+        <Label Style="{DynamicResource LabelStyleRegular}"
+               Content="{x:Static s:UserMenu.Username}"
+               HorizontalContentAlignment="Left"
+               Grid.Row="2" Grid.ColumnSpan="2" Margin="20,0,0,0"/>
+        <TextBox x:Name="tbUsername"
+                 Style="{DynamicResource TextBoxStyleCredentials}" 
+                 Grid.Row="3" Grid.ColumnSpan="3"
+                 Margin="20,4" Width="Auto" HorizontalAlignment="Stretch"/>
+        <Label Style="{DynamicResource LabelStyleRegular}"
+               Content="{x:Static s:UserMenu.Password}"
+               HorizontalContentAlignment="Left"
+               Grid.Row="4" Grid.ColumnSpan="2" Margin="20,0,0,0"/>
+        <PasswordBox x:Name="tbPassword" 
+                     Style="{DynamicResource PasswordBoxStyleCredentials}" 
+                     Grid.Row="5" Grid.ColumnSpan="3"
+                     Margin="20,4" HorizontalAlignment="Stretch" Width="Auto"/>
 
         <!-- Big fat login button -->
         <Button x:Name="btnDoLogin"
@@ -53,7 +58,7 @@
                 Style="{DynamicResource ButtonStyleRegular}"
                 Grid.Column="1" Grid.Row="7"
                 Click="btnDoLogin_Click"/>
-        
+
         <!-- Forgot password? -->
         <TextBlock x:Name="tblForgotPassword"
                    Text="{x:Static s:UserMenu.ForgotPassword}"

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,19 +25,10 @@ namespace Docular.Client.Windows.UI
     public partial class LoginControl : UserControl
     {
         /// <summary>
-        /// The Uri of the forgot password link.
-        /// </summary>
-        private String forgotPasswordUri { get; set; }
-
-        /// <summary>
         /// Initializes a new <see cref="LoginControl"/>.
         /// </summary>
         public LoginControl()
         {
-            DocularClientConfigurationSection clientConfig = 
-                (DocularClientConfigurationSection)ConfigurationManager.GetSection("ClientConfiguration") ?? new DocularClientConfigurationSection();
-            this.forgotPasswordUri = clientConfig.DocularResetPasswordUri;
-
             this.InitializeComponent();
         }
 
@@ -47,6 +39,9 @@ namespace Docular.Client.Windows.UI
         /// <param name="e"><see cref="RoutedEventArgs"/>.</param>
         private void btnDoLogin_Click(object sender, RoutedEventArgs e)
         {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
+
 
         }
 
@@ -57,8 +52,11 @@ namespace Docular.Client.Windows.UI
         /// <param name="e"><see cref="MouseButtonEventArgs"/>.</param>
         private void tblForgotPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Contract.Assume(forgotPasswordUri != null);
-            Process.Start(forgotPasswordUri);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
+
+            Contract.Assume(section != null);
+            Process.Start(section.DocularResetPasswordUri);
         }
     }
 }
