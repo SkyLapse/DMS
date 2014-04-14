@@ -117,24 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DocumentCreateDate" xml:space="preserve">
-    <value>Created on:</value>
-    <comment>Used in the UI to show a documents creation time.</comment>
+  <data name="Docular" xml:space="preserve">
+    <value>Docular</value>
   </data>
-  <data name="DocumentCreateUser" xml:space="preserve">
-    <value>Created by:</value>
-    <comment>Used in the UI to show the user who created a document.</comment>
+  <data name="DocularCapital" xml:space="preserve">
+    <value>DOCULAR</value>
   </data>
-  <data name="DocumentEditDate" xml:space="preserve">
-    <value>Last edited on:</value>
-    <comment>Used in the UI to show a documents last edit time.</comment>
-  </data>
-  <data name="DocumentEditUser" xml:space="preserve">
-    <value>Last edited by:</value>
-    <comment>Used in the UI to show a documents last edit user.</comment>
-  </data>
-  <data name="DocumentSize" xml:space="preserve">
-    <value>File size:</value>
-    <comment>Used in the UI to show a documents file size.</comment>
+  <data name="DocularDms" xml:space="preserve">
+    <value>Docular DMS</value>
   </data>
 </root>

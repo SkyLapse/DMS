@@ -40,27 +40,32 @@
         <Label Style="{DynamicResource LabelStyleRegular}"
                Content="{x:Static s:UserMenu.Username}"
                HorizontalContentAlignment="Left"
-               Grid.Row="2" Grid.ColumnSpan="2" Margin="20,0,0,0"/>
+               Grid.Row="2" Grid.ColumnSpan="2" 
+               Margin="20,0,0,0"/>
         <TextBox x:Name="tbUsername"
-                 Style="{DynamicResource TextBoxStyleCredentials}" 
+                 Style="{DynamicResource TextBoxStyleRegular}" 
                  Grid.Row="3" Grid.ColumnSpan="3"
-                 Margin="20,4" Width="Auto" HorizontalAlignment="Stretch"/>
+                 Margin="20,4"
+                 VerticalContentAlignment="Center"
+                 FontSize="18"
+                 TextWrapping="NoWrap"/>
         <Label Style="{DynamicResource LabelStyleRegular}"
                Content="{x:Static s:UserMenu.Password}"
                HorizontalContentAlignment="Left"
-               Grid.Row="4" Grid.ColumnSpan="2" Margin="20,0,0,0"/>
+               Grid.Row="4" Grid.ColumnSpan="2" 
+               Margin="20,0,0,0"/>
         <PasswordBox x:Name="tbPassword" 
-                     Style="{DynamicResource PasswordBoxStyleCredentials}" 
+                     Style="{DynamicResource PasswordBoxStyleRegular}" 
                      Grid.Row="5" Grid.ColumnSpan="3"
-                     Margin="20,4" HorizontalAlignment="Stretch" Width="Auto"/>
+                     Margin="20,4"
+                     VerticalContentAlignment="Center"
+                     FontSize="18"/>
 
         <!-- Big fat login button -->
         <Button x:Name="btnDoLogin"
                 Content="{x:Static s:UserMenu.LoginCaption}" 
                 Style="{DynamicResource ButtonStyleRegular}"
-                Foreground="{DynamicResource DarkLightBrush}"
                 FontSize="24"
-                Background="{DynamicResource BackgroundBrush}"
                 Grid.Column="1" Grid.Row="7"
                 Click="btnDoLogin_Click"/>
 

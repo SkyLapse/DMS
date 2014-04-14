@@ -4,10 +4,10 @@
         xmlns:dms="clr-namespace:Docular.Client.Windows.UI"
         Title="Docular DMS" 
         WindowStyle="None" ResizeMode="NoResize"
-        Width="1280" Height="720"
+        Width="1280" Height="720" MinWidth="1280" MinHeight="720"
         Style="{DynamicResource ContentControlStyleBordered}"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
-        <dms:LoginControl/>
+        <dms:Sidebar HorizontalAlignment="Left"/>
     </Grid>
 </Window>

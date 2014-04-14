@@ -1,11 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style x:Key="TextBoxStyleRegular" TargetType="TextBox"/>
-    
-    <Style x:Key="TextBoxStyleCredentials" TargetType="TextBox" BasedOn="{StaticResource TextBoxStyleRegular}">
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="TextWrapping" Value="NoWrap"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Style x:Key="TextBoxStyleRegular" TargetType="TextBox">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource DarkLightBrush}"/>
     </Style>

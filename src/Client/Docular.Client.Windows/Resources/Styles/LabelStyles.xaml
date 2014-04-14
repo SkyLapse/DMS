@@ -7,6 +7,18 @@
         <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
     </Style>
 
+    <Style x:Key="LabelStyleRegularDarkLight" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
+        <Setter Property="Foreground" Value="{DynamicResource DarkLightBrush}"/>
+    </Style>
+
+    <Style x:Key="LabelStyleRegularMediumLight" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
+        <Setter Property="Foreground" Value="{DynamicResource MediumLightBrush}"/>
+    </Style>
+
+    <Style x:Key="LabelStyleRegularBrightLight" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
+        <Setter Property="Foreground" Value="{DynamicResource BrightLightBrush}"/>
+    </Style>
+    
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Skins/Default.xaml"/>
     </ResourceDictionary.MergedDictionaries>

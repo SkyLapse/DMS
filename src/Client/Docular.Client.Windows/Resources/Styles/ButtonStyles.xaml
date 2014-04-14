@@ -1,71 +1,71 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:c="clr-namespace:Docular.Client.Windows">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="ButtonStyleRegular" TargetType="Button">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid x:Name="grid">
-                        <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <Rectangle x:Name="rectangleBackground">
-                                <Rectangle.Fill>
-                                    <SolidColorBrush x:Name="rectangleBackgroundFill" Color="{DynamicResource Background}"/>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                        </Border>
-                        <ContentPresenter x:Name="content"
-                                          Content="{TemplateBinding Content}"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                          Margin="{TemplateBinding Padding}"/>
-                        
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="00:00:0.25"/>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Normal"/>
-                                <VisualState x:Name="MouseOver">
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="rectangleBackgroundFill"
-                                                        Storyboard.TargetProperty="Color"
-                                                        Duration="0"
-                                                        To="{StaticResource Highlight}"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="rectangleBackgroundFill"
-                                                        Storyboard.TargetProperty="Color"
-                                                        Duration="0"
-                                                        To="{StaticResource BrightHighlight}"/>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ParallelTimeline>
-                                            <DoubleAnimation Storyboard.TargetName="content"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             Duration="0"
-                                                             To="0.5"/>
-                                            <DoubleAnimation Storyboard.TargetName="rectangleBackground"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             Duration="0"
-                                                             To="0.5"/>
-                                        </ParallelTimeline>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource DarkLightBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DarkLightBrush}"/>
+		<Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Template" Value="{DynamicResource ButtonStyleRegularTemplate}"/>
     </Style>
+    
+    <ControlTemplate x:Key="ButtonStyleRegularTemplate" TargetType="{x:Type Button}">
+    	<Grid>
+    		<VisualStateManager.VisualStateGroups>
+    			<VisualStateGroup x:Name="CommonStates">
+    				<VisualStateGroup.Transitions>
+    					<VisualTransition GeneratedDuration="0"/>
+    				</VisualStateGroup.Transitions>
+    				<VisualState x:Name="Normal"/>
+    				<VisualState x:Name="MouseOver">
+    					<Storyboard>
+    						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill)" Storyboard.TargetName="rectangleBackground">
+    							<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HighlightBrush}"/>
+    						</ObjectAnimationUsingKeyFrames>
+    					</Storyboard>
+    				</VisualState>
+    				<VisualState x:Name="Pressed">
+    					<Storyboard>
+    						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill)" Storyboard.TargetName="rectangleBackground">
+    							<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrightHighlightBrush}"/>
+    						</ObjectAnimationUsingKeyFrames>
+    					</Storyboard>
+    				</VisualState>
+    				<VisualState x:Name="Disabled">
+    					<Storyboard>
+    						<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangleBackground">
+    							<EasingDoubleKeyFrame KeyTime="0" Value="0.75"/>
+    						</DoubleAnimationUsingKeyFrames>
+    						<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="content">
+    							<EasingDoubleKeyFrame KeyTime="0" Value="0.5"/>
+    						</DoubleAnimationUsingKeyFrames>
+    					</Storyboard>
+    				</VisualState>
+    			</VisualStateGroup>
+    			<VisualStateGroup x:Name="FocusStates">
+    				<VisualState x:Name="Unfocused"/>
+    				<VisualState x:Name="Focused">
+    					<Storyboard>
+    						<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="border">
+    							<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrightLightBrush}"/>
+    						</ObjectAnimationUsingKeyFrames>
+    					</Storyboard>
+    				</VisualState>
+    			</VisualStateGroup>
+    		</VisualStateManager.VisualStateGroups>
+    		<Border x:Name="border" 
+    				BorderBrush="{TemplateBinding BorderBrush}"
+    				BorderThickness="{TemplateBinding BorderThickness}">
+    			<Rectangle x:Name="rectangleBackground" Fill="{DynamicResource BackgroundBrush}"/>
+    		</Border>
+    		<ContentPresenter x:Name="content"
+    						  Content="{TemplateBinding Content}"
+    						  ContentTemplate="{TemplateBinding ContentTemplate}"
+    						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+    						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+    						  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+    						  Margin="{TemplateBinding Padding}"/>
+    	</Grid>
+    </ControlTemplate>
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Skins/Default.xaml"/>

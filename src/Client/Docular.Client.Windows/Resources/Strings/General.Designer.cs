@@ -22,14 +22,14 @@ namespace Docular.Client.Windows.Resources.Strings {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DocumentDisplay {
+    public class General {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DocumentDisplay() {
+        internal General() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Docular.Client.Windows.Resources.Strings {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Docular.Client.Windows.Resources.Strings.DocumentDisplay", typeof(DocumentDisplay).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Docular.Client.Windows.Resources.Strings.General", typeof(General).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,29 @@ namespace Docular.Client.Windows.Resources.Strings {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Created on: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Docular ähnelt.
         /// </summary>
-        public static string DocumentCreateDate {
+        public static string Docular {
             get {
-                return ResourceManager.GetString("DocumentCreateDate", resourceCulture);
+                return ResourceManager.GetString("Docular", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Created by: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die DOCULAR ähnelt.
         /// </summary>
-        public static string DocumentCreateUser {
+        public static string DocularCapital {
             get {
-                return ResourceManager.GetString("DocumentCreateUser", resourceCulture);
+                return ResourceManager.GetString("DocularCapital", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Last edited on: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Docular DMS ähnelt.
         /// </summary>
-        public static string DocumentEditDate {
+        public static string DocularDms {
             get {
-                return ResourceManager.GetString("DocumentEditDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Last edited by: ähnelt.
-        /// </summary>
-        public static string DocumentEditUser {
-            get {
-                return ResourceManager.GetString("DocumentEditUser", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die File size: ähnelt.
-        /// </summary>
-        public static string DocumentSize {
-            get {
-                return ResourceManager.GetString("DocumentSize", resourceCulture);
+                return ResourceManager.GetString("DocularDms", resourceCulture);
             }
         }
     }

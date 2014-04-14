@@ -39,8 +39,8 @@ namespace Docular.Client.Windows.UI
         /// <param name="e"><see cref="RoutedEventArgs"/>.</param>
         private void btnDoLogin_Click(object sender, RoutedEventArgs e)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
+            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            //DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
 
 
         }

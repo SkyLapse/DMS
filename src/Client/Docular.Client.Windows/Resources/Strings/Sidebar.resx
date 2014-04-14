@@ -117,24 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DocumentCreateDate" xml:space="preserve">
-    <value>Created on:</value>
-    <comment>Used in the UI to show a documents creation time.</comment>
+  <data name="Categories" xml:space="preserve">
+    <value>Categories</value>
+    <comment>The title for the categories view.</comment>
   </data>
-  <data name="DocumentCreateUser" xml:space="preserve">
-    <value>Created by:</value>
-    <comment>Used in the UI to show the user who created a document.</comment>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents</value>
+    <comment>The title for the documents view.</comment>
   </data>
-  <data name="DocumentEditDate" xml:space="preserve">
-    <value>Last edited on:</value>
-    <comment>Used in the UI to show a documents last edit time.</comment>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+    <comment>The title for the search view.</comment>
   </data>
-  <data name="DocumentEditUser" xml:space="preserve">
-    <value>Last edited by:</value>
-    <comment>Used in the UI to show a documents last edit user.</comment>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+    <comment>The title for the settings view.</comment>
   </data>
-  <data name="DocumentSize" xml:space="preserve">
-    <value>File size:</value>
-    <comment>Used in the UI to show a documents file size.</comment>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+    <comment>The title for the tags view.</comment>
   </data>
 </root>
