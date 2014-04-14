@@ -6,6 +6,8 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="TextWrapping" Value="NoWrap"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DarkLightBrush}"/>
     </Style>
 
     <ResourceDictionary.MergedDictionaries>

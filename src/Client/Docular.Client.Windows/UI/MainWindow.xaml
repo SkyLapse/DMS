@@ -8,5 +8,6 @@
         Style="{DynamicResource ContentControlStyleBordered}"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
+        <dms:LoginControl/>
     </Grid>
 </Window>

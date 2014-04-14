@@ -2,10 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:clr="clr-namespace:System;assembly=mscorlib">
     <clr:Boolean x:Key="IsSkinDictionary">true</clr:Boolean>
+
+    <Color x:Key="Highlight">#2A6496</Color>
+    <Color x:Key="BrightHighlight">#447EB0</Color>
+    <Color x:Key="Background">#333333</Color>
+    <Color x:Key="DarkLight">#DDDDDD</Color>
+    <Color x:Key="MediumLight">#EEEEEE</Color>
+    <Color x:Key="BrightLight">White</Color>
     
-    <SolidColorBrush x:Key="WindowBorderBrush" Color="#FF007ACC"/>
-    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="White"/>
-    <SolidColorBrush x:Key="CaptionTextBrush" Color="Blue"/>
-    <SolidColorBrush x:Key="LinkColorBrush" Color="#FF0645AD"/>
-    <SolidColorBrush x:Key="EyeLogoBrush" Color="#FF333333"/>
+    <SolidColorBrush x:Key="HighlightBrush" Color="{DynamicResource Highlight}"/>
+    <SolidColorBrush x:Key="BrightHighlightBrush" Color="{DynamicResource BrightHighlight}"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource Background}"/>
+    <SolidColorBrush x:Key="DarkLightBrush" Color="{DynamicResource DarkLight}"/>
+    <SolidColorBrush x:Key="MediumLightBrush" Color="{DynamicResource MediumLight}"/>
+    <SolidColorBrush x:Key="BrightLightBrush" Color="{DynamicResource BrightLight}"/>
 </ResourceDictionary>

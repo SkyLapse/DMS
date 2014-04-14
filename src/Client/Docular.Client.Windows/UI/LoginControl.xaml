@@ -28,10 +28,12 @@
 
         <!-- Captions -->
         <Label Content="{x:Static s:UserMenu.LoginCaption}" 
-               Style="{DynamicResource LabelStyleLoginMenuCaption}" 
-               Grid.Row="0" Grid.ColumnSpan="3"/>
+               Style="{DynamicResource LabelStyleRegular}" 
+               Grid.Row="0" Grid.ColumnSpan="3"
+               FontSize="48"/>
         <Label Content="{x:Static s:UserMenu.EnterCredentials}"
-               Style="{DynamicResource LabelStyleLoginMenuCredentials}" 
+               Style="{DynamicResource LabelStyleRegular}" 
+               FontSize="16"
                Grid.Row="1" Grid.ColumnSpan="3"/>
 
         <!-- Text boxes -->
@@ -56,6 +58,9 @@
         <Button x:Name="btnDoLogin"
                 Content="{x:Static s:UserMenu.LoginCaption}" 
                 Style="{DynamicResource ButtonStyleRegular}"
+                Foreground="{DynamicResource DarkLightBrush}"
+                FontSize="24"
+                Background="{DynamicResource BackgroundBrush}"
                 Grid.Column="1" Grid.Row="7"
                 Click="btnDoLogin_Click"/>
 
@@ -65,7 +70,7 @@
                    Style="{DynamicResource TextBlockStyleRegular}"
                    Grid.Row="8" Grid.ColumnSpan="3"
                    TextDecorations="Underline"
-                   Foreground="{DynamicResource LinkColorBrush}"
+                   Foreground="{DynamicResource HighlightBrush}"
                    Height="20" 
                    MouseDown="tblForgotPassword_MouseDown"/>
     </Grid>

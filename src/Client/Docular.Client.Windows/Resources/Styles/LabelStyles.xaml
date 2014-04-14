@@ -4,16 +4,7 @@
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-    </Style>
-    
-    <Style x:Key="LabelStyleLoginMenuCaption" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
-        <Setter Property="FontSize" Value="48"/>
-        <Setter Property="Foreground" Value="{DynamicResource LinkColorBrush}"/>
-    </Style>
-
-    <Style x:Key="LabelStyleLoginMenuCredentials" TargetType="Label" BasedOn="{StaticResource LabelStyleRegular}">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
     </Style>
 
     <ResourceDictionary.MergedDictionaries>
