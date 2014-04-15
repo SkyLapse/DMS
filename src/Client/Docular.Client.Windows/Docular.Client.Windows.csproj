@@ -166,8 +166,8 @@
     <Compile Include="UI\Sidebar.xaml.cs">
       <DependentUpon>Sidebar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SidebarEntry.xaml.cs">
-      <DependentUpon>SidebarEntry.xaml</DependentUpon>
+    <Compile Include="UI\SidebarElement.xaml.cs">
+      <DependentUpon>SidebarElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsKeyStore.cs" />
     <Page Include="Resources\Icons\EyeLogo.xaml">
@@ -245,7 +245,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SidebarEntry.xaml">
+    <Page Include="UI\SidebarElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,15 +19,15 @@ namespace Docular.Client.Windows.UI
     /// <summary>
     /// Interaktionslogik für SidebarEntry.xaml
     /// </summary>
-    public partial class SidebarEntry : UserControl
+    public partial class SidebarElement : UserControl
     {
         /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:Icon"/>-property.
         /// </summary>
-        public static DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Path), typeof(SidebarEntry));
+        public static DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Path), typeof(SidebarElement));
 
         /// <summary>
-        /// The <see cref="SidebarEntry"/>'s icon.
+        /// The <see cref="SidebarElement"/>'s icon.
         /// </summary>
         [Bindable(true)]
         public Path Icon
@@ -43,9 +43,9 @@ namespace Docular.Client.Windows.UI
         }
 
         /// <summary>
-        /// Initializes a new <see cref="SidebarEntry"/>.
+        /// Initializes a new <see cref="SidebarElement"/>.
         /// </summary>
-        public SidebarEntry()
+        public SidebarElement()
         {
             InitializeComponent();
         }

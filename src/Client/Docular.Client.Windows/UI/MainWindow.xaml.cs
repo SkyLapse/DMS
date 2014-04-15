@@ -26,17 +26,7 @@ namespace Docular.Client.Windows.UI
     {
         public MainWindow()
         {
-            this.LoadSkinFromSettings();
             InitializeComponent();
-        }
-
-        private void LoadSkinFromSettings()
-        {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
-
-            Contract.Assume(section != null);
-            ((App)Application.Current).UpdateSkin(new Uri(String.Format("Resources/Skins/{0}.xaml", section.Skin), UriKind.Relative));
         }
     }
 }
