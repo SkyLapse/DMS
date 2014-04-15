@@ -22,9 +22,35 @@ namespace Docular.Client.Windows.UI
     public partial class SidebarElement : UserControl
     {
         /// <summary>
+        /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:CenterColumnWidth"/>-property.
+        /// </summary>
+        public static DependencyProperty CenterColumnWidthProperty = DependencyProperty.Register(
+            "CenterColumnWidth", 
+            typeof(GridLength), 
+            typeof(SidebarElement),
+            new PropertyMetadata(new GridLength(40, GridUnitType.Star))
+        );
+
+        /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:Icon"/>-property.
         /// </summary>
         public static DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Path), typeof(SidebarElement));
+
+        /// <summary>
+        /// The width of the center column.
+        /// </summary>
+        [Bindable(true)]
+        public GridLength CenterColumnWidth
+        {
+            get
+            {
+                return (GridLength)(this.GetValue(CenterColumnWidthProperty) ?? default(GridLength));
+            }
+            set
+            {
+                this.SetValue(CenterColumnWidthProperty, value);
+            }
+        }
 
         /// <summary>
         /// The <see cref="SidebarElement"/>'s icon.

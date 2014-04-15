@@ -20,7 +20,7 @@ namespace Docular.Client.Windows
         /// <summary>
         /// The <see cref="Uri"/> of the default skin.
         /// </summary>
-        private static Uri DefaultSkinUri = new Uri("Resources/Skins/Default.xaml");
+        private static Uri DefaultSkinUri = new Uri("Resources/Skins/Default.xaml", UriKind.Relative);
 
         /// <summary>
         /// Initializes a new <see cref="App"/>.
@@ -44,6 +44,8 @@ namespace Docular.Client.Windows
         /// <param name="skinFileName">The file name of the skin file (residing in Resources/Skins/FILENAME.xaml) without the extension.</param>
         public void UpdateSkin(String skinFileName)
         {
+            Contract.Requires<ArgumentNullException>(skinFileName != null);
+
             Uri skinUri = new Uri(String.Format("Resources/Skins/{0}.xaml", Uri.EscapeUriString(skinFileName)), UriKind.Relative);
             Contract.Assume(!skinUri.IsAbsoluteUri);
             this.UpdateSkin(skinUri);

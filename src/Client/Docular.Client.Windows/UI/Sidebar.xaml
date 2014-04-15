@@ -8,7 +8,7 @@
              MinWidth="110" d:DesignHeight="720" 
              Background="{DynamicResource BackgroundBrush}">
     <DockPanel LastChildFill="False">
-        <dms:SidebarElement Content="{x:Static s:General.Docular}" Icon="{DynamicResource EyeLogo}" DockPanel.Dock="Top"/>
+        <dms:SidebarElement Content="{x:Static s:General.Docular}" Icon="{DynamicResource EyeLogo}" CenterColumnWidth="100*" DockPanel.Dock="Top"/>
         <dms:SidebarElement Content="{x:Static s:Sidebar.Search}" Icon="{DynamicResource SearchIcon}" DockPanel.Dock="Top"/>
         <dms:SidebarElement Content="{x:Static s:Sidebar.Documents}" Icon="{DynamicResource BoxIcon}" DockPanel.Dock="Top"/>
         <dms:SidebarElement Content="{x:Static s:Sidebar.Categories}" Icon="{DynamicResource FolderIcon}" DockPanel.Dock="Top"/>

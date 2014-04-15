@@ -6,7 +6,7 @@
              xmlns:dms="clr-namespace:Docular.Client.Windows.UI"
              Width="110" Height="110"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             x:Name="entry">
+             x:Name="element">
     <UserControl.ContentTemplate>
         <DataTemplate>
             <Grid>
@@ -19,12 +19,12 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="25*"/>
-                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="{Binding Path=CenterColumnWidth, ElementName=element}"/>
                     <ColumnDefinition Width="25*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
 
-                <ContentControl Content="{Binding Path=Icon, ElementName=entry}" 
+                <ContentControl Content="{Binding Path=Icon, ElementName=element}" 
                                 Grid.Column="2" Grid.Row="1"/>
                 <Label Content="{TemplateBinding Content}" 
                        Style="{DynamicResource LabelStyleRegularDarkLight}"
