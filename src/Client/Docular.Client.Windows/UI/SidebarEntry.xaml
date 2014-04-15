@@ -4,27 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
              xmlns:dms="clr-namespace:Docular.Client.Windows.UI"
-             Height="110" Width="110"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="210*"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="15*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15*"/>
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="190*"/>
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="15*"/>
-        </Grid.ColumnDefinitions>
+             Width="110" Height="110"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             x:Name="entry">
+    <UserControl.ContentTemplate>
+        <DataTemplate>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="40*"/>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="49*"/>
+                    <ColumnDefinition Width="25*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
 
-        <Path Data="{Binding Path=Icon.Data, RelativeSource={RelativeSource AncestorType={x:Type dms:SidebarEntry}}}" 
-              Fill="{Binding Path=Icon.Fill, RelativeSource={RelativeSource AncestorType={x:Type dms:SidebarEntry}}}"
-              Grid.Column="2"/>
-        <Label Style="{DynamicResource LabelStyleRegularDarkLight}"
-               Content="{Binding Path=Content, RelativeSource={RelativeSource AncestorType={x:Type dms:SidebarEntry}}}" 
-               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
-    </Grid>
+                <ContentControl Content="{Binding Path=Icon, ElementName=entry}" 
+                                Grid.Column="2" Grid.Row="1"/>
+                <Label Content="{TemplateBinding Content}" 
+                       Style="{DynamicResource LabelStyleRegularDarkLight}"
+                       Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.ContentTemplate>
 </UserControl>
