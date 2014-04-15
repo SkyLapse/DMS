@@ -5,14 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
              xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
              xmlns:dms="clr-namespace:Docular.Client.Windows.UI"
-             MinWidth="110" d:DesignHeight="720" 
+             MinWidth="110" MinHeight="720" 
              Background="{DynamicResource BackgroundBrush}">
-    <DockPanel LastChildFill="False">
-        <dms:SidebarElement Content="{x:Static s:General.Docular}" Icon="{DynamicResource EyeLogo}" CenterColumnWidth="100*" DockPanel.Dock="Top"/>
-        <dms:SidebarElement Content="{x:Static s:Sidebar.Search}" Icon="{DynamicResource SearchIcon}" DockPanel.Dock="Top"/>
-        <dms:SidebarElement Content="{x:Static s:Sidebar.Documents}" Icon="{DynamicResource BoxIcon}" DockPanel.Dock="Top"/>
-        <dms:SidebarElement Content="{x:Static s:Sidebar.Categories}" Icon="{DynamicResource FolderIcon}" DockPanel.Dock="Top"/>
-        <dms:SidebarElement Content="{x:Static s:Sidebar.Tags}" Icon="{DynamicResource TicketIcon}" DockPanel.Dock="Top"/>
-        <dms:SidebarElement Content="{x:Static s:Sidebar.Settings}" Icon="{DynamicResource SettingsIcon}" DockPanel.Dock="Bottom"/>
-    </DockPanel>
+    <Grid>
+        <DockPanel LastChildFill="False">
+            <dms:SidebarElement Height="10" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:General.Docular}" Icon="{DynamicResource EyeLogo}" CenterColumnWidth="100*" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Height="10" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Search}" Icon="{DynamicResource SearchIcon}" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Documents}" Icon="{DynamicResource BoxIcon}" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Categories}" Icon="{DynamicResource FolderIcon}" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Tags}" Icon="{DynamicResource TicketIcon}" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Settings}" Icon="{DynamicResource SettingsIcon}" DockPanel.Dock="Bottom"/>
+        </DockPanel>
+    </Grid>
 </UserControl>

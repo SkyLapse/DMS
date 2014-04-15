@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
              xmlns:dms="clr-namespace:Docular.Client.Windows.UI"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Width="110" Height="110"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              x:Name="element">
@@ -24,11 +25,49 @@
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
 
-                <ContentControl Content="{Binding Path=Icon, ElementName=element}" 
+                <Rectangle x:Name="Marker"
+                           Fill="{DynamicResource HighlightBrush}"
+                           Grid.Row="1" Grid.RowSpan="2"
+                           Opacity="0"/>
+                <ContentControl x:Name="IconDisplay" 
+                                Content="{Binding Path=Icon, ElementName=element}" 
                                 Grid.Column="2" Grid.Row="1"/>
-                <Label Content="{TemplateBinding Content}" 
+                <Label x:Name="ContentLabel" Content="{TemplateBinding Content}" 
                        Style="{DynamicResource LabelStyleRegularDarkLight}"
                        Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2"/>
+                
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualStateGroup.Transitions>
+                            <VisualTransition GeneratedDuration="00:00:0.25"/>
+                        </VisualStateGroup.Transitions>
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="Marker" Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                 To="0.75"
+                                                 Duration="0"/>
+                            </Storyboard>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <Storyboard>
+                                <ParallelTimeline>
+                                    <DoubleAnimation Storyboard.TargetName="Marker" Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                     To="1"
+                                                     Duration="0"/>
+                                    <ColorAnimation Storyboard.TargetName="ContentDisplay" Storyboard.TargetProperty="(Control.Foreground).(SolidColorBrush.Color)"
+                                                    To="{DynamicResource BrightLight}"
+                                                    Duration="0"/>
+                                    <ColorAnimation Storyboard.TargetName="IconDisplay" Storyboard.TargetProperty="(ContentControl.Content).(Path.Fill).(SolidColorBrush.Color)"
+                                                    To="{DynamicResource BrightLight}"
+                                                    Duration="0"/>
+                                </ParallelTimeline>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+                <i:Interaction.Triggers>
+                    
+                </i:Interaction.Triggers>
             </Grid>
         </DataTemplate>
     </UserControl.ContentTemplate>
