@@ -94,7 +94,6 @@ namespace Docular.Client.Windows.UI
         /// </summary>
         public SidebarElement()
         {
-            this.MouseEnter += (s, e) => System.IO.File.AppendAllText("E:\\Users\\Moritz\\Debug.txt", "Mouse entered\n");
             InitializeComponent();
         }
     }

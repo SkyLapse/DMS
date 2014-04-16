@@ -20,6 +20,9 @@ namespace Docular.Client.Windows.UI
     /// </summary>
     public partial class Sidebar : UserControl
     {
+        /// <summary>
+        /// Initializes a new <see cref="Sidebar"/>.
+        /// </summary>
         public Sidebar()
         {
             InitializeComponent();
