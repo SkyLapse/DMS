@@ -16,11 +16,30 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type UserControl}">
                         <Grid x:Name="grid">
-                            <i:Interaction.Triggers>
-                                <ei:DataTrigger Binding="{Binding IsMouseOver, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type dms:SidebarElement}}}" Value="True">
-                                    <ei:GoToStateAction x:Name="MouseOverAction" StateName="MouseOver" TargetObject="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type dms:SidebarElement}}}"/>
-                                </ei:DataTrigger>
-                            </i:Interaction.Triggers>
+                        	<i:Interaction.Triggers>
+                        		<i:EventTrigger EventName="MouseEnter">
+                        			<ei:GoToStateAction x:Name="MouseEnterAction" TargetObject="{Binding ElementName=grid}" StateName="MouseOver"/>
+                        		</i:EventTrigger>
+                        		<i:EventTrigger EventName="MouseLeave">
+                        			<i:Interaction.Behaviors>
+                        				<ei:ConditionBehavior>
+                        					<ei:ConditionalExpression>
+                        						<ei:ComparisonCondition LeftOperand="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" RightOperand="False"/>
+                        					</ei:ConditionalExpression>
+                        				</ei:ConditionBehavior>
+                        			</i:Interaction.Behaviors>
+                        			<ei:GoToStateAction x:Name="MouseLeaveAction" TargetObject="{Binding ElementName=grid}" StateName="Normal"/>
+                        		</i:EventTrigger>
+                        		<ei:DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                        			<ei:GoToStateAction x:Name="SelectedAction" TargetObject="{Binding ElementName=grid}" StateName="Selected"/>
+                        		</ei:DataTrigger>
+                        		<ei:DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
+                        			<ei:GoToStateAction x:Name="DeselectedAction" TargetObject="{Binding ElementName=grid}" StateName="Normal"/>
+                        		</ei:DataTrigger>
+                        		<i:EventTrigger EventName="MouseDown">
+                        			<ei:ChangePropertyAction x:Name="InvertSelectStateAction" TargetObject="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" PropertyName="IsSelected" Value="True"/>
+                        		</i:EventTrigger>
+                        	</i:Interaction.Triggers>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>
@@ -33,7 +52,7 @@
                                                 <EasingDoubleKeyFrame KeyTime="0" Value="0.75"/>
                                             </DoubleAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground)" Storyboard.TargetName="ContentLabel">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MediumLightBrush}"/>
+                                            	<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MediumLightBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -43,7 +62,7 @@
                                                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
                                             </DoubleAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground)" Storyboard.TargetName="ContentLabel">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrightLightBrush}"/>
+                                            	<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource BrightLightBrush}"/>
                                             </ObjectAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -63,16 +82,17 @@
                                 <ColumnDefinition Width="5*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Rectangle x:Name="Marker"
-                                       Fill="{DynamicResource HighlightBrush}"
-                                       Grid.Row="1" Grid.RowSpan="2"
-                                       Opacity="0"/>
                             <ContentControl x:Name="IconDisplay" 
                                             Content="{Binding Path=Icon, ElementName=element}" 
                                             Grid.Column="2" Grid.Row="1"/>
                             <Label x:Name="ContentLabel" Content="{TemplateBinding Content}" 
                                    Style="{DynamicResource LabelStyleRegularDarkLight}"
-                                   Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2"/>
+                                   Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Foreground="{DynamicResource DarkLightBrush}"/>
+                            <Rectangle x:Name="Marker"
+                                       Fill="{DynamicResource HighlightBrush}"
+                                       Width="10"
+                                       Grid.Row="1" Grid.RowSpan="2"
+                                       Opacity="0"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

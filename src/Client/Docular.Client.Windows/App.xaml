@@ -1,11 +1,13 @@
-﻿<Application x:Class="Docular.Client.Windows.App"
+﻿<Application
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="clr-namespace:System.Windows.Media.Imaging;assembly=PresentationCore"
              xmlns:g="clr-namespace:System.Drawing;assembly=System.Drawing"
+             xmlns:DataStore="clr-namespace:Expression.Blend.DataStore.DataStore" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Docular.Client.Windows.App"
              StartupUri="UI/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Icons/EyeLogo.xaml"/>
                 <ResourceDictionary Source="Resources/Icons/GuiIcons.xaml"/>
@@ -17,6 +19,17 @@
                 <ResourceDictionary Source="Resources/Styles/TextBlockStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/TextBoxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+        	<DataStore:DataStore x:Key="DataStore" d:IsDataSource="True"/>
+            <Style x:Key="SidebarSpacerStyle" TargetType="{x:Type UserControl}">
+            	<Setter Property="Template">
+            		<Setter.Value>
+            			<ControlTemplate>
+            				<Grid/>
+            			</ControlTemplate>
+            		</Setter.Value>
+            	</Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

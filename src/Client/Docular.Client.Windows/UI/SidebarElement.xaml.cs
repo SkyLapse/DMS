@@ -39,7 +39,7 @@ namespace Docular.Client.Windows.UI
         /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:IsSelected"/>-property.
         /// </summary>
-        public static DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(Path), typeof(SidebarElement));
+        public static DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(bool), typeof(SidebarElement));
 
         /// <summary>
         /// The width of the center column.

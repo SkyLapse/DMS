@@ -9,9 +9,9 @@
              Background="{DynamicResource BackgroundBrush}">
     <Grid>
         <DockPanel LastChildFill="False">
-            <dms:SidebarElement Height="10" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Height="10" DockPanel.Dock="Top" Style="{DynamicResource SidebarSpacerStyle}"/>
             <dms:SidebarElement Content="{x:Static s:General.Docular}" Icon="{DynamicResource EyeLogo}" CenterColumnWidth="100*" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Height="10" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Height="10" DockPanel.Dock="Top" Style="{DynamicResource SidebarSpacerStyle}"/>
             <dms:SidebarElement Content="{x:Static s:Sidebar.Search}" Icon="{DynamicResource SearchIcon}" DockPanel.Dock="Top"/>
             <dms:SidebarElement Content="{x:Static s:Sidebar.Documents}" Icon="{DynamicResource BoxIcon}" DockPanel.Dock="Top"/>
             <dms:SidebarElement Content="{x:Static s:Sidebar.Categories}" Icon="{DynamicResource FolderIcon}" DockPanel.Dock="Top"/>

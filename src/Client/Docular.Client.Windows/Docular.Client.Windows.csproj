@@ -155,6 +155,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataStore\DataStore\DataStore.xaml.cs">
+      <DependentUpon>DataStore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Strings\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,6 +175,10 @@
       <DependentUpon>SidebarElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsKeyStore.cs" />
+    <Page Include="DataStore\DataStore\DataStore.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Icons\EyeLogo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -323,6 +330,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <DesignTimeOnly Include="DataStore\DataStore\DataStore.xsd" />
     <Resource Include="Resources\Icons\EyeLogo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
