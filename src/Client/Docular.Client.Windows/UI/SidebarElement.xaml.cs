@@ -37,9 +37,14 @@ namespace Docular.Client.Windows.UI
         public static DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Path), typeof(SidebarElement));
 
         /// <summary>
+        /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:IsSelected"/>-property.
+        /// </summary>
+        public static DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(Path), typeof(SidebarElement));
+
+        /// <summary>
         /// The width of the center column.
         /// </summary>
-        [Bindable(true)]
+        [Bindable(true, BindingDirection.TwoWay)]
         public GridLength CenterColumnWidth
         {
             get
@@ -55,7 +60,7 @@ namespace Docular.Client.Windows.UI
         /// <summary>
         /// The <see cref="SidebarElement"/>'s icon.
         /// </summary>
-        [Bindable(true)]
+        [Bindable(true, BindingDirection.TwoWay)]
         public Path Icon
         {
             get
@@ -69,10 +74,27 @@ namespace Docular.Client.Windows.UI
         }
 
         /// <summary>
+        /// Indicates whether the <see cref="SidebarElement"/> is selected or not.
+        /// </summary>
+        [Bindable(true, BindingDirection.TwoWay)]
+        public bool IsSelected
+        {
+            get
+            {
+                return (bool)(this.GetValue(IsSelectedProperty) ?? false);
+            }
+            set
+            {
+                this.SetValue(IsSelectedProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Initializes a new <see cref="SidebarElement"/>.
         /// </summary>
         public SidebarElement()
         {
+            this.MouseEnter += (s, e) => System.IO.File.AppendAllText("E:\\Users\\Moritz\\Debug.txt", "Mouse entered\n");
             InitializeComponent();
         }
     }
