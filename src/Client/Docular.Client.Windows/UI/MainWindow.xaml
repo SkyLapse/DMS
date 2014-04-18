@@ -7,7 +7,8 @@
         Width="1280" Height="720" MinWidth="1280" MinHeight="720"
         Style="{DynamicResource ContentControlStyleBordered}"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <Grid>
-        <dms:Sidebar HorizontalAlignment="Left"/>
-    </Grid>
+    <StackPanel Orientation="Horizontal">
+        <dms:Sidebar x:Name="Sidebar" HorizontalAlignment="Left"/>
+        <ContentControl Content="{Binding CurrentPageContent, ElementName=Sidebar}"/>
+    </StackPanel>
 </Window>

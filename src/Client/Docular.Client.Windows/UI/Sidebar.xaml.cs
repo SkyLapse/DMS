@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,37 @@ namespace Docular.Client.Windows.UI
     public partial class Sidebar : UserControl
     {
         /// <summary>
+        /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:CurrentPageContent"/>-property.
+        /// </summary>
+        public static DependencyProperty CurrentPageContentProperty = DependencyProperty.Register("CurrentPageContent", typeof(object), typeof(Sidebar));
+
+        /// <summary>
+        /// The content of the currently displayed page.
+        /// </summary>
+        [Bindable(true, BindingDirection.OneWay)]
+        public object CurrentPageContent
+        {
+            get
+            {
+                return this.GetValue(CurrentPageContentProperty);
+            }
+            protected set
+            {
+                this.SetValue(CurrentPageContentProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Initializes a new <see cref="Sidebar"/>.
         /// </summary>
         public Sidebar()
         {
             InitializeComponent();
+        }
+
+        private void SidebarElement_Selected(object sender, SidebarElement.SelectedEventArgs e)
+        {
+            this.CurrentPageContent = e.NewPageContent;
         }
     }
 }

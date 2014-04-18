@@ -16,30 +16,6 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type UserControl}">
                         <Grid x:Name="grid">
-                        	<i:Interaction.Triggers>
-                        		<i:EventTrigger EventName="MouseEnter">
-                        			<ei:GoToStateAction x:Name="MouseEnterAction" TargetObject="{Binding ElementName=grid}" StateName="MouseOver"/>
-                        		</i:EventTrigger>
-                        		<i:EventTrigger EventName="MouseLeave">
-                        			<i:Interaction.Behaviors>
-                        				<ei:ConditionBehavior>
-                        					<ei:ConditionalExpression>
-                        						<ei:ComparisonCondition LeftOperand="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" RightOperand="False"/>
-                        					</ei:ConditionalExpression>
-                        				</ei:ConditionBehavior>
-                        			</i:Interaction.Behaviors>
-                        			<ei:GoToStateAction x:Name="MouseLeaveAction" TargetObject="{Binding ElementName=grid}" StateName="Normal"/>
-                        		</i:EventTrigger>
-                        		<ei:DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
-                        			<ei:GoToStateAction x:Name="SelectedAction" TargetObject="{Binding ElementName=grid}" StateName="Selected"/>
-                        		</ei:DataTrigger>
-                        		<ei:DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="False">
-                        			<ei:GoToStateAction x:Name="DeselectedAction" TargetObject="{Binding ElementName=grid}" StateName="Normal"/>
-                        		</ei:DataTrigger>
-                        		<i:EventTrigger EventName="MouseDown">
-                        			<ei:ChangePropertyAction x:Name="InvertSelectStateAction" TargetObject="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" PropertyName="IsSelected" Value="True"/>
-                        		</i:EventTrigger>
-                        	</i:Interaction.Triggers>
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualStateGroup.Transitions>

@@ -9,14 +9,42 @@
              Background="{DynamicResource BackgroundBrush}">
     <Grid>
         <DockPanel LastChildFill="False">
-            <dms:SidebarElement Height="10" DockPanel.Dock="Top" Style="{DynamicResource SidebarSpacerStyle}"/>
-            <dms:SidebarElement Content="{x:Static s:General.Docular}" Icon="{DynamicResource EyeLogo}" CenterColumnWidth="100*" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Height="10" DockPanel.Dock="Top" Style="{DynamicResource SidebarSpacerStyle}"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Search}" Icon="{DynamicResource SearchIcon}" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Documents}" Icon="{DynamicResource BoxIcon}" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Categories}" Icon="{DynamicResource FolderIcon}" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Tags}" Icon="{DynamicResource TicketIcon}" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Settings}" Icon="{DynamicResource SettingsIcon}" DockPanel.Dock="Bottom"/>
+            <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}"
+                                Height="10" 
+                                DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:General.Docular}" 
+                                Icon="{DynamicResource EyeLogo}" 
+                                Selected="SidebarElement_Selected"
+                                CenterColumnWidth="100*" 
+                                IsSelected="True"
+                                DockPanel.Dock="Top">
+                <dms:SidebarElement.PageContent>
+                    <Label Content="This is a test!"/>
+                </dms:SidebarElement.PageContent>
+            </dms:SidebarElement>
+            <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" 
+                                Height="10" 
+                                DockPanel.Dock="Top" />
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Search}" 
+                                Icon="{DynamicResource SearchIcon}" 
+                                Selected="SidebarElement_Selected"
+                                DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Documents}" 
+                                Icon="{DynamicResource BoxIcon}" 
+                                Selected="SidebarElement_Selected"
+                                DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Categories}" 
+                                Icon="{DynamicResource FolderIcon}" 
+                                Selected="SidebarElement_Selected"
+                                DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Tags}" 
+                                Icon="{DynamicResource TicketIcon}" 
+                                Selected="SidebarElement_Selected"
+                                DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Settings}" 
+                                Icon="{DynamicResource SettingsIcon}" 
+                                Selected="SidebarElement_Selected"
+                                DockPanel.Dock="Bottom"/>
         </DockPanel>
     </Grid>
 </UserControl>
