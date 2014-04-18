@@ -2,13 +2,22 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:dms="clr-namespace:Docular.Client.Windows.UI"
+        xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
         Title="Docular DMS" 
         WindowStyle="None" ResizeMode="NoResize"
         Width="1280" Height="720" MinWidth="1280" MinHeight="720"
         Style="{DynamicResource ContentControlStyleBordered}"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
-    <StackPanel Orientation="Horizontal">
-        <dms:Sidebar x:Name="Sidebar" HorizontalAlignment="Left"/>
-        <ContentControl Content="{Binding CurrentPageContent, ElementName=Sidebar}"/>
-    </StackPanel>
+    <DockPanel LastChildFill="False">
+        <DockPanel DockPanel.Dock="Left" LastChildFill="False" Background="{DynamicResource BackgroundBrush}">
+            <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" Height="10" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:General.Docular}" Icon="{DynamicResource EyeLogo}" CenterColumnWidth="100*" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" Height="10" DockPanel.Dock="Top" />
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Search}" Icon="{DynamicResource SearchIcon}" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Documents}" Icon="{DynamicResource BoxIcon}" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Categories}" Icon="{DynamicResource FolderIcon}" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Tags}" Icon="{DynamicResource TicketIcon}" DockPanel.Dock="Top"/>
+            <dms:SidebarElement Content="{x:Static s:Sidebar.Settings}" Icon="{DynamicResource SettingsIcon}" DockPanel.Dock="Bottom"/>
+        </DockPanel>
+    </DockPanel>
 </Window>

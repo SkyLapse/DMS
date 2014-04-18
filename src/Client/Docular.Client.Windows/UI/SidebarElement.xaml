@@ -61,9 +61,12 @@
                             <ContentControl x:Name="IconDisplay" 
                                             Content="{Binding Path=Icon, ElementName=element}" 
                                             Grid.Column="2" Grid.Row="1"/>
-                            <Label x:Name="ContentLabel" Content="{TemplateBinding Content}" 
+                            <Label x:Name="ContentLabel" 
+                                   Content="{TemplateBinding Content}" 
                                    Style="{DynamicResource LabelStyleRegularDarkLight}"
-                                   Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Foreground="{DynamicResource DarkLightBrush}"/>
+                                   Foreground="{DynamicResource DarkLightBrush}"
+                                   VerticalContentAlignment="Top"
+                                   Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" />
                             <Rectangle x:Name="Marker"
                                        Fill="{DynamicResource HighlightBrush}"
                                        Width="10"
