@@ -20,12 +20,12 @@ namespace Docular.Client.Windows.UI
     /// <summary>
     /// Interaktionslogik für SidebarEntry.xaml
     /// </summary>
-    public partial class SidebarElement : UserControl, INotifyPropertyChanged
+    public partial class SidebarElement : UserControl
     {
         /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:CenterColumnWidth"/>-property.
         /// </summary>
-        public static DependencyProperty CenterColumnWidthProperty = DependencyProperty.Register(
+        public static readonly DependencyProperty CenterColumnWidthProperty = DependencyProperty.Register(
             "CenterColumnWidth", 
             typeof(GridLength), 
             typeof(SidebarElement),
@@ -33,25 +33,19 @@ namespace Docular.Client.Windows.UI
         );
 
         /// <summary>
+        /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:PageContentSource"/>-property.
+        /// </summary>
+        public static readonly DependencyProperty ContentSourceProperty = DependencyProperty.Register("ContentSource", typeof(Uri), typeof(SidebarElement));
+
+        /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:Icon"/>-property.
         /// </summary>
-        public static DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Path), typeof(SidebarElement));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Path), typeof(SidebarElement));
 
         /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:IsSelected"/>-property.
         /// </summary>
-        public static DependencyProperty IsSelectedProperty = DependencyProperty.Register(
-            "IsSelected", 
-            typeof(bool), 
-            typeof(SidebarElement)
-        );
-
-        /// <summary>
-        /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:PageContent"/>-property.
-        /// </summary>
-        public static DependencyProperty PageContentProperty = DependencyProperty.Register("PageContent", typeof(object), typeof(SidebarElement));
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(bool), typeof(SidebarElement));
 
         /// <summary>
         /// The width of the center column.
@@ -66,6 +60,22 @@ namespace Docular.Client.Windows.UI
             set
             {
                 this.SetValue(CenterColumnWidthProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="Uri"/> of the page content to load when the <see cref="SidebarElement"/> is selected.
+        /// </summary>
+        [Bindable(true, BindingDirection.TwoWay)]
+        public Uri ContentSource
+        {
+            get
+            {
+                return (Uri)this.GetValue(ContentSourceProperty);
+            }
+            set
+            {
+                this.SetValue(ContentSourceProperty, value);
             }
         }
 
@@ -107,26 +117,6 @@ namespace Docular.Client.Windows.UI
         public SidebarElement()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// Event arguments for the <see cref="E:Selected"/>-event.
-        /// </summary>
-        public class SelectedEventArgs : EventArgs
-        {
-            /// <summary>
-            /// The new content of the selected sidebar element.
-            /// </summary>
-            public object NewPageContent { get; private set; }
-
-            /// <summary>
-            /// Initializes a new <see cref="SelectedEventArgs"/>.
-            /// </summary>
-            /// <param name="newPageContent">The new content of the selected sidebar element.</param>
-            public SelectedEventArgs(object newPageContent)
-            {
-                this.NewPageContent = newPageContent;
-            }
         }
     }
 }

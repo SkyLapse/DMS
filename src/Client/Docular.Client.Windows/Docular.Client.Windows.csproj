@@ -165,6 +165,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sidebar.resx</DependentUpon>
     </Compile>
+    <Compile Include="UI\Sidebar.xaml.cs">
+      <DependentUpon>Sidebar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SidebarElement.xaml.cs">
       <DependentUpon>SidebarElement.xaml</DependentUpon>
     </Compile>
@@ -189,10 +192,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Styles\TabControlStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Resources\Styles\TextBlockStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,10 +203,6 @@
     <Page Include="Resources\Styles\ContentControlStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\TabItemStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\LoginControl.xaml">
       <SubType>Designer</SubType>
@@ -245,6 +240,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\Skins\Default.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Sidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

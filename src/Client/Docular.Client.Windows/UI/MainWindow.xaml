@@ -9,15 +9,7 @@
         Style="{DynamicResource ContentControlStyleBordered}"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <DockPanel LastChildFill="False">
-        <DockPanel DockPanel.Dock="Left" LastChildFill="False" Background="{DynamicResource BackgroundBrush}">
-            <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" Height="10" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:General.Docular}" Icon="{DynamicResource EyeLogo}" CenterColumnWidth="100*" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" Height="10" DockPanel.Dock="Top" />
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Search}" Icon="{DynamicResource SearchIcon}" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Documents}" Icon="{DynamicResource BoxIcon}" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Categories}" Icon="{DynamicResource FolderIcon}" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Tags}" Icon="{DynamicResource TicketIcon}" DockPanel.Dock="Top"/>
-            <dms:SidebarElement Content="{x:Static s:Sidebar.Settings}" Icon="{DynamicResource SettingsIcon}" DockPanel.Dock="Bottom"/>
-        </DockPanel>
+        <dms:Sidebar x:Name="Sidebar" MenuChanged="Sidebar_MenuChanged" DockPanel.Dock="Left"/>
+        <ContentPresenter ContentSource="{Binding CurrentContentSource, ElementName=Sidebar}"/>
     </DockPanel>
 </Window>

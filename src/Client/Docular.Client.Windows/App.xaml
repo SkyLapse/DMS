@@ -28,8 +28,6 @@
                 <ResourceDictionary Source="Resources/Styles/PasswordBoxStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/TextBlockStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/TextBoxStyles.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/TabControlStyles.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/TabItemStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

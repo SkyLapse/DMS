@@ -29,7 +29,12 @@ namespace Docular.Client.Windows.UI
         /// </summary>
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+        }
+
+        private void Sidebar_MenuChanged(object sender, Sidebar.MenuChangedEventArgs e)
+        {
+
         }
     }
 }
