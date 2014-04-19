@@ -9,7 +9,7 @@
         Style="{DynamicResource ContentControlStyleBordered}"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <DockPanel LastChildFill="False">
-        <dms:Sidebar x:Name="Sidebar" MenuChanged="Sidebar_MenuChanged" DockPanel.Dock="Left"/>
-        <ContentPresenter ContentSource="{Binding CurrentContentSource, ElementName=Sidebar}"/>
+        <dms:Sidebar x:Name="Sidebar" DockPanel.Dock="Left"/>
+        <ContentControl Content="{Binding CurrentContent, ElementName=Sidebar}" DockPanel.Dock="Left"/>
     </DockPanel>
 </Window>

@@ -24,7 +24,7 @@ namespace Docular.Client.Windows.UI
         /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:CurrentPageContentSource"/>-property.
         /// </summary>
-        public static readonly DependencyProperty CurrentContentSourceProperty = DependencyProperty.Register("CurrentContentSource", typeof(Uri), typeof(Sidebar));
+        public static readonly DependencyProperty CurrentContentProperty = DependencyProperty.Register("CurrentContent", typeof(object), typeof(Sidebar));
 
         /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:CurrentlySelectedElement"/>-property.
@@ -42,22 +42,17 @@ namespace Docular.Client.Windows.UI
         private object isSelectedLock = new object();
 
         /// <summary>
-        /// Occurs when the user selected a different menu item.
-        /// </summary>
-        public event EventHandler<MenuChangedEventArgs> MenuChanged;
-
-        /// <summary>
         /// The current source of the page content of the selected sidebar element.
         /// </summary>
-        public Uri CurrentContentSource
+        public object CurrentContent
         {
             get
             {
-                return (Uri)this.GetValue(CurrentContentSourceProperty);
+                return (object)this.GetValue(CurrentContentProperty);
             }
             set
             {
-                this.SetValue(CurrentContentSourceProperty, value);
+                this.SetValue(CurrentContentProperty, value);
             }
         }
         
@@ -115,7 +110,7 @@ namespace Docular.Client.Windows.UI
             Contract.Requires<ArgumentNullException>(sender != null);
             Contract.Requires<ArgumentException>(e.NewValue != null);
 
-            ((Sidebar)sender).CurrentContentSource = ((SidebarElement)e.NewValue).ContentSource;
+            ((Sidebar)sender).CurrentContent = ((SidebarElement)e.NewValue).PageContent;
         }
 
         /// <summary>

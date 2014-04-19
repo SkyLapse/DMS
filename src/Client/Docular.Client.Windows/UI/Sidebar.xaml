@@ -14,7 +14,8 @@
                             Icon="{DynamicResource EyeLogo}" 
                             CenterColumnWidth="100*" 
                             DockPanel.Dock="Top" 
-                            MouseDown="SidebarElement_MouseDown"/>
+                            MouseDown="SidebarElement_MouseDown"
+                            ContentSource="UI/LoginControl.xaml"/>
         <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" Height="10" DockPanel.Dock="Top" />
         <dms:SidebarElement x:Name="SearchElement"
                             Content="{x:Static s:Sidebar.Search}" 

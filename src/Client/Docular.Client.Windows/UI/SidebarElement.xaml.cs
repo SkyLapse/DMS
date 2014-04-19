@@ -111,11 +111,23 @@ namespace Docular.Client.Windows.UI
             }
         }
 
+        private Lazy<object> pageContentLazy;
+
+        [Bindable(true)]
+        public object PageContent
+        {
+            get
+            {
+                return pageContentLazy.Value;
+            }
+        }
+
         /// <summary>
         /// Initializes a new <see cref="SidebarElement"/>.
         /// </summary>
         public SidebarElement()
         {
+            this.pageContentLazy = new Lazy<object>(() => Application.LoadComponent(this.ContentSource), true);
             InitializeComponent();
         }
     }
