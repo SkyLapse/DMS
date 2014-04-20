@@ -33,11 +33,6 @@ namespace Docular.Client.Windows.UI
         );
 
         /// <summary>
-        /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:PageContentSource"/>-property.
-        /// </summary>
-        public static readonly DependencyProperty ContentSourceProperty = DependencyProperty.Register("ContentSource", typeof(Uri), typeof(SidebarElement));
-
-        /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:Icon"/>-property.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Path), typeof(SidebarElement));
@@ -60,22 +55,6 @@ namespace Docular.Client.Windows.UI
             set
             {
                 this.SetValue(CenterColumnWidthProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="Uri"/> of the page content to load when the <see cref="SidebarElement"/> is selected.
-        /// </summary>
-        [Bindable(true, BindingDirection.TwoWay)]
-        public Uri ContentSource
-        {
-            get
-            {
-                return (Uri)this.GetValue(ContentSourceProperty);
-            }
-            set
-            {
-                this.SetValue(ContentSourceProperty, value);
             }
         }
 
@@ -111,23 +90,11 @@ namespace Docular.Client.Windows.UI
             }
         }
 
-        private Lazy<object> pageContentLazy;
-
-        [Bindable(true)]
-        public object PageContent
-        {
-            get
-            {
-                return pageContentLazy.Value;
-            }
-        }
-
         /// <summary>
         /// Initializes a new <see cref="SidebarElement"/>.
         /// </summary>
         public SidebarElement()
         {
-            this.pageContentLazy = new Lazy<object>(() => Application.LoadComponent(this.ContentSource), true);
             InitializeComponent();
         }
     }

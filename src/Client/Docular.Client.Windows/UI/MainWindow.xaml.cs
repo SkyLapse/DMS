@@ -31,10 +31,5 @@ namespace Docular.Client.Windows.UI
         {
             this.InitializeComponent();
         }
-
-        private void Sidebar_MenuChanged(object sender, Sidebar.MenuChangedEventArgs e)
-        {
-
-        }
     }
 }

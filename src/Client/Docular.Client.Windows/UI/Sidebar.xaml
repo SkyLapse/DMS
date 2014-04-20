@@ -14,32 +14,31 @@
                             Icon="{DynamicResource EyeLogo}" 
                             CenterColumnWidth="100*" 
                             DockPanel.Dock="Top" 
-                            MouseDown="SidebarElement_MouseDown"
-                            ContentSource="UI/LoginControl.xaml"/>
+                            MouseDown="MainElement_MouseDown"/>
         <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" Height="10" DockPanel.Dock="Top" />
         <dms:SidebarElement x:Name="SearchElement"
                             Content="{x:Static s:Sidebar.Search}" 
                             Icon="{DynamicResource SearchIcon}" 
                             DockPanel.Dock="Top" 
-                            MouseDown="SidebarElement_MouseDown"/>
+                            MouseDown="SearchElement_MouseDown"/>
         <dms:SidebarElement x:Name="DocumentsElement"
                             Content="{x:Static s:Sidebar.Documents}" 
                             Icon="{DynamicResource BoxIcon}" 
                             DockPanel.Dock="Top" 
-                            MouseDown="SidebarElement_MouseDown"/>
+                            MouseDown="DocumentsElement_MouseDown"/>
         <dms:SidebarElement x:Name="CategoriesElement"
                             Content="{x:Static s:Sidebar.Categories}" 
                             Icon="{DynamicResource FolderIcon}" 
                             DockPanel.Dock="Top" 
-                            MouseDown="SidebarElement_MouseDown"/>
+                            MouseDown="CategoriesElement_MouseDown"/>
         <dms:SidebarElement x:Name="TagsElement" Content="{x:Static s:Sidebar.Tags}" 
                             Icon="{DynamicResource TicketIcon}" 
                             DockPanel.Dock="Top" 
-                            MouseDown="SidebarElement_MouseDown"/>
+                            MouseDown="TagsElement_MouseDown"/>
         <dms:SidebarElement x:Name="SettingsElement"
                             Content="{x:Static s:Sidebar.Settings}" 
                             Icon="{DynamicResource SettingsIcon}" 
                             DockPanel.Dock="Bottom" 
-                            MouseDown="SidebarElement_MouseDown"/>
+                            MouseDown="SettingsElement_MouseDown"/>
     </DockPanel>
 </UserControl>

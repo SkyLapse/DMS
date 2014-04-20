@@ -171,7 +171,6 @@
     <Compile Include="UI\SidebarElement.xaml.cs">
       <DependentUpon>SidebarElement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\UriToContentConverter.cs" />
     <Compile Include="WindowsKeyStore.cs" />
     <Page Include="Resources\Icons\EyeLogo.xaml">
       <Generator>MSBuild:Compile</Generator>
