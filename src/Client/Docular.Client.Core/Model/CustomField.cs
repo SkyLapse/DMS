@@ -37,5 +37,27 @@ namespace Docular.Client.Core.Model
             this.Key = key;
             this.Value = value;
         }
+
+        /// <summary>
+        /// Checks two <see cref="CustomField"/>s for equality.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns><c>true</c> if both <see cref="CustomField"/>s are equal, otherwise <c>false</c>.</returns>
+        public static bool operator ==(CustomField left, CustomField right)
+        {
+            return (left.Key == right.Key) && (left.Value == right.Value);
+        }
+
+        /// <summary>
+        /// Checks two <see cref="CustomField"/>s for inequality.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns><c>true</c> if both <see cref="CustomField"/>s are inequal, otherwise <c>false</c>.</returns>
+        public static bool operator !=(CustomField left, CustomField right)
+        {
+            return !(left == right);
+        }
     }
 }

@@ -129,6 +129,7 @@
     <Compile Include="Model\ChangeInfo.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Rest\IDocularClient.cs" />
   </ItemGroup>

@@ -60,5 +60,27 @@ namespace Docular.Client.Core.Model
         {
             return buzzword.Value;
         }
+
+        /// <summary>
+        /// Checks two <see cref="Buzzword"/>s for equality.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns><c>true</c> if both <see cref="Buzzword"/>s are equal, otherwise <c>false</c>.</returns>
+        public static bool operator ==(Buzzword left, Buzzword right)
+        {
+            return (left.Value == right.Value) && (left.Commonness == right.Commonness);
+        }
+
+        /// <summary>
+        /// Checks two <see cref="Buzzword"/>s for inequality.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns><c>true</c> if both <see cref="Buzzword"/>s are inequal, otherwise <c>false</c>.</returns>
+        public static bool operator !=(Buzzword left, Buzzword right)
+        {
+            return !(left == right);
+        }
     }
 }

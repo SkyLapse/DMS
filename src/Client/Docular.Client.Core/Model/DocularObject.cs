@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
@@ -15,49 +17,157 @@ namespace Docular.Client.Core.Model
     /// Represents an object in the Docular database.
     /// </summary>
     [ProtoContract]
-    public class DocularObject
+    public abstract class DocularObject : ObservableObject
     {
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private ChangeInfo _CreateInfo;
+
         /// <summary>
         /// Gets information about the creation of the <see cref="DocularObject"/>.
         /// </summary>
         [JsonProperty("createInfo"), ProtoMember(1)]
-        public ChangeInfo CreateInfo { get; protected set; }
+        public ChangeInfo CreateInfo
+        {
+            get
+            {
+                return _CreateInfo;
+            }
+            protected set
+            {
+                if (value != _CreateInfo)
+                {
+                    _CreateInfo = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private CustomField[] _CustomFields;
 
         /// <summary>
         /// Contains all custom fields.
         /// </summary>
         [JsonProperty("customFields"), ProtoMember(2)]
-        public CustomField[] CustomFields { get; set; }
+        public CustomField[] CustomFields
+        {
+            get
+            {
+                return _CustomFields;
+            }
+            set
+            {
+                if (value != _CustomFields)
+                {
+                    _CustomFields = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private String _Description;
 
         /// <summary>
         /// The <see cref="Category"/>'s description.
         /// </summary>
         [JsonProperty("description"), ProtoMember(3)]
-        public String Description { get; set; }
+        public String Description
+        {
+            get
+            {
+                return _Description;
+            }
+            set
+            {
+                if (value != _Description)
+                {
+                    _Description = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private ChangeInfo _EditInfo;
 
         /// <summary>
         /// Gets information about the last (server side) edit of the <see cref="Document"/>.
         /// </summary>
         [JsonProperty("editInfo"), ProtoMember(4)]
-        public ChangeInfo EditInfo { get; protected set; }
+        public ChangeInfo EditInfo
+        {
+            get
+            {
+                return _EditInfo;
+            }
+            protected set
+            {
+                if (value != _EditInfo)
+                {
+                    _EditInfo = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private String _Id;
 
         /// <summary>
         /// The unique Id.
         /// </summary>
         [JsonProperty("_id"), ProtoMember(5)]
-        public String Id { get; protected set; }
+        public String Id
+        {
+            get
+            {
+                return _Id;
+            }
+            protected set
+            {
+                if (value != _Id)
+                {
+                    _Id = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private String _Name;
 
         /// <summary>
         /// The <see cref="DocularObject"/>s name.
         /// </summary>
         [JsonProperty("name"), ProtoMember(6)]
-        public String Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>.
-        /// </summary>
-        [JsonIgnore]
-        protected IDocularClient Client { get; set; }
+        public String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                if (value != _Name)
+                {
+                    _Name = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Initializes a new <see cref="DocularObject"/>.
@@ -71,26 +181,6 @@ namespace Docular.Client.Core.Model
         protected DocularObject(String id)
         {
             this.Id = id;
-        }
-
-        /// <summary>
-        /// Initializes a new <see cref="DocularObject"/>.
-        /// </summary>
-        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>.</param>
-        protected DocularObject(IDocularClient client)
-        {
-            this.Client = client;
-        }
-
-        /// <summary>
-        /// Initializes a new <see cref="DocularObject"/>.
-        /// </summary>
-        /// <param name="id">The unique Id.</param>
-        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="DocularObject"/>.</param>
-        protected DocularObject(IDocularClient client, String id)
-            : this(id)
-        {
-            this.Client = client;
         }
 
         /// <summary>

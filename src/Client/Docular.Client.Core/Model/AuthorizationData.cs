@@ -60,5 +60,27 @@ namespace Docular.Client.Core.Model
             authRequest.AddBody(this);
             return (await restClient.Execute<String>(authRequest)).Data;
         }
+
+        /// <summary>
+        /// Checks two <see cref="AuthorizationData"/>s for equality.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns><c>true</c> if both <see cref="AuthorizationData"/>s are equal, otherwise <c>false</c>.</returns>
+        public static bool operator ==(AuthorizationData left, AuthorizationData right)
+        {
+            return (left.MachineName == right.MachineName) && (left.Username == right.Username) && (left.Password == right.Password);
+        }
+
+        /// <summary>
+        /// Checks two <see cref="AuthorizationData"/>s for inequality.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns><c>true</c> if both <see cref="AuthorizationData"/>s are inequal, otherwise <c>false</c>.</returns>
+        public static bool operator !=(AuthorizationData left, AuthorizationData right)
+        {
+            return !(left == right);
+        }
     }
 }

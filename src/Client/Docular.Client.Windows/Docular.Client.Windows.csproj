@@ -165,10 +165,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sidebar.resx</DependentUpon>
     </Compile>
-    <Compile Include="UI\Sidebar.xaml.cs">
+    <Compile Include="Views\Sidebar.xaml.cs">
       <DependentUpon>Sidebar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\SidebarElement.xaml.cs">
+    <Compile Include="Views\SidebarElement.xaml.cs">
       <DependentUpon>SidebarElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsKeyStore.cs" />
@@ -204,11 +204,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\LoginControl.xaml">
+    <Page Include="Views\LoginControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\MainWindow.xaml">
+    <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -232,10 +232,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserMenu.resx</DependentUpon>
     </Compile>
-    <Compile Include="UI\LoginControl.xaml.cs">
+    <Compile Include="Views\LoginControl.xaml.cs">
       <DependentUpon>LoginControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\MainWindow.xaml.cs">
+    <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -243,11 +243,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Sidebar.xaml">
+    <Page Include="Views\Sidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\SidebarElement.xaml">
+    <Page Include="Views\SidebarElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,6 +325,7 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\EyeLogo.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -5,17 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
              xmlns:dms="clr-namespace:Docular.Client.Windows.UI"
              xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
-             d:DesignHeight="720" d:DesignWidth="110"
+             d:DesignHeight="720" d:DesignWidth="90"
              Background="{DynamicResource BackgroundBrush}">
     <DockPanel x:Name="Content" DockPanel.Dock="Left" LastChildFill="False" Background="{DynamicResource BackgroundBrush}">
-        <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" Height="10" DockPanel.Dock="Top"/>
         <dms:SidebarElement x:Name="MainElement"
                             Content="{x:Static s:General.Docular}" 
                             Icon="{DynamicResource EyeLogo}" 
                             CenterColumnWidth="100*" 
                             DockPanel.Dock="Top" 
                             MouseDown="MainElement_MouseDown"/>
-        <dms:SidebarElement Style="{StaticResource SidebarSpacerStyle}" Height="10" DockPanel.Dock="Top" />
         <dms:SidebarElement x:Name="SearchElement"
                             Content="{x:Static s:Sidebar.Search}" 
                             Icon="{DynamicResource SearchIcon}" 

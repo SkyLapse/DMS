@@ -18,29 +18,42 @@ namespace Docular.Client.Core.Model
     public class Category : DocularObject
     {
         /// <summary>
+        /// Backing field.
+        /// </summary>
+        private Category _Parent;
+
+        /// <summary>
         /// The <see cref="Category"/>s parent.
         /// </summary>
         [JsonProperty("parent"), ProtoMember(1)]
-        public Category Parent { get; set; }
+        public Category Parent
+        {
+            get
+            {
+                return _Parent;
+            }
+            set
+            {
+                if (value != _Parent)
+                {
+                    _Parent = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Initializes a new <see cref="Category"/>.
         /// </summary>
-        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Category"/>.</param>
-        [JsonConstructor]
-        public Category(IDocularClient client)
-            : base(client)
-        {
-            Contract.Requires<ArgumentNullException>(client != null);
-        }
+        public Category() { }
 
         /// <summary>
-        /// Gets all <see cref="Document"/>s within the <see cref="Category"/>.
+        /// Initializes a new <see cref="Category"/>.
         /// </summary>
-        /// <returns>An array of <see cref="Document"/>s that are within the <see cref="Category"/>.</returns>
-        public Task<Document[]> GetDocumentsAsync()
+        /// <param name="name">The <see cref="Category"/>s name.</param>
+        public Category(String name)
         {
-            return this.Client.GetDocumentsAsync(new Parameter() { Name = "category", Value = this.Id, Type = ParameterType.GetOrPost });
+            this.Name = name;
         }
     }
 }

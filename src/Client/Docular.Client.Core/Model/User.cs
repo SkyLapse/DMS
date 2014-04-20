@@ -18,29 +18,33 @@ namespace Docular.Client.Core.Model
     public class User : DocularObject
     {
         /// <summary>
+        /// Backing field.
+        /// </summary>
+        private String[] _Permissions;
+
+        /// <summary>
         /// Gets the <see cref="User"/>s permission.
         /// </summary>
         [JsonProperty("permissions"), ProtoMember(1)]
-        public String[] Permissions { get; private set; }
+        public String[] Permissions
+        {
+            get
+            {
+                return _Permissions;
+            }
+            set
+            {
+                if (value != _Permissions)
+                {
+                    _Permissions = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Initializes a new <see cref="User"/>.
         /// </summary>
-        /// <param name="client">The <see cref="IDocularClient"/> that created the user.</param>
-        [JsonConstructor]
-        public User(IDocularClient client)
-            : base(client)
-        {
-            Contract.Requires<ArgumentNullException>(client != null);
-        }
-
-        /// <summary>
-        /// Gets all <see cref="Document"/>s created by the current <see cref="User"/>.
-        /// </summary>
-        /// <returns>An array of <see cref="Document"/>s that were created by the <see cref="User"/>.</returns>
-        public Task<Document[]> GetDocumentsAsync()
-        {
-            return this.Client.GetDocumentsAsync(new Parameter() { Name = "user", Value = this.Id, Type = ParameterType.GetOrPost });
-        }
+        public User() { }
     }
 }

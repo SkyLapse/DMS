@@ -20,37 +20,17 @@ namespace Docular.Client.Core.Model
         /// <summary>
         /// Initializes a new <see cref="Tag"/>.
         /// </summary>
-        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Tag"/>.</param>
-        [JsonConstructor]
-        public Tag(IDocularClient client)
-            : base(client)
-        {
-            Contract.Requires<ArgumentNullException>(client != null);
-        }
+        public Tag() { }
 
         /// <summary>
         /// Initializes a new <see cref="Tag"/>.
         /// </summary>
-        /// <param name="client">The <see cref="IDocularClient"/> that created the <see cref="Tag"/>.</param>
         /// <param name="description">The <see cref="Tag"/>s description.</param>
         /// <param name="name">The <see cref="Tag"/>s name.</param>
-        [JsonConstructor]
-        public Tag(IDocularClient client, String name, String description) 
-            : base(client) 
+        public Tag(String name, String description) 
         {
-            Contract.Requires<ArgumentNullException>(client != null);
-
             this.Name = name;
             this.Description = description;
-        }
-
-        /// <summary>
-        /// Gets all <see cref="Document"/>s with the <see cref="Tag"/>.
-        /// </summary>
-        /// <returns>An array of <see cref="Document"/>s that are tagged with the <see cref="Tag"/>.</returns>
-        public Task<Document[]> GetDocumentsAsync()
-        {
-            return this.Client.GetDocumentsAsync(new Parameter() { Name = "tag", Value = this.Id, Type = ParameterType.GetOrPost });
         }
     }
 }

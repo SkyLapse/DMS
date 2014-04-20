@@ -7,9 +7,9 @@
         WindowStyle="None" ResizeMode="NoResize"
         Width="1280" Height="720" MinWidth="1280" MinHeight="720"
         Style="{DynamicResource ContentControlStyleBordered}"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        MouseDown="Window_MouseDown">
     <DockPanel LastChildFill="False">
-        <dms:Sidebar x:Name="Sidebar" 
-                     DockPanel.Dock="Left"/>
+        
     </DockPanel>
 </Window>

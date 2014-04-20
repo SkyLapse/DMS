@@ -37,5 +37,27 @@ namespace Docular.Client.Core.Model
             this.User = user;
             this.Date = date;
         }
+
+        /// <summary>
+        /// Checks two <see cref="ChangeInfo"/>s for equality.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns><c>true</c> if both <see cref="ChangeInfo"/>s are equal, otherwise <c>false</c>.</returns>
+        public static bool operator ==(ChangeInfo left, ChangeInfo right)
+        {
+            return (left.User == right.User) && (left.Date == right.Date);
+        }
+
+        /// <summary>
+        /// Checks two <see cref="ChangeInfo"/>s for inequality.
+        /// </summary>
+        /// <param name="left">The left operand.</param>
+        /// <param name="right">The right operand.</param>
+        /// <returns><c>true</c> if both <see cref="ChangeInfo"/>s are inequal, otherwise <c>false</c>.</returns>
+        public static bool operator !=(ChangeInfo left, ChangeInfo right)
+        {
+            return !(left == right);
+        }
     }
 }

@@ -31,5 +31,18 @@ namespace Docular.Client.Windows.UI
         {
             this.InitializeComponent();
         }
+
+        /// <summary>
+        /// Handles the <see cref="E:MouseDown"/>-event.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e"><see cref="MouseButtonEventArgs"/> describing the event.</param>
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
     }
 }

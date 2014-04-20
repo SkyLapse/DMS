@@ -29,18 +29,13 @@ namespace Docular.Client.Windows.UI
             "CenterColumnWidth", 
             typeof(GridLength), 
             typeof(SidebarElement),
-            new PropertyMetadata(new GridLength(40, GridUnitType.Star))
+            new PropertyMetadata(new GridLength(30, GridUnitType.Star))
         );
 
         /// <summary>
         /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:Icon"/>-property.
         /// </summary>
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Path), typeof(SidebarElement));
-
-        /// <summary>
-        /// The underlying <see cref="DependencyProperty"/> for the <see cref="P:IsSelected"/>-property.
-        /// </summary>
-        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register("IsSelected", typeof(bool), typeof(SidebarElement));
 
         /// <summary>
         /// The width of the center column.
@@ -71,22 +66,6 @@ namespace Docular.Client.Windows.UI
             set
             {
                 this.SetValue(IconProperty, value);
-            }
-        }
-
-        /// <summary>
-        /// Indicates whether the <see cref="SidebarElement"/> is selected or not.
-        /// </summary>
-        [Bindable(true, BindingDirection.TwoWay)]
-        public bool IsSelected
-        {
-            get
-            {
-                return (bool)(this.GetValue(IsSelectedProperty) ?? false);
-            }
-            set
-            {
-                this.SetValue(IsSelectedProperty, value);
             }
         }
 
