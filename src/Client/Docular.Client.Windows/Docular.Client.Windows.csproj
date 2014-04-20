@@ -304,6 +304,10 @@
       <Project>{0dfb7644-0d72-42c0-adfb-891753921158}</Project>
       <Name>Docular.Client.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Docular.Client.ViewModel.Wpf\Docular.Client.ViewModel.Wpf.csproj">
+      <Project>{27ecd305-f608-4ba4-8f09-d266a15eef7a}</Project>
+      <Name>Docular.Client.ViewModel.Wpf</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

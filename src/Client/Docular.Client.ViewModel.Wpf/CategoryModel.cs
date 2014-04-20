@@ -12,40 +12,40 @@ using Docular.Client.Core.Model.Rest;
 namespace Docular.Client.ViewModel.Wpf
 {
     /// <summary>
-    /// The <see cref="Document"/> view model.
+    /// The <see cref="Category"/> view model.
     /// </summary>
-    public class DocumentModel : BaseModel
+    public class CategoryModel : BaseModel
     {
         /// <summary>
         /// Backing field.
         /// </summary>
-        private ObservableCollection<Document> _Documents;
+        private ObservableCollection<Category> _Categories;
 
         /// <summary>
-        /// All currently loaded <see cref="Document"/>s.
+        /// All loaded <see cref="Category"/>s.
         /// </summary>
-        public ObservableCollection<Document> Documents
+        public ObservableCollection<Category> Categories
         {
             get
             {
-                return _Documents;
+                return _Categories;
             }
             set
             {
-                if (value != _Documents)
+                if (value != _Categories)
                 {
-                    _Documents = value;
+                    _Categories = value;
                     this.OnPropertyChanged();
                 }
             }
         }
 
         /// <summary>
-        /// Initializes a new <see cref="DocumentModel"/>.
+        /// Initializes a new <see cref="CategoryModel"/>.
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> used to fetch data from the database.</param>
-        public DocumentModel(IDocularClient client)
-            : base(client, "Documents")
+        public CategoryModel(IDocularClient client)
+            : base(client, "Categories")
         {
             Contract.Requires<ArgumentNullException>(client != null);
         }
@@ -59,7 +59,7 @@ namespace Docular.Client.ViewModel.Wpf
             try
             {
                 this.IsBusy = true;
-                this.Documents = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync());
+                this.Categories = new ObservableCollection<Category>(await this.Client.GetCategoriesAsync());
             }
             finally
             {

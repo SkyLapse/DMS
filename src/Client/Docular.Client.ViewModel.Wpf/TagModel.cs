@@ -12,40 +12,40 @@ using Docular.Client.Core.Model.Rest;
 namespace Docular.Client.ViewModel.Wpf
 {
     /// <summary>
-    /// The <see cref="Document"/> view model.
+    /// The <see cref="Tag"/> view model.
     /// </summary>
-    public class DocumentModel : BaseModel
+    public class TagModel : BaseModel
     {
         /// <summary>
         /// Backing field.
         /// </summary>
-        private ObservableCollection<Document> _Documents;
+        private ObservableCollection<Tag> _Tags;
 
         /// <summary>
-        /// All currently loaded <see cref="Document"/>s.
+        /// All loaded <see cref="Tag"/>s.
         /// </summary>
-        public ObservableCollection<Document> Documents
+        public ObservableCollection<Tag> Tags
         {
             get
             {
-                return _Documents;
+                return _Tags;
             }
             set
             {
-                if (value != _Documents)
+                if (value != _Tags)
                 {
-                    _Documents = value;
+                    _Tags = value;
                     this.OnPropertyChanged();
                 }
             }
         }
 
         /// <summary>
-        /// Initializes a new <see cref="DocumentModel"/>.
+        /// Initializes a new <see cref="TagModel"/>.
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> used to fetch data from the database.</param>
-        public DocumentModel(IDocularClient client)
-            : base(client, "Documents")
+        public TagModel(IDocularClient client)
+            : base(client, "Tags")
         {
             Contract.Requires<ArgumentNullException>(client != null);
         }
@@ -59,7 +59,7 @@ namespace Docular.Client.ViewModel.Wpf
             try
             {
                 this.IsBusy = true;
-                this.Documents = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync());
+                this.Tags = new ObservableCollection<Tag>(await this.Client.GetTagsAsync());
             }
             finally
             {

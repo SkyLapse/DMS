@@ -145,31 +145,6 @@ namespace Docular.Client.Core.Model
         }
 
         /// <summary>
-        /// Backing field.
-        /// </summary>
-        private String _Name;
-
-        /// <summary>
-        /// The <see cref="DocularObject"/>s name.
-        /// </summary>
-        [JsonProperty("name"), ProtoMember(6)]
-        public String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (value != _Name)
-                {
-                    _Name = value;
-                    this.OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
         /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
         protected DocularObject() { }
