@@ -56,14 +56,9 @@ namespace Docular.Client.ViewModel.Wpf
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public override async Task LoadData()
         {
-            try
+            using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.IsBusy = true;
                 this.Documents = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync());
-            }
-            finally
-            {
-                this.IsBusy = false;
             }
         }
     }

@@ -42,9 +42,12 @@ namespace Docular.Client.ViewModel.Wpf
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public override async Task LoadData()
         {
-            MainPageModel mainPage = new MainPageModel();
-            await mainPage.LoadData();
-            this.DisplayModel = mainPage;
+            using (IsBusySwitcher section = new IsBusySwitcher(this))
+            {
+                MainPageModel mainPage = new MainPageModel();
+                await mainPage.LoadData();
+                this.DisplayModel = mainPage;
+            }
         }
     }
 }

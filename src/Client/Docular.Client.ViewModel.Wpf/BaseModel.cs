@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,5 +79,56 @@ namespace Docular.Client.ViewModel.Wpf
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public abstract Task LoadData();
+
+        /// <summary>
+        /// Starts a section of code that needs to have the <see cref="P:IsBusy"/>-flag set to true.
+        /// </summary>
+        /// <returns>A disposable <see cref="IsBusySwitcher"/> for use with the using-keyword.</returns>
+        /// <example>
+        /// using (var releaser = this.StartBusyAction())
+        /// {
+        ///     // Busy code
+        /// }
+        /// </example>
+        public IsBusySwitcher StartBusySection()
+        {
+            return new IsBusySwitcher(this);
+        }
+
+        /// <summary>
+        /// Triggers the <see cref="P:IsBusy"/>-property using <see cref="IDisposable"/> and the convenient using-directive.
+        /// </summary>
+        /// <remarks>Always, always, always make sure to dispose this struct, otherwise the <see cref="P:IsBusy"/> property will not be reset.</remarks>
+        protected struct IsBusySwitcher : IDisposable
+        {
+            /// <summary>
+            /// The model which is busy.
+            /// </summary>
+            private BaseModel busyModel;
+
+            /// <summary>
+            /// Initializes a new <see cref="IsBusySwitcher"/>.
+            /// </summary>
+            /// <param name="model">The <see cref="BaseModel"/> to swich the <see cref="P:BaseModel.IsBusy"/>-state of.</param>
+            public IsBusySwitcher(BaseModel model)
+                : this()
+            {
+                Contract.Requires<ArgumentNullException>(model != null);
+
+                this.busyModel = model;
+                this.busyModel.IsBusy = true;
+            }
+
+            /// <summary>
+            /// Disposes the <see cref="IsBusySwitcher"/> debusying the <see cref="BaseModel"/>.
+            /// </summary>
+            public void Dispose()
+            {
+                if (this.busyModel != null)
+                {
+                    this.busyModel.IsBusy = false;
+                }
+            }
+        }
     }
 }
