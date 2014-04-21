@@ -14,32 +14,8 @@ namespace Docular.Client.ViewModel.Wpf
     /// <summary>
     /// The <see cref="Document"/> view model.
     /// </summary>
-    public class DocumentModel : BaseModel
+    public class DocumentModel : CollectionModel<Document>
     {
-        /// <summary>
-        /// Backing field.
-        /// </summary>
-        private ObservableCollection<Document> _Documents;
-
-        /// <summary>
-        /// All currently loaded <see cref="Document"/>s.
-        /// </summary>
-        public ObservableCollection<Document> Documents
-        {
-            get
-            {
-                return _Documents;
-            }
-            set
-            {
-                if (value != _Documents)
-                {
-                    _Documents = value;
-                    this.OnPropertyChanged();
-                }
-            }
-        }
-
         /// <summary>
         /// Initializes a new <see cref="DocumentModel"/>.
         /// </summary>
@@ -58,7 +34,7 @@ namespace Docular.Client.ViewModel.Wpf
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Documents = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync());
+                this.Items = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync());
             }
         }
     }

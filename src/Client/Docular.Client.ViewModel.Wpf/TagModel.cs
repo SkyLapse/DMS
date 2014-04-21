@@ -14,32 +14,8 @@ namespace Docular.Client.ViewModel.Wpf
     /// <summary>
     /// The <see cref="Tag"/> view model.
     /// </summary>
-    public class TagModel : BaseModel
+    public class TagModel : CollectionModel<Tag>
     {
-        /// <summary>
-        /// Backing field.
-        /// </summary>
-        private ObservableCollection<Tag> _Tags;
-
-        /// <summary>
-        /// All loaded <see cref="Tag"/>s.
-        /// </summary>
-        public ObservableCollection<Tag> Tags
-        {
-            get
-            {
-                return _Tags;
-            }
-            set
-            {
-                if (value != _Tags)
-                {
-                    _Tags = value;
-                    this.OnPropertyChanged();
-                }
-            }
-        }
-
         /// <summary>
         /// Initializes a new <see cref="TagModel"/>.
         /// </summary>
@@ -58,7 +34,7 @@ namespace Docular.Client.ViewModel.Wpf
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Tags = new ObservableCollection<Tag>(await this.Client.GetTagsAsync());
+                this.Items = new ObservableCollection<Tag>(await this.Client.GetTagsAsync());
             }
         }
     }

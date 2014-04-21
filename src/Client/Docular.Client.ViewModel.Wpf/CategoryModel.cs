@@ -14,32 +14,8 @@ namespace Docular.Client.ViewModel.Wpf
     /// <summary>
     /// The <see cref="Category"/> view model.
     /// </summary>
-    public class CategoryModel : BaseModel
+    public class CategoryModel : CollectionModel<Category>
     {
-        /// <summary>
-        /// Backing field.
-        /// </summary>
-        private ObservableCollection<Category> _Categories;
-
-        /// <summary>
-        /// All loaded <see cref="Category"/>s.
-        /// </summary>
-        public ObservableCollection<Category> Categories
-        {
-            get
-            {
-                return _Categories;
-            }
-            set
-            {
-                if (value != _Categories)
-                {
-                    _Categories = value;
-                    this.OnPropertyChanged();
-                }
-            }
-        }
-
         /// <summary>
         /// Initializes a new <see cref="CategoryModel"/>.
         /// </summary>
@@ -58,7 +34,7 @@ namespace Docular.Client.ViewModel.Wpf
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Categories = new ObservableCollection<Category>(await this.Client.GetCategoriesAsync());
+                this.Items = new ObservableCollection<Category>(await this.Client.GetCategoriesAsync());
             }
         }
     }

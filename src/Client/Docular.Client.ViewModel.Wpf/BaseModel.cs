@@ -44,6 +44,27 @@ namespace Docular.Client.ViewModel.Wpf
         }
 
         /// <summary>
+        /// The <see cref="ICommand"/> used to load the data into the model.
+        /// </summary>
+        public RelayCommand LoadDataCommand
+        {
+            get
+            {
+                return new RelayCommand(async p =>
+                {
+                    try
+                    {
+                        await this.LoadData();
+                    }
+                    catch
+                    {
+                        throw; // TODO: Handle exception properly.
+                    }
+                });
+            }
+        }
+
+        /// <summary>
         /// Initializes a new <see cref="BaseModel"/>.
         /// </summary>
         protected BaseModel() { }
@@ -90,7 +111,7 @@ namespace Docular.Client.ViewModel.Wpf
         ///     // Busy code
         /// }
         /// </example>
-        public IsBusySwitcher StartBusySection()
+        protected IsBusySwitcher StartBusySection()
         {
             return new IsBusySwitcher(this);
         }
