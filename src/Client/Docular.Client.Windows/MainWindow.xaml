@@ -1,8 +1,8 @@
-﻿<Window x:Class="Docular.Client.Windows.UI.MainWindow"
+﻿<Window x:Class="Docular.Client.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:dms="clr-namespace:Docular.Client.Windows.UI"
-        xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
+        xmlns:vm="clr-namespace:Docular.Client.ViewModel.Wpf;assembly=Docular.Client.ViewModel.Wpf"
+        xmlns:views="clr-namespace:Docular.Client.Windows.Views"
         Title="Docular DMS" 
         WindowStyle="None" ResizeMode="NoResize"
         Width="1280" Height="720" MinWidth="1280" MinHeight="720"
@@ -12,4 +12,9 @@
     <DockPanel LastChildFill="False">
         
     </DockPanel>
+    <Window.Resources >
+        <DataTemplate DataType="vm:DocumentModel">
+            <views:DocumentsGridView/>
+        </DataTemplate>
+    </Window.Resources>
 </Window>

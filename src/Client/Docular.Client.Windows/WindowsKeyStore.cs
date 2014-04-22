@@ -7,7 +7,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Core.Model.Rest;
-using Docular.Client.Windows.UI;
+using Docular.Client.Windows.Views;
 
 namespace Docular.Client.Windows
 {

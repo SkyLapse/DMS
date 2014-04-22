@@ -16,6 +16,42 @@ namespace Docular.Client.ViewModel.Wpf
     /// </summary>
     public class SettingsModel : BaseModel
     {
+        private String _Skin;
+
+        public String Skin
+        {
+            get
+            {
+                return _Skin;
+            }
+            set
+            {
+                if (value != _Skin)
+                {
+                    _Skin = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        private String _DocularHomeUrl;
+
+        public String DocularHomeUrl
+        {
+            get
+            {
+                return _DocularHomeUrl;
+            }
+            set
+            {
+                if (value != _DocularHomeUrl)
+                {
+                    _DocularHomeUrl = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
         /// <summary>
         /// Loads the data into the model.
         /// </summary>

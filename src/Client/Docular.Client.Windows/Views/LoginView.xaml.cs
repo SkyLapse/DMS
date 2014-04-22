@@ -17,17 +17,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Docular.Client.Windows.UI
+namespace Docular.Client.Windows.Views
 {
     /// <summary>
-    /// Interaktionslogik für LoginControl.xaml
+    /// Interaktionslogik für LoginView.xaml
     /// </summary>
-    public partial class LoginControl : UserControl
+    public partial class LoginView : UserControl
     {
         /// <summary>
-        /// Initializes a new <see cref="LoginControl"/>.
+        /// Initializes a new <see cref="LoginView"/>.
         /// </summary>
-        public LoginControl()
+        public LoginView()
         {
             this.InitializeComponent();
         }
