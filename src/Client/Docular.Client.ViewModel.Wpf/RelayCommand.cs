@@ -62,7 +62,7 @@ namespace Docular.Client.ViewModel.Wpf
             Contract.Requires<ArgumentNullException>(executeAction != null);
 
             this.ExecuteAction = executeAction;
-            this.CanExecuteAction = canExecuteAction ?? (Func<object, bool>)(obj => true);
+            this.CanExecuteAction = canExecuteAction;
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Docular.Client.ViewModel.Wpf
         /// <returns><c>true</c> if <see cref="M:Execute"/> can be executed, otherwise <c>false</c>.</returns>
         public bool CanExecute(object parameter)
         {
-            return this.CanExecuteAction(parameter);
+            return (this.CanExecuteAction == null) || this.CanExecuteAction(parameter);
         }
 
         /// <summary>

@@ -119,7 +119,9 @@ namespace Docular.Client.ViewModel.Wpf
         /// <summary>
         /// Triggers the <see cref="P:IsBusy"/>-property using <see cref="IDisposable"/> and the convenient using-directive.
         /// </summary>
-        /// <remarks>Always, always, always make sure to dispose this struct, otherwise the <see cref="P:IsBusy"/> property will not be reset.</remarks>
+        /// <remarks>
+        /// Always, always, always make sure to dispose this struct, otherwise the <see cref="P:IsBusy"/> property will not be reset properly.
+        /// </remarks>
         protected struct IsBusySwitcher : IDisposable
         {
             /// <summary>

@@ -5,7 +5,7 @@
              xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
              d:DesignHeight="425" d:DesignWidth="350"
-             Height="425" Width="350" MinHeight="425" MinWidth="350"
+             MinHeight="425" MinWidth="350"
              Style="{DynamicResource ContentControlStyleBordered}"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
@@ -66,8 +66,7 @@
                 Content="{x:Static s:UserMenu.LoginCaption}" 
                 Style="{DynamicResource ButtonStyleRegular}"
                 FontSize="24"
-                Grid.Column="1" Grid.Row="7"
-                Click="btnDoLogin_Click"/>
+                Grid.Column="1" Grid.Row="7"/>
 
         <!-- Forgot password? -->
         <TextBlock x:Name="tblForgotPassword"
@@ -76,7 +75,6 @@
                    Grid.Row="8" Grid.ColumnSpan="3"
                    TextDecorations="Underline"
                    Foreground="{DynamicResource HighlightBrush}"
-                   Height="20" 
-                   MouseDown="tblForgotPassword_MouseDown"/>
+                   Height="20"/>
     </Grid>
 </UserControl>

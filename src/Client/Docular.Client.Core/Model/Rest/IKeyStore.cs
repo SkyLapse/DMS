@@ -18,6 +18,6 @@ namespace Docular.Client.Core.Model.Rest
         /// <returns>
         /// The newly generated API key or <c>null</c> if retreival was absolutely impossible (no account and account-creation not allowed, etc.).
         /// </returns>
-        String GetKey();
+        String Key { get; set; }
     }
 }

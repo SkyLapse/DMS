@@ -31,32 +31,5 @@ namespace Docular.Client.Windows.UI
         {
             this.InitializeComponent();
         }
-
-        /// <summary>
-        /// Handles the event when the user clicked on the log in button.
-        /// </summary>
-        /// <param name="sender">The button that was clicked.</param>
-        /// <param name="e"><see cref="RoutedEventArgs"/>.</param>
-        private void btnDoLogin_Click(object sender, RoutedEventArgs e)
-        {
-            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            //DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
-
-
-        }
-
-        /// <summary>
-        /// Handles the event when the user clicked on the forgot password field.
-        /// </summary>
-        /// <param name="sender">The label that was clicked on.</param>
-        /// <param name="e"><see cref="MouseButtonEventArgs"/>.</param>
-        private void tblForgotPassword_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
-
-            Contract.Assume(section != null);
-            Process.Start(section.DocularResetPasswordUri);
-        }
     }
 }

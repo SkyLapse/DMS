@@ -104,7 +104,12 @@ namespace Docular.Client.Core.Model.Rest
         /// <summary>
         /// The part of the REST API to obtain an API key.
         /// </summary>
-        private const String Keys = "keys";
+        public const String Keys = "keys";
+
+        /// <summary>
+        /// The part of the REST API to check whether an API key is still valid.
+        /// </summary>
+        public const String ValidateKeys = Keys + "/validate";
 
         #endregion
 

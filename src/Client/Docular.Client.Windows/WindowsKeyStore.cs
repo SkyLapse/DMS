@@ -17,21 +17,32 @@ namespace Docular.Client.Windows
     public class WindowsKeyStore : IKeyStore
     {
         /// <summary>
+        /// Gets the API key.
+        /// </summary>
+        public String Key
+        {
+            get
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+                DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
+
+                Contract.Assume(section != null);
+                return section.ApiKey;
+            }
+            set
+            {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+                DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
+
+                Contract.Assume(section != null);
+                section.ApiKey = value;
+                config.Save();
+            }
+        }
+
+        /// <summary>
         /// Initializes a new <see cref="WindowsKeyStore"/>.
         /// </summary>
         public WindowsKeyStore() { }
-
-        /// <summary>
-        /// Gets the API key.
-        /// </summary>
-        /// <returns>The API key.</returns>
-        public String GetKey()
-        {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
-
-            Contract.Assume(section != null);
-            return section.ApiKey;
-        }
     }
 }

@@ -68,7 +68,7 @@ namespace Docular.Client.Windows
         /// </summary>
         [StringValidator(MinLength = 12)]
         [ConfigurationProperty("DocularUri", DefaultValue = "http://example.com/", IsRequired = true)]
-        public String DocularUri
+        public String DocularHomeUri
         {
             get
             {
@@ -77,30 +77,6 @@ namespace Docular.Client.Windows
             set
             {
                 this["DocularUri"] = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets the Uri to the docular REST API.
-        /// </summary>
-        public String DocularApiUri
-        {
-            get
-            {
-                String docularUri = this.DocularUri;
-                return (docularUri != null) ? new Uri(docularUri).Combine("api/").ToString() : null;
-            }
-        }
-
-        /// <summary>
-        /// Gets the Uri to the docular REST API.
-        /// </summary>
-        public String DocularResetPasswordUri
-        {
-            get
-            {
-                String docularUri = this.DocularUri;
-                return (docularUri != null) ? new Uri(docularUri).Combine("resetpassword/").ToString() : null;
             }
         }
 

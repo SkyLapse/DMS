@@ -37,7 +37,7 @@ namespace Docular.Client.Core.Model.Rest
         /// <param name="request">The <see cref="IRestRequest"/> to be authenticated.</param>
         public void Authenticate(IRestClient client, IRestRequest request)
         {
-            String key = this.KeyStore.GetKey();
+            String key = this.KeyStore.Key;
             if (key == null)
             {
                 throw new NotSupportedException("Authentication was impossible, no key was found. This *should not* occur when running the app, it's a design error.");
