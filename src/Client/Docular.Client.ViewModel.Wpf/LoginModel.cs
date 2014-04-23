@@ -102,6 +102,7 @@ namespace Docular.Client.ViewModel.Wpf
                     {
                         this.Password = ((System.Windows.Controls.PasswordBox)p).Password;
                         await this.Login();
+                        this.Password = null;
                     }
                     catch (Exception)
                     {

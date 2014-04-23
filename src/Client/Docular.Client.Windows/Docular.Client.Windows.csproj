@@ -168,6 +168,9 @@
     <Compile Include="Views\DocumentsGridView.xaml.cs">
       <DependentUpon>DocumentsGridView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DocumentsGridViewElement.xaml.cs">
+      <DependentUpon>DocumentsGridViewElement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Sidebar.xaml.cs">
       <DependentUpon>Sidebar.xaml</DependentUpon>
     </Compile>
@@ -208,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DocumentsGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DocumentsGridViewElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

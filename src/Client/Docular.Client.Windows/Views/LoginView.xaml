@@ -72,12 +72,30 @@
                 CommandParameter="{Binding ElementName=tbPassword}"/>
 
         <!-- Forgot password? -->
-        <TextBlock x:Name="tblForgotPassword"
-                   Text="{x:Static s:UserMenu.ForgotPassword}"
-                   Style="{DynamicResource TextBlockStyleRegular}"
-                   Grid.Row="8" Grid.ColumnSpan="3"
-                   TextDecorations="Underline"
-                   Foreground="{DynamicResource HighlightBrush}"
-                   Height="20"/>
+        <Button x:Name="btnForgotPassword"
+                Content="{x:Static s:UserMenu.ForgotPassword}"
+                Grid.Row="8" Grid.ColumnSpan="3"
+                Command="{Binding ForgotPasswordCommand}">
+            <Button.Template>
+                <ControlTemplate>
+                    <TextBlock x:Name="tblUnderline"
+                               Style="{DynamicResource TextBlockStyleRegular}"
+                               Foreground="{DynamicResource HighlightBrush}"
+                               TextDecorations="Underline"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center">
+                        <ContentPresenter Content="{Binding Content, ElementName=btnForgotPassword}"/>
+                    </TextBlock>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="tblUnderline" Property="Foreground" Value="{DynamicResource BrightHighlightBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="tblUnderline" Property="Foreground" Value="{DynamicResource HighlightBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </UserControl>
