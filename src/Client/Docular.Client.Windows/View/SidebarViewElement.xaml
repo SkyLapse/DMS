@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Docular.Client.Windows.View.SidebarViewElement"
+             x:Name="element" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             d:DesignWidth="110" d:DesignHeight="110"
+             MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+             MinHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="{Binding CenterColumnWidth}"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <ContentControl x:Name="IconDisplay" 
+                        Content="{Binding Icon}" 
+                        Grid.Column="2" Grid.Row="1"/>
+        <Label x:Name="ContentLabel" 
+               Content="{Binding Name}" 
+               Style="{DynamicResource LabelStyleRegularDarkLight}"
+               VerticalContentAlignment="Top"
+               Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
+            <Label.Foreground>
+                <SolidColorBrush x:Name="LabelForegroundBrush" Color="{DynamicResource DarkLight}"/>
+            </Label.Foreground>
+        </Label>
+        <Rectangle x:Name="Marker" Grid.Row="1" Grid.RowSpan="2"/>
+    </Grid>
+</UserControl>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ProtoBuf;
 
-namespace Docular.Client.Core
+namespace Docular.Client
 {
     /// <summary>
     /// Represents an object that notifies its subscribers of changes in its properties.

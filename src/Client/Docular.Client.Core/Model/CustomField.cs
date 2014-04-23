@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ProtoBuf;
 
-namespace Docular.Client.Core.Model
+namespace Docular.Client.Model
 {
     /// <summary>
     /// Represents a custom field of some arbitrary data.

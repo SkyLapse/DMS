@@ -8,11 +8,11 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Model;
+using Docular.Client.Model;
 using Newtonsoft.Json;
 using RestSharp.Portable;
 
-namespace Docular.Client.Core.Model.Rest
+namespace Docular.Client.Model.Rest
 {
     /// <summary>
     /// Represents a client for working with a docular DB.

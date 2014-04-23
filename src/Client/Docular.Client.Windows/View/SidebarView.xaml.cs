@@ -14,12 +14,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Docular.Client.Windows.Views
+namespace Docular.Client.Windows.View
 {
     /// <summary>
-    /// Interaktionslogik für Sidebar.xaml
+    /// Interaktionslogik für SidebarView.xaml
     /// </summary>
-    public partial class Sidebar : UserControl
+    public partial class SidebarView : UserControl
     {
         ///// <summary>
         ///// Used for synchronizing the selected state.
@@ -57,9 +57,9 @@ namespace Docular.Client.Windows.Views
         //public event EventHandler SettingsPageSelected;
 
         /// <summary>
-        /// Initializes a new <see cref="Sidebar"/>.
+        /// Initializes a new <see cref="SidebarView"/>.
         /// </summary>
-        public Sidebar()
+        public SidebarView()
         {
             this.InitializeComponent();
         }

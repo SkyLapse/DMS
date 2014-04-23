@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Docular.Client.Core.Model.Rest
+namespace Docular.Client.Model.Rest
 {
     /// <summary>
     /// Defines a platform-agnostic mechanism to obtain an API key for a user.

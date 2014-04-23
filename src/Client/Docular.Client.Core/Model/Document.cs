@@ -4,11 +4,11 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Model.Rest;
+using Docular.Client.Model.Rest;
 using Newtonsoft.Json;
 using ProtoBuf;
 
-namespace Docular.Client.Core.Model
+namespace Docular.Client.Model
 {
     /// <summary>
     /// Represents a stored document.

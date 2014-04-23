@@ -4,7 +4,7 @@
              xmlns:i="clr-namespace:System.Windows.Media.Imaging;assembly=PresentationCore"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  mc:Ignorable="d" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:dms="clr-namespace:Docular.Client.Windows.Views"
+             xmlns:dms="clr-namespace:Docular.Client.Windows.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

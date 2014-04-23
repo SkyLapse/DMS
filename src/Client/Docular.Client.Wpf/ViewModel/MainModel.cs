@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core;
+using Docular.Client;
 
-namespace Docular.Client.ViewModel.Wpf
+namespace Docular.Client.ViewModel
 {
     /// <summary>
     /// The main model containing the model currently being displayed.

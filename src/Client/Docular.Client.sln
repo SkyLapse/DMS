@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Core.Test", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Windows", "Docular.Client.Windows\Docular.Client.Windows.csproj", "{7B0D509B-7A5E-4BBA-8B1E-9E347A6CE5AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.ViewModel.Wpf", "Docular.Client.ViewModel.Wpf\Docular.Client.ViewModel.Wpf.csproj", "{27ECD305-F608-4BA4-8F09-D266A15EEF7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Wpf", "Docular.Client.Wpf\Docular.Client.Wpf.csproj", "{27ECD305-F608-4BA4-8F09-D266A15EEF7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

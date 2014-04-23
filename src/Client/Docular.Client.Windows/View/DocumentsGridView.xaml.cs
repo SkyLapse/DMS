@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,19 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Docular.Client.Windows.Views
+namespace Docular.Client.Windows.View
 {
     /// <summary>
-    /// Interaktionslogik für LoginView.xaml
+    /// Interaktionslogik für DocumentsGridView.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class DocumentsGridView : UserControl
     {
         /// <summary>
-        /// Initializes a new <see cref="LoginView"/>.
+        /// Initializes a new <see cref="DocumentsGridView"/>.
         /// </summary>
-        public LoginView()
+        public DocumentsGridView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
     }
 }

@@ -4,10 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core;
-using Docular.Client.Core.Model;
+using Docular.Client;
+using Docular.Client.Model;
 
-namespace Docular.Client.ViewModel.Wpf
+namespace Docular.Client.ViewModel
 {
     /// <summary>
     /// The main page view model.

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,14 +15,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Docular.Client.Windows.Views
+namespace Docular.Client.Windows.View
 {
     /// <summary>
-    /// Interaktionslogik für DocumentsGridViewElement.xaml
+    /// Interaktionslogik für SidebarViewElement.xaml
     /// </summary>
-    public partial class DocumentsGridViewElement : UserControl
+    public partial class SidebarViewElement : UserControl
     {
-        public DocumentsGridViewElement()
+        /// <summary>
+        /// Initializes a new <see cref="SidebarViewElement"/>.
+        /// </summary>
+        public SidebarViewElement()
         {
             InitializeComponent();
         }

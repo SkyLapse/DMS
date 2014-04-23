@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using RestSharp.Portable.Deserializers;
 using RestSharp.Portable.Serializers;
 
-namespace Docular.Client.Core.Model.Rest
+namespace Docular.Client.Model.Rest
 {
     /// <summary>
     /// A custom RestSharp json (de)serializer for proper date handling.

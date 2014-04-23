@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Docular.Client.Core
+namespace Docular.Client
 {
     /// <summary>
     /// Contains extension methods.

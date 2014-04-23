@@ -4,12 +4,12 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Model.Rest;
+using Docular.Client.Model.Rest;
 using Newtonsoft.Json;
 using ProtoBuf;
 using RestSharp.Portable;
 
-namespace Docular.Client.Core.Model
+namespace Docular.Client.Model
 {
     /// <summary>
     /// Represents a category.

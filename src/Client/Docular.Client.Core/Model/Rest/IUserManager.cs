@@ -4,10 +4,10 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Model;
+using Docular.Client.Model;
 using RestSharp.Portable;
 
-namespace Docular.Client.Core.Model.Rest
+namespace Docular.Client.Model.Rest
 {
     /// <summary>
     /// Defines a mechanism to work with docular users.

@@ -155,6 +155,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\SidebarViewElement.cs" />
     <Compile Include="Resources\Strings\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -165,17 +166,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sidebar.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\DocumentsGridView.xaml.cs">
+    <Compile Include="ViewModel\SidebarModel.cs" />
+    <Compile Include="View\DocumentsGridView.xaml.cs">
       <DependentUpon>DocumentsGridView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DocumentsGridViewElement.xaml.cs">
+    <Compile Include="View\DocumentsGridViewElement.xaml.cs">
       <DependentUpon>DocumentsGridViewElement.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Sidebar.xaml.cs">
-      <DependentUpon>Sidebar.xaml</DependentUpon>
+    <Compile Include="View\SidebarView.xaml.cs">
+      <DependentUpon>SidebarView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SidebarElement.xaml.cs">
-      <DependentUpon>SidebarElement.xaml</DependentUpon>
+    <Compile Include="View\SidebarViewElement.xaml.cs">
+      <DependentUpon>SidebarViewElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsKeyStore.cs" />
     <Page Include="Resources\Icons\EyeLogo.xaml">
@@ -210,15 +212,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DocumentsGridView.xaml">
+    <Page Include="View\DocumentsGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DocumentsGridViewElement.xaml">
+    <Page Include="View\DocumentsGridViewElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\LoginView.xaml">
+    <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,7 +248,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UserMenu.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\LoginView.xaml.cs">
+    <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
@@ -257,11 +259,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Sidebar.xaml">
+    <Page Include="View\SidebarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SidebarElement.xaml">
+    <Page Include="View\SidebarViewElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,9 +320,9 @@
       <Project>{0dfb7644-0d72-42c0-adfb-891753921158}</Project>
       <Name>Docular.Client.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Docular.Client.ViewModel.Wpf\Docular.Client.ViewModel.Wpf.csproj">
+    <ProjectReference Include="..\Docular.Client.Wpf\Docular.Client.Wpf.csproj">
       <Project>{27ecd305-f608-4ba4-8f09-d266a15eef7a}</Project>
-      <Name>Docular.Client.ViewModel.Wpf</Name>
+      <Name>Docular.Client.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

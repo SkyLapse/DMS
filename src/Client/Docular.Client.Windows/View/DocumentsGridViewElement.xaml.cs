@@ -13,17 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Docular.Client.Windows.Views
+namespace Docular.Client.Windows.View
 {
     /// <summary>
-    /// Interaktionslogik für DocumentsGridView.xaml
+    /// Interaktionslogik für DocumentsGridViewElement.xaml
     /// </summary>
-    public partial class DocumentsGridView : UserControl
+    public partial class DocumentsGridViewElement : UserControl
     {
         /// <summary>
-        /// Initializes a new <see cref="DocumentsGridView"/>.
+        /// Initializes a new <see cref="DocumentsGridViewElement"/>.
         /// </summary>
-        public DocumentsGridView()
+        public DocumentsGridViewElement()
         {
             InitializeComponent();
         }

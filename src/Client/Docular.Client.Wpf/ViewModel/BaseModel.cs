@@ -4,10 +4,10 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core;
-using Docular.Client.Core.Model.Rest;
+using Docular.Client;
+using Docular.Client.Model.Rest;
 
-namespace Docular.Client.ViewModel.Wpf
+namespace Docular.Client.ViewModel
 {
     /// <summary>
     /// Represents a basic model.

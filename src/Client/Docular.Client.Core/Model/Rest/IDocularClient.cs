@@ -4,9 +4,9 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Model;
+using Docular.Client.Model;
 
-namespace Docular.Client.Core.Model.Rest
+namespace Docular.Client.Model.Rest
 {
     /// <summary>
     /// Defines the way to work with a remote or local docular database.

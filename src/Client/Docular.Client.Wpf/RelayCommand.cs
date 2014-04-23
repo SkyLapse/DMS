@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Docular.Client.ViewModel.Wpf
+namespace Docular.Client
 {
     /// <summary>
     /// Represents an <see cref="ICommand"/> outsourcing the <see cref="M:ICommand.Execute"/> and <see cref="M:ICommand.CanExecute"/>

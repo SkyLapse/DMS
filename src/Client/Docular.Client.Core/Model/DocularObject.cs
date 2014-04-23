@@ -7,11 +7,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Model.Rest;
+using Docular.Client.Model.Rest;
 using Newtonsoft.Json;
 using ProtoBuf;
 
-namespace Docular.Client.Core.Model
+namespace Docular.Client.Model
 {
     /// <summary>
     /// Represents an object in the Docular database.

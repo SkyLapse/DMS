@@ -6,8 +6,8 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core.Model.Rest;
-using Docular.Client.Windows.Views;
+using Docular.Client.Model.Rest;
+using Docular.Client.Windows.View;
 
 namespace Docular.Client.Windows
 {

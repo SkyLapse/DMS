@@ -5,23 +5,23 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Core;
-using Docular.Client.Core.Model;
-using Docular.Client.Core.Model.Rest;
+using Docular.Client;
+using Docular.Client.Model;
+using Docular.Client.Model.Rest;
 
-namespace Docular.Client.ViewModel.Wpf
+namespace Docular.Client.ViewModel
 {
     /// <summary>
-    /// The <see cref="Document"/> view model.
+    /// The <see cref="Category"/> view model.
     /// </summary>
-    public class DocumentModel : CollectionModel<Document>
+    public class CategoryModel : CollectionModel<Category>
     {
         /// <summary>
-        /// Initializes a new <see cref="DocumentModel"/>.
+        /// Initializes a new <see cref="CategoryModel"/>.
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> used to fetch data from the database.</param>
-        public DocumentModel(IDocularClient client)
-            : base(client, "Documents")
+        public CategoryModel(IDocularClient client)
+            : base(client, "Categories")
         {
             Contract.Requires<ArgumentNullException>(client != null);
         }
@@ -34,7 +34,7 @@ namespace Docular.Client.ViewModel.Wpf
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Items = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync());
+                this.Items = new ObservableCollection<Category>(await this.Client.GetCategoriesAsync());
             }
         }
     }
