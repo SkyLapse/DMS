@@ -26,11 +26,7 @@ namespace Docular.Client.ViewModel
             }
             set
             {
-                if (value != _Skin)
-                {
-                    _Skin = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Skin, value);
             }
         }
 
@@ -44,11 +40,7 @@ namespace Docular.Client.ViewModel
             }
             set
             {
-                if (value != _DocularHomeUrl)
-                {
-                    _DocularHomeUrl = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _DocularHomeUrl, value);
             }
         }
 

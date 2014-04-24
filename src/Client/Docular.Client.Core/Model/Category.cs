@@ -34,11 +34,7 @@ namespace Docular.Client.Model
             }
             set
             {
-                if (value != _Parent)
-                {
-                    _Parent = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Parent, value);
             }
         }
 

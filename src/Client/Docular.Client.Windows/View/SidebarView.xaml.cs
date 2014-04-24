@@ -29,5 +29,10 @@ namespace Docular.Client.View
         {
             this.InitializeComponent();
         }
+
+        private void ElementControl_TargetUpdated(object sender, DataTransferEventArgs e)
+        {
+            DockPanel.SetDock((UIElement)this.ElementControl.ItemContainerGenerator.Items.Last(), Dock.Bottom);
+        }
     }
 }

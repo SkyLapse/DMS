@@ -193,8 +193,8 @@
     <Compile Include="ViewModel\CollectionViewModel.cs" />
     <Compile Include="ViewModel\DocumentViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\MainPageModel.cs" />
+    <Compile Include="ViewModel\RootViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\SidebarViewModel.cs" />
@@ -210,6 +210,9 @@
     </Compile>
     <Compile Include="View\SidebarViewElement.xaml.cs">
       <DependentUpon>SidebarViewElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StartView.xaml.cs">
+      <DependentUpon>StartView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsKeyStore.cs" />
     <Page Include="Resources\Icons\EyeLogo.xaml">
@@ -296,6 +299,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SidebarViewElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StartView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

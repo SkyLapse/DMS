@@ -34,11 +34,7 @@ namespace Docular.Client.Model
             }
             set
             {
-                if (value != _Permissions)
-                {
-                    _Permissions = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Permissions, value);
             }
         }
 

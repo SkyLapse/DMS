@@ -10,9 +10,9 @@ using Docular.Client.Model;
 namespace Docular.Client.ViewModel
 {
     /// <summary>
-    /// The main page view model.
+    /// The starting page view model.
     /// </summary>
-    public class MainPageModel : BaseViewModel
+    public class StartViewModel : BaseViewModel
     {
         /// <summary>
         /// Loads the data into the model.

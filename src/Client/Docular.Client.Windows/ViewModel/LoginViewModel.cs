@@ -44,11 +44,7 @@ namespace Docular.Client.ViewModel
             }
             set
             {
-                if (value != _Username)
-                {
-                    _Username = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Username, value);
             }
         }
 
@@ -69,11 +65,7 @@ namespace Docular.Client.ViewModel
             }
             set
             {
-                if (value != _Password)
-                {
-                    _Password = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Password, value);
             }
         }
 

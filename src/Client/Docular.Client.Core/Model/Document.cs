@@ -33,11 +33,7 @@ namespace Docular.Client.Model
             }
             private set
             {
-                if (value != _Buzzwords)
-                {
-                    _Buzzwords = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Buzzwords, value);
             }
         }
 
@@ -58,11 +54,7 @@ namespace Docular.Client.Model
             }
             set
             {
-                if (value != _Category)
-                {
-                    _Category = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Category, value);
             }
         }
 
@@ -83,11 +75,7 @@ namespace Docular.Client.Model
             }
             private set
             {
-                if (value != _ExtractedContent)
-                {
-                    _ExtractedContent = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _ExtractedContent, value);
             }
         }
 
@@ -108,11 +96,7 @@ namespace Docular.Client.Model
             }
             private set
             {
-                if (value != _Mime)
-                {
-                    _Mime = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Mime, value);
             }
         }
 
@@ -133,11 +117,7 @@ namespace Docular.Client.Model
             }
             private set
             {
-                if (value != _PayloadPath)
-                {
-                    _PayloadPath = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _PayloadPath, value);
             }
         }
 
@@ -158,11 +138,7 @@ namespace Docular.Client.Model
             }
             private set
             {
-                if (value != _ThumbnailPath)
-                {
-                    _ThumbnailPath = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _ThumbnailPath, value);
             }
         }
 
@@ -183,11 +159,7 @@ namespace Docular.Client.Model
             }
             private set
             {
-                if (value != _Size)
-                {
-                    _Size = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Size, value);
             }
         }
 
@@ -208,11 +180,7 @@ namespace Docular.Client.Model
             }
             set
             {
-                if (value != _Tags)
-                {
-                    _Tags = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Tags, value);
             }
         }
 

@@ -10,7 +10,7 @@ namespace Docular.Client.ViewModel
     /// <summary>
     /// The main model containing the model currently being displayed.
     /// </summary>
-    public class MainViewModel : BaseViewModel
+    public class RootViewModel : BaseViewModel
     {
         /// <summary>
         /// Backing field.
@@ -28,11 +28,7 @@ namespace Docular.Client.ViewModel
             }
             set
             {
-                if (value != _DisplayViewModel)
-                {
-                    _DisplayViewModel = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _DisplayViewModel, value);
             }
         }
 
@@ -52,33 +48,29 @@ namespace Docular.Client.ViewModel
             }
             set
             {
-                if (value != _NavigationViewModel)
-                {
-                    _NavigationViewModel = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _NavigationViewModel, value);
             }
         }
 
         /// <summary>
-        /// Initializes a new <see cref="MainViewModel"/>.
+        /// Initializes a new <see cref="RootViewModel"/>.
         /// </summary>
-        public MainViewModel() { }
+        public RootViewModel() 
+        {
+            StartViewModel startModel = new StartViewModel();
+            SidebarViewModel sidebarModel = new SidebarViewModel();
+            Task.WaitAll(startModel.LoadData(), sidebarModel.LoadData());
+            this.DisplayViewModel = startModel;
+            this.NavigationViewModel = sidebarModel;
+        }
 
         /// <summary>
         /// Loads the data into the model.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
-        public override async Task LoadData()
+        public override Task LoadData()
         {
-            using (IsBusySwitcher section = new IsBusySwitcher(this))
-            {
-                BaseViewModel displayModel = new MainPageModel();
-                BaseViewModel navigationModel = new SidebarViewModel();
-                await Task.WhenAll(displayModel.LoadData(), navigationModel.LoadData());
-                this.DisplayViewModel = displayModel;
-                this.NavigationViewModel = navigationModel;
-            }
+            return Task.FromResult<object>(null);
         }
 
         protected override void OnLoadDataCommandException(Exception ex)

@@ -35,11 +35,7 @@ namespace Docular.Client.ViewModel
             }
             protected set
             {
-                if (value != _IsBusy)
-                {
-                    _IsBusy = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _IsBusy, value);
             }
         }
 

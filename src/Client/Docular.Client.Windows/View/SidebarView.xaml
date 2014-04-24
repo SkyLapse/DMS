@@ -6,7 +6,7 @@
              xmlns:views="clr-namespace:Docular.Client.View"
              d:DesignHeight="720" d:DesignWidth="90"
              Background="{DynamicResource BackgroundBrush}">
-    <ItemsControl x:Name="ElementControl" ItemsSource="{Binding Items}">
+    <ItemsControl x:Name="ElementControl" ItemsSource="{Binding Items, NotifyOnTargetUpdated=True}" TargetUpdated="ElementControl_TargetUpdated">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
                 <views:SidebarViewElement/>

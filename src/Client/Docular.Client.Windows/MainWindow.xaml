@@ -7,7 +7,7 @@
         WindowStyle="None" ResizeMode="NoResize"
         Width="1280" Height="720" MinWidth="1280" MinHeight="720"
         Style="{DynamicResource ContentControlStyleBordered}"
-        DataContext="{Binding MainModel, RelativeSource={RelativeSource Self}}"
+        DataContext="{Binding RootModel, RelativeSource={RelativeSource Self}}"
         MouseDown="Window_MouseDown">
     <DockPanel LastChildFill="False">
         <ContentPresenter Content="{Binding NavigationModel}"

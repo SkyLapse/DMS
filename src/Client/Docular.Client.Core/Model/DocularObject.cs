@@ -36,11 +36,7 @@ namespace Docular.Client.Model
             }
             protected set
             {
-                if (value != _CreateInfo)
-                {
-                    _CreateInfo = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _CreateInfo, value);
             }
         }
 
@@ -61,11 +57,7 @@ namespace Docular.Client.Model
             }
             set
             {
-                if (value != _CustomFields)
-                {
-                    _CustomFields = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _CustomFields, value);
             }
         }
 
@@ -86,11 +78,7 @@ namespace Docular.Client.Model
             }
             set
             {
-                if (value != _Description)
-                {
-                    _Description = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Description, value);
             }
         }
 
@@ -111,11 +99,7 @@ namespace Docular.Client.Model
             }
             protected set
             {
-                if (value != _EditInfo)
-                {
-                    _EditInfo = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _EditInfo, value);
             }
         }
 
@@ -136,11 +120,7 @@ namespace Docular.Client.Model
             }
             protected set
             {
-                if (value != _Id)
-                {
-                    _Id = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Id, value);
             }
         }
 

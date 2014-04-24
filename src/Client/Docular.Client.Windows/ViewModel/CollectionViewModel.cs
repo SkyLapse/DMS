@@ -31,11 +31,7 @@ namespace Docular.Client.ViewModel
             }
             set
             {
-                if (value != _Items)
-                {
-                    _Items = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Items, value);
             }
         }
 

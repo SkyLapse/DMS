@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using ProtoBuf;
@@ -37,11 +38,7 @@ namespace Docular.Client
             }
             set
             {
-                if (value != _Name)
-                {
-                    _Name = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Name, value);
             }
         }
 
@@ -60,15 +57,22 @@ namespace Docular.Client
         }
 
         /// <summary>
-        /// Fires the <see cref="PropertyChanged"/>-event for the specified property name.
+        /// Sets the specified property and raises the <see cref="PropertyChanged"/>-event.
         /// </summary>
-        /// <param name="propertyName">The name of the property that changed.</param>
-        protected void OnPropertyChanged([CallerMemberName] String propertyName = null)
+        /// <typeparam name="T">The <see cref="Type"/> of property to set.</typeparam>
+        /// <param name="location">The backing field of the property to set.</param>
+        /// <param name="value">The new property value.</param>
+        /// <param name="propertyName">The name of the property. Leave this empty, it will be filled out by the compiler.</param>
+        protected void SetProperty<T>(ref T location, T value, [CallerMemberName] String propertyName = null)
         {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null)
+            if (!ReferenceEquals(value, location))
             {
-                handler(this, new PropertyChangedEventArgs(propertyName));
+                location = value;
+                PropertyChangedEventHandler handler = this.PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(propertyName));
+                }
             }
         }
     }
