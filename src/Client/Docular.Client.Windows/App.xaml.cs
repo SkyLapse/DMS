@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
-namespace Docular.Client.Windows
+namespace Docular.Client
 {
     /// <summary>
     /// Interaktionslogik für "App.xaml"

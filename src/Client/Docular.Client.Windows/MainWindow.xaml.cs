@@ -18,7 +18,7 @@ using Docular.Client;
 using Docular.Client.Model;
 using Docular.Client.Model.Rest;
 
-namespace Docular.Client.Windows
+namespace Docular.Client
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml

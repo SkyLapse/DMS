@@ -7,9 +7,9 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model.Rest;
-using Docular.Client.Windows.View;
+using Docular.Client.View;
 
-namespace Docular.Client.Windows
+namespace Docular.Client
 {
     /// <summary>
     /// Retreives the API key for an app instance.

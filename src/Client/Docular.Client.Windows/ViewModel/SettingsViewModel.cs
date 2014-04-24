@@ -14,7 +14,7 @@ namespace Docular.Client.ViewModel
     /// <summary>
     /// The settings view model.
     /// </summary>
-    public class SettingsModel : BaseModel
+    public class SettingsViewModel : BaseViewModel
     {
         private String _Skin;
 
@@ -57,6 +57,11 @@ namespace Docular.Client.ViewModel
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public override Task LoadData()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnLoadDataCommandException(Exception ex)
         {
             throw new NotImplementedException();
         }

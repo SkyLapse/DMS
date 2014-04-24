@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Docular.Client.Windows.View.LoginView"
+﻿<UserControl x:Class="Docular.Client.View.LoginView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
-             xmlns:s="clr-namespace:Docular.Client.Windows.Resources.Strings"
+             xmlns:s="clr-namespace:Docular.Client.Resources.Strings"
              d:DesignHeight="425" d:DesignWidth="350"
              MinHeight="425" MinWidth="350"
              Style="{DynamicResource ContentControlStyleBordered}"
@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
 
         <!-- Captions -->
-        <Label Content="{x:Static s:UserMenu.LoginCaption}" 
+        <Label Content="{x:Static s:UserMenu.LoginCaption}"
                Style="{DynamicResource LabelStyleRegular}" 
                Grid.Row="0" Grid.ColumnSpan="3"
                FontSize="48"/>
@@ -64,7 +64,7 @@
 
         <!-- Big fat login button -->
         <Button x:Name="btnDoLogin"
-                Content="{x:Static s:UserMenu.LoginCaption}" 
+                Content="{x:Static s:UserMenu.LoginCaption}"
                 Style="{DynamicResource ButtonStyleRegular}"
                 FontSize="24"
                 Grid.Column="1" Grid.Row="7"

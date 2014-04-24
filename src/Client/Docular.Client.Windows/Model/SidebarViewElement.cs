@@ -5,30 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
 
-namespace Docular.Client.Windows.Model
+namespace Docular.Client.Model
 {
+    /// <summary>
+    /// Represents an element in the sidebar.
+    /// </summary>
     public class SidebarViewElement : ObservableObject
     {
-        private String _Name;
-
-        public String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                if (value != _Name)
-                {
-                    _Name = value;
-                    this.OnPropertyChanged();
-                }
-            }
-        }
-
+        /// <summary>
+        /// Backing field.
+        /// </summary>
         private Path _Icon;
 
+        /// <summary>
+        /// The <see cref="SidebarViewElement"/>'s icon.
+        /// </summary>
         public Path Icon
         {
             get
@@ -43,6 +34,20 @@ namespace Docular.Client.Windows.Model
                     this.OnPropertyChanged();
                 }
             }
+        }
+
+        /// <summary>
+        /// Initializes a new <see cref="SidebarViewElement"/>.
+        /// </summary>
+        public SidebarViewElement() { }
+
+        /// <summary>
+        /// Initializes a new <see cref="SidebarViewElement"/>.
+        /// </summary>
+        public SidebarViewElement(String name, Path icon)
+            : base(name)
+        {
+            this.Icon = icon;
         }
     }
 }

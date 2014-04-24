@@ -10,10 +10,10 @@ using Docular.Client.Model.Rest;
 namespace Docular.Client.ViewModel
 {
     /// <summary>
-    /// Represents a <see cref="BaseModel"/> hosting a collection of items.
+    /// Represents a <see cref="BaseViewModel"/> hosting a collection of items.
     /// </summary>
     /// <typeparam name="T">The <see cref="Type"/> of items to store.</typeparam>
-    public abstract class CollectionModel<T> : BaseModel
+    public abstract class CollectionViewModel<T> : BaseViewModel
     {
         /// <summary>
         /// Backing field.
@@ -40,31 +40,31 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
-        /// Initializes a new <see cref="BaseModel"/>.
+        /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
-        protected CollectionModel() { }
+        protected CollectionViewModel() { }
 
         /// <summary>
-        /// Initializes a new <see cref="BaseModel"/>.
+        /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
-        /// <param name="name">The <see cref="BaseModel"/>s name.</param>
-        protected CollectionModel(String name) : base(name) { }
+        /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
+        protected CollectionViewModel(String name) : base(name) { }
 
         /// <summary>
-        /// Initializes a new <see cref="BaseModel"/>.
+        /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
-        protected CollectionModel(IDocularClient client)
+        protected CollectionViewModel(IDocularClient client)
         {
             this.Client = client;
         }
 
         /// <summary>
-        /// Initializes a new <see cref="BaseModel"/>.
+        /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
-        /// <param name="name">The <see cref="BaseModel"/>s name.</param>
-        protected CollectionModel(IDocularClient client, String name)
+        /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
+        protected CollectionViewModel(IDocularClient client, String name)
             : base(name)
         {
             this.Client = client;

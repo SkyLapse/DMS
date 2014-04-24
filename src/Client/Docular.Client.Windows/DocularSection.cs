@@ -7,9 +7,8 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client;
 
-namespace Docular.Client.Windows
+namespace Docular.Client
 {
     /// <summary>
     /// Contains configuration data for the docular windows client.

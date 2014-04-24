@@ -12,16 +12,16 @@ using Docular.Client.Model.Rest;
 namespace Docular.Client.ViewModel
 {
     /// <summary>
-    /// The <see cref="Category"/> view model.
+    /// The <see cref="Tag"/> view model.
     /// </summary>
-    public class CategoryModel : CollectionModel<Category>
+    public class TagViewModel : CollectionViewModel<Tag>
     {
         /// <summary>
-        /// Initializes a new <see cref="CategoryModel"/>.
+        /// Initializes a new <see cref="TagViewModel"/>.
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> used to fetch data from the database.</param>
-        public CategoryModel(IDocularClient client)
-            : base(client, "Categories")
+        public TagViewModel(IDocularClient client)
+            : base(client, "Tags")
         {
             Contract.Requires<ArgumentNullException>(client != null);
         }
@@ -34,8 +34,13 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Items = new ObservableCollection<Category>(await this.Client.GetCategoriesAsync());
+                this.Items = new ObservableCollection<Tag>(await this.Client.GetTagsAsync());
             }
+        }
+
+        protected override void OnLoadDataCommandException(Exception ex)
+        {
+            throw new NotImplementedException();
         }
     }
 }

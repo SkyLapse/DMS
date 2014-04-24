@@ -10,17 +10,17 @@ namespace Docular.Client.ViewModel
     /// <summary>
     /// The main model containing the model currently being displayed.
     /// </summary>
-    public class MainModel : BaseModel
+    public class MainViewModel : BaseViewModel
     {
         /// <summary>
         /// Backing field.
         /// </summary>
-        private BaseModel _DisplayModel;
+        private BaseViewModel _DisplayModel;
 
         /// <summary>
         /// The model to display in the UI.
         /// </summary>
-        public BaseModel DisplayModel
+        public BaseViewModel DisplayModel
         {
             get
             {
@@ -48,6 +48,11 @@ namespace Docular.Client.ViewModel
                 await mainPage.LoadData();
                 this.DisplayModel = mainPage;
             }
+        }
+
+        protected override void OnLoadDataCommandException(Exception ex)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Core.Test", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Windows", "Docular.Client.Windows\Docular.Client.Windows.csproj", "{7B0D509B-7A5E-4BBA-8B1E-9E347A6CE5AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Wpf", "Docular.Client.Wpf\Docular.Client.Wpf.csproj", "{27ECD305-F608-4BA4-8F09-D266A15EEF7A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,10 +34,6 @@ Global
 		{7B0D509B-7A5E-4BBA-8B1E-9E347A6CE5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B0D509B-7A5E-4BBA-8B1E-9E347A6CE5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B0D509B-7A5E-4BBA-8B1E-9E347A6CE5AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27ECD305-F608-4BA4-8F09-D266A15EEF7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27ECD305-F608-4BA4-8F09-D266A15EEF7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27ECD305-F608-4BA4-8F09-D266A15EEF7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27ECD305-F608-4BA4-8F09-D266A15EEF7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

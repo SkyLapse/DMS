@@ -15,7 +15,7 @@ namespace Docular.Client.ViewModel
     /// The model for the login window.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class LoginModel : BaseModel
+    public class LoginViewModel : BaseViewModel
     {
         /// <summary>
         /// The <see cref="IKeyStore"/> to fill.
@@ -109,7 +109,7 @@ namespace Docular.Client.ViewModel
                         // TODO: Proper exception handling here, please!
                         throw;
                     }
-                }, 
+                },
                 p => !String.IsNullOrEmpty(this.Username) && !String.IsNullOrEmpty(this.Password) && (this.docularUri != null) && (this.keyStore != null));
             }
         }
@@ -126,11 +126,11 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
-        /// Initializes a new <see cref="LoginModel"/>.
+        /// Initializes a new <see cref="LoginViewModel"/>.
         /// </summary>
         /// <param name="docularUri">The <see cref="Uri"/> of the remote docular DB. Not the /api url!</param>
         /// <param name="keyStore">The <see cref="IKeyStore"/> to store the obtained key in.</param>
-        public LoginModel(IKeyStore keyStore, Uri docularUri)
+        public LoginViewModel(IKeyStore keyStore, Uri docularUri)
             : base("Log in")
         {
             Contract.Requires<ArgumentNullException>(keyStore != null && docularUri != null);
@@ -190,5 +190,11 @@ namespace Docular.Client.ViewModel
         {
             System.Diagnostics.Process.Start(this.docularUri.Combine("resetpassword/").ToString());
         }
+
+        protected override void OnLoadDataCommandException(Exception ex)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+

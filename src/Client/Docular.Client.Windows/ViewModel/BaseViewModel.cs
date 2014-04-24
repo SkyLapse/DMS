@@ -12,7 +12,7 @@ namespace Docular.Client.ViewModel
     /// <summary>
     /// Represents a basic model.
     /// </summary>
-    public abstract class BaseModel : ObservableObject
+    public abstract class BaseViewModel : ObservableObject
     {
         /// <summary>
         /// The <see cref="IDocularClient"/> used to fetch the data.
@@ -56,40 +56,40 @@ namespace Docular.Client.ViewModel
                     {
                         await this.LoadData();
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        throw; // TODO: Handle exception properly.
+                        this.OnLoadDataCommandException(ex);
                     }
                 });
             }
         }
 
         /// <summary>
-        /// Initializes a new <see cref="BaseModel"/>.
+        /// Initializes a new <see cref="BaseViewModel"/>.
         /// </summary>
-        protected BaseModel() { }
+        protected BaseViewModel() { }
 
         /// <summary>
-        /// Initializes a new <see cref="BaseModel"/>.
+        /// Initializes a new <see cref="BaseViewModel"/>.
         /// </summary>
-        /// <param name="name">The <see cref="BaseModel"/>s name.</param>
-        protected BaseModel(String name) : base(name) { }
+        /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
+        protected BaseViewModel(String name) : base(name) { }
 
         /// <summary>
-        /// Initializes a new <see cref="BaseModel"/>.
+        /// Initializes a new <see cref="BaseViewModel"/>.
         /// </summary>
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
-        protected BaseModel(IDocularClient client)
+        protected BaseViewModel(IDocularClient client)
         {
             this.Client = client;
         }
 
         /// <summary>
-        /// Initializes a new <see cref="BaseModel"/>.
+        /// Initializes a new <see cref="BaseViewModel"/>.
         /// </summary>
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
-        /// <param name="name">The <see cref="BaseModel"/>s name.</param>
-        protected BaseModel(IDocularClient client, String name)
+        /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
+        protected BaseViewModel(IDocularClient client, String name)
             : base(name)
         {
             this.Client = client;
@@ -100,6 +100,13 @@ namespace Docular.Client.ViewModel
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public abstract Task LoadData();
+
+        /// <summary>
+        /// Callback for any exceptions occuring in the asynchronous <see cref="LoadData"/>-method if it
+        /// is executed from an async void method.
+        /// </summary>
+        /// <param name="ex">The <see cref="Exception"/> that was thrown.</param>
+        protected abstract void OnLoadDataCommandException(Exception ex);
 
         /// <summary>
         /// Starts a section of code that needs to have the <see cref="P:IsBusy"/>-flag set to true.
@@ -127,13 +134,13 @@ namespace Docular.Client.ViewModel
             /// <summary>
             /// The model which is busy.
             /// </summary>
-            private BaseModel busyModel;
+            private BaseViewModel busyModel;
 
             /// <summary>
             /// Initializes a new <see cref="IsBusySwitcher"/>.
             /// </summary>
-            /// <param name="model">The <see cref="BaseModel"/> to swich the <see cref="P:BaseModel.IsBusy"/>-state of.</param>
-            public IsBusySwitcher(BaseModel model)
+            /// <param name="model">The <see cref="BaseViewModel"/> to swich the <see cref="P:BaseModel.IsBusy"/>-state of.</param>
+            public IsBusySwitcher(BaseViewModel model)
                 : this()
             {
                 Contract.Requires<ArgumentNullException>(model != null);
@@ -143,7 +150,7 @@ namespace Docular.Client.ViewModel
             }
 
             /// <summary>
-            /// Disposes the <see cref="IsBusySwitcher"/> debusying the <see cref="BaseModel"/>.
+            /// Disposes the <see cref="IsBusySwitcher"/> debusying the <see cref="BaseViewModel"/>.
             /// </summary>
             public void Dispose()
             {

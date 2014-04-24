@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Docular.Client.Windows.View
+namespace Docular.Client.View
 {
     /// <summary>
     /// Interaktionslogik für SidebarView.xaml
