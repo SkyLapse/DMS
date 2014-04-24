@@ -15,26 +15,55 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Backing field.
         /// </summary>
-        private BaseViewModel _DisplayModel;
+        private BaseViewModel _DisplayViewModel;
 
         /// <summary>
         /// The model to display in the UI.
         /// </summary>
-        public BaseViewModel DisplayModel
+        public BaseViewModel DisplayViewModel
         {
             get
             {
-                return _DisplayModel;
+                return _DisplayViewModel;
             }
             set
             {
-                if (value != _DisplayModel)
+                if (value != _DisplayViewModel)
                 {
-                    _DisplayModel = value;
+                    _DisplayViewModel = value;
                     this.OnPropertyChanged();
                 }
             }
         }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private BaseViewModel _NavigationViewModel;
+
+        /// <summary>
+        /// The <see cref="BaseViewModel"/> used for window navigation.
+        /// </summary>
+        public BaseViewModel NavigationViewModel
+        {
+            get
+            {
+                return _NavigationViewModel;
+            }
+            set
+            {
+                if (value != _NavigationViewModel)
+                {
+                    _NavigationViewModel = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new <see cref="MainViewModel"/>.
+        /// </summary>
+        public MainViewModel() { }
 
         /// <summary>
         /// Loads the data into the model.
@@ -44,9 +73,11 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher section = new IsBusySwitcher(this))
             {
-                MainPageModel mainPage = new MainPageModel();
-                await mainPage.LoadData();
-                this.DisplayModel = mainPage;
+                BaseViewModel displayModel = new MainPageModel();
+                BaseViewModel navigationModel = new SidebarViewModel();
+                await Task.WhenAll(displayModel.LoadData(), navigationModel.LoadData());
+                this.DisplayViewModel = displayModel;
+                this.NavigationViewModel = navigationModel;
             }
         }
 

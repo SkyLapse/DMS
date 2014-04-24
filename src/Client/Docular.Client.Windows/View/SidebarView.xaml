@@ -6,10 +6,10 @@
              xmlns:views="clr-namespace:Docular.Client.View"
              d:DesignHeight="720" d:DesignWidth="90"
              Background="{DynamicResource BackgroundBrush}">
-    <ItemsControl ItemsSource="{Binding Items}">
+    <ItemsControl x:Name="ElementControl" ItemsSource="{Binding Items}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                
+                <views:SidebarViewElement/>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
         <ItemsControl.ItemsPanel>

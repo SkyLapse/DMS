@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,20 +19,64 @@ using System.Windows.Shapes;
 using Docular.Client;
 using Docular.Client.Model;
 using Docular.Client.Model.Rest;
+using Docular.Client.ViewModel;
 
 namespace Docular.Client
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Occurs when a property of the <see cref="MainWindow"/> changed.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// The main view model.
+        /// </summary>
+        private MainViewModel _MainModel;
+
+        /// <summary>
+        /// The main view model.
+        /// </summary>
+        public MainViewModel MainModel
+        {
+            get
+            {
+                return _MainModel;
+            }
+            set
+            {
+                if (value != _MainModel)
+                {
+                    _MainModel = value;
+                    this.OnPropertyChanged();
+                }
+            }
+        }
+
         /// <summary>
         /// Initializes a new <see cref="MainWindow"/>.
         /// </summary>
         public MainWindow()
         {
             this.InitializeComponent();
+            this.MainModel = new MainViewModel();
+        }
+
+        /// <summary>
+        /// Fires the <see cref="PropertyChanged"/>-event for the specified property name.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
+        protected void OnPropertyChanged([CallerMemberName] String propertyName = null)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         /// <summary>

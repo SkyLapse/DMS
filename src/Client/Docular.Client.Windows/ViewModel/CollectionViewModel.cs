@@ -42,21 +42,29 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
-        protected CollectionViewModel() { }
+        protected CollectionViewModel()
+        {
+            this.Items = new ObservableCollection<T>();
+        }
 
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
         /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
-        protected CollectionViewModel(String name) : base(name) { }
+        protected CollectionViewModel(String name)
+            : base(name)
+        {
+            this.Items = new ObservableCollection<T>();
+        }
 
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
         protected CollectionViewModel(IDocularClient client)
+            : base(client)
         {
-            this.Client = client;
+            this.Items = new ObservableCollection<T>();
         }
 
         /// <summary>
@@ -65,9 +73,9 @@ namespace Docular.Client.ViewModel
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
         /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
         protected CollectionViewModel(IDocularClient client, String name)
-            : base(name)
+            : base(client, name)
         {
-            this.Client = client;
+            this.Items = new ObservableCollection<T>();
         }
     }
 }
