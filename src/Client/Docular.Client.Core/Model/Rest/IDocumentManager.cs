@@ -51,6 +51,13 @@ namespace Docular.Client.Model.Rest
         Task<int> GetDocumentCountAsync();
 
         /// <summary>
+        /// Gets the size in bytes of a specified document collection.
+        /// </summary>
+        /// <param name="filterParameters"><see cref="Parameter"/>s to filter a collection before obtaining it's size.</param>
+        /// <returns>The size of the selected documents in bytes.</returns>
+        Task<int> GetDocumentsSizeAsync(params Parameter[] filterParameters);
+
+        /// <summary>
         /// Gets a <see cref="Stream"/> containing the thumbnail image of the <see cref="Document"/>.
         /// </summary>
         /// <param name="documentId">The ID of the <see cref="Document"/> to obtain the thumbnail of.</param>
@@ -131,6 +138,17 @@ namespace Docular.Client.Model.Rest
         /// </summary>
         Task<int> IDocumentManager.GetDocumentCountAsync()
         {
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<int> IDocumentManager.GetDocumentsSizeAsync(params Parameter[] filterParameters)
+        {
+            Contract.Requires<ArgumentNullException>(filterParameters != null);
+            Contract.Requires<ArgumentException>(filterParameters.All(filterParam => filterParam.Type == ParameterType.GetOrPost));
+
             return null;
         }
 

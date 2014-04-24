@@ -4,7 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
              d:DesignWidth="1000" d:DesignHeight="600">
-    <Grid>
-            
-    </Grid>
+    <DockPanel LastChildFill="False">
+        <ContentControl Content="{DynamicResource EyeLogoWithTextWide}"
+                        DockPanel.Dock="Top"
+                        Width="700">
+            <ContentControl.Effect>
+                <DropShadowEffect Color="{DynamicResource Background}" ShadowDepth="0" BlurRadius="10"/>
+            </ContentControl.Effect>
+        </ContentControl>
+    </DockPanel>
 </UserControl>

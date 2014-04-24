@@ -10,7 +10,7 @@ namespace Docular.Client.ViewModel
     /// <summary>
     /// The main model containing the model currently being displayed.
     /// </summary>
-    public class RootViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
         /// <summary>
         /// Backing field.
@@ -53,9 +53,9 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
-        /// Initializes a new <see cref="RootViewModel"/>.
+        /// Initializes a new <see cref="MainViewModel"/>.
         /// </summary>
-        public RootViewModel() 
+        public MainViewModel() 
         {
             StartViewModel startModel = new StartViewModel();
             SidebarViewModel sidebarModel = new SidebarViewModel();

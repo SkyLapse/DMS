@@ -3,17 +3,21 @@ REST-API
 
 Every specified URL is prefixed by http://_yoursite.com_/api/
 
-### GET Collection Filtering Parameters (applies to all collections):
+---
+
+## Main (collection) APIs
+
+### Optional GET Collection Filtering Parameters (applies to all collections):
 - start=startIndex				// Starts searching at the specified collection index
 - count=count 					// Indicates the maximum amount of results, defaults to infinite
 - orderby=fieldName 			// Specifies the field the collection shall be sorted by before applying the query, defaults to the item creation time (createInfo.date)
 - order=a/d						// Orders the collection to be searched in ascending (a) or descending (d) order before applying the query, defaults to ascending (a)
-- nowrap=true/false				// Output the JSON data directly without wrapping it into a root element ({ /* Document Properties */ } instead of { "document": { /* Document Properties */ } })
+- nowrap=true/false				// Output the JSON data directly without wrapping it into a root element ({ /* Document Properties */ } instead of { "document": { /* Document Properties */ } }), defaults to wrapping
 
 ### Documents:
 - Retreive document info: documents/$id (GET)
 - Retreive collection: documents (GET)
-	- GET-Parameters: 
+	- Optional GET-Parameters: 
 		- user=userID 			// Returns documents created by that given user only
 		- category=categoryID 	// Returns documents that belong into that specific category only
 		- tag=tagID 			// Returns documents that are tagged with the given tag only
@@ -25,11 +29,16 @@ Every specified URL is prefixed by http://_yoursite.com_/api/
 - Delete: documents/$id (DELETE)
 - Content: documents/$id/payload (GET, POST)
 - Thumbnail: documents/$id/thumbnail (GET)
+- Size in bytes: documents/size (GET)
+	- Optional GET-Parameters: 
+		- user=userID 			// Includes documents created by that given user only
+		- category=categoryID 	// Includes documents that belong into that specific category only
+		- tag=tagID 			// Includes documents that are tagged with the given tag only
 
 ### Categories:
 - Retreive: categories/$id (GET)
 - Retreive collection: categories (GET)
-	- GET-Parameters:
+	- Optional GET-Parameters:
 		- user=userID 			// Returns documents created by that given user only
 		- category=parentId		// Returns categories with that specified parent only
 - Add: categories (POST)
@@ -40,7 +49,7 @@ Every specified URL is prefixed by http://_yoursite.com_/api/
 ### Tags:
 - Retreive: tags/$id (GET)
 - Retreive collection: tags (GET)
-	- GET-Parameters:
+	- Optional GET-Parameters:
 		- user=userID 			// Returns documents created by that given user only
 - Add: tags (POST)
 - Count: tags/count (GET)
@@ -54,3 +63,19 @@ Every specified URL is prefixed by http://_yoursite.com_/api/
 - Count: users/count (GET)
 - Edit: users/$id (PUT)
 - Delete: users/$id (DELETE)
+
+---
+
+## Additional APIs
+
+### Authorization:
+- Get new key: keys (POST)
+    - Request body:
+        - username              // The username of the user
+        - password              // The users password
+        - machineName           // The name of the currently running machine or device
+- Check whether key is valid: keys/validate (POST)
+    - Request body:
+        - key                   // The key to validate    
+
+### Server information

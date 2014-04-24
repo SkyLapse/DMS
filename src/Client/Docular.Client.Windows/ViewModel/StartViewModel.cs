@@ -14,6 +14,8 @@ namespace Docular.Client.ViewModel
     /// </summary>
     public class StartViewModel : BaseViewModel
     {
+
+
         /// <summary>
         /// Loads the data into the model.
         /// </summary>

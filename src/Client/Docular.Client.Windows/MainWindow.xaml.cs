@@ -36,12 +36,12 @@ namespace Docular.Client
         /// <summary>
         /// The main view model.
         /// </summary>
-        private RootViewModel _RootModel;
+        private MainViewModel _RootModel;
 
         /// <summary>
         /// The main view model.
         /// </summary>
-        public RootViewModel RootModel
+        public MainViewModel RootModel
         {
             get
             {
@@ -63,7 +63,7 @@ namespace Docular.Client
         public MainWindow()
         {
             this.InitializeComponent();
-            this.RootModel = new RootViewModel();
+            this.RootModel = new MainViewModel();
         }
 
         /// <summary>

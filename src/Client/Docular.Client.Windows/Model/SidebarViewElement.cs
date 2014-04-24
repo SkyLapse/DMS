@@ -28,11 +28,7 @@ namespace Docular.Client.Model
             }
             set
             {
-                if (value != _Icon)
-                {
-                    _Icon = value;
-                    this.OnPropertyChanged();
-                }
+                this.SetProperty(ref _Icon, value);
             }
         }
 

@@ -72,6 +72,11 @@ namespace Docular.Client.Model.Rest
         public const String DocumentsIdThumbnail = DocumentsId + "/thumbnail";
 
         /// <summary>
+        /// The sub path for obtaining a collections size in bytes.
+        /// </summary>
+        public const String DocumentsSize = Documents + "/size";
+
+        /// <summary>
         /// The sub path for tags.
         /// </summary>
         public const String Tags = "tags";
@@ -226,6 +231,22 @@ namespace Docular.Client.Model.Rest
         public Task<int> GetDocumentCountAsync()
         {
             return this.PerformCountRequest(DocumentsCount);
+        }
+
+        /// <summary>
+        /// Gets the size in bytes of a specified document collection.
+        /// </summary>
+        /// <param name="filterParameters"><see cref="Parameter"/>s to filter a collection before obtaining it's size.</param>
+        /// <returns>The size of the selected documents in bytes.</returns>
+        public async Task<int> GetDocumentsSizeAsync(params Parameter[] filterParameters)
+        {
+            RestRequest sizeRequest = new RestRequest(DocumentsSize, HttpMethod.Get);
+            sizeRequest.Serializer = this.jsonSerializer;
+            foreach (Parameter p in filterParameters)
+            {
+                sizeRequest.AddParameter(p);
+            }
+            return (await this.restClient.Execute<int>(sizeRequest)).Data;
         }
 
         /// <summary>

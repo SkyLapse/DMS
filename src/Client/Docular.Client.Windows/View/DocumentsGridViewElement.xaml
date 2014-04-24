@@ -10,14 +10,14 @@
     <UserControl.Background>
         <SolidColorBrush x:Name="BackgroundBrush" Color="{DynamicResource Highlight}" Opacity="0"/>
     </UserControl.Background>
-	<i:Interaction.Triggers>
+	<!--<i:Interaction.Triggers>
 		<ei:DataTrigger Binding="{Binding IsMouseOver, ElementName=userControl, Mode=OneWay}" Value="True">
 			<ei:GoToStateAction TargetObject="{Binding ElementName=userControl}" StateName="MouseOver"/>
 		</ei:DataTrigger>
 		<ei:DataTrigger Binding="{Binding IsMouseOver, ElementName=userControl, Mode=OneWay}" Value="False">
 			<ei:GoToStateAction TargetObject="{Binding ElementName=userControl}" StateName="Normal"/>
 		</ei:DataTrigger>
-	</i:Interaction.Triggers>
+	</i:Interaction.Triggers>-->
 	<Grid>
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="StandardStates">

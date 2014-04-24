@@ -158,7 +158,7 @@ namespace Docular.Client.ViewModel
                     return true;
                 }
 
-                RestRequest loginRequest = new RestRequest(DocularClient.Keys);
+                RestRequest loginRequest = new RestRequest(DocularClient.Keys, System.Net.Http.HttpMethod.Get);
                 loginRequest.AddParameter("nowrap", true, ParameterType.GetOrPost);
                 loginRequest.AddBody(this);
 
