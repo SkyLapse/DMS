@@ -124,6 +124,15 @@ namespace Docular.Client.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sidebar ähnelt.
+        /// </summary>
+        public static string SidebarCaption {
+            get {
+                return ResourceManager.GetString("SidebarCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Start ähnelt.
         /// </summary>
         public static string StartCaption {

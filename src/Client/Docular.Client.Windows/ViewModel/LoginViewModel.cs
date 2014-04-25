@@ -92,9 +92,10 @@ namespace Docular.Client.ViewModel
                 {
                     try
                     {
+                        // This is a little bit dirty (since we're referencing the View from the ViewModel) but there's no other way.
                         this.Password = ((System.Windows.Controls.PasswordBox)p).Password;
                         await this.Login();
-                        this.Password = null;
+                        this.Password = null; // Assign null to avoid unnecessary references
                     }
                     catch (Exception)
                     {
@@ -113,7 +114,10 @@ namespace Docular.Client.ViewModel
         {
             get
             {
-                return new RelayCommand(p => this.ForgotPassword(), p => this.docularUri != null);
+                return new RelayCommand(
+                    p => this.ForgotPassword(), 
+                    p => this.docularUri != null
+                );
             }
         }
 
@@ -123,7 +127,7 @@ namespace Docular.Client.ViewModel
         /// <param name="docularUri">The <see cref="Uri"/> of the remote docular DB. Not the /api url!</param>
         /// <param name="keyStore">The <see cref="IKeyStore"/> to store the obtained key in.</param>
         public LoginViewModel(IKeyStore keyStore, Uri docularUri)
-            : base("Log in")
+            : base(Resources.Strings.LoginView.LoginCaption)
         {
             Contract.Requires<ArgumentNullException>(keyStore != null && docularUri != null);
             Contract.Requires<ArgumentException>(docularUri.AbsoluteUri.EndsWith("api/"));
@@ -181,6 +185,16 @@ namespace Docular.Client.ViewModel
         public void ForgotPassword()
         {
             System.Diagnostics.Process.Start(this.docularUri.Combine("resetpassword/").ToString());
+        }
+
+        /// <summary>
+        /// Contains Contract.Invariant definitions.
+        /// </summary>
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(this.docularUri != null);
+            Contract.Invariant(this.keyStore != null);
         }
     }
 }

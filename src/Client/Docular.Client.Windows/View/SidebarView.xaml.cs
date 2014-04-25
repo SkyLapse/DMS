@@ -39,7 +39,7 @@ namespace Docular.Client.View
         {
             if (this.ElementControl.Items.Count > 0)
             {
-                DockPanel.SetDock((UIElement)this.ElementControl.ItemContainerGenerator.Items.Last(), Dock.Bottom);
+                DockPanel.SetDock((UIElement)this.ElementControl.ItemContainerGenerator.ContainerFromIndex(this.ElementControl.Items.Count - 1), Dock.Bottom);
             }
         }
     }

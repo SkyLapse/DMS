@@ -62,7 +62,7 @@ namespace Docular.Client.ViewModel
         {
             Messenger.Default.Register<ChangeViewModelMessage>(this, m => this.ContentViewModel = m.NewViewModel);
 
-            ViewModelLocator locator = (ViewModelLocator)Application.Current.Resources["ViewModelLocator"];
+            ViewModelLocator locator = ViewModelLocator.Default;
             Contract.Assume(locator != null);
             this.ContentViewModel = locator.StartViewModel;
             this.NavigationViewModel = locator.SidebarViewModel;

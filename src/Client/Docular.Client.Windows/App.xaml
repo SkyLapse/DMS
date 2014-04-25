@@ -5,9 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:vm="clr-namespace:Docular.Client.ViewModel"
+             xmlns:views="clr-namespace:Docular.Client.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <DataTemplate DataType="{x:Type vm:DocumentViewModel}">
+                <views:DocumentsGridView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SidebarViewModel}">
+                <views:SidebarView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:StartViewModel}">
+                <views:StartView/>
+            </DataTemplate>
+            
             <vm:ViewModelLocator x:Key="ViewModelLocator" d:IsDataSource="True"/>
             
             <ResourceDictionary.MergedDictionaries>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,17 @@ namespace Docular.Client.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+        /// <summary>
+        /// The default <see cref="ViewModelLocator."/>
+        /// </summary>
+        public static ViewModelLocator Default
+        {
+            get
+            {
+                return (ViewModelLocator)System.Windows.Application.Current.Resources["ViewModelLocator"];
+            }
+        }
+
         /// <summary>
         /// Gets the <see cref="CategoryViewModel"/>.
         /// </summary>
@@ -43,6 +55,17 @@ namespace Docular.Client.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<LoginViewModel>();
+            }
+        }
+
+        /// <summary>
+        /// Gets the <see cref="SearchViewModel"/>.
+        /// </summary>
+        public SearchViewModel SearchViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SearchViewModel>();
             }
         }
 
@@ -95,10 +118,13 @@ namespace Docular.Client.ViewModel
         /// </summary>
         public ViewModelLocator()
         {
+            Contract.Assume(SimpleIoc.Default != null);
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<CategoryViewModel>();
             SimpleIoc.Default.Register<DocumentViewModel>();
             SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<SearchViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<SidebarViewModel>();
             SimpleIoc.Default.Register<StartViewModel>();

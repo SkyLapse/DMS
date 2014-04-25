@@ -200,6 +200,7 @@
     <Compile Include="ViewModel\DocumentViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SearchViewModel.cs" />
     <Compile Include="ViewModel\StartViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
@@ -282,10 +283,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DocumentView.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Strings\UserView.Designer.cs">
+    <Compile Include="Resources\Strings\LoginView.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UserView.resx</DependentUpon>
+      <DependentUpon>LoginView.resx</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -337,9 +338,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DocumentView.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\UserView.resx">
+    <EmbeddedResource Include="Resources\Strings\LoginView.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UserView.Designer.cs</LastGenOutput>
+      <LastGenOutput>LoginView.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

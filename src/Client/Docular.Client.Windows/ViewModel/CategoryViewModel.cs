@@ -9,6 +9,7 @@ using System.Windows.Shapes;
 using Docular.Client;
 using Docular.Client.Model;
 using Docular.Client.Model.Rest;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace Docular.Client.ViewModel
 {
@@ -17,6 +18,12 @@ namespace Docular.Client.ViewModel
     /// </summary>
     public class CategoryViewModel : CollectionViewModel<Category>
     {
+        /// <summary>
+        /// Initializes a new <see cref="DocumentViewModel"/>.
+        /// </summary>
+        [PreferredConstructor]
+        public CategoryViewModel() : base(Resources.Strings.General.DocumentsCaption, (Path)System.Windows.Application.Current.Resources["BoxIcon"]) { }
+
         /// <summary>
         /// Initializes a new <see cref="CategoryViewModel"/>.
         /// </summary>

@@ -145,6 +145,10 @@
     <value>Settings</value>
     <comment>The title for the settings view.</comment>
   </data>
+  <data name="SidebarCaption" xml:space="preserve">
+    <value>Sidebar</value>
+    <comment>The title for the sidebar.</comment>
+  </data>
   <data name="StartCaption" xml:space="preserve">
     <value>Start</value>
     <comment>The title for the start view.</comment>
