@@ -23,20 +23,13 @@ namespace Docular.Client
         {
             get
             {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-                DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
-
-                Contract.Assume(section != null);
-                return section.ApiKey;
+                return DocularSection.Default.ApiKey;
             }
             set
             {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-                DocularSection section = (DocularSection)config.GetSection(DocularSection.SectionXmlKey);
-
-                Contract.Assume(section != null);
+                DocularSection section = DocularSection.Default;
                 section.ApiKey = value;
-                config.Save();
+                section.CurrentConfiguration.Save();
             }
         }
 

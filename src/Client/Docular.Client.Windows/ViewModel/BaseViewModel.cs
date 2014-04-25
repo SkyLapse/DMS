@@ -4,14 +4,17 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 using Docular.Client;
 using Docular.Client.Model.Rest;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Docular.Client.ViewModel
 {
     /// <summary>
     /// Represents a basic model.
     /// </summary>
+    [ContractClass(typeof(BaseViewModelContracts))]
     public abstract class BaseViewModel : ObservableObject
     {
         /// <summary>
@@ -40,23 +43,47 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
-        /// The <see cref="ICommand"/> used to load the data into the model.
+        /// The <see cref="RelayCommand"/> used to change the current content view model.
+        /// </summary>
+        public RelayCommand ChangeViewModelCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    p => Messenger.Default.Send<ChangeViewModelMessage>(new ChangeViewModelMessage((BaseViewModel)p)),
+                    p => (p != null) && (p is BaseViewModel)
+                );
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="RelayCommand"/> used to load the data into the model.
         /// </summary>
         public RelayCommand LoadDataCommand
         {
             get
             {
-                return new RelayCommand(async p =>
-                {
-                    try
-                    {
-                        await this.LoadData();
-                    }
-                    catch (Exception ex)
-                    {
-                        this.OnLoadDataCommandException(ex);
-                    }
-                });
+                return new RelayCommand(async p => await this.LoadData());
+            }
+        }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private Path _Icon;
+
+        /// <summary>
+        /// The <see cref="BaseViewModel"/>'s icon.
+        /// </summary>
+        public Path Icon
+        {
+            get
+            {
+                return _Icon;
+            }
+            set
+            {
+                this.SetProperty(ref _Icon, value);
             }
         }
 
@@ -70,6 +97,17 @@ namespace Docular.Client.ViewModel
         /// </summary>
         /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
         protected BaseViewModel(String name) : base(name) { }
+
+        /// <summary>
+        /// Initializes a new <see cref="BaseViewModel"/>.
+        /// </summary>
+        /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
+        /// <param name="icon">The <see cref="BaseViewModel"/>'s icon.</param>
+        protected BaseViewModel(String name, Path icon)
+            : this(name)
+        {
+            this.Icon = icon;
+        }
 
         /// <summary>
         /// Initializes a new <see cref="BaseViewModel"/>.
@@ -92,17 +130,22 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
+        /// Initializes a new <see cref="BaseViewModel"/>.
+        /// </summary>
+        /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
+        /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
+        /// <param name="icon">The <see cref="BaseViewModel"/>'s icon.</param>
+        protected BaseViewModel(IDocularClient client, String name, Path icon)
+            : this(client, name)
+        {
+            this.Icon = icon;
+        }
+
+        /// <summary>
         /// Loads the data into the model.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public abstract Task LoadData();
-
-        /// <summary>
-        /// Callback for any exceptions occuring in the asynchronous <see cref="LoadData"/>-method if it
-        /// is executed from an async void method.
-        /// </summary>
-        /// <param name="ex">The <see cref="Exception"/> that was thrown.</param>
-        protected abstract void OnLoadDataCommandException(Exception ex);
 
         /// <summary>
         /// Starts a section of code that needs to have the <see cref="P:IsBusy"/>-flag set to true.
@@ -155,6 +198,23 @@ namespace Docular.Client.ViewModel
                     this.busyModel.IsBusy = false;
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Contains contract definitions for abstract members of <see cref="BaseViewModel"/>.
+    /// </summary>
+    [ContractClassFor(typeof(BaseViewModel))]
+    abstract class BaseViewModelContracts : BaseViewModel
+    {
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        public override Task LoadData()
+        {
+            Contract.Ensures(Contract.Result<Task>() != null);
+
+            return null;
         }
     }
 }

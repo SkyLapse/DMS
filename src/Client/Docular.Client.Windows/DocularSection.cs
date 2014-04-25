@@ -21,6 +21,20 @@ namespace Docular.Client
         public const String SectionXmlKey = "ClientConfiguration";
 
         /// <summary>
+        /// Gets the an instance of the <see cref="DocularSection"/>.
+        /// </summary>
+        public static DocularSection Default
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<DocularSection>() != null);
+
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
+                return (DocularSection)(config.GetSection(SectionXmlKey) ?? new DocularSection());
+            }
+        }
+
+        /// <summary>
         /// A "random" salt. ;-)
         /// </summary>
         private static byte[] entropy = Encoding.UTF8.GetBytes("I should really invent a better salting mechanism!");

@@ -132,7 +132,16 @@
     <ApplicationIcon>Resources\Icons\EyeLogo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight.Extras.WPF45">
+      <HintPath>..\packages\MvvmLightLibs.4.3.31.0\lib\net45\GalaSoft.MvvmLight.Extras.WPF45.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.WPF45">
+      <HintPath>..\packages\MvvmLightLibs.4.3.31.0\lib\net45\GalaSoft.MvvmLight.WPF45.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.2\lib\portable-windows8+net40+sl5+windowsphone8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.165\lib\net45\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
@@ -159,6 +168,9 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.4.3.31.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -176,19 +188,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\SidebarViewElement.cs" />
     <Compile Include="Resources\Strings\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>General.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Strings\Sidebar.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Sidebar.resx</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\ChangeViewModelMessage.cs" />
     <Compile Include="ViewModel\CollectionViewModel.cs" />
     <Compile Include="ViewModel\DocumentViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -198,6 +205,7 @@
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\SidebarViewModel.cs" />
     <Compile Include="ViewModel\TagViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DocumentsGridView.xaml.cs">
       <DependentUpon>DocumentsGridView.xaml</DependentUpon>
     </Compile>
@@ -206,9 +214,6 @@
     </Compile>
     <Compile Include="View\SidebarView.xaml.cs">
       <DependentUpon>SidebarView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SidebarViewElement.xaml.cs">
-      <DependentUpon>SidebarViewElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StartView.xaml.cs">
       <DependentUpon>StartView.xaml</DependentUpon>
@@ -267,20 +272,20 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DocularSection.cs" />
-    <Compile Include="Resources\Strings\SettingsMenu.Designer.cs">
+    <Compile Include="Resources\Strings\SettingsView.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SettingsMenu.resx</DependentUpon>
+      <DependentUpon>SettingsView.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Strings\DocumentDisplay.Designer.cs">
+    <Compile Include="Resources\Strings\DocumentView.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DocumentDisplay.resx</DependentUpon>
+      <DependentUpon>DocumentView.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Strings\UserMenu.Designer.cs">
+    <Compile Include="Resources\Strings\UserView.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UserMenu.resx</DependentUpon>
+      <DependentUpon>UserView.resx</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -294,10 +299,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SidebarView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SidebarViewElement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -328,21 +329,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>General.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\SettingsMenu.resx">
+    <EmbeddedResource Include="Resources\Strings\SettingsView.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SettingsMenu.Designer.cs</LastGenOutput>
+      <LastGenOutput>SettingsView.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\DocumentDisplay.resx">
+    <EmbeddedResource Include="Resources\Strings\DocumentView.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DocumentDisplay.Designer.cs</LastGenOutput>
+      <LastGenOutput>DocumentView.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\Sidebar.resx">
+    <EmbeddedResource Include="Resources\Strings\UserView.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Sidebar.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings\UserMenu.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UserMenu.Designer.cs</LastGenOutput>
+      <LastGenOutput>UserView.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -380,7 +377,6 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\EyeLogo.ico" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

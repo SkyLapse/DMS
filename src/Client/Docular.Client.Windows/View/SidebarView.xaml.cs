@@ -30,9 +30,17 @@ namespace Docular.Client.View
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Handles a change in source collection of the sidebar elements.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e"><see cref="DataTransferEventArgs"/>.</param>
         private void ElementControl_TargetUpdated(object sender, DataTransferEventArgs e)
         {
-            DockPanel.SetDock((UIElement)this.ElementControl.ItemContainerGenerator.Items.Last(), Dock.Bottom);
+            if (this.ElementControl.Items.Count > 0)
+            {
+                DockPanel.SetDock((UIElement)this.ElementControl.ItemContainerGenerator.Items.Last(), Dock.Bottom);
+            }
         }
     }
 }

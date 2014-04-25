@@ -82,7 +82,7 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
-        /// The <see cref="ICommand"/> used to log-in.
+        /// The <see cref="RelayCommand"/> used to log-in.
         /// </summary>
         public RelayCommand LoginCommand
         {
@@ -107,7 +107,7 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
-        /// The <see cref="ICommand"/> used to open the forgot password site.
+        /// The <see cref="RelayCommand"/> used to open the forgot password site.
         /// </summary>
         public RelayCommand ForgotPasswordCommand
         {
@@ -181,11 +181,6 @@ namespace Docular.Client.ViewModel
         public void ForgotPassword()
         {
             System.Diagnostics.Process.Start(this.docularUri.Combine("resetpassword/").ToString());
-        }
-
-        protected override void OnLoadDataCommandException(Exception ex)
-        {
-            throw new NotImplementedException();
         }
     }
 }

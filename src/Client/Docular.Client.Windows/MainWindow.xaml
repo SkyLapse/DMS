@@ -1,29 +1,34 @@
 ﻿<Window x:Class="Docular.Client.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
         xmlns:views="clr-namespace:Docular.Client.View"
         xmlns:vm="clr-namespace:Docular.Client.ViewModel"
         Title="Docular DMS" 
         WindowStyle="None" ResizeMode="NoResize"
         Width="1280" Height="720" MinWidth="800" MinHeight="600"
         Style="{DynamicResource ContentControlStyleBordered}"
-        DataContext="{Binding RootModel, RelativeSource={RelativeSource Self}}"
+        DataContext="{Binding MainModel, RelativeSource={RelativeSource Self}}"
         MouseDown="Window_MouseDown">
-    <DockPanel LastChildFill="False">
-        <ContentPresenter Content="{Binding NavigationModel}"
-                          DockPanel.Dock="Left"
-                          Width="110"/>
-        <ContentPresenter Content="{Binding DisplayModel}"
-                          DockPanel.Dock="Left"/>
+    <DockPanel>
+        <ContentPresenter Content="{Binding NavigationViewModel}"
+			              DockPanel.Dock="Left"/>
+        <ContentPresenter Content="{Binding ContentViewModel}"
+			              DockPanel.Dock="Left"/>
     </DockPanel>
+    
     <Window.Resources>
-        <DataTemplate DataType="vm:DocumentViewModel">
+        <DataTemplate DataType="{x:Type vm:DocumentViewModel}">
             <views:DocumentsGridView/>
         </DataTemplate>
-        <DataTemplate DataType="vm:SidebarViewModel">
+        <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+            <views:LoginView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SidebarViewModel}">
             <views:SidebarView/>
         </DataTemplate>
-        <DataTemplate DataType="vm:StartViewModel">
+        <DataTemplate DataType="{x:Type vm:StartViewModel}">
             <views:StartView/>
         </DataTemplate>
     </Window.Resources>

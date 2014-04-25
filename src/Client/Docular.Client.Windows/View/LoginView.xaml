@@ -27,18 +27,18 @@
         </Grid.RowDefinitions>
 
         <!-- Captions -->
-        <Label Content="{x:Static s:UserMenu.LoginCaption}"
+        <Label Content="{x:Static s:UserView.LoginCaption}"
                Style="{DynamicResource LabelStyleRegular}" 
                Grid.Row="0" Grid.ColumnSpan="3"
                FontSize="48"/>
-        <Label Content="{x:Static s:UserMenu.EnterCredentials}"
+        <Label Content="{x:Static s:UserView.EnterCredentialsBelow}"
                Style="{DynamicResource LabelStyleRegular}" 
                FontSize="16"
                Grid.Row="1" Grid.ColumnSpan="3"/>
 
         <!-- Text boxes -->
         <Label Style="{DynamicResource LabelStyleRegular}"
-               Content="{x:Static s:UserMenu.Username}"
+               Content="{x:Static s:UserView.Username}"
                HorizontalContentAlignment="Left"
                Grid.Row="2" Grid.ColumnSpan="2" 
                Margin="20,0,0,0"/>
@@ -51,7 +51,7 @@
                  FontSize="18"
                  TextWrapping="NoWrap"/>
         <Label Style="{DynamicResource LabelStyleRegular}"
-               Content="{x:Static s:UserMenu.Password}"
+               Content="{x:Static s:UserView.Password}"
                HorizontalContentAlignment="Left"
                Grid.Row="4" Grid.ColumnSpan="2" 
                Margin="20,0,0,0"/>
@@ -64,7 +64,7 @@
 
         <!-- Big fat login button -->
         <Button x:Name="btnDoLogin"
-                Content="{x:Static s:UserMenu.LoginCaption}"
+                Content="{x:Static s:UserView.LoginCaption}"
                 Style="{DynamicResource ButtonStyleRegular}"
                 FontSize="24"
                 Grid.Column="1" Grid.Row="7"
@@ -73,7 +73,7 @@
 
         <!-- Forgot password? -->
         <Button x:Name="btnForgotPassword"
-                Content="{x:Static s:UserMenu.ForgotPassword}"
+                Content="{x:Static s:UserView.ForgotPassword}"
                 Grid.Row="8" Grid.ColumnSpan="3"
                 Command="{Binding ForgotPasswordCommand}">
             <Button.Template>

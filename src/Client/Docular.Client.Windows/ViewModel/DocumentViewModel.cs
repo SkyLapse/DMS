@@ -5,6 +5,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Shapes;
 using Docular.Client;
 using Docular.Client.Model;
 using Docular.Client.Model.Rest;
@@ -21,7 +22,7 @@ namespace Docular.Client.ViewModel
         /// </summary>
         /// <param name="client">The <see cref="IDocularClient"/> used to fetch data from the database.</param>
         public DocumentViewModel(IDocularClient client)
-            : base(client, "Documents")
+            : base(client, Resources.Strings.General.DocumentsCaption, (Path)System.Windows.Application.Current.Resources["BoxIcon"])
         {
             Contract.Requires<ArgumentNullException>(client != null);
         }
@@ -36,11 +37,6 @@ namespace Docular.Client.ViewModel
             {
                 this.Items = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync());
             }
-        }
-
-        protected override void OnLoadDataCommandException(Exception ex)
-        {
-            throw new NotImplementedException();
         }
     }
 }

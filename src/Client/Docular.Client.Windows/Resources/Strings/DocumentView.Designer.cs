@@ -22,14 +22,14 @@ namespace Docular.Client.Resources.Strings {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DocumentDisplay {
+    public class DocumentView {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DocumentDisplay() {
+        internal DocumentView() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Docular.Client.Resources.Strings {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Docular.Client.Resources.Strings.DocumentDisplay", typeof(DocumentDisplay).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Docular.Client.Resources.Strings.DocumentView", typeof(DocumentView).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

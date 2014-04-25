@@ -36,22 +36,22 @@ namespace Docular.Client
         /// <summary>
         /// The main view model.
         /// </summary>
-        private MainViewModel _RootModel;
+        private MainViewModel _MainModel;
 
         /// <summary>
         /// The main view model.
         /// </summary>
-        public MainViewModel RootModel
+        public MainViewModel MainModel
         {
             get
             {
-                return _RootModel;
+                return _MainModel;
             }
             set
             {
-                if (value != _RootModel)
+                if (value != _MainModel)
                 {
-                    _RootModel = value;
+                    _MainModel = value;
                     this.OnPropertyChanged();
                 }
             }
@@ -62,8 +62,8 @@ namespace Docular.Client
         /// </summary>
         public MainWindow()
         {
+            this.MainModel = new MainViewModel();
             this.InitializeComponent();
-            this.RootModel = new MainViewModel();
         }
 
         /// <summary>

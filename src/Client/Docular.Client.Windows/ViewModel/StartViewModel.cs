@@ -14,18 +14,11 @@ namespace Docular.Client.ViewModel
     /// </summary>
     public class StartViewModel : BaseViewModel
     {
-
-
         /// <summary>
         /// Loads the data into the model.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public override Task LoadData()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void OnLoadDataCommandException(Exception ex)
         {
             throw new NotImplementedException();
         }

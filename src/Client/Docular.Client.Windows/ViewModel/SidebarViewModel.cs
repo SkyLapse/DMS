@@ -8,16 +8,17 @@ using Docular.Client.Model;
 
 namespace Docular.Client.ViewModel
 {
-    public class SidebarViewModel : CollectionViewModel<SidebarViewElement>
+    public class SidebarViewModel : CollectionViewModel<BaseViewModel>
     {
+        public SidebarViewModel()
+            : base("Sidebar")
+        {
+
+        }
+
         public override Task LoadData()
         {
             return Task.FromResult<object>(null);
-        }
-
-        protected override void OnLoadDataCommandException(Exception ex)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -61,6 +61,15 @@ namespace Docular.Client.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Categories ähnelt.
+        /// </summary>
+        public static string CategoriesCaption {
+            get {
+                return ResourceManager.GetString("CategoriesCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Docular ähnelt.
         /// </summary>
         public static string Docular {
@@ -84,6 +93,60 @@ namespace Docular.Client.Resources.Strings {
         public static string DocularDms {
             get {
                 return ResourceManager.GetString("DocularDms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Documents ähnelt.
+        /// </summary>
+        public static string DocumentsCaption {
+            get {
+                return ResourceManager.GetString("DocumentsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Search ähnelt.
+        /// </summary>
+        public static string SearchCaption {
+            get {
+                return ResourceManager.GetString("SearchCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Settings ähnelt.
+        /// </summary>
+        public static string SettingsCaption {
+            get {
+                return ResourceManager.GetString("SettingsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start ähnelt.
+        /// </summary>
+        public static string StartCaption {
+            get {
+                return ResourceManager.GetString("StartCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tags ähnelt.
+        /// </summary>
+        public static string TagsCaption {
+            get {
+                return ResourceManager.GetString("TagsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die User ähnelt.
+        /// </summary>
+        public static string UserCaption {
+            get {
+                return ResourceManager.GetString("UserCaption", resourceCulture);
             }
         }
     }

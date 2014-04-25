@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Docular.Client;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Docular.Client.ViewModel
 {
@@ -15,20 +18,20 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Backing field.
         /// </summary>
-        private BaseViewModel _DisplayViewModel;
+        private BaseViewModel _ContentViewModel;
 
         /// <summary>
         /// The model to display in the UI.
         /// </summary>
-        public BaseViewModel DisplayViewModel
+        public BaseViewModel ContentViewModel
         {
             get
             {
-                return _DisplayViewModel;
+                return _ContentViewModel;
             }
             set
             {
-                this.SetProperty(ref _DisplayViewModel, value);
+                this.SetProperty(ref _ContentViewModel, value);
             }
         }
 
@@ -57,11 +60,12 @@ namespace Docular.Client.ViewModel
         /// </summary>
         public MainViewModel() 
         {
-            StartViewModel startModel = new StartViewModel();
-            SidebarViewModel sidebarModel = new SidebarViewModel();
-            Task.WaitAll(startModel.LoadData(), sidebarModel.LoadData());
-            this.DisplayViewModel = startModel;
-            this.NavigationViewModel = sidebarModel;
+            Messenger.Default.Register<ChangeViewModelMessage>(this, m => this.ContentViewModel = m.NewViewModel);
+
+            ViewModelLocator locator = (ViewModelLocator)Application.Current.Resources["ViewModelLocator"];
+            Contract.Assume(locator != null);
+            this.ContentViewModel = locator.StartViewModel;
+            this.NavigationViewModel = locator.SidebarViewModel;
         }
 
         /// <summary>
@@ -71,11 +75,6 @@ namespace Docular.Client.ViewModel
         public override Task LoadData()
         {
             return Task.FromResult<object>(null);
-        }
-
-        protected override void OnLoadDataCommandException(Exception ex)
-        {
-            throw new NotImplementedException();
         }
     }
 }

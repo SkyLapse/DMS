@@ -117,24 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Categories" xml:space="preserve">
-    <value>Categories</value>
-    <comment>The title for the categories view.</comment>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot password?</value>
+    <comment>The title for the "forgot password" field.</comment>
   </data>
-  <data name="Documents" xml:space="preserve">
-    <value>Documents</value>
-    <comment>The title for the documents view.</comment>
+  <data name="LoginCaption" xml:space="preserve">
+    <value>Log in</value>
+    <comment>The caption for a login control.</comment>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-    <comment>The title for the search view.</comment>
+  <data name="LogoutCaption" xml:space="preserve">
+    <value>Log out</value>
+    <comment>The button title for the log out button.</comment>
   </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-    <comment>The title for the settings view.</comment>
+  <data name="Password" xml:space="preserve">
+    <value>Password:</value>
+    <comment>The title for the text box for the user password.</comment>
   </data>
-  <data name="Tags" xml:space="preserve">
-    <value>Tags</value>
-    <comment>The title for the tags view.</comment>
+  <data name="Username" xml:space="preserve">
+    <value>Username:</value>
+    <comment>The title for the text box for the username.</comment>
+  </data>
+  <data name="EnterCredentialsBelow" xml:space="preserve">
+    <value>Enter your login credentials below...</value>
+    <comment>The caption for the credentials label.</comment>
   </data>
 </root>
