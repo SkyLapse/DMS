@@ -20,6 +20,40 @@ namespace Docular.Client.ViewModel
     public class DocumentViewModel : CollectionViewModel<Document>
     {
         /// <summary>
+        /// The <see cref="RelayCommand"/> used to show a <see cref="Document"/> in the detail view.
+        /// </summary>
+        public RelayCommand ShowDetailDisplayDocumentCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    p => this.DetailDisplayDocument = (Document)p,
+                    p => (p != null)
+                );
+            }
+        }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private Document _DetailDisplayDocument;
+
+        /// <summary>
+        /// The <see cref="Document"/> to display in the detail view on the side.
+        /// </summary>
+        public Document DetailDisplayDocument
+        {
+            get
+            {
+                return _DetailDisplayDocument;
+            }
+            set
+            {
+                this.SetProperty(ref _DetailDisplayDocument, value);
+            }
+        }
+
+        /// <summary>
         /// Initializes a new <see cref="DocumentViewModel"/>.
         /// </summary>
         [PreferredConstructor]

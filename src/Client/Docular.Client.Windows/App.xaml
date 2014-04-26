@@ -10,7 +10,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type vm:DocumentViewModel}">
-                <views:DocumentsGridView/>
+                <views:DocumentGridView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:LoginViewModel}">
                 <views:LoginView/>

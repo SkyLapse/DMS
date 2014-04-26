@@ -13,7 +13,7 @@
                         MinWidth="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                         MinHeight="{Binding ActualWidth, RelativeSource={RelativeSource Self}}"
                         Command="{Binding ChangeViewModelCommand}"
-                        CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}" 
+                        CommandParameter="{Binding }" 
                         BorderThickness="0" 
                         Background="Transparent">
                     <Button.Template>
@@ -46,7 +46,7 @@
                                                 </DoubleAnimationUsingKeyFrames>
                                                 <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Color" 
                                                                               Storyboard.TargetName="LabelForegroundBrush">
-                                                    <EasingColorKeyFrame KeyTime="0" Value="{StaticResource BrightHighlight}"/>
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource BrightHighlight}"/>
                                                 </ColorAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>

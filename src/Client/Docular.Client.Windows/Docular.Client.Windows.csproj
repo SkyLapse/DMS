@@ -207,11 +207,8 @@
     <Compile Include="ViewModel\SidebarViewModel.cs" />
     <Compile Include="ViewModel\TagViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\DocumentsGridView.xaml.cs">
-      <DependentUpon>DocumentsGridView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\DocumentsGridViewElement.xaml.cs">
-      <DependentUpon>DocumentsGridViewElement.xaml</DependentUpon>
+    <Compile Include="View\DocumentGridView.xaml.cs">
+      <DependentUpon>DocumentGridView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SidebarView.xaml.cs">
       <DependentUpon>SidebarView.xaml</DependentUpon>
@@ -252,11 +249,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DocumentsGridView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DocumentsGridViewElement.xaml">
+    <Page Include="View\DocumentGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

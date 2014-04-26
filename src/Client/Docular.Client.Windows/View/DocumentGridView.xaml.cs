@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace Docular.Client.View
 {
     /// <summary>
-    /// Interaktionslogik für DocumentsGridView.xaml
+    /// Interaktionslogik für DocumentGridView.xaml
     /// </summary>
-    public partial class DocumentsGridView : UserControl
+    public partial class DocumentGridView : UserControl
     {
         /// <summary>
-        /// Initializes a new <see cref="DocumentsGridView"/>.
+        /// Initializes a new <see cref="DocumentGridView"/>.
         /// </summary>
-        public DocumentsGridView()
+        public DocumentGridView()
         {
             InitializeComponent();
         }
