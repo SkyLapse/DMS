@@ -224,6 +224,8 @@ pip-log.txt
 
 *.pfx
 
+# PhpStorm specific
 src/Server/.idea/workspace.xml
 
-src/Server/.idea/workspace.xml
+src/Server/static/css/style.css
+src/Server/static/css/less/style.css
