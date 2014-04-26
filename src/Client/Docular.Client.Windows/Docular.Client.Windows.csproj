@@ -206,7 +206,6 @@
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\SidebarViewModel.cs" />
     <Compile Include="ViewModel\TagViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\DocumentGridView.xaml.cs">
       <DependentUpon>DocumentGridView.xaml</DependentUpon>
     </Compile>

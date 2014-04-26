@@ -22,8 +22,6 @@
                 <views:StartView/>
             </DataTemplate>
             
-            <vm:ViewModelLocator x:Key="ViewModelLocator" d:IsDataSource="True"/>
-            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Icons/EyeLogo.xaml"/>
                 <ResourceDictionary Source="Resources/Icons/GuiIcons.xaml"/>

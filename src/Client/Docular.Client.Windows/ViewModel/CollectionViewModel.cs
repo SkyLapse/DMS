@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Backing field.
         /// </summary>
-        private ObservableCollection<T> _Items;
+        private ObservableCollection<T> _Items = new ObservableCollection<T>();
 
         /// <summary>
         /// Contains all loaded items.
@@ -32,6 +33,8 @@ namespace Docular.Client.ViewModel
             }
             set
             {
+                Contract.Requires<ArgumentNullException>(value != null);
+
                 this.SetProperty(ref _Items, value);
             }
         }
@@ -39,51 +42,33 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
-        protected CollectionViewModel() 
-        {
-            this.Items = new ObservableCollection<T>();
-        }
+        protected CollectionViewModel() { }
 
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
         /// <param name="name">The <see cref="CollectionViewModel{T}"/>s name.</param>
-        protected CollectionViewModel(String name) : base(name)
-        {
-            this.Items = new ObservableCollection<T>();
-        }
+        protected CollectionViewModel(String name) : base(name) { }
 
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
         /// <param name="name">The <see cref="CollectionViewModel{T}"/>s name.</param>
         /// <param name="icon">The <see cref="CollectionViewModel{T}"/>'s icon.</param>
-        protected CollectionViewModel(String name, Path icon)
-            : base(name, icon)
-        {
-            this.Items = new ObservableCollection<T>();
-        }
+        protected CollectionViewModel(String name, Path icon) : base(name, icon) { }
 
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
-        protected CollectionViewModel(IDocularClient client)
-            : base(client)
-        {
-            this.Items = new ObservableCollection<T>();
-        }
+        protected CollectionViewModel(IDocularClient client) : base(client) { }
 
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
         /// </summary>
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
         /// <param name="name">The <see cref="CollectionViewModel{T}"/>s name.</param>
-        protected CollectionViewModel(IDocularClient client, String name)
-            : base(client, name)
-        {
-            this.Items = new ObservableCollection<T>();
-        }
+        protected CollectionViewModel(IDocularClient client, String name) : base(client, name) { }
 
         /// <summary>
         /// Initializes a new <see cref="CollectionViewModel{T}"/>.
@@ -91,10 +76,15 @@ namespace Docular.Client.ViewModel
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
         /// <param name="name">The <see cref="CollectionViewModel{T}"/>s name.</param>
         /// <param name="icon">The <see cref="CollectionViewModel{T}"/>'s icon.</param>
-        protected CollectionViewModel(IDocularClient client, String name, Path icon)
-            : base(client, name, icon)
+        protected CollectionViewModel(IDocularClient client, String name, Path icon) : base(client, name, icon) { }
+
+        /// <summary>
+        /// Contains Contract.Invariant definitions.
+        /// </summary>
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
         {
-            this.Items = new ObservableCollection<T>();
+            Contract.Invariant(this.Items != null);
         }
     }
 }

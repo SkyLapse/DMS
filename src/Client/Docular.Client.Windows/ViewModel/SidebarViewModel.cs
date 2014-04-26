@@ -19,13 +19,12 @@ namespace Docular.Client.ViewModel
         public SidebarViewModel()
             : base(Resources.Strings.General.SidebarCaption)
         {
-            ViewModelLocator locator = ViewModelLocator.Default;
-            this.Items.Add(locator.StartViewModel);
-            this.Items.Add(locator.SearchViewModel);
-            this.Items.Add(locator.DocumentViewModel);
-            this.Items.Add(locator.CategoryViewModel);
-            this.Items.Add(locator.TagViewModel);
-            this.Items.Add(locator.SettingsViewModel);
+            this.Items.Add(new StartViewModel());
+            this.Items.Add(new SearchViewModel());
+            this.Items.Add(new DocumentViewModel());
+            this.Items.Add(new CategoryViewModel());
+            this.Items.Add(new TagViewModel());
+            this.Items.Add(new SettingsViewModel());
         }
 
         /// <summary>

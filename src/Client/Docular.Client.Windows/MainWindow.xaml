@@ -10,7 +10,7 @@
         DataContext="{Binding MainModel, RelativeSource={RelativeSource Self}}"
         MouseDown="Window_MouseDown">
     <DockPanel>
-        <ContentPresenter Content="{Binding NavigationViewModel}" DockPanel.Dock="Left"/>
-        <ContentPresenter Content="{Binding ContentViewModel}" DockPanel.Dock="Left"/>
+        <ContentControl Content="{Binding NavigationViewModel}" DockPanel.Dock="Left"/>
+        <ContentControl Content="{Binding ContentViewModel}" DockPanel.Dock="Left"/>
     </DockPanel>
 </Window>

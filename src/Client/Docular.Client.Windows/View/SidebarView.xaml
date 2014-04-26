@@ -34,7 +34,7 @@
                                                 </DoubleAnimationUsingKeyFrames>
                                                 <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Color" 
                                                                               Storyboard.TargetName="LabelForegroundBrush">
-                                                    <EasingColorKeyFrame KeyTime="0" Value="{StaticResource MediumLight}"/>
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource MediumLight}"/>
                                                 </ColorAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
