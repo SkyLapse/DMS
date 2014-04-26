@@ -26,7 +26,7 @@ namespace Docular.Client.ViewModel
 
         /// <summary>
         /// Initializes a new <see cref="CategoryViewModel"/>.
-        /// </summary>
+        /// </summary>5
         /// <param name="client">The <see cref="IDocularClient"/> used to fetch data from the database.</param>
         public CategoryViewModel(IDocularClient client)
             : base(client, Resources.Strings.General.CategoriesCaption, (Path)System.Windows.Application.Current.Resources["FolderIcon"])

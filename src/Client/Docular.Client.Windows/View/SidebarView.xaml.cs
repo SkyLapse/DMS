@@ -37,10 +37,19 @@ namespace Docular.Client.View
         /// <param name="e"><see cref="DataTransferEventArgs"/>.</param>
         private void ElementControl_TargetUpdated(object sender, DataTransferEventArgs e)
         {
-            if (this.ElementControl.Items.Count > 0)
-            {
-                DockPanel.SetDock((UIElement)this.ElementControl.ItemContainerGenerator.ContainerFromIndex(this.ElementControl.Items.Count - 1), Dock.Bottom);
-            }
+            //if (this.ElementControl.Items.Count > 0)
+            //{
+            //    for (int i = 0; i < this.ElementControl.Items.Count - 1; i++)
+            //    {
+            //        DockPanel.SetDock((UIElement)this.ElementControl.ItemContainerGenerator.ContainerFromIndex(i), Dock.Top);
+            //    }
+            //    DockPanel.SetDock((UIElement)this.ElementControl.ItemContainerGenerator.ContainerFromIndex(this.ElementControl.Items.Count - 1), Dock.Bottom);
+            //}
+        }
+
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+
         }
     }
 }
