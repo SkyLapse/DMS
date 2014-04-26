@@ -9,6 +9,7 @@ from flask.ext import restful
 # Import Models, Controllers, Workers
 import model.base as modelbase
 from controllers.documents import DocumentsController, PayloadController
+from controllers.categories import CategoriesController
 import workers.contentextractor
 
 
@@ -36,6 +37,7 @@ app.content_extractor = workers.contentextractor.ContentExtractor()
 # Set routing for the API
 api.add_resource(DocumentsController, "/api/documents", "/api/documents/<string:id>")
 api.add_resource(PayloadController, "/api/documents/<string:id>/payload", "/api/documents/<string:id>/thumbnail")
+api.add_resource(CategoriesController, "/api/categories", "/api/categories/<string:id>")
 
 
 # Set the index page
