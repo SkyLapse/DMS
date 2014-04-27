@@ -156,7 +156,7 @@ namespace Docular.Client.Model.Rest
         /// <param name="contentReceiver">The <see cref="IContentReceiver"/> used to obtain a <see cref="Document"/>s content.</param>
         public DocularClient(Uri apiUri, IKeyStore keyStore, IContentReceiver contentReceiver)
         {
-            Contract.Requires<ArgumentNullException>(apiUri != null && keyStore != null && contentReceiver != null);
+            Contract.Requires<ArgumentNullException>(apiUri != null && contentReceiver != null);
             Contract.Requires<ArgumentException>(!apiUri.IsFile);
             Contract.Requires<ArgumentException>(apiUri.AbsolutePath.EndsWith("/"));
 
@@ -166,7 +166,10 @@ namespace Docular.Client.Model.Rest
             this.jsonSerializer = new DocularJsonSerializer();
             this.pbufSerializer = new DocularProtobufSerializer();
             this.restClient.BaseUrl = this.DocularUri;
-            this.restClient.Authenticator = new DocularAuthenticator(keyStore);
+            if (keyStore != null)
+            {
+                this.restClient.Authenticator = new DocularAuthenticator(keyStore);
+            }
             this.restClient.AddDefaultParameter("nowrap", true, ParameterType.GetOrPost);
             this.restClient.RemoveHandler("application/json");
             this.restClient.RemoveHandler("text/json");
@@ -612,7 +615,6 @@ namespace Docular.Client.Model.Rest
         {
             Contract.Invariant(this.ContentReceiver != null);
             Contract.Invariant(this.DocularUri != null);
-            Contract.Invariant(this.KeyStore != null);
             Contract.Invariant(this.restClient != null);
             Contract.Invariant(this.jsonSerializer != null);
             Contract.Invariant(this.pbufSerializer != null);
