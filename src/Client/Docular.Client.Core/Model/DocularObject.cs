@@ -7,16 +7,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace Docular.Client.Model
 {
     /// <summary>
     /// Represents an object in the Docular database.
     /// </summary>
-    [ProtoContract]
     public abstract class DocularObject : ObservableObject
     {
         /// <summary>
@@ -27,7 +25,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets information about the creation of the <see cref="DocularObject"/>.
         /// </summary>
-        [JsonProperty("createInfo"), ProtoMember(1)]
+        [JsonProperty("createInfo")]
         public ChangeInfo CreateInfo
         {
             get
@@ -48,7 +46,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Contains all custom fields.
         /// </summary>
-        [JsonProperty("customFields"), ProtoMember(2)]
+        [JsonProperty("customFields")]
         public CustomField[] CustomFields
         {
             get
@@ -69,7 +67,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The <see cref="Category"/>'s description.
         /// </summary>
-        [JsonProperty("description"), ProtoMember(3)]
+        [JsonProperty("description")]
         public String Description
         {
             get
@@ -90,7 +88,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets information about the last (server side) edit of the <see cref="Document"/>.
         /// </summary>
-        [JsonProperty("editInfo"), ProtoMember(4)]
+        [JsonProperty("editInfo")]
         public ChangeInfo EditInfo
         {
             get
@@ -111,7 +109,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The unique Id.
         /// </summary>
-        [JsonProperty("_id"), ProtoMember(5)]
+        [JsonProperty("_id")]
         public String Id
         {
             get

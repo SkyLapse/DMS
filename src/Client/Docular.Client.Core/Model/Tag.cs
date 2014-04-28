@@ -4,9 +4,8 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 using Newtonsoft.Json;
-using ProtoBuf;
 using RestSharp.Portable;
 
 namespace Docular.Client.Model
@@ -14,7 +13,6 @@ namespace Docular.Client.Model
     /// <summary>
     /// Represents a tag.
     /// </summary>
-    [ProtoContract]
     public class Tag : DocularObject
     {
         /// <summary>

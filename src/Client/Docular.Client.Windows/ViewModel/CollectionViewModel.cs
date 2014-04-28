@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 
 namespace Docular.Client.ViewModel
 {

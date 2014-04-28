@@ -4,9 +4,8 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 using Newtonsoft.Json;
-using ProtoBuf;
 using RestSharp.Portable;
 
 namespace Docular.Client.Model
@@ -14,7 +13,6 @@ namespace Docular.Client.Model
     /// <summary>
     /// Represents a user.
     /// </summary>
-    [ProtoContract]
     public class User : DocularObject
     {
         /// <summary>
@@ -25,7 +23,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets the <see cref="User"/>s permission.
         /// </summary>
-        [JsonProperty("permissions"), ProtoMember(1)]
+        [JsonProperty("permissions")]
         public String[] Permissions
         {
             get

@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 using RestSharp.Portable;
 
 namespace Docular.Client.Core.Test

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using RestSharp.Portable;
 using RestSharp.Portable.Authenticators;
 
-namespace Docular.Client.Model.Rest
+namespace Docular.Client.Rest
 {
     /// <summary>
     /// Authenticates a REST-request with the Docular DB.

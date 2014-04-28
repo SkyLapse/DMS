@@ -12,7 +12,7 @@ using Docular.Client.Model;
 using Newtonsoft.Json;
 using RestSharp.Portable;
 
-namespace Docular.Client.Model.Rest
+namespace Docular.Client.Rest
 {
     /// <summary>
     /// Represents a client for working with a docular DB.

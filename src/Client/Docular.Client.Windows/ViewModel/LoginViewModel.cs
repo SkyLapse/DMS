@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 using Newtonsoft.Json;
 using RestSharp.Portable;
 

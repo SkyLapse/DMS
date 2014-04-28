@@ -4,16 +4,14 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace Docular.Client.Model
 {
     /// <summary>
     /// Represents a stored document.
     /// </summary>
-    [ProtoContract]
     public class Document : DocularObject
     {
         /// <summary>
@@ -24,7 +22,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Contains all repeatedly occuring words in the extracted content.
         /// </summary>
-        [JsonProperty("buzzwords"), ProtoMember(1)]
+        [JsonProperty("buzzwords")]
         public Buzzword[] Buzzwords
         {
             get
@@ -45,7 +43,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets the <see cref="Category"/> the <see cref="Document"/> belongs to.
         /// </summary>
-        [JsonProperty("category"), ProtoMember(2)]
+        [JsonProperty("category")]
         public Category Category
         {
             get
@@ -66,7 +64,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Contains the extracted content that was read via OCR or some other content recognition method.
         /// </summary>
-        [JsonProperty("content"), ProtoMember(3)]
+        [JsonProperty("content")]
         public String ExtractedContent
         {
             get
@@ -87,7 +85,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The document's mime type.
         /// </summary>
-        [JsonProperty("mime"), ProtoMember(4)]
+        [JsonProperty("mime")]
         public String Mime
         {
             get
@@ -108,7 +106,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The <see cref="Uri"/> of the payload.
         /// </summary>
-        [JsonProperty("documentPath"), ProtoMember(5)]
+        [JsonProperty("documentPath")]
         public Uri PayloadPath
         {
             get
@@ -129,7 +127,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The <see cref="Uri"/> of the thumbnail image.
         /// </summary>
-        [JsonProperty("thumbnailPath"), ProtoMember(6)]
+        [JsonProperty("thumbnailPath")]
         public Uri ThumbnailPath
         {
             get
@@ -150,7 +148,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The size of the content in bytes.
         /// </summary>
-        [JsonProperty("size"), ProtoMember(7)]
+        [JsonProperty("size")]
         public int Size
         {
             get
@@ -171,7 +169,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets all <see cref="Tag"/>s associated with the <see cref="Document"/>.
         /// </summary>
-        [JsonProperty("tags"), ProtoMember(8)]
+        [JsonProperty("tags")]
         public Tag[] Tags
         {
             get

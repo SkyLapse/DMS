@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 using Docular.Client.View;
 
 namespace Docular.Client

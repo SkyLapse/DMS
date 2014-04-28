@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Docular.Client.Model;
 using RestSharp.Portable;
 
-namespace Docular.Client.Model.Rest
+namespace Docular.Client.Rest
 {
     /// <summary>
     /// Defines a mechanism for interacting with docular categories.

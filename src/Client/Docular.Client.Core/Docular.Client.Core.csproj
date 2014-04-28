@@ -110,16 +110,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="Model\Rest\DocularAuthenticator.cs" />
-    <Compile Include="Model\Rest\DocularClient.cs" />
-    <Compile Include="Model\Rest\DocularJsonSerializer.cs" />
-    <Compile Include="Model\Rest\DocularProtobufSerializer.cs" />
-    <Compile Include="Model\Rest\ICategoryManager.cs" />
-    <Compile Include="Model\Rest\IContentReceiver.cs" />
-    <Compile Include="Model\Rest\IDocumentManager.cs" />
-    <Compile Include="Model\Rest\IKeyStore.cs" />
-    <Compile Include="Model\Rest\ITagManager.cs" />
-    <Compile Include="Model\Rest\IUserManager.cs" />
+    <Compile Include="Rest\DocularAuthenticator.cs" />
+    <Compile Include="Rest\DocularClient.cs" />
+    <Compile Include="Rest\DocularJsonSerializer.cs" />
+    <Compile Include="Rest\DocularProtobufSerializer.cs" />
+    <Compile Include="Rest\ICategoryManager.cs" />
+    <Compile Include="Rest\IContentReceiver.cs" />
+    <Compile Include="Rest\IDocumentManager.cs" />
+    <Compile Include="Rest\IKeyStore.cs" />
+    <Compile Include="Rest\ITagManager.cs" />
+    <Compile Include="Rest\IUserManager.cs" />
     <Compile Include="Model\Buzzword.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\CustomField.cs" />
@@ -130,7 +130,7 @@
     <Compile Include="Model\User.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\Rest\IDocularClient.cs" />
+    <Compile Include="Rest\IDocularClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">

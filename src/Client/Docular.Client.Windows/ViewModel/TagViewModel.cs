@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Shapes;
 using Docular.Client;
 using Docular.Client.Model;
-using Docular.Client.Model.Rest;
+using Docular.Client.Rest;
 using GalaSoft.MvvmLight.Ioc;
 
 namespace Docular.Client.ViewModel

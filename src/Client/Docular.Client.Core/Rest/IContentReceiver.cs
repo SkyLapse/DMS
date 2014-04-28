@@ -5,8 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Docular.Client.Model;
 
-namespace Docular.Client.Model.Rest
+namespace Docular.Client.Rest
 {
     /// <summary>
     /// Defines a mechanism for obtaining a <see cref="Document"/>s locally saved content.
