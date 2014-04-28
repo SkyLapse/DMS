@@ -46,20 +46,20 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Backing field.
         /// </summary>
-        private String _DocularHomeUrl;
+        private String _DocularApiUrl;
 
         /// <summary>
         /// The uri of the server to work with.
         /// </summary>
-        public String DocularHomeUrl
+        public String DocularApiUrl
         {
             get
             {
-                return _DocularHomeUrl;
+                return _DocularApiUrl;
             }
             set
             {
-                this.SetProperty(ref _DocularHomeUrl, value);
+                this.SetProperty(ref _DocularApiUrl, value);
             }
         }
 

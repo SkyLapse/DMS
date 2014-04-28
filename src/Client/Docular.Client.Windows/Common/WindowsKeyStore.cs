@@ -17,6 +17,11 @@ namespace Docular.Client
     public class WindowsKeyStore : IKeyStore
     {
         /// <summary>
+        /// The <see cref="ConfigurationEventSource"/> used for logging.
+        /// </summary>
+        private ConfigurationEventSource eventSource = new ConfigurationEventSource();
+
+        /// <summary>
         /// Gets the API key.
         /// </summary>
         public String Key
@@ -29,7 +34,14 @@ namespace Docular.Client
             {
                 DocularSection section = DocularSection.Default;
                 section.ApiKey = value;
-                section.CurrentConfiguration.Save();
+                try
+                {
+                    section.CurrentConfiguration.Save();
+                }
+                catch (Exception ex)
+                {
+                    
+                }
             }
         }
 

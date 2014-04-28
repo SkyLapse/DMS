@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
              xmlns:s="clr-namespace:Docular.Client.Resources.Strings"
-             d:DesignHeight="425" d:DesignWidth="350"
              MinHeight="425" MinWidth="350"
              Style="{DynamicResource ContentControlStyleBordered}"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">

@@ -16,6 +16,16 @@ namespace Docular.Client
     public class DocularSection : ConfigurationSection
     {
         /// <summary>
+        /// Used for locking.
+        /// </summary>
+        private static object defaultAccessorLock = new object();
+
+        /// <summary>
+        /// The <see cref="ConfigurationEventSource"/> used for logging.
+        /// </summary>
+        private static readonly ConfigurationEventSource staticEventSource = new ConfigurationEventSource();
+        
+        /// <summary>
         /// The key used to identify the default <see cref="DocularSection"/> instance in the configuration XML file.
         /// </summary>
         public const String SectionXmlKey = "ClientConfiguration";
@@ -29,8 +39,24 @@ namespace Docular.Client
             {
                 Contract.Ensures(Contract.Result<DocularSection>() != null);
 
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
-                return (DocularSection)(config.GetSection(SectionXmlKey) ?? new DocularSection());
+                lock (defaultAccessorLock)
+                {
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
+                    DocularSection section = config.GetSection(SectionXmlKey) as DocularSection;
+                    if (section == null)
+                    {
+                        staticEventSource.SectionNotFound(typeof(DocularSection).AssemblyQualifiedName, SectionXmlKey);
+
+                        section = new DocularSection();
+                        config.Sections.Add(SectionXmlKey, section);
+                        config.Save(ConfigurationSaveMode.Full);
+                        return section;
+                    }
+                    else
+                    {
+                        return section;
+                    }
+                }
             }
         }
 
@@ -38,6 +64,11 @@ namespace Docular.Client
         /// A "random" salt. ;-)
         /// </summary>
         private static byte[] entropy = Encoding.UTF8.GetBytes("I should really invent a better salting mechanism!");
+
+        /// <summary>
+        /// The <see cref="ConfigurationEventSource"/> used for logging.
+        /// </summary>
+        private readonly ConfigurationEventSource eventSource = new ConfigurationEventSource();
 
         /// <summary>
         /// The API key string. Will be encrypted upon save and decrypted upon access.
@@ -57,22 +88,15 @@ namespace Docular.Client
                 {
                     return DPAPIDecryptToString(encryptedKeyString);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    this.ApiKey = null;
+                    this.eventSource.DecryptFailed(encryptedKeyString, ex);
                     return null;
                 }
             }
             set
             {
-                if (value != null)
-                {
-                    this["ApiKey"] = DPAPIEncrypt(value);
-                }
-                else
-                {
-                    this["ApiKey"] = null;
-                }
+                this["ApiKey"] = (value != null) ? DPAPIEncrypt(value) : null;
             }
         }
 
@@ -80,16 +104,16 @@ namespace Docular.Client
         /// The path to the docular remote DB.
         /// </summary>
         [StringValidator(MinLength = 12)]
-        [ConfigurationProperty("DocularUri", DefaultValue = "http://example.com/", IsRequired = true)]
-        public String DocularHomeUri
+        [ConfigurationProperty("DocularUri", DefaultValue = "http://example.com/api/", IsRequired = true)]
+        public String DocularApiUri
         {
             get
             {
-                return (String)this["DocularUri"] ?? "http://example.com/";
+                return (String)this["DocularUri"] ?? "http://example.com/api/";
             }
             set
             {
-                this["DocularUri"] = value;
+                this["DocularUri"] = value ?? "http://example.com/api/";
             }
         }
 
