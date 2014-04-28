@@ -113,7 +113,6 @@
     <Compile Include="Rest\DocularAuthenticator.cs" />
     <Compile Include="Rest\DocularClient.cs" />
     <Compile Include="Rest\DocularJsonSerializer.cs" />
-    <Compile Include="Rest\DocularProtobufSerializer.cs" />
     <Compile Include="Rest\ICategoryManager.cs" />
     <Compile Include="Rest\IContentReceiver.cs" />
     <Compile Include="Rest\IDocumentManager.cs" />

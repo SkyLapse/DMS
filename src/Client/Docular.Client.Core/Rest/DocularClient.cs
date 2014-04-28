@@ -124,11 +124,6 @@ namespace Docular.Client.Rest
         private DocularJsonSerializer jsonSerializer = null;
 
         /// <summary>
-        /// The <see cref="DocularProtobufSerializer"/> used to (de)serialize rest requests.
-        /// </summary>
-        private DocularProtobufSerializer pbufSerializer = null;
-
-        /// <summary>
         /// The <see cref="RestClient"/> used to perform the REST requests.
         /// </summary>
         private RestClient restClient = new RestClient();
@@ -164,7 +159,6 @@ namespace Docular.Client.Rest
             this.DocularUri = apiUri;
             this.KeyStore = keyStore;
             this.jsonSerializer = new DocularJsonSerializer();
-            this.pbufSerializer = new DocularProtobufSerializer();
             this.restClient.BaseUrl = this.DocularUri;
             if (keyStore != null)
             {
@@ -179,7 +173,6 @@ namespace Docular.Client.Rest
             this.restClient.AddHandler("text/json", this.jsonSerializer);
             this.restClient.AddHandler("text/x-json", this.jsonSerializer);
             this.restClient.AddHandler("text/javascript", this.jsonSerializer);
-            this.restClient.AddHandler("application/protobuf", this.pbufSerializer);
         }
 
         #region Documents
@@ -617,7 +610,6 @@ namespace Docular.Client.Rest
             Contract.Invariant(this.DocularUri != null);
             Contract.Invariant(this.restClient != null);
             Contract.Invariant(this.jsonSerializer != null);
-            Contract.Invariant(this.pbufSerializer != null);
         }
     }
 }

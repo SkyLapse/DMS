@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using ProtoBuf;
 
 namespace Docular.Client
 {
@@ -29,7 +28,7 @@ namespace Docular.Client
         /// <summary>
         /// The <see cref="ObservableObject"/>s name.
         /// </summary>
-        [JsonProperty("name"), ProtoMember(6)]
+        [JsonProperty("name")]
         public String Name
         {
             get
