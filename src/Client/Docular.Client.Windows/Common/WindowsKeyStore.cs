@@ -28,11 +28,11 @@ namespace Docular.Client
         {
             get
             {
-                return DocularSection.Default.ApiKey;
+                return RemoteDbSection.Default.ApiKey;
             }
             set
             {
-                DocularSection section = DocularSection.Default;
+                RemoteDbSection section = RemoteDbSection.Default;
                 section.ApiKey = value;
                 try
                 {
@@ -40,7 +40,7 @@ namespace Docular.Client
                 }
                 catch (Exception ex)
                 {
-                    
+                    throw;
                 }
             }
         }

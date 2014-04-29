@@ -11,52 +11,25 @@ using System.Threading.Tasks;
 namespace Docular.Client
 {
     /// <summary>
-    /// Contains configuration data for the docular windows client.
+    /// Contains configuration data for the docular remote database.
     /// </summary>
-    public class DocularSection : ConfigurationSection
+    public class RemoteDbSection : ConfigurationSection
     {
         /// <summary>
-        /// Used for locking.
+        /// The key used to identify the default <see cref="RemoteDbSection"/> instance in the configuration XML file.
         /// </summary>
-        private static object defaultAccessorLock = new object();
+        public const String SectionXmlKey = "RemoteDbConfiguration";
 
         /// <summary>
-        /// The <see cref="ConfigurationEventSource"/> used for logging.
+        /// Gets the an instance of the <see cref="RemoteDbSection"/>.
         /// </summary>
-        private static readonly ConfigurationEventSource staticEventSource = new ConfigurationEventSource();
-        
-        /// <summary>
-        /// The key used to identify the default <see cref="DocularSection"/> instance in the configuration XML file.
-        /// </summary>
-        public const String SectionXmlKey = "ClientConfiguration";
-
-        /// <summary>
-        /// Gets the an instance of the <see cref="DocularSection"/>.
-        /// </summary>
-        public static DocularSection Default
+        public static RemoteDbSection Default
         {
             get
             {
-                Contract.Ensures(Contract.Result<DocularSection>() != null);
+                Contract.Ensures(Contract.Result<RemoteDbSection>() != null);
 
-                lock (defaultAccessorLock)
-                {
-                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
-                    DocularSection section = config.GetSection(SectionXmlKey) as DocularSection;
-                    if (section == null)
-                    {
-                        staticEventSource.SectionNotFound(typeof(DocularSection).AssemblyQualifiedName, SectionXmlKey);
-
-                        section = new DocularSection();
-                        config.Sections.Add(SectionXmlKey, section);
-                        config.Save(ConfigurationSaveMode.Full);
-                        return section;
-                    }
-                    else
-                    {
-                        return section;
-                    }
-                }
+                return App.GetConfigurationSection<RemoteDbSection>(SectionXmlKey);
             }
         }
 
@@ -118,26 +91,9 @@ namespace Docular.Client
         }
 
         /// <summary>
-        /// Gets or sets the application skin to use on startup.
+        /// Initializes a new <see cref="RemoteDbSection"/>.
         /// </summary>
-        [StringValidator(MinLength = 1)]
-        [ConfigurationProperty("Skin", DefaultValue = "Default", IsRequired = true)]
-        public String Skin
-        {
-            get
-            {
-                return (String)this["Skin"] ?? "Default";
-            }
-            set
-            {
-                this["Skin"] = value ?? "Default";
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new <see cref="DocularSection"/>.
-        /// </summary>
-        public DocularSection()
+        public RemoteDbSection()
         {
             this.SectionInformation.AllowDefinition = ConfigurationAllowDefinition.Everywhere;
             this.SectionInformation.AllowExeDefinition = ConfigurationAllowExeDefinition.MachineToRoamingUser;
@@ -145,7 +101,7 @@ namespace Docular.Client
         }
 
         /// <summary>
-        /// Indicates whether the <see cref="DocularSection"/> is read-only.
+        /// Indicates whether the <see cref="RemoteDbSection"/> is read-only.
         /// </summary>
         /// <returns><c>false</c>, the section is always writable.</returns>
         public override bool IsReadOnly()

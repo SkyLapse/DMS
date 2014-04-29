@@ -4,13 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
              d:DesignWidth="1000" d:DesignHeight="600">
-    <DockPanel LastChildFill="False">
-        <ContentControl Content="{DynamicResource EyeLogoWithTextWide}"
-                        DockPanel.Dock="Top"
-                        Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="460*"/>
+        </Grid.RowDefinitions>
+        
+        <ContentControl Content="{DynamicResource EyeLogoWithTextWide}" Grid.Row="1">
             <ContentControl.Effect>
                 <DropShadowEffect Color="{DynamicResource Background}" ShadowDepth="0" BlurRadius="10"/>
             </ContentControl.Effect>
         </ContentControl>
-    </DockPanel>
+    </Grid>
 </UserControl>

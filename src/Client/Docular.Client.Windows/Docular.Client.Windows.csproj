@@ -189,6 +189,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\ConfigurationEventSource.cs" />
+    <Compile Include="Common\GeneralSection.cs" />
     <Compile Include="Resources\Strings\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -265,7 +266,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\DocularSection.cs" />
+    <Compile Include="Common\RemoteDbSection.cs" />
     <Compile Include="Resources\Strings\SettingsView.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -134,30 +134,50 @@ namespace Docular.Client.Rest
         public Uri DocularUri { get; private set; }
 
         /// <summary>
-        /// The <see cref="IContentReceiver"/> used to obtain a <see cref="Document"/>s content.
+        /// Backing field.
         /// </summary>
-        public IContentReceiver ContentReceiver { get; private set; }
+        private ILocalContentInteractor _ContentInteractor;
+
+        /// <summary>
+        /// The <see cref="ILocalContentInteractor"/> used to obtain a <see cref="Document"/>s content.
+        /// </summary>
+        public ILocalContentInteractor ContentInteractor { get; private set; }
+
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private IKeyStore _KeyStore;
 
         /// <summary>
         /// The <see cref="IKeyStore"/> used to obtain the API key.
         /// </summary>
-        public IKeyStore KeyStore { get; private set; }
+        public IKeyStore KeyStore
+        {
+            get
+            {
+                return _KeyStore;
+            }
+            set
+            {
+                _KeyStore = value;
+                this.restClient.Authenticator = (value != null) ? new DocularAuthenticator(value) : null;
+            }
+        }
 
         /// <summary>
         /// Initializes a new <see cref="DocularClient"/>.
         /// </summary>
         /// <param name="apiUri">The adress of the remote host. Has to end with a slash. <example>http://example.com/api/</example></param>
         /// <param name="keyStore">A <see cref="IKeyStore"/> used to obtain the API key.</param>
-        /// <param name="contentReceiver">The <see cref="IContentReceiver"/> used to obtain a <see cref="Document"/>s content.</param>
-        public DocularClient(Uri apiUri, IKeyStore keyStore, IContentReceiver contentReceiver)
+        /// <param name="contentReceiver">The <see cref="ILocalContentInteractor"/> used to obtain a <see cref="Document"/>s content.</param>
+        public DocularClient(Uri apiUri, IKeyStore keyStore, ILocalContentInteractor contentReceiver)
         {
-            Contract.Requires<ArgumentNullException>(apiUri != null && contentReceiver != null);
+            Contract.Requires<ArgumentNullException>(apiUri != null);
             Contract.Requires<ArgumentException>(!apiUri.IsFile);
             Contract.Requires<ArgumentException>(apiUri.AbsolutePath.EndsWith("/"));
 
-            this.ContentReceiver = contentReceiver;
+            this.ContentInteractor = contentReceiver;
             this.DocularUri = apiUri;
-            this.KeyStore = keyStore;
             this.jsonSerializer = new DocularJsonSerializer();
             this.restClient.BaseUrl = this.DocularUri;
             if (keyStore != null)
@@ -270,7 +290,7 @@ namespace Docular.Client.Rest
             await Task.Run(() =>
             {
                 documentRequest.AddBody(document);
-                documentRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
+                documentRequest.AddFile("file", this.ContentInteractor.GetLocalContent(document), this.ContentInteractor.GetFileName(document));
             });
             await this.restClient.Execute(documentRequest);
         }
@@ -288,7 +308,7 @@ namespace Docular.Client.Rest
             await Task.Run(() =>
             {
                 documentRequest.AddBody(document);
-                documentRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
+                documentRequest.AddFile("file", this.ContentInteractor.GetLocalContent(document), this.ContentInteractor.GetFileName(document));
             });
             await this.restClient.Execute(documentRequest);
         }
@@ -303,7 +323,7 @@ namespace Docular.Client.Rest
             RestRequest contentRequest = new RestRequest(DocumentsId, HttpMethod.Put);
             contentRequest.Serializer = this.jsonSerializer;
             contentRequest.AddUrlSegment("id", document.Id);
-            contentRequest.AddFile("file", this.ContentReceiver.GetLocalContent(document), this.ContentReceiver.GetFileName(document));
+            contentRequest.AddFile("file", this.ContentInteractor.GetLocalContent(document), this.ContentInteractor.GetFileName(document));
             await this.restClient.Execute(contentRequest);
         }
 
@@ -510,7 +530,7 @@ namespace Docular.Client.Rest
         {
             Contract.Requires<ArgumentNullException>(id != null && apiUrl != null);
 
-            RestRequest deleteRequest = new RestRequest(UsersId, HttpMethod.Get);
+            RestRequest deleteRequest = new RestRequest(UsersId, HttpMethod.Delete);
             deleteRequest.Serializer = this.jsonSerializer;
             deleteRequest.AddUrlSegment("id", id);
             return this.restClient.Execute(deleteRequest);
@@ -606,7 +626,7 @@ namespace Docular.Client.Rest
         [ContractInvariantMethod]
         private void ObjectInvariant()
         {
-            Contract.Invariant(this.ContentReceiver != null);
+            Contract.Invariant(this.ContentInteractor != null);
             Contract.Invariant(this.DocularUri != null);
             Contract.Invariant(this.restClient != null);
             Contract.Invariant(this.jsonSerializer != null);

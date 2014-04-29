@@ -13,7 +13,7 @@ namespace Docular.Client.Rest
     /// Defines a mechanism for obtaining a <see cref="Document"/>s locally saved content.
     /// </summary>
     [ContractClass(typeof(ContentReceiverContracts))]
-    public interface IContentReceiver
+    public interface ILocalContentInteractor
     {
         /// <summary>
         /// Gets the <see cref="Document"/>s local content.
@@ -33,15 +33,15 @@ namespace Docular.Client.Rest
     }
 
     /// <summary>
-    /// Contains contract definitions for <see cref="IContentReceiver"/>.
+    /// Contains contract definitions for <see cref="ILocalContentInteractor"/>.
     /// </summary>
-    [ContractClassFor(typeof(IContentReceiver))]
-    abstract class ContentReceiverContracts : IContentReceiver
+    [ContractClassFor(typeof(ILocalContentInteractor))]
+    abstract class ContentReceiverContracts : ILocalContentInteractor
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Stream IContentReceiver.GetLocalContent(Document document)
+        Stream ILocalContentInteractor.GetLocalContent(Document document)
         {
             Contract.Requires<ArgumentNullException>(document != null);
             Contract.Ensures(Contract.Result<Stream>() != null);
@@ -52,7 +52,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        String IContentReceiver.GetFileName(Document document)
+        String ILocalContentInteractor.GetFileName(Document document)
         {
             Contract.Requires<ArgumentNullException>(document != null);
             Contract.Ensures(Contract.Result<String>() != null);

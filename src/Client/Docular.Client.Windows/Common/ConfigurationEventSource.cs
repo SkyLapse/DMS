@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics.Contracts;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +30,8 @@ namespace Docular.Client
                Level = EventLevel.Critical)]
         public void ConfigurationSaveFailed(Configuration configuration, Exception ex)
         {
+            Contract.Requires<ArgumentNullException>(ex != null);
+
             this.WriteEvent(
                 1, 
                 configuration.FilePath, 
@@ -48,6 +52,8 @@ namespace Docular.Client
                Level = EventLevel.Warning)]
         public void DecryptFailed(String apiKey, Exception ex)
         {
+            Contract.Requires<ArgumentNullException>(ex != null);
+
             this.WriteEvent(
                 2,
                 apiKey,

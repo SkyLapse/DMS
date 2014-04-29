@@ -114,7 +114,7 @@
     <Compile Include="Rest\DocularClient.cs" />
     <Compile Include="Rest\DocularJsonSerializer.cs" />
     <Compile Include="Rest\ICategoryManager.cs" />
-    <Compile Include="Rest\IContentReceiver.cs" />
+    <Compile Include="Rest\ILocalContentInteractor.cs" />
     <Compile Include="Rest\IDocumentManager.cs" />
     <Compile Include="Rest\IKeyStore.cs" />
     <Compile Include="Rest\ITagManager.cs" />
