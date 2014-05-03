@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Rest;
-using Newtonsoft.Json;
-using RestSharp.Portable;
 
 namespace Docular.Client.Model
 {

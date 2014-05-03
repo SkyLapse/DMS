@@ -42,7 +42,7 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Items = new ObservableCollection<Tag>(await this.Client.GetTagsAsync());
+                this.Items = new ObservableCollection<Tag>(await this.Client.GetTagsAsync(TagCollectionRequest.Default));
             }
         }
     }

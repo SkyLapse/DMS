@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Rest;
-using Newtonsoft.Json;
 
 namespace Docular.Client.Model
 {
@@ -25,14 +24,13 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets information about the creation of the <see cref="DocularObject"/>.
         /// </summary>
-        [JsonProperty("createInfo")]
         public ChangeInfo CreateInfo
         {
             get
             {
                 return _CreateInfo;
             }
-            protected set
+            set
             {
                 this.SetProperty(ref _CreateInfo, value);
             }
@@ -46,7 +44,6 @@ namespace Docular.Client.Model
         /// <summary>
         /// Contains all custom fields.
         /// </summary>
-        [JsonProperty("customFields")]
         public CustomField[] CustomFields
         {
             get
@@ -67,7 +64,6 @@ namespace Docular.Client.Model
         /// <summary>
         /// The <see cref="Category"/>'s description.
         /// </summary>
-        [JsonProperty("description")]
         public String Description
         {
             get
@@ -88,14 +84,13 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets information about the last (server side) edit of the <see cref="Document"/>.
         /// </summary>
-        [JsonProperty("editInfo")]
         public ChangeInfo EditInfo
         {
             get
             {
                 return _EditInfo;
             }
-            protected set
+            set
             {
                 this.SetProperty(ref _EditInfo, value);
             }
@@ -109,14 +104,14 @@ namespace Docular.Client.Model
         /// <summary>
         /// The unique Id.
         /// </summary>
-        [JsonProperty("_id")]
+        [System.Runtime.Serialization.DataMember(Name = "_id")]
         public String Id
         {
             get
             {
                 return _Id;
             }
-            protected set
+            set
             {
                 this.SetProperty(ref _Id, value);
             }
@@ -126,15 +121,6 @@ namespace Docular.Client.Model
         /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
         protected DocularObject() { }
-
-        /// <summary>
-        /// Initializes a new <see cref="DocularObject"/>.
-        /// </summary>
-        /// <param name="id">The unique Id.</param>
-        protected DocularObject(String id)
-        {
-            this.Id = id;
-        }
 
         /// <summary>
         /// Implictly gets the <see cref="DocularObject"/>'s ID.

@@ -6,15 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client;
 using Docular.Client.Rest;
-using Newtonsoft.Json;
-using RestSharp.Portable;
 
 namespace Docular.Client.ViewModel
 {
     /// <summary>
     /// The model for the login window.
     /// </summary>
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class LoginViewModel : BaseViewModel
     {
         /// <summary>
@@ -35,7 +32,6 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// The username.
         /// </summary>
-        [JsonProperty("username")]
         public String Username
         {
             get
@@ -56,7 +52,6 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// The password.
         /// </summary>
-        [JsonProperty("password")]
         public String Password
         {
             get
@@ -72,7 +67,6 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// The current machine's name.
         /// </summary>
-        [JsonProperty("machineName")]
         public String MachineName
         {
             get
@@ -153,29 +147,7 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher switcher = this.StartBusySection())
             {
-                RestClient restClient = new RestClient(this.docularUri);
-                RestRequest validateRequest = new RestRequest(DocularClient.ValidateKeys);
-                validateRequest.AddParameter("key", this.keyStore.Key, ParameterType.RequestBody);
-
-                if ((await restClient.Execute<bool>(validateRequest)).Data)
-                {
-                    return true;
-                }
-
-                RestRequest loginRequest = new RestRequest(DocularClient.Keys, System.Net.Http.HttpMethod.Get);
-                loginRequest.AddParameter("nowrap", true, ParameterType.GetOrPost);
-                loginRequest.AddBody(this);
-
-                IRestResponse<String> response = await restClient.Execute<String>(loginRequest);
-                if (!response.StatusCode.IsError())
-                {
-                    this.keyStore.Key = response.Data;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                throw new NotImplementedException();
             }
         }
 

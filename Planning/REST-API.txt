@@ -31,15 +31,13 @@ Every specified URL is prefixed by http://_yoursite.com_/api/
 - Thumbnail: documents/$id/thumbnail (GET)
 - Size in bytes: documents/size (GET)
 	- Optional GET-Parameters: 
-		- user=userID 			// Includes documents created by that given user only
-		- category=categoryID 	// Includes documents that belong into that specific category only
-		- tag=tagID 			// Includes documents that are tagged with the given tag only
+		- Same as collection retreival
 
 ### Categories:
 - Retreive: categories/$id (GET)
 - Retreive collection: categories (GET)
 	- Optional GET-Parameters:
-		- user=userID 			// Returns documents created by that given user only
+		- user=userID 			// Returns categories created by that given user only
 		- category=parentId		// Returns categories with that specified parent only
 - Add: categories (POST)
 - Count: categories/count (GET)
@@ -50,7 +48,7 @@ Every specified URL is prefixed by http://_yoursite.com_/api/
 - Retreive: tags/$id (GET)
 - Retreive collection: tags (GET)
 	- Optional GET-Parameters:
-		- user=userID 			// Returns documents created by that given user only
+		- user=userID 			// Returns tags created by that given user only
 - Add: tags (POST)
 - Count: tags/count (GET)
 - Edit: tags/$id (PUT)

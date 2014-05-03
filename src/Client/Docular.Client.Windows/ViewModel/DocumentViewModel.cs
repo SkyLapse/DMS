@@ -77,7 +77,7 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Items = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync());
+                this.Items = new ObservableCollection<Document>(await this.Client.GetDocumentsAsync(DocumentCollectionRequest.Default));
             }
         }
     }

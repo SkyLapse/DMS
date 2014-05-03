@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Rest;
-using Newtonsoft.Json;
-using RestSharp.Portable;
+using ServiceStack.Text;
 
 namespace Docular.Client.Model
 {
@@ -23,7 +22,6 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets the <see cref="User"/>s permission.
         /// </summary>
-        [JsonProperty("permissions")]
         public String[] Permissions
         {
             get

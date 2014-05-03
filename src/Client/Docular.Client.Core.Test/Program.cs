@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
 using Docular.Client.Rest;
-using RestSharp.Portable;
 
 namespace Docular.Client.Core.Test
 {

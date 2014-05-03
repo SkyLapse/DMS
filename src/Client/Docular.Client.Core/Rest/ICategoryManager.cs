@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
-using RestSharp.Portable;
 
 namespace Docular.Client.Rest
 {
@@ -16,25 +15,32 @@ namespace Docular.Client.Rest
     public interface ICategoryManager
     {
         /// <summary>
+        /// Uploads a new <see cref="Category"/> to the server.
+        /// </summary>
+        /// <param name="categoryRequest">The <see cref="Category"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
+        Task AddCategoryAsync(CategoryAddRequest categoryAddRequest);
+
+        /// <summary>
         /// Asynchronously deletes the specified <see cref="Category"/>.
         /// </summary>
-        /// <param name="categoryId">The ID of the <see cref="Category"/> to delete.</param>
+        /// <param name="deleteRequest">The ID of the <see cref="Category"/> to delete.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous deleting process.</returns>
-        Task DeleteCategoryAsync(String categoryId);
+        Task DeleteCategoryAsync(CategoryDeleteRequest deleteRequest);
 
         /// <summary>
         /// Gets the <see cref="Category"/> with the specified ID.
         /// </summary>
-        /// <param name="id">The id of the <see cref="Category"/> to get.</param>
+        /// <param name="categoryRequest">The id of the <see cref="Category"/> to get.</param>
         /// <returns>The <see cref="Category"/> with the specified ID, or <c>null</c> if it was not found.</returns>
-        Task<Category> GetCategoryAsync(String id);
+        Task<Category> GetCategoryAsync(CategoryRequest categoryRequest);
 
         /// <summary>
         /// Gets all <see cref="Category"/>s that match the specified criteria.
         /// </summary>
-        /// <param name="filterParameters">A collection of <see cref="Parameter"/>s to filter by.</param>
+        /// <param name="collectionRequest">A collection of parameters to filter by.</param>
         /// <returns></returns>
-        Task<Category[]> GetCategoriesAsync(params Parameter[] filterParameters);
+        Task<Category[]> GetCategoriesAsync(CategoryCollectionRequest collectionRequest);
 
         /// <summary>
         /// Gets the amount of <see cref="Category"/>s.
@@ -43,18 +49,11 @@ namespace Docular.Client.Rest
         Task<int> GetCategoryCountAsync();
 
         /// <summary>
-        /// Uploads a new <see cref="Category"/> to the server.
-        /// </summary>
-        /// <param name="category">The <see cref="Category"/> to upload.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
-        Task PostCategoryAsync(Category category);
-
-        /// <summary>
         /// Uploads a changed <see cref="Category"/> to the server.
         /// </summary>
-        /// <param name="category">The <see cref="Category"/> to upload.</param>
+        /// <param name="categoryRequest">The <see cref="Category"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
-        Task PutCategoryAsync(Category category);
+        Task UpdateCategoryAsync(CategoryAddRequest categoryRequest);
     }
 
     /// <summary>
@@ -66,19 +65,9 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task ICategoryManager.DeleteCategoryAsync(String categoryId)
+        Task ICategoryManager.AddCategoryAsync(CategoryAddRequest categoryRequest)
         {
-            Contract.Requires<ArgumentNullException>(categoryId != null);
-            
-            return null;
-        }
-
-        /// <summary>
-        /// Contains contract definitions, not for actual use.
-        /// </summary>
-        Task<Category> ICategoryManager.GetCategoryAsync(String id)
-        {
-            Contract.Requires<ArgumentNullException>(id != null);
+            Contract.Requires<ArgumentNullException>(categoryRequest != null);
 
             return null;
         }
@@ -86,10 +75,31 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<Category[]> ICategoryManager.GetCategoriesAsync(params Parameter[] filterParameters)
+        Task ICategoryManager.DeleteCategoryAsync(CategoryDeleteRequest deleteRequest)
         {
-            Contract.Requires<ArgumentNullException>(filterParameters != null);
-            Contract.Requires<ArgumentException>(filterParameters.All(filterParam => filterParam.Type == ParameterType.GetOrPost));
+            Contract.Requires<ArgumentNullException>(deleteRequest != null);
+            Contract.Requires<ArgumentException>(deleteRequest.Id != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Category> ICategoryManager.GetCategoryAsync(CategoryRequest categoryRequest)
+        {
+            Contract.Requires<ArgumentNullException>(categoryRequest != null);
+            Contract.Requires<ArgumentException>(categoryRequest.Id != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<Category[]> ICategoryManager.GetCategoriesAsync(CategoryCollectionRequest request)
+        {
+            Contract.Requires<ArgumentNullException>(request != null);
 
             return null;
         }
@@ -105,21 +115,11 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task ICategoryManager.PostCategoryAsync(Category category)
+        Task ICategoryManager.UpdateCategoryAsync(CategoryAddRequest categoryRequest)
         {
-            Contract.Requires<ArgumentNullException>(category != null);
-            
-            return null;
-        }
+            Contract.Requires<ArgumentNullException>(categoryRequest != null);
+            Contract.Requires<ArgumentException>(categoryRequest.Id != null);
 
-        /// <summary>
-        /// Contains contract definitions, not for actual use.
-        /// </summary>
-        Task ICategoryManager.PutCategoryAsync(Category category)
-        {
-            Contract.Requires<ArgumentNullException>(category != null);
-            Contract.Requires<ArgumentNullException>(category.Id != null);
-            
             return null;
         }
     }
