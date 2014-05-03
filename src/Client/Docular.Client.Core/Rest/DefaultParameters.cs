@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,11 +11,13 @@ namespace Docular.Client.Rest
     /// <summary>
     /// Defines the default parameters for any REST collection request.
     /// </summary>
+    [DataContract]
     public abstract class DefaultParameters
     {
         /// <summary>
         /// The index to start searching at.
         /// </summary>
+        [DataMember]
         public int Start { get; set; }
 
         /// <summary>
@@ -25,6 +28,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// The amount of results to return.
         /// </summary>
+        [DataMember]
         public int Count
         {
             get
@@ -43,8 +47,9 @@ namespace Docular.Client.Rest
         private String _OrderBy = "createInfo.date";
 
         /// <summary>
-        /// Specifies the field the collection shall be sorted by before applying the query, defaults to the item creation time
+        /// Specifies the field the collection shall be sorted by before applying the query, defaults to the item creation time.
         /// </summary>
+        [DataMember]
         public String OrderBy
         {
             get
@@ -65,6 +70,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Orders the collection to be searched in ascending 'a' or descending 'd' order before applying the query.
         /// </summary>
+        [DataMember]
         public String Order
         {
             get

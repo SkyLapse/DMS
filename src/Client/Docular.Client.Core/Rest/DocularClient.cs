@@ -24,12 +24,12 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Initializes a new <see cref="DocularClient"/>.
         /// </summary>
-        /// <param name="baseUri">The base URL of the remote docular host.</param>
-        public DocularClient(String baseUri)
+        /// <param name="apiUri">The base URL of the remote docular host's API.</param>
+        public DocularClient(String apiUri)
         {
-            Contract.Requires<ArgumentNullException>(baseUri != null);
+            Contract.Requires<ArgumentNullException>(apiUri != null);
 
-            this.client.BaseUri = baseUri;
+            this.client.BaseUri = apiUri;
             JsConfig.EmitCamelCaseNames = true;
         }
 

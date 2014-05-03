@@ -143,7 +143,6 @@
     <Compile Include="Rest\IdVoidRequest.cs" />
     <Compile Include="Rest\IDocumentManager.cs" />
     <Compile Include="Rest\IdRequest.cs" />
-    <Compile Include="Rest\IKeyStore.cs" />
     <Compile Include="Rest\ITagManager.cs" />
     <Compile Include="Rest\IUserManager.cs" />
     <Compile Include="Model\Buzzword.cs" />
