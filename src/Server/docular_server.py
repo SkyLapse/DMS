@@ -3,7 +3,7 @@ import sys
 __author__ = 'leobernard'
 
 # Import Flask and Extensions
-from flask import Flask, render_template
+from flask import Flask
 from flask.ext import restful
 
 # Import Models, Controllers, Workers
@@ -41,9 +41,9 @@ api.add_resource(CategoriesController, "/api/categories", "/api/categories/<stri
 
 
 # Set the index page
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.errorhandler(404)
+def index(arg):
+    return app.send_static_file('index.html')
 
 
 try:
