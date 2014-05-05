@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,16 +10,19 @@ namespace Docular.Client.Model
     /// <summary>
     /// Represents a custom field of some arbitrary data.
     /// </summary>
+    [DataContract]
     public struct CustomField
     {
         /// <summary>
         /// Gets the custom field's key.
         /// </summary>
+        [DataMember]
         public String Key { get; private set; }
 
         /// <summary>
         /// Gets the custom field's value.
         /// </summary>
+        [DataMember]
         public String Value { get; private set; }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,17 +10,20 @@ namespace Docular.Client.Model
     /// <summary>
     /// Contains information about a change of an item.
     /// </summary>
+    [DataContract]
     public struct ChangeInfo
     {
         /// <summary>
-        /// The <see cref="User"/> who made the change.
-        /// </summary>
-        public User User { get; private set; }
-
-        /// <summary>
         /// The date and time of the change.
         /// </summary>
+        [DataMember]
         public DateTime Date { get; private set; }
+
+        /// <summary>
+        /// The ID of the <see cref="User"/> who made the change.
+        /// </summary>
+        [DataMember]
+        public User User { get; private set; }
 
         /// <summary>
         /// Initializes a new <see cref="ChangeInfo"/>.
@@ -29,8 +33,17 @@ namespace Docular.Client.Model
         public ChangeInfo(User user, DateTime date)
             : this()
         {
-            this.User = user;
             this.Date = date;
+            this.User = user;
+        }
+
+        /// <summary>
+        /// Gets the object's hash code.
+        /// </summary>
+        /// <returns>The hash code.</returns>
+        public override int GetHashCode()
+        {
+            return new { this.Date, this.User }.GetHashCode();
         }
 
         /// <summary>

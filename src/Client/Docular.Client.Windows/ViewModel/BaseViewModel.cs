@@ -142,8 +142,12 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
-        /// Loads the data into the model.
+        /// Loads the data into the model. See remarks.
         /// </summary>
+        /// <remarks>
+        /// IT IS ABSOLUTELY CRUCIAL THAT THIS METHOD DOES NOT THROW ANY EXCEPTIONS AS THEY CAN NOT BE CAUGHT EXCEPT FOR CATCHING
+        /// UNHANDLED EXCEPTIONS USING <see cref="AppDomain.UnhandledException"/> WHEN THIS IS FIRED FROM AN ASYNC EVENT HANDLER!
+        /// </remarks>
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public abstract Task LoadData();
 

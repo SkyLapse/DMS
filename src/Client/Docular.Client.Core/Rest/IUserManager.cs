@@ -29,6 +29,12 @@ namespace Docular.Client.Rest
         Task DeleteUserAsync(UserDeleteRequest deleteRequest);
 
         /// <summary>
+        /// Gets the <see cref="User"/> associated with the login data.
+        /// </summary>
+        /// <returns>The <see cref="User"/> associated with the transmitted login data.</returns>
+        Task<User> GetCurrentUserAsync();
+
+        /// <summary>
         /// Gets the <see cref="User"/> with the specified ID.
         /// </summary>
         /// <param name="request">A <see cref="UserRequest"/> containing the ID of the <see cref="User"/> to obtain.</param>
@@ -67,7 +73,9 @@ namespace Docular.Client.Rest
         /// </summary>
         Task IUserManager.AddUserAsync(UserAddRequest addRequest)
         {
-            throw new NotImplementedException();
+            Contract.Requires<ArgumentNullException>(addRequest != null);
+
+            return null;
         }
 
         /// <summary>
@@ -75,7 +83,18 @@ namespace Docular.Client.Rest
         /// </summary>
         Task IUserManager.DeleteUserAsync(UserDeleteRequest deleteRequest)
         {
-            throw new NotImplementedException();
+            Contract.Requires<ArgumentNullException>(deleteRequest != null);
+            Contract.Requires<ArgumentException>(deleteRequest.Id != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task<User> IUserManager.GetCurrentUserAsync()
+        {
+            return null;
         }
 
         /// <summary>
@@ -83,7 +102,10 @@ namespace Docular.Client.Rest
         /// </summary>
         Task<User> IUserManager.GetUserAsync(UserRequest request)
         {
-            throw new NotImplementedException();
+            Contract.Requires<ArgumentNullException>(request != null);
+            Contract.Requires<ArgumentException>(request.Id != null);
+
+            return null;
         }
 
         /// <summary>
@@ -91,7 +113,9 @@ namespace Docular.Client.Rest
         /// </summary>
         Task<User[]> IUserManager.GetUsersAsync(UserCollectionRequest collectionRequest)
         {
-            throw new NotImplementedException();
+            Contract.Requires<ArgumentNullException>(collectionRequest != null);
+
+            return null;
         }
 
         /// <summary>
@@ -99,7 +123,7 @@ namespace Docular.Client.Rest
         /// </summary>
         Task<int> IUserManager.GetUserCountAsync()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>
@@ -107,7 +131,10 @@ namespace Docular.Client.Rest
         /// </summary>
         Task IUserManager.UpdateUserAsync(UserAddRequest updateRequest)
         {
-            throw new NotImplementedException();
+            Contract.Requires<ArgumentNullException>(updateRequest != null);
+            Contract.Requires<ArgumentException>(updateRequest.Id != null);
+
+            return null;
         }
     }
 }

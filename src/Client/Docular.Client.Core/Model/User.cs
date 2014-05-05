@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Rest;
@@ -12,6 +13,7 @@ namespace Docular.Client.Model
     /// <summary>
     /// Represents a user.
     /// </summary>
+    [DataContract]
     public class User : DocularObject
     {
         /// <summary>
@@ -22,6 +24,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets the <see cref="User"/>s permission.
         /// </summary>
+        [DataMember]
         public String[] Permissions
         {
             get

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,16 +11,19 @@ namespace Docular.Client.Model
     /// <summary>
     /// Represents a buzzword in a text.
     /// </summary>
+    [DataContract]
     public struct Buzzword
     {
         /// <summary>
         /// The commonness of the word inside the text.
         /// </summary>
+        [DataMember]
         public float Commonness { get; private set; }
 
         /// <summary>
         /// The buzzword itself.
         /// </summary>
+        [DataMember]
         public String Value { get; private set; }
         
         /// <summary>
@@ -36,6 +40,15 @@ namespace Docular.Client.Model
 
             this.Commonness = commonness;
             this.Value = value;
+        }
+
+        /// <summary>
+        /// Gets the object's hash code.
+        /// </summary>
+        /// <returns>The hash code.</returns>
+        public override int GetHashCode()
+        {
+            return new { this.Commonness, this.Value }.GetHashCode();
         }
 
         /// <summary>

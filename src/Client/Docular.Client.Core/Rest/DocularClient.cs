@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
+using PCLStorage;
 using ServiceStack;
 using ServiceStack.Text;
 
@@ -17,9 +18,19 @@ namespace Docular.Client.Rest
     public class DocularClient : IDocularClient
     {
         /// <summary>
+        /// The folder name for the folder storing the documents payloads.
+        /// </summary>
+        private const String PayloadFolderName = "Payloads";
+
+        /// <summary>
+        /// The folder name for the folder storing the documents thumbnails.
+        /// </summary>
+        private const String ThumbnailFolderName = "Thumbnails";
+
+        /// <summary>
         /// The <see cref="JsonServiceClient"/> executing the requests.
         /// </summary>
-        private JsonServiceClient client = new JsonServiceClient();
+        private readonly JsonServiceClient client = new JsonServiceClient();
 
         /// <summary>
         /// Initializes a new <see cref="DocularClient"/>.
@@ -31,6 +42,12 @@ namespace Docular.Client.Rest
 
             this.client.BaseUri = apiUri;
             JsConfig.EmitCamelCaseNames = true;
+            JsConfig.DateHandler = DateHandler.UnixTime;
+            JsConfig.PropertyConvention = PropertyConvention.Strict;
+            JsConfig.IncludeNullValues = true;
+            JsConfig<Buzzword>.TreatValueAsRefType = true;
+            JsConfig<ChangeInfo>.TreatValueAsRefType = true;
+            JsConfig<CustomField>.TreatValueAsRefType = true;
         }
 
         #region API-Keys
@@ -95,6 +112,11 @@ namespace Docular.Client.Rest
 
         public Task<Stream> GetPayloadAsync(DocumentPayloadRequest payloadRequest)
         {
+            return this.GetPayloadAsync(payloadRequest, false);
+        }
+
+        public Task<Stream> GetPayloadAsync(DocumentPayloadRequest payloadRequest, bool allowCached)
+        {
             return this.client.GetAsync<Stream>(payloadRequest);
         }
 
@@ -119,6 +141,11 @@ namespace Docular.Client.Rest
         }
 
         public Task<Stream> GetThumbnailAsync(DocumentThumbnailRequest thumbnailRequest)
+        {
+            return this.GetThumbnailAsync(thumbnailRequest, false);
+        }
+
+        public Task<Stream> GetThumbnailAsync(DocumentThumbnailRequest thumbnailRequest, bool allowCached)
         {
             return this.client.GetAsync<Stream>(thumbnailRequest);
         }
@@ -181,6 +208,11 @@ namespace Docular.Client.Rest
             return this.client.DeleteAsync(deleteRequest);
         }
 
+        public Task<User> GetCurrentUserAsync()
+        {
+            return this.client.GetAsync<User>(new UserCurrentRequest());
+        }
+
         public Task<User> GetUserAsync(UserRequest request)
         {
             return this.client.GetAsync<User>(request);
@@ -202,5 +234,39 @@ namespace Docular.Client.Rest
         }
 
         #endregion
+
+        private async Task<Stream> GetCachedPayload(String documentId)
+        {
+            Contract.Requires<ArgumentNullException>(documentId != null);
+
+            return await this.OpenFile(
+               await FileSystem.Current.LocalStorage.CreateFolderAsync(PayloadFolderName, CreationCollisionOption.OpenIfExists),
+               documentId
+            );
+        }
+
+        private async Task<Stream> GetCachedThumbnail(String documentId)
+        {
+            Contract.Requires<ArgumentNullException>(documentId != null);
+
+            return await this.OpenFile(
+                await FileSystem.Current.LocalStorage.CreateFolderAsync(ThumbnailFolderName, CreationCollisionOption.OpenIfExists),
+                documentId
+            );
+        }
+
+        private async Task<Stream> OpenFile(IFolder folder, String fileName)
+        {
+            Contract.Requires<ArgumentNullException>(folder != null && fileName != null);
+
+            IFile payloadFile = await folder.GetFileAsync(fileName);
+            return (payloadFile != null) ? await payloadFile.OpenAsync(FileAccess.Read) : null;
+        }
+        
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(this.client != null);
+        }
     }
 }

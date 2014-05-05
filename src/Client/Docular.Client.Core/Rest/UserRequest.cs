@@ -12,5 +12,16 @@ namespace Docular.Client.Rest
     /// The REST request used to retreive a single <see cref="User"/>.
     /// </summary>
     [Route("/users/{Id}", "GET")]
-    public class UserRequest : IdRequest<Tag> { }
+    public class UserRequest : IdRequest<Tag>
+    {
+        /// <summary>
+        /// Implicitly converts the specified <see cref="User"/>-ID into a <see cref="UserRequest"/>.
+        /// </summary>
+        /// <param name="userId">The ID to convert.</param>
+        /// <returns>The conversion result.</returns>
+        public static implicit operator UserRequest(String userId)
+        {
+            return (userId != null) ? new UserRequest() { Id = userId } : null;
+        }
+    }
 }

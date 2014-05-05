@@ -34,9 +34,9 @@ namespace Docular.Client
         }
 
         /// <summary>
-        /// A "random" salt. ;-)
+        /// A PC specific salt.
         /// </summary>
-        private static byte[] entropy = Encoding.UTF8.GetBytes("I should really invent a better salting mechanism!");
+        private static byte[] entropy = Encoding.UTF8.GetBytes(Environment.MachineName);
 
         /// <summary>
         /// The <see cref="ConfigurationEventSource"/> used for logging.

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,17 +16,27 @@ namespace Docular.Client.Core.Test
     {
         static void Main(string[] args)
         {
-            DocularClient client = new DocularClient("http://62.143.158.178/api/");
-            JsonServiceClient serviceClient = new JsonServiceClient("http://62.143.158.178/api/");
+            DocularClient client = new DocularClient("http://62.143.158.178:5002/api/");
 
-            using (FileStream fs = File.Create("E:\\Users\\Moritz\\Downloads\\Reponse.json", 8192))
+            Document doc = new Document()
             {
-                Document[] documents = serviceClient.Get(DocumentCollectionRequest.Default);
-                Console.WriteLine(documents.ToJson());
-            }
+                Category = new Category("Hello, this is a test category!"),
+                CreateInfo = new ChangeInfo(new User() { Name = "TestUser" }, DateTime.Now),
+                CustomFields = new[] { new CustomField("TestKey1", "TestValue"), new CustomField("TestKey2", "TestValue2") },
+                Description = "This document is used as test.",
+                ExtractedContent = "Hello, this is a test",
+                Name = "Test Document",
+                Mime = "image/jpg",
+                Size = 1010213
+            };
+
+            File.WriteAllText("E:\\Users\\Moritz\\Downloads\\Document.json", doc.ToJson());
+
+            //client.AddDocumentAsync(doc).Wait();
+
+            Document[] docs = client.GetDocumentsAsync(DocumentCollectionRequest.Default).Result;
 
             Console.WriteLine("Finished!");
-            Console.ReadLine();
         }
     }
 }

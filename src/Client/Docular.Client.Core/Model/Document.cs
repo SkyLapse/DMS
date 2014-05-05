@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Rest;
@@ -21,6 +22,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Contains all repeatedly occuring words in the extracted content.
         /// </summary>
+        [DataMember]
         public Buzzword[] Buzzwords
         {
             get
@@ -37,10 +39,11 @@ namespace Docular.Client.Model
         /// Backing field.
         /// </summary>
         private Category _Category;
-        
+
         /// <summary>
         /// Gets the <see cref="Category"/> the <see cref="Document"/> belongs to.
         /// </summary>
+        [IgnoreDataMember]
         public Category Category
         {
             get
@@ -61,6 +64,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Contains the extracted content that was read via OCR or some other content recognition method.
         /// </summary>
+        [DataMember]
         public String ExtractedContent
         {
             get
@@ -81,6 +85,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The document's mime type.
         /// </summary>
+        [DataMember]
         public String Mime
         {
             get
@@ -96,20 +101,21 @@ namespace Docular.Client.Model
         /// <summary>
         /// Backing field.
         /// </summary>
-        private Uri _DocumentPath;
+        private Uri _PayloadPath;
 
         /// <summary>
         /// The <see cref="Uri"/> of the payload.
         /// </summary>
-        public Uri DocumentPath
+        [DataMember]
+        public Uri PayloadPath
         {
             get
             {
-                return _DocumentPath;
+                return _PayloadPath;
             }
             set
             {
-                this.SetProperty(ref _DocumentPath, value);
+                this.SetProperty(ref _PayloadPath, value);
             }
         }
 
@@ -121,6 +127,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The <see cref="Uri"/> of the thumbnail image.
         /// </summary>
+        [DataMember]
         public Uri ThumbnailPath
         {
             get
@@ -141,6 +148,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The size of the content in bytes.
         /// </summary>
+        [DataMember]
         public int Size
         {
             get
@@ -163,6 +171,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets all <see cref="Tag"/>s associated with the <see cref="Document"/>.
         /// </summary>
+        [DataMember]
         public Tag[] Tags
         {
             get

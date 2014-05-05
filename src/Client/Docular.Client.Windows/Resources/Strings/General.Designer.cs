@@ -158,5 +158,41 @@ namespace Docular.Client.Resources.Strings {
                 return ResourceManager.GetString("UserCaption", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hello
+        ///Hi
+        ///Greetings
+        ///Hallo
+        ///Guten Tag
+        ///Hola
+        ///Bonjour
+        ///Allô
+        ///你好
+        ///здра́вствуйте
+        ///Hei
+        ///Hej
+        ///Olá
+        ///God dag
+        ///Morn
+        ///こんにちは
+        ///もしもし
+        ///สวัสดีคะ
+        ///Cześć
+        ///Halo
+        ///Terve
+        ///안녕하세요
+        ///Sali
+        ///Salut
+        ///Merhaba
+        ///नमस्ते
+        ///Zdravo
+        ///Salâm ähnelt.
+        /// </summary>
+        public static string WelcomeExpressions {
+            get {
+                return ResourceManager.GetString("WelcomeExpressions", resourceCulture);
+            }
+        }
     }
 }

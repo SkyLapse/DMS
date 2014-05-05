@@ -23,7 +23,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Backing field.
         /// </summary>
-        private int _Count = -1;
+        private int _Count = 0;
 
         /// <summary>
         /// The amount of results to return.
@@ -38,6 +38,15 @@ namespace Docular.Client.Rest
             set
             {
                 _Count = value;
+            }
+        }
+
+        [DataMember(Name = "nowrap")]
+        public bool NoWrap
+        {
+            get
+            {
+                return true;
             }
         }
 
@@ -79,7 +88,7 @@ namespace Docular.Client.Rest
             }
             set
             {
-                Contract.Requires<ArgumentException>(value.ToLowerInvariant() == "a" || value.ToLowerInvariant() == "d");
+                Contract.Requires<ArgumentException>(value == null || value.ToLowerInvariant() == "a" || value.ToLowerInvariant() == "d");
 
                 _Order = value;
             }

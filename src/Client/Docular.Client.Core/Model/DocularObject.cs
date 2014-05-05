@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Rest;
@@ -14,8 +15,30 @@ namespace Docular.Client.Model
     /// <summary>
     /// Represents an object in the Docular database.
     /// </summary>
+    [DataContract]
     public abstract class DocularObject : ObservableObject
     {
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private IDocularClient _DocularClient;
+
+        /// <summary>
+        /// A <see cref="IDocularClient"/> used to interact with the docular DB.
+        /// </summary>
+        [IgnoreDataMember]
+        public IDocularClient DocularClient
+        {
+            get
+            {
+                return _DocularClient;
+            }
+            set
+            {
+                this.SetProperty(ref _DocularClient, value);
+            }
+        }
+
         /// <summary>
         /// Backing field.
         /// </summary>
@@ -24,6 +47,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets information about the creation of the <see cref="DocularObject"/>.
         /// </summary>
+        [DataMember]
         public ChangeInfo CreateInfo
         {
             get
@@ -44,6 +68,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Contains all custom fields.
         /// </summary>
+        [DataMember]
         public CustomField[] CustomFields
         {
             get
@@ -64,6 +89,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The <see cref="Category"/>'s description.
         /// </summary>
+        [DataMember]
         public String Description
         {
             get
@@ -84,6 +110,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets information about the last (server side) edit of the <see cref="Document"/>.
         /// </summary>
+        [DataMember]
         public ChangeInfo EditInfo
         {
             get
@@ -104,7 +131,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// The unique Id.
         /// </summary>
-        [System.Runtime.Serialization.DataMember(Name = "_id")]
+        [DataMember(Name = "_id")]
         public String Id
         {
             get
@@ -120,7 +147,10 @@ namespace Docular.Client.Model
         /// <summary>
         /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
-        protected DocularObject() { }
+        protected DocularObject() 
+        {
+            this.CreateInfo = new ChangeInfo(null, DateTime.Now);
+        }
 
         /// <summary>
         /// Implictly gets the <see cref="DocularObject"/>'s ID.

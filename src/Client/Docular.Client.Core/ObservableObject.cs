@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Docular.Client
     /// <summary>
     /// Represents an object that notifies its subscribers of changes in its properties.
     /// </summary>
+    [DataContract]
     public class ObservableObject : INotifyPropertyChanged
     {
         /// <summary>
@@ -27,6 +29,7 @@ namespace Docular.Client
         /// <summary>
         /// The <see cref="ObservableObject"/>s name.
         /// </summary>
+        [DataMember]
         public String Name
         {
             get
@@ -54,6 +57,19 @@ namespace Docular.Client
         }
 
         /// <summary>
+        /// Raises the <see cref="PropertyChanged"/>-event with the specified <paramref name="propertyName"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
+        protected void OnPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        /// <summary>
         /// Sets the specified property and raises the <see cref="PropertyChanged"/>-event.
         /// </summary>
         /// <typeparam name="T">The <see cref="Type"/> of property to set.</typeparam>
@@ -65,11 +81,7 @@ namespace Docular.Client
             if (!ReferenceEquals(value, location))
             {
                 location = value;
-                PropertyChangedEventHandler handler = this.PropertyChanged;
-                if (handler != null)
-                {
-                    handler(this, new PropertyChangedEventArgs(propertyName));
-                }
+                this.OnPropertyChanged(propertyName);
             }
         }
     }

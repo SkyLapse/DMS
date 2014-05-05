@@ -116,6 +116,7 @@
     <Compile Include="Rest\DocumentSizeRequest.cs" />
     <Compile Include="Rest\DocumentUpdatePayloadRequest.cs" />
     <Compile Include="Rest\IApiKeyManager.cs" />
+    <Compile Include="Rest\UserCurrentRequest.cs" />
     <Compile Include="Rest\UserRequest.cs" />
     <Compile Include="Rest\UserDeleteRequest.cs" />
     <Compile Include="Rest\UserCountRequest.cs" />

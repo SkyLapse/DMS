@@ -12,7 +12,7 @@ Every specified URL is prefixed by http://_yoursite.com_/api/
 - count=count 					// Indicates the maximum amount of results, defaults to infinite
 - orderby=fieldName 			// Specifies the field the collection shall be sorted by before applying the query, defaults to the item creation time (createInfo.date)
 - order=a/d						// Orders the collection to be searched in ascending (a) or descending (d) order before applying the query, defaults to ascending (a)
-- nowrap=true/false				// Output the JSON data directly without wrapping it into a root element ({ /* Document Properties */ } instead of { "document": { /* Document Properties */ } }), defaults to wrapping
+- nowrap				        // Output the JSON data directly without wrapping it into a root element ({ /* Document Properties */ } instead of { "document": { /* Document Properties */ } })
 
 ### Documents:
 - Retreive document info: documents/$id (GET)
@@ -49,7 +49,7 @@ Every specified URL is prefixed by http://_yoursite.com_/api/
 - Retreive collection: tags (GET)
 	- Optional GET-Parameters:
 		- user=userID 			// Returns tags created by that given user only
-        - document=documentID   // Returns from that specific document only
+        - document=documentID   // Returns tags from that specific document only
 - Add: tags (POST)
 - Count: tags/count (GET)
 - Edit: tags/$id (PUT)
