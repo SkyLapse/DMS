@@ -49,6 +49,7 @@ Every specified URL is prefixed by http://_yoursite.com_/api/
 - Retreive collection: tags (GET)
 	- Optional GET-Parameters:
 		- user=userID 			// Returns tags created by that given user only
+        - document=documentID   // Returns from that specific document only
 - Add: tags (POST)
 - Count: tags/count (GET)
 - Edit: tags/$id (PUT)
