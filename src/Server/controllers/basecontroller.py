@@ -11,9 +11,7 @@ class BaseController(restful.Resource):
         pass
 
     def bson_to_json(self, bson):
-        self.app.logger.debug("Parsing BSON object to JSON...")
         res = convert_to_json(bson)
-        self.app.logger.debug("Result: " + str(res))
         return res
 
     def format_output(self, name, bson, wrap=None):

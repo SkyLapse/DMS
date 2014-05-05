@@ -1,4 +1,5 @@
 from bson import ObjectId
+from flask import request
 
 __author__ = 'leobernard'
 
@@ -14,6 +15,7 @@ class DocumentsController(BaseController):
             return self.format_output("document", self.app.models.documents.get_single({"_id": ObjectId(id)}))
 
     def post(self, id=None):
+        self.app.logger.info(request.data)
         res = self.app.models.documents.insert({})
         return self.format_output("status", res)
 
