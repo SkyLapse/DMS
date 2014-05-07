@@ -23,7 +23,7 @@ api = restful.Api(app)
 
 # Initialize logger
 log_formatter = logging.Formatter("[%(asctime)s] [%(filename)s:%(lineno)d] [%(levelname)s] %(message)s")
-handler1 = RotatingFileHandler('/Users/leobernard/doculus_server.log', maxBytes=10000, backupCount=1)
+handler1 = RotatingFileHandler('docular_server.log', maxBytes=10000, backupCount=1)
 handler2 = logging.StreamHandler()
 handler1.setFormatter(log_formatter)
 handler2.setFormatter(log_formatter)
