@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{d1cdada2-1d48-49ab-919c-e3a8e734e973}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>docular_server.py</StartupFile>
+    <SearchPath>C:\Program Files (x86)\Python\3.4\Lib</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="requirements.txt" />
+    <Compile Include="docular_server.py" />
+    <Compile Include="app_utils\bson_utils.py" />
+    <Compile Include="app_utils\__init__.py" />
+    <Compile Include="controllers\basecontroller.py" />
+    <Compile Include="controllers\categories.py" />
+    <Compile Include="controllers\documents.py" />
+    <Compile Include="controllers\__init__.py" />
+    <Compile Include="model\appkeys.py" />
+    <Compile Include="model\base.py" />
+    <Compile Include="model\basemodel.py" />
+    <Compile Include="model\categories.py" />
+    <Compile Include="model\documents.py" />
+    <Compile Include="model\tags.py" />
+    <Compile Include="model\users.py" />
+    <Compile Include="model\__init__.py" />
+    <Content Include="static\index.html" />
+    <Content Include="templates\index.html" />
+    <Compile Include="workers\baseworker.py" />
+    <Compile Include="workers\contentextractor.py" />
+    <Compile Include="workers\__init__.py" />
+    <Content Include="static\css\bootstrap-theme.css" />
+    <Content Include="static\css\bootstrap.min.css" />
+    <Content Include="static\css\font-awesome.min.css" />
+    <Content Include="static\css\helper.css" />
+    <Content Include="static\css\normalize.css" />
+    <Content Include="static\css\pe-icon-7-stroke.css" />
+    <Content Include="static\fonts\fontawesome-webfont.svg" />
+    <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="static\fonts\Pe-icon-7-stroke.svg" />
+    <Content Include="static\img\logo-vert.png" />
+    <Content Include="static\img\logo.png" />
+    <Content Include="static\img\logo-vector.svg" />
+    <Content Include="static\js\app.js" />
+    <Content Include="static\js\controllers.js" />
+    <Content Include="static\partials\home.html" />
+    <Content Include="static\css\less\style.css" />
+    <Content Include="static\js\libs\angular-resource.min.js" />
+    <Content Include="static\js\libs\angular.min.js" />
+    <Content Include="static\js\libs\bootstrap.js" />
+    <Content Include="static\js\libs\bootstrap.min.js" />
+    <Content Include="static\js\libs\handlebars-1.1.2.js" />
+    <Content Include="static\js\libs\jquery-1.10.2.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app_utils" />
+    <Folder Include="controllers" />
+    <Folder Include="model" />
+    <Folder Include="static" />
+    <Folder Include="static\css" />
+    <Folder Include="static\css\less" />
+    <Folder Include="static\fonts" />
+    <Folder Include="static\img" />
+    <Folder Include="static\js" />
+    <Folder Include="static\js\libs" />
+    <Folder Include="static\partials" />
+    <Folder Include="templates" />
+    <Folder Include="workers" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>
