@@ -16,7 +16,7 @@ namespace Docular.Client.Core.Test
     {
         static void Main(string[] args)
         {
-            DocularClient client = new DocularClient("http://62.143.158.178:5002/api/");
+            DocularClient client = new DocularClient("http://raspbmc.local:5002/api/");
 
             Document doc = new Document()
             {
@@ -32,9 +32,9 @@ namespace Docular.Client.Core.Test
 
             File.WriteAllText("E:\\Users\\Moritz\\Downloads\\Document.json", doc.ToJson());
 
-            //client.AddDocumentAsync(doc).Wait();
+            client.AddDocumentAsync(doc).Wait();
 
-            Document[] docs = client.GetDocumentsAsync(DocumentCollectionRequest.Default).Result;
+            //Document[] docs = client.GetDocumentsAsync(DocumentCollectionRequest.Default).Result;
 
             Console.WriteLine("Finished!");
         }

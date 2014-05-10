@@ -37,18 +37,22 @@ namespace Docular.Client.ViewModel
             set
             {
                 this.SetProperty(ref _CurrentUser, value);
+                this.OnPropertyChanged("GreetingSentence");
             }
         }
 
         /// <summary>
-        /// Selects a random greeting word from the list of available words.
+        /// Gets the greeting sentence displayed on the start view.
         /// </summary>
-        public String RandomGreetingWord
+        public String GreetingSentence
         {
             get
             {
-                String[] words = General.WelcomeExpressions.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-                return words.ElementAt(random.Next(1, words.Length));
+                return String.Format(
+                    StartView.WelcomeFormatText,
+                    this.GetRandomGreetingWord(),
+                    this.CurrentUser.Name
+                );
             }
         }
 
@@ -56,9 +60,20 @@ namespace Docular.Client.ViewModel
         /// Loads the data into the model.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
-        public override async Task LoadData()
+        public override Task LoadData()
         {
             //this.CurrentUser = await this.Client.GetCurrentUserAsync();
+            return Task.FromResult<object>(null);
+        }
+
+        /// <summary>
+        /// Gets a greeting word from the list of available ones.
+        /// </summary>
+        /// <returns>The greeting word.</returns>
+        private String GetRandomGreetingWord()
+        {
+            String[] words = StartView.WelcomeExpressions.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            return words.ElementAt(random.Next(1, words.Length));
         }
     }
 }

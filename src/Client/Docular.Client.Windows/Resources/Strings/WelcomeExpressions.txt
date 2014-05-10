@@ -1,13 +1,16 @@
 ﻿Hello
 Hi
+Howdy
 Greetings
 Hallo
 Guten Tag
+Zdravo
 Hola
 Bonjour
 Allô
 你好
 здра́вствуйте
+Вітаемо
 Hei
 Hej
 Olá
@@ -24,5 +27,5 @@ Sali
 Salut
 Merhaba
 नमस्ते
-Zdravo
 Salâm
+Γεια σας

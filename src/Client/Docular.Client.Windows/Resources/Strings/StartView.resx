@@ -117,48 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CategoriesCaption" xml:space="preserve">
-    <value>Categories</value>
-    <comment>The title for the categories view.</comment>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="WelcomeExpressions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>welcomeexpressions.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="Docular" xml:space="preserve">
-    <value>Docular</value>
-    <comment>The String "Docular".</comment>
-  </data>
-  <data name="DocularCapital" xml:space="preserve">
-    <value>DOCULAR</value>
-    <comment>The String "Docular" in pure capital letters.</comment>
-  </data>
-  <data name="DocularDms" xml:space="preserve">
-    <value>Docular DMS</value>
-    <comment>The String "DocularDMS".</comment>
-  </data>
-  <data name="DocumentsCaption" xml:space="preserve">
-    <value>Documents</value>
-    <comment>The title for the documents view.</comment>
-  </data>
-  <data name="SearchCaption" xml:space="preserve">
-    <value>Search</value>
-    <comment>The title for the search view.</comment>
-  </data>
-  <data name="SettingsCaption" xml:space="preserve">
-    <value>Settings</value>
-    <comment>The title for the settings view.</comment>
-  </data>
-  <data name="SidebarCaption" xml:space="preserve">
-    <value>Sidebar</value>
-    <comment>The title for the sidebar.</comment>
-  </data>
-  <data name="StartCaption" xml:space="preserve">
-    <value>Start</value>
-    <comment>The title for the start view.</comment>
-  </data>
-  <data name="TagsCaption" xml:space="preserve">
-    <value>Tags</value>
-    <comment>The title for the tags view.</comment>
-  </data>
-  <data name="UserCaption" xml:space="preserve">
-    <value>User</value>
-    <comment>The title for the user menu.</comment>
+  <data name="WelcomeFormatText" xml:space="preserve">
+    <value>{0}, {1}! You currently have {2} documents. Since {3} you uploaded {4} documents and {5} new ones were processed.</value>
   </data>
 </root>

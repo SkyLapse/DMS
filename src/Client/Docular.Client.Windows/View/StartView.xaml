@@ -8,8 +8,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20*"/>
             <RowDefinition Height="75*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="440*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="420*"/>
         </Grid.RowDefinitions>
         
         <ContentControl Content="{DynamicResource EyeLogoWithTextWide}" Grid.Row="1">
@@ -17,14 +17,9 @@
                 <DropShadowEffect Color="{DynamicResource Background}" ShadowDepth="0" BlurRadius="10"/>
             </ContentControl.Effect>
         </ContentControl>
-        <Label Style="{DynamicResource LabelStyleRegularDarkLight}"
+        <Label Style="{DynamicResource LabelStyleRegularBackground}"
+               Content="{Binding GreetingSentence}"
                Grid.Row="2"
-               HorizontalContentAlignment="Left">
-            <TextBlock>
-                <Run Text="{Binding RandomGreetingWord}"/>
-                <Run Text=", "/>
-                <Run Text="{Binding CurrentUser.Name}"/>
-            </TextBlock>
-        </Label>
+               Margin="10,0"/>
     </Grid>
 </UserControl>
