@@ -38,6 +38,15 @@ namespace Docular.Client.Model
         }
 
         /// <summary>
+        /// Gets the object's hash code.
+        /// </summary>
+        /// <returns>The hash code.</returns>
+        public override int GetHashCode()
+        {
+            return new { this.Key, this.Value }.GetHashCode();
+        }
+
+        /// <summary>
         /// Checks two <see cref="CustomField"/>s for equality.
         /// </summary>
         /// <param name="left">The left operand.</param>

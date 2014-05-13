@@ -185,11 +185,8 @@ namespace Docular.Client.Model
         }
 
         /// <summary>
-        /// Initializes a new <see cref="Document"/>. This constructor is used for deserialization.
+        /// Initializes a new <see cref="Document"/>.
         /// </summary>
-        public Document() 
-        {
-            this.Tags = null;
-        }
+        public Document() { }
     }
 }

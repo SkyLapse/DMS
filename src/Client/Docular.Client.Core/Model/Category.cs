@@ -40,14 +40,5 @@ namespace Docular.Client.Model
         /// Initializes a new <see cref="Category"/>.
         /// </summary>
         public Category() { }
-
-        /// <summary>
-        /// Initializes a new <see cref="Category"/>.
-        /// </summary>
-        /// <param name="name">The <see cref="Category"/>s name.</param>
-        public Category(String name)
-        {
-            this.Name = name;
-        }
     }
 }
