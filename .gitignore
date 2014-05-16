@@ -226,6 +226,7 @@ pip-log.txt
 
 # PhpStorm specific
 src/Server/.idea/workspace.xml
+.[Iidea]/
 
 src/Server/static/css/style.css
 src/Server/static/css/less/style.css
