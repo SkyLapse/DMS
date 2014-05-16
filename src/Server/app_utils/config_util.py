@@ -1,31 +1,31 @@
 import json
 import os
+import threading
 
 __author__ = 'leobernard'
 
 
-def loadConfig(file_name):
-    with open(os.path.join(os.path.dirname(__file__), file_name)) as config_file:
-        data = json.load(config_file)
-
-    return
-
-
 class Config():
-    def __init__(self, data, file_name):
-        self.data = data
+    def __init__(self, file_name, data=None):
         self.file_name = file_name
-        self.is_locked = False
+        self.lock = threading.RLock()
+        if data is None:
+            with open(os.path.join(os.path.dirname(__file__), file_name)) as config_file:
+                self.data = json.load(config_file)
+        else:
+            self.data = data
+
+    def get(self, item):
+        return self.__getitem__(item)
+
+    def set(self, key, value):
+        return self.__setitem__(key, value)
 
     def __getitem__(self, item):
         return self.data[item]
 
     def __setitem__(self, key, value):
-        while self.is_locked:
-            pass
-
-        self.data[key] = value
-
-        self.is_locked = True
-        with open(os.path.join(os.path.dirname(__file__), self.file_name), 'w') as config_file:
-            config_file.write(json.dumps(self.data, indent=4))
+        with self.lock:
+            self.data[key] = value
+            with open(os.path.join(os.path.dirname(__file__), self.file_name), 'w') as config_file:
+                config_file.write(json.dumps(self.data, indent=4))
