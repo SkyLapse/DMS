@@ -41,9 +41,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator CategoryAddRequest(Category category)
         {
-            Contract.Requires<ArgumentNullException>(category != null);
-
-            return new CategoryAddRequest() { Category = category };
+            return (category != null) ? new CategoryAddRequest() { Category = category } : null;
         }
     }
 }

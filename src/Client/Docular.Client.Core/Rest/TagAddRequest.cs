@@ -41,9 +41,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator TagAddRequest(Tag tag)
         {
-            Contract.Requires<ArgumentNullException>(tag != null);
-
-            return new TagAddRequest() { Tag = tag };
+            return (tag != null) ? new TagAddRequest() { Tag = tag } : null;
         }
     }
 }

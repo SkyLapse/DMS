@@ -43,7 +43,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Gets the <see cref="Category"/> the <see cref="Document"/> belongs to.
         /// </summary>
-        [IgnoreDataMember]
+        [DataMember]
         public Category Category
         {
             get

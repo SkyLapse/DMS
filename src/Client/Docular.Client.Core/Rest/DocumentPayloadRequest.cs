@@ -23,9 +23,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator DocumentPayloadRequest(Document document)
         {
-            Contract.Requires<ArgumentNullException>(document != null);
-
-            return new DocumentPayloadRequest() { Id = document.Id };
+            return (document != null) ? new DocumentPayloadRequest() { Id = document.Id } : null;
         }
 
         /// <summary>
@@ -35,9 +33,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator DocumentPayloadRequest(String documentId)
         {
-            Contract.Requires<ArgumentNullException>(documentId != null);
-
-            return new DocumentPayloadRequest() { Id = documentId };
+            return (documentId != null) ? new DocumentPayloadRequest() { Id = documentId } : null;
         }
     }
 }

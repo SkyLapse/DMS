@@ -22,9 +22,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator TagDeleteRequest(Tag tag)
         {
-            Contract.Requires<ArgumentNullException>(tag != null);
-
-            return new TagDeleteRequest() { Id = tag.Id };
+            return (tag != null) ? new TagDeleteRequest() { Id = tag.Id } : null;
         }
 
         /// <summary>
@@ -34,9 +32,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator TagDeleteRequest(String id)
         {
-            Contract.Requires<ArgumentNullException>(id != null);
-
-            return new TagDeleteRequest() { Id = id };
+            return (id != null) ? new TagDeleteRequest() { Id = id } : null;
         }
     }
 }

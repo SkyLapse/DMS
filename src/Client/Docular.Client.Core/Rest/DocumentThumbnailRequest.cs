@@ -63,9 +63,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator DocumentThumbnailRequest(Document document)
         {
-            Contract.Requires<ArgumentNullException>(document != null);
-
-            return new DocumentThumbnailRequest() { Id = document.Id };
+            return (document != null) ? new DocumentThumbnailRequest() { Id = document.Id } : null;
         }
 
         /// <summary>
@@ -75,9 +73,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator DocumentThumbnailRequest(String documentId)
         {
-            Contract.Requires<ArgumentNullException>(documentId != null);
-
-            return new DocumentThumbnailRequest() { Id = documentId };
+            return (documentId != null) ? new DocumentThumbnailRequest() { Id = documentId } : null;
         }
     }
 }

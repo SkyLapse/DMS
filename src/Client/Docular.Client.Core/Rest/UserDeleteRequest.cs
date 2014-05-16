@@ -18,13 +18,11 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Implicitly converts the <see cref="Category"/> into a <see cref="UserDeleteRequest"/>.
         /// </summary>
-        /// <param name="User">The <see cref="User"/> to convert.</param>
+        /// <param name="user">The <see cref="User"/> to convert.</param>
         /// <returns>The conversion result.</returns>
-        public static implicit operator UserDeleteRequest(User User)
+        public static implicit operator UserDeleteRequest(User user)
         {
-            Contract.Requires<ArgumentNullException>(User != null);
-
-            return new UserDeleteRequest() { Id = User.Id };
+            return (user != null) ? new UserDeleteRequest() { Id = user.Id } : null;
         }
 
         /// <summary>
@@ -34,9 +32,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator UserDeleteRequest(String id)
         {
-            Contract.Requires<ArgumentNullException>(id != null);
-
-            return new UserDeleteRequest() { Id = id };
+            return (id != null) ? new UserDeleteRequest() { Id = id } : null;
         }
     }
 }

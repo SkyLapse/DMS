@@ -41,9 +41,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator UserAddRequest(User user)
         {
-            Contract.Requires<ArgumentNullException>(user != null);
-
-            return new UserAddRequest() { User = user };
+            return (user != null) ? new UserAddRequest() { User = user } : null;
         }
     }
 }

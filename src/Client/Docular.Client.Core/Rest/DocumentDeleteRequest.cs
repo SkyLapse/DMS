@@ -22,9 +22,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator DocumentDeleteRequest(Document document)
         {
-            Contract.Requires<ArgumentNullException>(document != null);
-
-            return new DocumentDeleteRequest() { Id = document.Id };
+            return (document != null) ? new DocumentDeleteRequest() { Id = document.Id } : null;
         }
 
         /// <summary>
@@ -34,9 +32,7 @@ namespace Docular.Client.Rest
         /// <returns>The conversion result.</returns>
         public static implicit operator DocumentDeleteRequest(String id)
         {
-            Contract.Requires<ArgumentNullException>(id != null);
-
-            return new DocumentDeleteRequest() { Id = id };
+            return (id != null) ? new DocumentDeleteRequest() { Id = id } : null;
         }
     }
 }

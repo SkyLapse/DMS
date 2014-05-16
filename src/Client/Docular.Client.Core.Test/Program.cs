@@ -20,7 +20,7 @@ namespace Docular.Client.Core.Test
 
             Document doc = new Document()
             {
-                Category = new Category("Hello, this is a test category!"),
+                Category = new Category() { Name = "Hello, this is a test category!" },
                 CreateInfo = new ChangeInfo(new User() { Name = "TestUser" }, DateTime.Now),
                 CustomFields = new[] { new CustomField("TestKey1", "TestValue"), new CustomField("TestKey2", "TestValue2") },
                 Description = "This document is used as test.",
