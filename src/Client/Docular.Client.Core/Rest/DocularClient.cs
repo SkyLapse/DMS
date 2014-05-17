@@ -44,7 +44,7 @@ namespace Docular.Client.Rest
             JsConfig.EmitCamelCaseNames = true;
             JsConfig.DateHandler = DateHandler.UnixTime;
             JsConfig.PropertyConvention = PropertyConvention.Strict;
-            JsConfig.IncludeNullValues = true;
+            JsConfig.IncludeNullValues = false;
             JsConfig<Buzzword>.TreatValueAsRefType = true;
             JsConfig<ChangeInfo>.TreatValueAsRefType = true;
             JsConfig<CustomField>.TreatValueAsRefType = true;

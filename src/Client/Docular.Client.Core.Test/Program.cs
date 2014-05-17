@@ -20,19 +20,29 @@ namespace Docular.Client.Core.Test
 
             Document doc = new Document()
             {
-                Category = new Category() { Name = "Hello, this is a test category!" },
+                Category = new Category() 
+                { 
+                    Name = "Hello, this is a test category!",
+                    Description = "This is the description of the test category.",
+                    CustomFields = new[] 
+                    { 
+                        new CustomField("CustomFieldKey1", "This is the value of the first custom field."),
+                        new CustomField("CustomFieldKey2", "This is the value of the second custom field.")
+                    }
+                },
                 CreateInfo = new ChangeInfo(new User() { Name = "TestUser" }, DateTime.Now),
-                CustomFields = new[] { new CustomField("TestKey1", "TestValue"), new CustomField("TestKey2", "TestValue2") },
+                CustomFields = new[] { new CustomField("TestKey1", "TestValue1"), new CustomField("TestKey2", "TestValue2") },
                 Description = "This document is used as test.",
                 ExtractedContent = "Hello, this is a test",
                 Name = "Test Document",
                 Mime = "image/jpg",
-                Size = 1010213
+                Size = 1010213,
+                Tags = new[] { new Tag() { Name = "Tag1", Description = "This is the description of the one and only tag the document is tagged with." } }
             };
 
             File.WriteAllText("E:\\Users\\Moritz\\Downloads\\Document.json", doc.ToJson());
 
-            client.AddDocumentAsync(doc).Wait();
+            //client.AddDocumentAsync(doc).Wait();
 
             //Document[] docs = client.GetDocumentsAsync(DocumentCollectionRequest.Default).Result;
 
