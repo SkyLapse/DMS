@@ -12,7 +12,7 @@ namespace Docular.Client.Rest
     /// Contains filtering parameters for a <see cref="User"/> request.
     /// </summary>
     [Route("/users", "GET")]
-    public class UserCollectionRequest : DefaultParameters, IReturn<User[]>
+    public class UserCollectionRequest : CollectionRequest, IReturn<User[]>
     {
         /// <summary>
         /// The default <see cref="UserCollectionRequest"/> returning all available <see cref="User"/>s.

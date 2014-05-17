@@ -12,7 +12,7 @@ namespace Docular.Client.Rest
     /// Contains filtering parameters for a <see cref="Tag"/> request.
     /// </summary>
     [Route("/tags", "GET")]
-    public class TagCollectionRequest : DefaultParameters, IReturn<Tag[]>
+    public class TagCollectionRequest : CollectionRequest, IReturn<Tag[]>
     {
         /// <summary>
         /// The default <see cref="TagCollectionRequest"/> returning all available <see cref="Tag"/>s.

@@ -132,7 +132,7 @@
     <Compile Include="Rest\TagDeleteRequest.cs" />
     <Compile Include="Rest\TagRequest.cs" />
     <Compile Include="Rest\CategoryRequest.cs" />
-    <Compile Include="Rest\DefaultParameters.cs" />
+    <Compile Include="Rest\CollectionRequest.cs" />
     <Compile Include="Rest\CategoryDeleteRequest.cs" />
     <Compile Include="Rest\DocularClient.cs" />
     <Compile Include="Rest\DocumentAddRequest.cs" />

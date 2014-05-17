@@ -12,7 +12,7 @@ namespace Docular.Client.Rest
     /// Defines the default parameters for any REST collection request.
     /// </summary>
     [DataContract]
-    public abstract class DefaultParameters
+    public abstract class CollectionRequest
     {
         /// <summary>
         /// The index to start searching at.

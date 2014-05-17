@@ -12,7 +12,7 @@ namespace Docular.Client.Rest
     /// Contains filtering parameters for a <see cref="Category"/> request.
     /// </summary>
     [Route("/categories", "GET")]
-    public class CategoryCollectionRequest : DefaultParameters, IReturn<Category[]>
+    public class CategoryCollectionRequest : CollectionRequest, IReturn<Category[]>
     {
         /// <summary>
         /// The default <see cref="CategoryCollectionRequest"/> returning all available <see cref="Category"/>s.

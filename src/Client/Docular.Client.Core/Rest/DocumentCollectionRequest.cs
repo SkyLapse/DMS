@@ -14,7 +14,7 @@ namespace Docular.Client.Rest
     /// </summary>
     [Route("/documents", "GET")]
     [DataContract]
-    public class DocumentCollectionRequest : DefaultParameters, IReturn<Document[]>
+    public class DocumentCollectionRequest : CollectionRequest, IReturn<Document[]>
     {
         /// <summary>
         /// A default <see cref="DocumentCollectionRequest"/> returning all <see cref="Document"/>s.

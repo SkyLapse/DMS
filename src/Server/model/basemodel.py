@@ -1,7 +1,9 @@
+from bson import DBRef
+from pymongo.database import Database
+
 __author__ = 'leobernard'
 
 from abc import ABCMeta, abstractmethod
-from pymongo import database
 
 
 class BaseModel():
@@ -48,19 +50,19 @@ class BaseModel():
 
         return self.get_collection().update(spec, final)
 
-    def resolve_object_ids(self, object):
-        if object is None:
+    def resolve_object_ids(self, mongo_object):
+        if mongo_object is None:
             return None
 
-        if type(object) is "dict":
+        if type(mongo_object) is "dict":
             result = {}
-            for key in object:
-                result[key] = self.resolve_object_ids(object[key]) if key is not "_id" else object[key]
+            for key in mongo_object:
+                result[key] = self.resolve_object_ids(mongo_object[key]) if key is not "_id" else mongo_object[key]
             return result
-        elif type(object) is "list":
-            collection = list()
-            for item in object:
-                collection.append(self.resolve_object_ids(item))
-            return collection
-        elif type(object) is "bson.objectid.ObjectId":
-            return object.to_mongo()
+        elif type(mongo_object) is "list":
+            for item in mongo_object:
+                yield self.resolve_object_ids(item)
+        elif type(mongo_object) is "bson.objectid.ObjectId":
+            return self.get_single(mongo_object)
+        elif type(mongo_object) is "bson.dbref.DBRef":
+            return Database.dereference(mongo_object)

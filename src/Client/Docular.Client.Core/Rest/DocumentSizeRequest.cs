@@ -12,7 +12,7 @@ namespace Docular.Client.Rest
     /// Contains filtering parameters for a <see cref="Document"/> collection request.
     /// </summary>
     [Route("/documents/size", "GET")]
-    public class DocumentSizeRequest : DefaultParameters, IReturn<Document[]>
+    public class DocumentSizeRequest : CollectionRequest, IReturn<Document[]>
     {
         /// <summary>
         /// A default <see cref="DocumentSizeRequest"/> returning all <see cref="Document"/>s.
