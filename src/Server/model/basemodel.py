@@ -1,6 +1,7 @@
 __author__ = 'leobernard'
 
 from abc import ABCMeta, abstractmethod
+from pymongo import database
 
 
 class BaseModel():
@@ -46,3 +47,20 @@ class BaseModel():
             final[index] = data[index]
 
         return self.get_collection().update(spec, final)
+
+    def resolve_object_ids(self, object):
+        if object is None:
+            return None
+
+        if type(object) is "dict":
+            result = {}
+            for key in object:
+                result[key] = self.resolve_object_ids(object[key]) if key is not "_id" else object[key]
+            return result
+        elif type(object) is "list":
+            collection = list()
+            for item in object:
+                collection.append(self.resolve_object_ids(item))
+            return collection
+        elif type(object) is "bson.objectid.ObjectId":
+            return object.to_mongo()
