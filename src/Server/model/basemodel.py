@@ -60,8 +60,12 @@ class BaseModel():
                 result[key] = self.resolve_object_ids(mongo_object[key]) if key is not "_id" else mongo_object[key]
             return result
         elif type(mongo_object) is "list":
+            output = []
+
             for item in mongo_object:
-                yield self.resolve_object_ids(item)
+                output.append(self.resolve_object_ids(item))
+
+            return output
         elif type(mongo_object) is "bson.objectid.ObjectId":
             return self.get_single(mongo_object)
         elif type(mongo_object) is "bson.dbref.DBRef":

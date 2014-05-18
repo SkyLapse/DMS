@@ -16,5 +16,3 @@ class BaseController(restful.Resource):
     @abstractmethod
     def get(self, id=None):
         pass
-
-    def post(self, ):
