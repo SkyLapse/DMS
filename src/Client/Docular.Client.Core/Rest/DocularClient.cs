@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
+using Docular.Client.Rest.Requests;
 using PCLStorage;
 using ServiceStack;
 using ServiceStack.Text;
@@ -18,29 +19,37 @@ namespace Docular.Client.Rest
     public class DocularClient : IDocularClient
     {
         /// <summary>
-        /// The folder name for the folder storing the documents payloads.
-        /// </summary>
-        private const String PayloadFolderName = "Payloads";
-
-        /// <summary>
-        /// The folder name for the folder storing the documents thumbnails.
-        /// </summary>
-        private const String ThumbnailFolderName = "Thumbnails";
-
-        /// <summary>
         /// The <see cref="JsonServiceClient"/> executing the requests.
         /// </summary>
         private readonly JsonServiceClient client = new JsonServiceClient();
+
+        /// <summary>
+        /// The <see cref="ICache"/> used to cache the payloads and thumbnails.
+        /// </summary>
+        private readonly ICache cache;
 
         /// <summary>
         /// Initializes a new <see cref="DocularClient"/>.
         /// </summary>
         /// <param name="apiUri">The base URL of the remote docular host's API.</param>
         public DocularClient(String apiUri)
+            : this(apiUri, new DocularCache())
         {
             Contract.Requires<ArgumentNullException>(apiUri != null);
+        }
 
+        /// <summary>
+        /// Initializes a new <see cref="DocularClient"/>.
+        /// </summary>
+        /// <param name="apiUri">The base URL of the remote docular host's API.</param>
+        /// <param name="cache">The <see cref="ICache"/> used to cache thumbnails and payloads.</param>
+        public DocularClient(String apiUri, ICache cache)
+        {
+            Contract.Requires<ArgumentNullException>(apiUri != null && cache != null);
+
+            this.cache = cache;
             this.client.BaseUri = apiUri;
+
             JsConfig.EmitCamelCaseNames = true;
             JsConfig.DateHandler = DateHandler.UnixTime;
             JsConfig.PropertyConvention = PropertyConvention.Strict;
@@ -234,39 +243,5 @@ namespace Docular.Client.Rest
         }
 
         #endregion
-
-        private async Task<Stream> GetCachedPayload(String documentId)
-        {
-            Contract.Requires<ArgumentNullException>(documentId != null);
-
-            return await this.OpenFile(
-               await FileSystem.Current.LocalStorage.CreateFolderAsync(PayloadFolderName, CreationCollisionOption.OpenIfExists),
-               documentId
-            );
-        }
-
-        private async Task<Stream> GetCachedThumbnail(String documentId)
-        {
-            Contract.Requires<ArgumentNullException>(documentId != null);
-
-            return await this.OpenFile(
-                await FileSystem.Current.LocalStorage.CreateFolderAsync(ThumbnailFolderName, CreationCollisionOption.OpenIfExists),
-                documentId
-            );
-        }
-
-        private async Task<Stream> OpenFile(IFolder folder, String fileName)
-        {
-            Contract.Requires<ArgumentNullException>(folder != null && fileName != null);
-
-            IFile payloadFile = await folder.GetFileAsync(fileName);
-            return (payloadFile != null) ? await payloadFile.OpenAsync(FileAccess.Read) : null;
-        }
-        
-        [ContractInvariantMethod]
-        private void ObjectInvariant()
-        {
-            Contract.Invariant(this.client != null);
-        }
     }
 }

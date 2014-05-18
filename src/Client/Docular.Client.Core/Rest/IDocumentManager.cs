@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
+using Docular.Client.Rest.Requests;
 
 namespace Docular.Client.Rest
 {
     /// <summary>
     /// Defines a mechanism to work with docular documents.
     /// </summary>
-    [ContractClass(typeof(DocumentManagerContracts))]
+    [ContractClass(typeof(IDocumentManagerContracts))]
     public interface IDocumentManager
     {
         /// <summary>
@@ -91,7 +92,7 @@ namespace Docular.Client.Rest
     /// Contains contract definitions.
     /// </summary>
     [ContractClassFor(typeof(IDocumentManager))]
-    abstract class DocumentManagerContracts : IDocumentManager
+    abstract class IDocumentManagerContracts : IDocumentManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.

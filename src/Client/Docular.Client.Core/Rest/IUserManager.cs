@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
+using Docular.Client.Rest.Requests;
 
 namespace Docular.Client.Rest
 {
     /// <summary>
     /// Defines a mechanism to work with docular users.
     /// </summary>
-    [ContractClass(typeof(UserManagerContracts))]
+    [ContractClass(typeof(IUserManagerContracts))]
     public interface IUserManager
     {
         /// <summary>
@@ -66,7 +67,7 @@ namespace Docular.Client.Rest
     /// Contains contract definitions.
     /// </summary>
     [ContractClassFor(typeof(IUserManager))]
-    abstract class UserManagerContracts : IUserManager
+    abstract class IUserManagerContracts : IUserManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.

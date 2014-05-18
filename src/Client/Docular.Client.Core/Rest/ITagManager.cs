@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
+using Docular.Client.Rest.Requests;
 
 namespace Docular.Client.Rest
 {
     /// <summary>
     /// Defines a mechanism to work with docular tags.
     /// </summary>
-    [ContractClass(typeof(TagManagerContracts))]
+    [ContractClass(typeof(ITagManagerContracts))]
     public interface ITagManager
     {
         /// <summary>
@@ -60,7 +61,7 @@ namespace Docular.Client.Rest
     /// Contains contract definitions.
     /// </summary>
     [ContractClassFor(typeof(ITagManager))]
-    abstract class TagManagerContracts : ITagManager
+    abstract class ITagManagerContracts : ITagManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.

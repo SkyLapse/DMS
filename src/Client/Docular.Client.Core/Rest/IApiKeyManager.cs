@@ -4,13 +4,14 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Docular.Client.Rest.Requests;
 
 namespace Docular.Client.Rest
 {
     /// <summary>
     /// Defines mechanisms to work with docular API keys.
     /// </summary>
-    [ContractClass(typeof(ApiKeyManagerContracts))]
+    [ContractClass(typeof(IApiKeyManagerContracts))]
     public interface IApiKeyManager
     {
         /// <summary>
@@ -32,12 +33,12 @@ namespace Docular.Client.Rest
     /// Contains contract definitions for <see cref="IApiKeyManager"/>.
     /// </summary>
     [ContractClassFor(typeof(IApiKeyManager))]
-    abstract class ApiKeyManagerContracts : IApiKeyManager
+    abstract class IApiKeyManagerContracts : IApiKeyManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<string> IApiKeyManager.GetKey(ApiKeyRequest keyRequest)
+        Task<String> IApiKeyManager.GetKey(ApiKeyRequest keyRequest)
         {
             Contract.Requires<ArgumentNullException>(keyRequest != null);
             Contract.Requires<ArgumentException>(keyRequest.MachineName != null);

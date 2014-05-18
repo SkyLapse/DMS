@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
+using Docular.Client.Rest.Requests;
 
 namespace Docular.Client.Rest
 {
     /// <summary>
     /// Defines a mechanism for interacting with docular categories.
     /// </summary>
-    [ContractClass(typeof(CategoryManagerContracts))]
+    [ContractClass(typeof(ICategoryManagerContracts))]
     public interface ICategoryManager
     {
         /// <summary>
@@ -60,7 +61,7 @@ namespace Docular.Client.Rest
     /// Contains contract definitions.
     /// </summary>
     [ContractClassFor(typeof(ICategoryManager))]
-    abstract class CategoryManagerContracts : ICategoryManager
+    abstract class ICategoryManagerContracts : ICategoryManager
     {
         /// <summary>
         /// Contains contract definitions, not for actual use.

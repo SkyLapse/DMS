@@ -35,8 +35,8 @@ namespace Docular.Client.Model
             : this()
         {
             Contract.Requires<ArgumentNullException>(value != null);
-            Contract.Requires<ArgumentException>(!value.Contains(" "));
             Contract.Requires<ArgumentOutOfRangeException>(commonness >= 0.0f);
+            Contract.Requires<ArgumentException>(!value.Contains(" "));
 
             this.Commonness = commonness;
             this.Value = value;
