@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
 using Docular.Client.Rest;
-using ServiceStack;
 
 namespace Docular.Client.Core.Test
 {
@@ -16,36 +15,24 @@ namespace Docular.Client.Core.Test
     {
         static void Main(string[] args)
         {
-            DocularClient client = new DocularClient("http://raspbmc.local:5002/api/");
+            ICache cache = new DocularCache();
 
-            Document doc = new Document()
+            using (MemoryStream ms = new MemoryStream())
+            using (StreamWriter sw = new StreamWriter(ms))
             {
-                Category = new Category() 
-                { 
-                    Name = "Hello, this is a test category!",
-                    Description = "This is the description of the test category.",
-                    CustomFields = new[] 
-                    { 
-                        new CustomField("CustomFieldKey1", "This is the value of the first custom field."),
-                        new CustomField("CustomFieldKey2", "This is the value of the second custom field.")
-                    }
-                },
-                CreateInfo = new ChangeInfo(new User() { Name = "TestUser" }, DateTime.Now),
-                CustomFields = new[] { new CustomField("TestKey1", "TestValue1"), new CustomField("TestKey2", "TestValue2") },
-                Description = "This document is used as test.",
-                ExtractedContent = "Hello, this is a test",
-                Name = "Test Document",
-                Mime = "image/jpg",
-                Size = 1010213,
-                Tags = new[] { new Tag() { Name = "Tag1", Description = "This is the description of the one and only tag the document is tagged with." } }
-            };
+                sw.Write("Hello, this is a test!");
+                sw.Flush();
+                ms.Position = 0;
+                cache.Add("TestFile", ms, "Test").Wait();
+            }
 
-            File.WriteAllText("E:\\Users\\Moritz\\Downloads\\Document.json", doc.ToJson());
+            using (Stream s = cache.Get("TestFile", "Test").Result)
+            using (StreamReader sr = new StreamReader(s))
+            {
+                Console.WriteLine(sr.ReadToEnd());
+            }
 
-            //client.AddDocumentAsync(doc).Wait();
-
-            //Document[] docs = client.GetDocumentsAsync(DocumentCollectionRequest.Default).Result;
-
+            Console.Read();
             Console.WriteLine("Finished!");
         }
     }

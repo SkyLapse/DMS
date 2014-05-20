@@ -40,5 +40,14 @@ namespace Docular.Client.Model
         /// Initializes a new <see cref="Category"/>.
         /// </summary>
         public Category() { }
+
+        /// <summary>
+        /// Saves the <see cref="Category"/> to the remote DB.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
+        public override Task SaveAsync()
+        {
+            return this.DocularClient.UpdateCategoryAsync(this);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
@@ -11,86 +12,121 @@ using PCLStorage;
 namespace Docular.Client.Rest
 {
     /// <summary>
-    /// Represents a cache for thumbnails and payloads.
+    /// Represents a cache.
     /// </summary>
     public class DocularCache : ICache
     {
         /// <summary>
-        /// The folder name for the folder storing the documents payloads.
+        /// Adds an item to the cache.
         /// </summary>
-        private const String PayloadFolderName = "Payloads";
-
-        /// <summary>
-        /// The folder name for the folder storing the documents thumbnails.
-        /// </summary>
-        private const String ThumbnailFolderName = "Thumbnails";
-
-        /// <summary>
-        /// Gets the payload for the <see cref="Document"/> with the specified ID.
-        /// </summary>
-        /// <param name="id">The ID of the document to obtain the payload of.</param>
-        /// <returns>The payload.</returns>
-        public async Task<Stream> GetPayloadAsync(String id)
+        /// <param name="store">The store storing the cache data.</param>
+        /// <param name="name">The name of the cache item.</param>
+        /// <param name="content">The cached data.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous caching operation.</returns>
+        public async Task Add(String name, Stream content, String store = null)
         {
-            return await this.OpenFile(await this.OpenPayloadFolder(), id);
+            await this.WriteToFileAsync(content, await this.OpenStore(store), name);
         }
 
         /// <summary>
-        /// Gets the thumbnail for the <see cref="Document"/> with the specified ID.
+        /// Retreives an item from the cache.
         /// </summary>
-        /// <param name="id">The ID of the document to obtain the thumbnail of.</param>
-        /// <returns>The thumbnail.</returns>
-        public async Task<Stream> GetThumbnailAsync(String id)
+        /// <param name="storeName">The name of the store storing the cache data.</param>
+        /// <param name="name">The name of the cache item.</param>
+        /// <returns>The cached data.</returns>
+        public async Task<Stream> Get(String name, String storeName = null)
         {
-            return await this.OpenFile(await this.OpenThumbnailFolder(), id);
+            return await (await (await this.OpenStore(storeName)).GetFileAsync(name)).OpenAsync(FileAccess.Read);
         }
 
         /// <summary>
-        /// Opens the specified file in the specified <see cref="IFolder"/>.
-        /// </summary>
-        /// <param name="folder">The <see cref="IFolder"/> containing the file.</param>
-        /// <param name="fileName">The name of the file to open.</param>
-        /// <returns>The opened file.</returns>
-        private async Task<Stream> OpenFile(IFolder folder, String fileName)
-        {
-            Contract.Requires<ArgumentNullException>(folder != null && fileName != null);
-
-            IFile payloadFile = await folder.GetFileAsync(fileName);
-            return (payloadFile != null) ? await payloadFile.OpenAsync(FileAccess.Read) : null;
-        }
-
-        /// <summary>
-        /// Invaliates the locally stored data deleting it from the device.
+        /// Invaliates all local stores deleting the cached data from the device.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous deleting operation.</returns>
         public async Task Invalidate()
         {
             await Task.WhenAll(
-                Task.WhenAll((await (await this.OpenPayloadFolder()).GetFilesAsync()).Select(file => file.DeleteAsync())),
-                Task.WhenAll((await (await this.OpenThumbnailFolder()).GetFilesAsync()).Select(file => file.DeleteAsync()))
+                (await (await this.OpenCacheFolder()).GetFoldersAsync()).Select(folder => this.Invalidate(folder))
             );
         }
 
         /// <summary>
-        /// Opens the payload folder.
+        /// Invaliates the locally stored data deleting it from the device. See remarks.
         /// </summary>
-        /// <returns>The <see cref="IFolder"/> containing the payloads.</returns>
-        private Task<IFolder> OpenPayloadFolder()
+        /// <param name="store">The cache store to invalidate.</param>
+        /// <remarks>
+        /// Due to thread-safety, the method only deletes the files that were present when it was called, it does not make
+        /// sure the cache folder is emptied completely.
+        /// </remarks>
+        /// <returns>A <see cref="Task"/> representing the asynchronous deleting operation.</returns>
+        public async Task Invalidate(String store)
         {
-            Contract.Assume(FileSystem.Current.LocalStorage != null);
-
-            return FileSystem.Current.LocalStorage.CreateFolderAsync(PayloadFolderName, CreationCollisionOption.OpenIfExists);
+            await this.Invalidate(await this.OpenStore(store));
         }
 
         /// <summary>
-        /// Opens the thumbnail folder.
+        /// Invalidates the specified cache-store deleting all it's files.
         /// </summary>
-        /// <returns>The <see cref="IFolder"/> containing the thumbnails.</returns>
-        private Task<IFolder> OpenThumbnailFolder()
+        /// <param name="store">The store to invalidate.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous invalidating operation.</returns>
+        public async Task Invalidate(IFolder store)
         {
+            if (store != null)
+            {
+                await Task.WhenAll((await store.GetFilesAsync()).Select(file => file.DeleteAsync()));
+            }
+        }
+
+        /// <summary>
+        /// Opens the cache folder.
+        /// </summary>
+        /// <returns>The folder containing the cache stores.</returns>
+        private Task<IFolder> OpenCacheFolder()
+        {
+            Contract.Assume(FileSystem.Current != null);
             Contract.Assume(FileSystem.Current.LocalStorage != null);
 
-            return FileSystem.Current.LocalStorage.CreateFolderAsync(ThumbnailFolderName, CreationCollisionOption.OpenIfExists);
+            return FileSystem.Current.LocalStorage.CreateFolderAsync("Cache", CreationCollisionOption.OpenIfExists);
+        }
+
+        /// <summary>
+        /// Opens the cache store with the specified name.
+        /// </summary>
+        /// <param name="name">The name of the store to open.</param>
+        /// <returns>The cache store.</returns>
+        private async Task<IFolder> OpenStore(String name)
+        {
+            return await (await this.OpenCacheFolder()).CreateFolderAsync(name ?? "Default", CreationCollisionOption.OpenIfExists);
+        }
+
+        /// <summary>
+        /// Writes the specified byte data to the file with the specified name, overwriting it, if it exists.
+        /// </summary>
+        /// <param name="content">The new file content.</param>
+        /// <param name="folder">The <see cref="IFolder"/> the file resides in.</param>
+        /// <param name="fileName">The name of the file to access.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous writing process.</returns>
+        private async Task WriteToFileAsync(Stream content, IFolder folder, String fileName)
+        {
+            Contract.Requires<ArgumentNullException>(content != null && folder != null && fileName != null);
+
+            await this.WriteToFileAsync(content, await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting));
+        }
+
+        /// <summary>
+        /// Writes the specified byte data to the specified <see cref="IFile"/>.
+        /// </summary>
+        /// <param name="content">The new file content.</param>
+        /// <param name="file">The <see cref="IFile"/> to write to.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous writing process.</returns>
+        private async Task WriteToFileAsync(Stream content, IFile file)
+        {
+            Contract.Requires<ArgumentNullException>(content != null && file != null);
+
+            using (Stream fs = await file.OpenAsync(FileAccess.ReadAndWrite))
+            {
+                await content.CopyToAsync(fs);
+            }
         }
     }
 }

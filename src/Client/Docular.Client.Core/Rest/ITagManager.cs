@@ -39,7 +39,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Gets a filtered collection of <see cref="Tag"/>s.
         /// </summary>
-        /// <param name="collectionRequest">A collection of <see cref="Parameter"/>s to filter by.</param>
+        /// <param name="collectionRequest">A collection of parameters to filter by.</param>
         /// <returns>The <see cref="Tag"/>s that matched the search criteria.</returns>
         Task<Tag[]> GetTagsAsync(TagCollectionRequest collectionRequest);
 

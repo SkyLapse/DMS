@@ -6,31 +6,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
+using PCLStorage;
 
 namespace Docular.Client.Rest
 {
     /// <summary>
-    /// Defines mechanisms to locally cache document payloads and thumbnails.
+    /// Defines mechanisms to locally cache data.
     /// </summary>
     [ContractClass(typeof(ICacheContracts))]
     public interface ICache
     {
         /// <summary>
-        /// Gets the thumbnail for the <see cref="Document"/> with the specified ID.
+        /// Adds an item to the cache.
         /// </summary>
-        /// <param name="id">The ID of the document to obtain the thumbnail of.</param>
-        /// <returns>The thumbnail.</returns>
-        Task<Stream> GetThumbnailAsync(String id);
+        /// <param name="name">The name of the cache item.</param>
+        /// <param name="content">The cached data.</param>
+        /// <param name="store">The store storing the cache data. If null is specified, the default store will be chosen.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous caching operation.</returns>
+        Task Add(String name, Stream content, String store = null);
 
         /// <summary>
-        /// Gets the payload for the <see cref="Document"/> with the specified ID.
+        /// Retreives an item from the cache.
         /// </summary>
-        /// <param name="id">The ID of the document to obtain the payload of.</param>
-        /// <returns>The payload.</returns>
-        Task<Stream> GetPayloadAsync(String id);
+        /// <param name="name">The name of the cache item.</param>
+        /// <param name="store">The store storing the cache data. If null is specified, the default store will be opened.</param>
+        /// <returns>The cached data.</returns>
+        Task<Stream> Get(String name, String store = null);
 
         /// <summary>
-        /// Invaliates the locally stored data deleting it from the device. See remarks.
+        /// Invaliates all of the locally stored data deleting it from the device. See remarks.
         /// </summary>
         /// <remarks>
         /// Due to thread-safety, the method only deletes the files that were present when it was called, it does not make
@@ -38,6 +42,17 @@ namespace Docular.Client.Rest
         /// </remarks>
         /// <returns>A <see cref="Task"/> representing the asynchronous deleting operation.</returns>
         Task Invalidate();
+
+        /// <summary>
+        /// Invaliates the locally stored data deleting it from the device. See remarks.
+        /// </summary>
+        /// <param name="store">The cache store to invalidate. If <c>null</c> is specified, nothing will be invalidated.</param>
+        /// <remarks>
+        /// Due to thread-safety, the method only deletes the files that were present when it was called, it does not make
+        /// sure the cache folder is emptied completely.
+        /// </remarks>
+        /// <returns>A <see cref="Task"/> representing the asynchronous deleting operation.</returns>
+        Task Invalidate(String store);
     }
 
     /// <summary>
@@ -49,9 +64,11 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        public Task<Stream> GetThumbnailAsync(String id)
+        public Task Add(String name, Stream content, String store = null)
         {
-            Contract.Requires<ArgumentNullException>(id != null);
+            Contract.Requires<ArgumentNullException>(store != null);
+            Contract.Requires<ArgumentNullException>(name != null);
+            Contract.Requires<ArgumentNullException>(content != null);
 
             return null;
         }
@@ -59,9 +76,10 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        public Task<Stream> GetPayloadAsync(String id)
+        public Task<Stream> Get(String name, String store = null)
         {
-            Contract.Requires<ArgumentNullException>(id != null);
+            Contract.Requires<ArgumentNullException>(store != null);
+            Contract.Requires<ArgumentNullException>(name != null);
 
             return null;
         }
@@ -70,6 +88,14 @@ namespace Docular.Client.Rest
         /// Contains contract definitions, not for actual use.
         /// </summary>
         public Task Invalidate()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        public Task Invalidate(String store)
         {
             return null;
         }

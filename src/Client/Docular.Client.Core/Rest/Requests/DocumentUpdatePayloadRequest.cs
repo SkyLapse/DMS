@@ -9,7 +9,7 @@ using ServiceStack;
 namespace Docular.Client.Rest.Requests
 {
     /// <summary>
-    /// Updates a <see cref="Document"/>'s payload.
+    /// Updates a <see cref="Docular.Client.Model.Document"/>'s payload.
     /// </summary>
     [Route("/documents/{Id}/payload", "POST")]
     public class DocumentUpdatePayloadRequest : IdVoidRequest

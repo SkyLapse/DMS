@@ -49,14 +49,6 @@ namespace Docular.Client.Rest
 
             this.cache = cache;
             this.client.BaseUri = apiUri;
-
-            JsConfig.EmitCamelCaseNames = true;
-            JsConfig.DateHandler = DateHandler.UnixTime;
-            JsConfig.PropertyConvention = PropertyConvention.Strict;
-            JsConfig.IncludeNullValues = false;
-            JsConfig<Buzzword>.TreatValueAsRefType = true;
-            JsConfig<ChangeInfo>.TreatValueAsRefType = true;
-            JsConfig<CustomField>.TreatValueAsRefType = true;
         }
 
         #region API-Keys
@@ -124,9 +116,21 @@ namespace Docular.Client.Rest
             return this.GetPayloadAsync(payloadRequest, false);
         }
 
-        public Task<Stream> GetPayloadAsync(DocumentPayloadRequest payloadRequest, bool allowCached)
+        public async Task<Stream> GetPayloadAsync(DocumentPayloadRequest payloadRequest, bool allowCached)
         {
-            return this.client.GetAsync<Stream>(payloadRequest);
+            if (allowCached)
+            {
+                return await this.cache.Get(payloadRequest.Id, "Payloads") ?? await this.GetPayloadAsync(payloadRequest, false);
+            }
+            else
+            {
+                Stream payloadStream = await this.client.GetAsync<Stream>(payloadRequest);
+                if (payloadStream != null)
+                {
+                    await this.cache.Add(payloadRequest.Id, payloadStream, "Payloads");
+                }
+                return payloadStream;
+            }
         }
 
         public Task<Document> GetDocumentAsync(DocumentRequest documentRequest)
@@ -154,9 +158,21 @@ namespace Docular.Client.Rest
             return this.GetThumbnailAsync(thumbnailRequest, false);
         }
 
-        public Task<Stream> GetThumbnailAsync(DocumentThumbnailRequest thumbnailRequest, bool allowCached)
+        public async Task<Stream> GetThumbnailAsync(DocumentThumbnailRequest thumbnailRequest, bool allowCached)
         {
-            return this.client.GetAsync<Stream>(thumbnailRequest);
+            if (allowCached)
+            {
+                return await this.cache.Get(thumbnailRequest.Id, "Thumbnails") ?? await this.GetThumbnailAsync(thumbnailRequest, false);
+            }
+            else
+            {
+                Stream thumbnailStream = await this.client.GetAsync<Stream>(thumbnailRequest);
+                if (thumbnailStream != null)
+                {
+                    await this.cache.Add(thumbnailRequest.Id, thumbnailStream, "Thumbnails");
+                }
+                return thumbnailStream;
+            }
         }
 
         public Task UpdateDocumentAsync(DocumentAddRequest documentRequest)

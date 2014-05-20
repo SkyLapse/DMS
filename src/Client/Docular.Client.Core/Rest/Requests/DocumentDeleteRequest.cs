@@ -28,7 +28,7 @@ namespace Docular.Client.Rest.Requests
         /// <summary>
         /// Implicitly converts the tag ID into a <see cref="DocumentDeleteRequest"/>.
         /// </summary>
-        /// <param name="category">The ID to convert.</param>
+        /// <param name="id">The ID to convert.</param>
         /// <returns>The conversion result.</returns>
         public static implicit operator DocumentDeleteRequest(String id)
         {

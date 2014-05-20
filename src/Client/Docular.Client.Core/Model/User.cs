@@ -41,5 +41,14 @@ namespace Docular.Client.Model
         /// Initializes a new <see cref="User"/>.
         /// </summary>
         public User() { }
+
+        /// <summary>
+        /// Saves the <see cref="User"/> to the remote DB.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
+        public override Task SaveAsync()
+        {
+            return this.DocularClient.UpdateUserAsync(this);
+        }
     }
 }

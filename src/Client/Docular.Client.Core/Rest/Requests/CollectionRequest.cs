@@ -41,15 +41,6 @@ namespace Docular.Client.Rest.Requests
             }
         }
 
-        [DataMember(Name = "nowrap")]
-        public bool NoWrap
-        {
-            get
-            {
-                return true;
-            }
-        }
-
         /// <summary>
         /// Backing field.
         /// </summary>

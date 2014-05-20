@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Rest;
+using ServiceStack.Text;
 
 namespace Docular.Client.Model
 {
@@ -147,6 +149,23 @@ namespace Docular.Client.Model
         {
             this.CreateInfo = new ChangeInfo(null, DateTime.Now);
         }
+
+        /// <summary>
+        /// Initializes static properties.
+        /// </summary>
+        static DocularObject()
+        {
+            JsConfig.EmitCamelCaseNames = true;
+            JsConfig.DateHandler = DateHandler.UnixTime;
+            JsConfig.PropertyConvention = PropertyConvention.Strict;
+            JsConfig.IncludeNullValues = false;
+        }
+
+        /// <summary>
+        /// Saves the <see cref="DocularObject"/> to the remote DB.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
+        public abstract Task SaveAsync();
 
         /// <summary>
         /// Implictly gets the <see cref="DocularObject"/>'s ID.

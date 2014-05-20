@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using ServiceStack.Text;
 
 namespace Docular.Client.Model
 {
@@ -35,6 +36,27 @@ namespace Docular.Client.Model
         {
             this.Date = date;
             this.User = user;
+        }
+
+        /// <summary>
+        /// Initializes static properties.
+        /// </summary>
+        static ChangeInfo()
+        {
+            JsConfig<ChangeInfo>.TreatValueAsRefType = true;
+        }
+
+        /// <summary>
+        /// Checks whether the current object equals the specified object.
+        /// </summary>
+        /// <param name="obj">The object to test for equality with.</param>
+        /// <returns><c>true</c> if the objects are equal, otherwise <c>false</c>.</returns>
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+                return false;
+
+            return (obj is ChangeInfo) && (this == ((ChangeInfo)obj));
         }
 
         /// <summary>

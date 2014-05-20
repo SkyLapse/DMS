@@ -18,7 +18,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Uploads a new <see cref="Category"/> to the server.
         /// </summary>
-        /// <param name="categoryRequest">The <see cref="Category"/> to upload.</param>
+        /// <param name="categoryAddRequest">The <see cref="Category"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         Task AddCategoryAsync(CategoryAddRequest categoryAddRequest);
 

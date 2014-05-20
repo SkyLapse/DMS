@@ -188,5 +188,14 @@ namespace Docular.Client.Model
         /// Initializes a new <see cref="Document"/>.
         /// </summary>
         public Document() { }
+
+        /// <summary>
+        /// Saves the <see cref="Document"/> to the remote DB.
+        /// </summary>
+        /// <returns>A <see cref="Task"/> representing the asynchronous saving process.</returns>
+        public override Task SaveAsync()
+        {
+            return this.DocularClient.UpdateDocumentAsync(this);
+        }
     }
 }
