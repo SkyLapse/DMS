@@ -7,17 +7,18 @@ class Categories(BaseModel):
     def get_collection(self):
         return self.db['categories']
 
-    def get_default_scheme(self):
+    def populate(self, item):
         return {
-            "name": "Unnamed",
-            "description": None,
-            "parent": None,
+            "name": item["name"],
+            "description": item["description"],
+            "parent": item["parent"],
             "createInfo": {
-                "date": datetime.now(),
-                "user": None
+                "date": item["createInfo"]["date"],
+                "user": item["createInfo"]["user"]
             },
             "editInfo": {
-                "date": datetime.now(),
-                "user": None
-            }
+                "date": item["editInfo"]["date"],
+                "user": item["editInfo"]["user"]
+            },
+            "customFields": item["customFields"]
         }

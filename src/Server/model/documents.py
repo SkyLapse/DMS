@@ -7,24 +7,24 @@ class Documents(BaseModel):
     def get_collection(self):
         return self.db['documents']
 
-    def get_default_scheme(self):
+    def populate(self, item):
         return {
-            "name": "Unnamed",
-            "documentPath": None,
-            "thumbnailPath": None,
-            "size": 0,
-            "mime": None,
+            "name": item["name"],
+            "documentPath": item["documentPath"],
+            "thumbnailPath": item["thumbnailPath"],
+            "size": item["size"],
+            "mime": item["mime"],
             "createInfo": {
-                "date": datetime.now(),
-                "user": None
+                "date": item["createInfo"]["date"],
+                "user": item["createInfo"]["user"]
             },
             "editInfo": {
-                "date": datetime.now(),
-                "user": None
+                "date": item["editInfo"]["date"],
+                "user": item["editInfo"]["user"]
             },
-            "content": "",
-            "category": None,
-            "tags": [],
-            "buzzwords": [],
-            "customFields": []
+            "content": item["content"],
+            "category": item["category"],
+            "tags": item["tags"],
+            "buzzwords": item["buzzwords"],
+            "customFields": item["customFields"]
         }

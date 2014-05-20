@@ -3,16 +3,8 @@ from model.basemodel import BaseModel
 
 
 class Users(BaseModel):
-    def get_default_scheme(self):
-        return {
-            "username": None,
-            "mail": None,
-            "password": None,
-            "rights": {
-
-            },
-
-        }
-
     def get_collection(self):
         return self.db['documents']
+
+    def populate(self, item):
+        return {}

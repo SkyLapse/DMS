@@ -15,27 +15,22 @@ class BaseModel():
         self.client = client
         self.db = db
 
+    def get(self, spec=None, limit=0):
+        return self.get_collection().find(spec, limit=limit)
+
     @abstractmethod
     def get_collection(self):
         pass
-
-    @abstractmethod
-    def get_default_scheme(self):
-        pass
-
-    def get(self, spec=None, limit=0):
-        return self.get_collection().find(spec, limit=limit)
 
     def get_single(self, spec=None):
         return self.get_collection().find_one(spec)
 
     def insert(self, data):
-        final = self.get_default_scheme()
+        return self.get_collection().insert(self.populate(data))
 
-        for index in data:
-            final[index] = data[index]
-
-        return self.get_collection().insert(final)
+    @abstractmethod
+    def populate(self, item):
+        pass
 
     def update(self, spec, data):
         """ Updates datasets with a given
@@ -43,12 +38,7 @@ class BaseModel():
         :param data:
         :return:
         """
-        final = self.get_default_scheme()
-
-        for index in data:
-            final[index] = data[index]
-
-        return self.get_collection().update(spec, final)
+        return self.get_collection().update(spec, self.populate(data))
 
     def resolve_object_ids(self, mongo_object):
         if mongo_object is None:
@@ -60,12 +50,10 @@ class BaseModel():
                 result[key] = self.resolve_object_ids(mongo_object[key]) if key is not "_id" else mongo_object[key]
             return result
         elif type(mongo_object) is "list":
-            output = []
-
+            result = []
             for item in mongo_object:
-                output.append(self.resolve_object_ids(item))
-
-            return output
+                result.append(self.resolve_object_ids(item))
+            return result
         elif type(mongo_object) is "bson.objectid.ObjectId":
             return self.get_single(mongo_object)
         elif type(mongo_object) is "bson.dbref.DBRef":
