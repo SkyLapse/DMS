@@ -8,4 +8,6 @@ class AppKeyModel(BaseModel):
         return self.db['appkeys']
 
     def populate(self, item):
-        return { }
+        return {
+            "machineName": item["machineName"]
+        }

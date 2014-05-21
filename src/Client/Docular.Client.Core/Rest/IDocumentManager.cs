@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
@@ -165,7 +166,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<Stream> IDocumentManager.GetThumbnailAsync(String documentId, int width = -1, int height = -1)
+        Task<Stream> IDocumentManager.GetThumbnailAsync(String documentId, int width, int height)
         {
             Contract.Requires<ArgumentNullException>(documentId != null);
 

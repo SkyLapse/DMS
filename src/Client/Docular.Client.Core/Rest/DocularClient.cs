@@ -53,11 +53,23 @@ namespace Docular.Client.Rest
 
         #region Authorization
 
+        /// <summary>
+        /// Gets a new key from the server.
+        /// </summary>
+        /// <param name="machineName">The name of the current machine.</param>
+        /// <param name="password">The user's password.</param>
+        /// <param name="username">The user's name.</param>
+        /// <returns>A new API key.</returns>
         public Task<String> GetKey(String username, String password, String machineName)
         {
             return this.client.PostAsync<String>(new ApiKeyDto() { MachineName = machineName, Password = password, Username = username });
         }
 
+        /// <summary>
+        /// Checks whether the specified API key is still valid.
+        /// </summary>
+        /// <param name="key">The key to validate.</param>
+        /// <returns><c>true</c> if the key is valid, otherwise <c>false</c>.</returns>
         public Task<bool> ValidateKey(String key)
         {
             return this.client.PostAsync<bool>(new ApiKeyValidateDto() { Key = key });
@@ -67,31 +79,60 @@ namespace Docular.Client.Rest
 
         #region Categories
 
+        /// <summary>
+        /// Uploads a new <see cref="Category"/> to the server.
+        /// </summary>
+        /// <param name="category">The <see cref="Category"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public Task AddCategoryAsync(Category category)
         {
             return this.client.PostAsync((CategoryAddDto)category);
         }
 
+        /// <summary>
+        /// Asynchronously deletes the specified <see cref="Category"/>.
+        /// </summary>
+        /// <param name="categoryId">The ID of the <see cref="Category"/> to delete.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous deleting process.</returns>
         public Task DeleteCategoryAsync(String categoryId)
         {
             return this.client.DeleteAsync((CategoryDeleteDto)categoryId);
         }
 
+        /// <summary>
+        /// Gets the <see cref="Category"/> with the specified ID.
+        /// </summary>
+        /// <param name="categoryId">The ID of the <see cref="Category"/> to get.</param>
+        /// <returns>The <see cref="Category"/> with the specified ID, or <c>null</c> if it was not found.</returns>
         public Task<Category> GetCategoryAsync(String categoryId)
         {
             return this.client.GetAsync<Category>((CategoryDto)categoryId);
         }
 
+        /// <summary>
+        /// Gets all <see cref="Category"/>s that match the specified criteria.
+        /// </summary>
+        /// <param name="filter">A collection of parameters to filter by.</param>
+        /// <returns></returns>
         public Task<Category[]> GetCategoriesAsync(CategoryCollectionParameters filter)
         {
             return this.client.GetAsync<Category[]>((CategoryCollectionDto)filter);
         }
 
+        /// <summary>
+        /// Gets the amount of <see cref="Category"/>s.
+        /// </summary>
+        /// <returns>The amount of stored <see cref="Category"/>s.</returns>
         public Task<int> GetCategoryCountAsync()
         {
             return this.client.GetAsync<int>(new CategoryCountDto());
         }
 
+        /// <summary>
+        /// Uploads a changed <see cref="Category"/> to the server.
+        /// </summary>
+        /// <param name="category">The <see cref="Category"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public Task UpdateCategoryAsync(Category category)
         {
             return this.client.PutAsync((CategoryAddDto)category);
@@ -101,51 +142,103 @@ namespace Docular.Client.Rest
 
         #region Documents
 
+        /// <summary>
+        /// Uploads the specified new <see cref="Document"/> to the server.
+        /// </summary>
+        /// <param name="document">The <see cref="Document"/> to add.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public Task AddDocumentAsync(Document document)
         {
             return this.client.PostAsync((DocumentAddDto)document);
         }
 
+        /// <summary>
+        /// Deletes the specified <see cref="Document"/> from the docular DB.
+        /// </summary>
+        /// <param name="documentId">The ID of the <see cref="Document"/> to delete.</param>
+        /// <returns>A <see cref="Task"/> describing the asynchronous deleting process.</returns>
         public Task DeleteDocumentAsync(String documentId)
         {
             return this.client.DeleteAsync((DocumentDeleteDto)documentId);
         }
 
+        /// <summary>
+        /// Gets the <see cref="Document"/> with the specified ID.
+        /// </summary>
+        /// <param name="documentId">The ID of the <see cref="Document"/> to obtain..</param>
+        /// <returns>The <see cref="Document"/> with the specified ID, or <c>null</c> if the <see cref="Document"/> was not found.</returns>
         public Task<Document> GetDocumentAsync(String documentId)
         {
             return this.client.GetAsync<Document>((DocumentDto)documentId);
         }
 
+        /// <summary>
+        /// Gets a filtered list of <see cref="Document"/>s that match the specified criteria.
+        /// </summary>
+        /// <param name="filter">A collection of parameters to filter by.</param>
+        /// <returns>A collection of <see cref="Document"/>s that match the criteria.</returns>
         public Task<Document[]> GetDocumentsAsync(DocumentCollectionParameters filter)
         {
             return this.client.GetAsync<Document[]>((DocumentCollectionDto)filter);
         }
 
+        /// <summary>
+        /// Gets the amount of stored <see cref="Document"/>s.
+        /// </summary>
+        /// <returns>The amount of stored <see cref="Document"/>s.</returns>
         public Task<int> GetDocumentCountAsync()
         {
             return this.client.GetAsync<int>(new DocumentCountDto());
         }
 
+        /// <summary>
+        /// Gets the size in bytes of a specified document collection.
+        /// </summary>
+        /// <param name="filter">A collection of parameters to filter by.</param>
+        /// <returns>The size of the selected documents in bytes.</returns>
         public Task<int> GetDocumentsSizeAsync(DocumentCollectionParameters filter)
         {
             return this.client.GetAsync<int>((DocumentSizeDto)filter);
         }
 
+        /// <summary>
+        /// Gets the <see cref="Document"/>'s payload data.
+        /// </summary>
+        /// <param name="documentId">The ID of the <see cref="Document"/> to obtain the content of.</param>
+        /// <returns>The <see cref="Document"/>'s payload.</returns>
         public Task<Stream> GetPayloadAsync(String documentId)
         {
             return this.client.GetAsync<Stream>((DocumentPayloadDto)documentId);
         }
 
+        /// <summary>
+        /// Gets a <see cref="Stream"/> containing the thumbnail image of the <see cref="Document"/>.
+        /// </summary>
+        /// <param name="documentId">The ID of the <see cref="Document"/> to obtain the thumbnail of.</param>
+        /// <param name="height">The desired width of the thumbnail. Specifying values &lt; 0 results in no resizing / cropping.</param>
+        /// <param name="width">The desired height of the thumbnail. Specifying values &lt; 0 results in no resizing / cropping.</param>
+        /// <returns>The <see cref="Document"/>'s thumbnail.</returns>
         public Task<Stream> GetThumbnailAsync(String documentId, int width = -1, int height = -1)
         {
             return this.client.GetAsync<Stream>(new DocumentThumbnailDto() { Width = width, Height = height, Id = documentId });
         }
 
+        /// <summary>
+        /// Uploads the specified changed <see cref="Document"/> to the server.
+        /// </summary>
+        /// <param name="document">The <see cref="Document"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public Task UpdateDocumentAsync(Document document)
         {
             return this.client.PutAsync((DocumentAddDto)document);
         }
 
+        /// <summary>
+        /// Uploads the specified changed <see cref="Document"/> content to the server.
+        /// </summary>
+        /// <param name="content">The <see cref="Document"/>'s content.</param>
+        /// <param name="documentId">The ID of the <see cref="Document"/> whose content is to be updated.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public Task UpdateDocumentContentAsync(String documentId, Stream content)
         {
             return this.client.PostAsync(new DocumentUpdatePayloadDto() { Id = documentId, File = content });
@@ -155,31 +248,60 @@ namespace Docular.Client.Rest
 
         #region Tags
 
+        /// <summary>
+        /// Uploads a new <see cref="Tag"/> to the server.
+        /// </summary>
+        /// <param name="tag">The <see cref="Tag"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> describing the asynchronous uploading process.</returns>
         public Task AddTagAsync(Tag tag)
         {
             return this.client.PostAsync((TagAddDto)tag);
         }
 
+        /// <summary>
+        /// Removes a <see cref="Tag"/> from the DB.
+        /// </summary>
+        /// <param name="tagId">The ID of the <see cref="Tag"/> to delete.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous deleting process.</returns>
         public Task DeleteTagAsync(String tagId)
         {
             return this.client.DeleteAsync((TagDeleteDto)tagId);
         }
 
+        /// <summary>
+        /// Gets the <see cref="Tag"/> with the specified ID.
+        /// </summary>
+        /// <param name="tagId">The ID of the <see cref="Tag"/> to obtain..</param>
+        /// <returns>The <see cref="Task"/> with the ID, or <c>null</c> if the <see cref="Tag"/> could not be found.</returns>
         public Task<Tag> GetTagAsync(String tagId)
         {
             return this.client.GetAsync<Tag>((TagDto)tagId);
         }
 
+        /// <summary>
+        /// Gets a filtered collection of <see cref="Tag"/>s.
+        /// </summary>
+        /// <param name="filter">A collection of parameters to filter by.</param>
+        /// <returns>The <see cref="Tag"/>s that matched the search criteria.</returns>
         public Task<Tag[]> GetTagsAsync(TagCollectionParameters filter)
         {
             return this.client.GetAsync<Tag[]>((TagCollectionDto)filter);
         }
 
+        /// <summary>
+        /// Gets the amount of <see cref="Tag"/>s.
+        /// </summary>
+        /// <returns>The amount of <see cref="Tag"/>s in the DB.</returns>
         public Task<int> GetTagCountAsync()
         {
             return this.client.GetAsync<int>(new TagCountDto());
         }
 
+        /// <summary>
+        /// Uploads a changed <see cref="Tag"/> to the server.
+        /// </summary>
+        /// <param name="tag">The <see cref="Tag"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> describing the asynchronous uploading process.</returns>
         public Task UpdateTagAsync(Tag tag)
         {
             return this.client.PutAsync((TagAddDto)tag);
@@ -189,36 +311,69 @@ namespace Docular.Client.Rest
 
         #region Users
 
+        /// <summary>
+        /// Uploads a new <see cref="User"/> to the DB.
+        /// </summary>
+        /// <param name="user">The <see cref="User"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public Task AddUserAsync(User user)
         {
             return this.client.PostAsync((UserAddDto)user);
         }
 
+        /// <summary>
+        /// Deletes a <see cref="User"/> from the DB.
+        /// </summary>
+        /// <param name="userId">The ID of the <see cref="User"/> to delete.</param>
+        /// <returns>A <see cref="Task"/> describing the asynchronous deleting process.</returns>
         public Task DeleteUserAsync(String userId)
         {
             return this.client.DeleteAsync((UserDeleteDto)userId);
         }
 
+        /// <summary>
+        /// Gets the <see cref="User"/> associated with the login data.
+        /// </summary>
+        /// <returns>The <see cref="User"/> associated with the transmitted login data.</returns>
         public Task<User> GetCurrentUserAsync()
         {
             return this.client.GetAsync<User>(new UserCurrentDto());
         }
 
+        /// <summary>
+        /// Gets the <see cref="User"/> with the specified ID.
+        /// </summary>
+        /// <param name="userId">The ID of the <see cref="User"/> to obtain.</param>
+        /// <returns>The <see cref="User"/> with the specified ID, or <c>null</c> if the user was not found.</returns>
         public Task<User> GetUserAsync(String userId)
         {
             return this.client.GetAsync<User>((UserDto)userId);
         }
 
+        /// <summary>
+        /// Gets a filtered list of <see cref="User"/>s that match the specified criteria.
+        /// </summary>
+        /// <param name="filter">A collection of parameters to filter by.</param>
+        /// <returns>A collection of <see cref="User"/>s that match the criteria.</returns>
         public Task<User[]> GetUsersAsync(UserCollectionParameters filter)
         {
             return this.client.GetAsync<User[]>((UserCollectionDto)filter);
         }
 
+        /// <summary>
+        /// Gets the amount of <see cref="User"/>s.
+        /// </summary>
+        /// <returns>The amount of <see cref="User"/>s.</returns>
         public Task<int> GetUserCountAsync()
         {
             return this.client.GetAsync<int>(new UserCountDto());
         }
 
+        /// <summary>
+        /// Uploads a changed <see cref="User"/> to the DB.
+        /// </summary>
+        /// <param name="user">The changed <see cref="User"/> to upload.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
         public Task UpdateUserAsync(User user)
         {
             return this.client.PutAsync((UserAddDto)user);
@@ -443,7 +598,7 @@ namespace Docular.Client.Rest
         private class DocumentDeleteDto : IdVoidDto
         {
             /// <summary>
-            /// Implicitly converts the <see cref="Category"/> into a <see cref="DocumentDeleteRequest"/>.
+            /// Implicitly converts the <see cref="Category"/> into a <see cref="DocumentDeleteDto"/>.
             /// </summary>
             /// <param name="document">The <see cref="Document"/> to convert.</param>
             /// <returns>The conversion result.</returns>
@@ -453,7 +608,7 @@ namespace Docular.Client.Rest
             }
 
             /// <summary>
-            /// Implicitly converts the tag ID into a <see cref="DocumentDeleteRequest"/>.
+            /// Implicitly converts the tag ID into a <see cref="DocumentDeleteDto"/>.
             /// </summary>
             /// <param name="id">The ID to convert.</param>
             /// <returns>The conversion result.</returns>
@@ -470,7 +625,7 @@ namespace Docular.Client.Rest
         private class DocumentDto : IdDto<Document>
         {
             /// <summary>
-            /// Implicitly converts the specified <see cref="Document"/>-ID into a <see cref="DocumentRequest"/>.
+            /// Implicitly converts the specified <see cref="Document"/>-ID into a <see cref="DocumentDto"/>.
             /// </summary>
             /// <param name="documentId">The ID to convert.</param>
             /// <returns>The conversion result.</returns>
@@ -663,7 +818,7 @@ namespace Docular.Client.Rest
             /// <summary>
             /// Implicitly converts the tag ID into a <see cref="TagDeleteDto"/>.
             /// </summary>
-            /// <param name="category">The ID to convert.</param>
+            /// <param name="id">The ID to convert.</param>
             /// <returns>The conversion result.</returns>
             public static implicit operator TagDeleteDto(String id)
             {
@@ -765,7 +920,7 @@ namespace Docular.Client.Rest
             /// <summary>
             /// Implicitly converts the User ID into a <see cref="UserDeleteDto"/>.
             /// </summary>
-            /// <param name="category">The ID to convert.</param>
+            /// <param name="id">The ID to convert.</param>
             /// <returns>The conversion result.</returns>
             public static implicit operator UserDeleteDto(String id)
             {
