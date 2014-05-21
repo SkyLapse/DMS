@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
-using Docular.Client.Rest.Requests;
 
 namespace Docular.Client.Rest
 {
@@ -19,37 +18,30 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Uploads the specified new <see cref="Document"/> to the server.
         /// </summary>
-        /// <param name="documentRequest">A <see cref="DocumentAddRequest"/> containing the <see cref="Document"/> to add.</param>
+        /// <param name="document">The <see cref="Document"/> to add.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
-        Task AddDocumentAsync(DocumentAddRequest documentRequest);
+        Task AddDocumentAsync(Document document);
 
         /// <summary>
         /// Deletes the specified <see cref="Document"/> from the docular DB.
         /// </summary>
-        /// <param name="deleteRequest">The <see cref="Document"/> to delete.</param>
+        /// <param name="documentId">The ID of the <see cref="Document"/> to delete.</param>
         /// <returns>A <see cref="Task"/> describing the asynchronous deleting process.</returns>
-        Task DeleteDocumentAsync(DocumentDeleteRequest deleteRequest);
-
-        /// <summary>
-        /// Gets the <see cref="Document"/>'s payload data.
-        /// </summary>
-        /// <param name="payloadRequest">A <see cref="DocumentPayloadRequest"/> of the <see cref="Document"/> to obtain the content of.</param>
-        /// <returns>The <see cref="Document"/>'s payload.</returns>
-        Task<Stream> GetPayloadAsync(DocumentPayloadRequest payloadRequest);
+        Task DeleteDocumentAsync(String documentId);
 
         /// <summary>
         /// Gets the <see cref="Document"/> with the specified ID.
         /// </summary>
-        /// <param name="documentRequest">A <see cref="DocumentRequest"/> used to obtain the <see cref="Document"/>.</param>
+        /// <param name="documentId">The ID of the <see cref="Document"/> to obtain..</param>
         /// <returns>The <see cref="Document"/> with the specified ID, or <c>null</c> if the <see cref="Document"/> was not found.</returns>
-        Task<Document> GetDocumentAsync(DocumentRequest documentRequest);
+        Task<Document> GetDocumentAsync(String documentId);
 
         /// <summary>
         /// Gets a filtered list of <see cref="Document"/>s that match the specified criteria.
         /// </summary>
-        /// <param name="collectionRequest">A collection of parameters to filter by.</param>
+        /// <param name="filter">A collection of parameters to filter by.</param>
         /// <returns>A collection of <see cref="Document"/>s that match the criteria.</returns>
-        Task<Document[]> GetDocumentsAsync(DocumentCollectionRequest collectionRequest);
+        Task<Document[]> GetDocumentsAsync(DocumentCollectionParameters filter);
 
         /// <summary>
         /// Gets the amount of stored <see cref="Document"/>s.
@@ -62,30 +54,38 @@ namespace Docular.Client.Rest
         /// </summary>
         /// <param name="filter">A collection of parameters to filter by.</param>
         /// <returns>The size of the selected documents in bytes.</returns>
-        Task<int> GetDocumentsSizeAsync(DocumentSizeRequest filter);
+        Task<int> GetDocumentsSizeAsync(DocumentCollectionParameters filter);
+
+        /// <summary>
+        /// Gets the <see cref="Document"/>'s payload data.
+        /// </summary>
+        /// <param name="documentId">The ID of the <see cref="Document"/> to obtain the content of.</param>
+        /// <returns>The <see cref="Document"/>'s payload.</returns>
+        Task<Stream> GetPayloadAsync(String documentId);
 
         /// <summary>
         /// Gets a <see cref="Stream"/> containing the thumbnail image of the <see cref="Document"/>.
         /// </summary>
-        /// <param name="thumbnailRequest">
-        /// A <see cref="DocumentThumbnailRequest"/> containing the ID of the <see cref="Document"/> to obtain the thumbnail of.
-        /// </param>
+        /// <param name="documentId">The ID of the <see cref="Document"/> to obtain the thumbnail of.</param>
+        /// <param name="height">The desired width of the thumbnail. Specifying values &lt; 0 results in no resizing / cropping.</param>
+        /// <param name="width">The desired height of the thumbnail. Specifying values &lt; 0 results in no resizing / cropping.</param>
         /// <returns>The <see cref="Document"/>'s thumbnail.</returns>
-        Task<Stream> GetThumbnailAsync(DocumentThumbnailRequest thumbnailRequest);
+        Task<Stream> GetThumbnailAsync(String documentId, int width = -1, int height = -1);
 
         /// <summary>
         /// Uploads the specified changed <see cref="Document"/> to the server.
         /// </summary>
-        /// <param name="documentRequest">The <see cref="Document"/> to upload.</param>
+        /// <param name="document">The <see cref="Document"/> to upload.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
-        Task UpdateDocumentAsync(DocumentAddRequest documentRequest);
+        Task UpdateDocumentAsync(Document document);
 
         /// <summary>
         /// Uploads the specified changed <see cref="Document"/> content to the server.
         /// </summary>
-        /// <param name="updatePayloadRequest">A <see cref="DocumentUpdatePayloadRequest"/> containing the new payload.</param>
+        /// <param name="content">The <see cref="Document"/>'s content.</param>
+        /// <param name="documentId">The ID of the <see cref="Document"/> whose content is to be updated.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous uploading process.</returns>
-        Task UpdateDocumentContentAsync(DocumentUpdatePayloadRequest updatePayloadRequest);
+        Task UpdateDocumentContentAsync(String documentId, Stream content);
     }
 
     /// <summary>
@@ -97,9 +97,9 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task IDocumentManager.AddDocumentAsync(DocumentAddRequest documentRequest)
+        Task IDocumentManager.AddDocumentAsync(Document document)
         {
-            Contract.Requires<ArgumentNullException>(documentRequest != null);
+            Contract.Requires<ArgumentNullException>(document != null);
 
             return null;
         }
@@ -107,10 +107,9 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task IDocumentManager.DeleteDocumentAsync(DocumentDeleteRequest deleteRequest)
+        Task IDocumentManager.DeleteDocumentAsync(String documentId)
         {
-            Contract.Requires<ArgumentNullException>(deleteRequest != null);
-            Contract.Requires<ArgumentException>(deleteRequest.Id != null);
+            Contract.Requires<ArgumentNullException>(documentId != null);
 
             return null;
         }
@@ -118,10 +117,9 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<Stream> IDocumentManager.GetPayloadAsync(DocumentPayloadRequest payloadRequest)
+        Task<Document> IDocumentManager.GetDocumentAsync(String documentId)
         {
-            Contract.Requires<ArgumentNullException>(payloadRequest != null);
-            Contract.Requires<ArgumentException>(payloadRequest.Id != null);
+            Contract.Requires<ArgumentNullException>(documentId != null);
 
             return null;
         }
@@ -129,20 +127,9 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<Document> IDocumentManager.GetDocumentAsync(DocumentRequest documentRequest)
+        Task<Document[]> IDocumentManager.GetDocumentsAsync(DocumentCollectionParameters filter)
         {
-            Contract.Requires<ArgumentNullException>(documentRequest != null);
-            Contract.Requires<ArgumentException>(documentRequest.Id != null);
-
-            return null;
-        }
-
-        /// <summary>
-        /// Contains contract definitions, not for actual use.
-        /// </summary>
-        Task<Document[]> IDocumentManager.GetDocumentsAsync(DocumentCollectionRequest request)
-        {
-            Contract.Requires<ArgumentNullException>(request != null);
+            Contract.Requires<ArgumentNullException>(filter != null);
 
             return null;
         }
@@ -158,7 +145,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<int> IDocumentManager.GetDocumentsSizeAsync(DocumentSizeRequest filter)
+        Task<int> IDocumentManager.GetDocumentsSizeAsync(DocumentCollectionParameters filter)
         {
             Contract.Requires<ArgumentNullException>(filter != null);
 
@@ -168,10 +155,9 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<Stream> IDocumentManager.GetThumbnailAsync(DocumentThumbnailRequest request)
+        Task<Stream> IDocumentManager.GetPayloadAsync(String documentId)
         {
-            Contract.Requires<ArgumentNullException>(request != null);
-            Contract.Requires<ArgumentException>(request.Id != null);
+            Contract.Requires<ArgumentNullException>(documentId != null);
 
             return null;
         }
@@ -179,10 +165,9 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task IDocumentManager.UpdateDocumentAsync(DocumentAddRequest documentRequest)
+        Task<Stream> IDocumentManager.GetThumbnailAsync(String documentId, int width = -1, int height = -1)
         {
-            Contract.Requires<ArgumentNullException>(documentRequest != null);
-            Contract.Requires<ArgumentException>(documentRequest.Id != null);
+            Contract.Requires<ArgumentNullException>(documentId != null);
 
             return null;
         }
@@ -190,10 +175,21 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task IDocumentManager.UpdateDocumentContentAsync(DocumentUpdatePayloadRequest updatePayloadRequest)
+        Task IDocumentManager.UpdateDocumentAsync(Document document)
         {
-            Contract.Requires<ArgumentNullException>(updatePayloadRequest != null);
-            Contract.Requires<ArgumentException>(updatePayloadRequest.Id != null);
+            Contract.Requires<ArgumentNullException>(document != null);
+            Contract.Requires<ArgumentException>(document.Id != null);
+
+            return null;
+        }
+
+        /// <summary>
+        /// Contains contract definitions, not for actual use.
+        /// </summary>
+        Task IDocumentManager.UpdateDocumentContentAsync(String documentId, Stream content)
+        {
+            Contract.Requires<ArgumentNullException>(documentId != null);
+            Contract.Requires<ArgumentNullException>(content != null);
 
             return null;
         }

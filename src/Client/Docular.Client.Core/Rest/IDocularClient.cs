@@ -11,7 +11,5 @@ namespace Docular.Client.Rest
     /// <summary>
     /// Defines the way to work with a remote or local docular database.
     /// </summary>
-    public interface IDocularClient : IApiKeyManager, ICategoryManager, IDocumentManager, ITagManager, IUserManager
-    {
-    }
+    public interface IDocularClient : IApiKeyManager, ICategoryManager, IDocumentManager, ITagManager, IUserManager { }
 }

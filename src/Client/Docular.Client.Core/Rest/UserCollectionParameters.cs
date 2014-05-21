@@ -4,24 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
-using ServiceStack;
 
-namespace Docular.Client.Rest.Requests
+namespace Docular.Client.Rest
 {
     /// <summary>
     /// Contains filtering parameters for a <see cref="User"/> request.
     /// </summary>
-    [Route("/users", "GET")]
-    public class UserCollectionRequest : CollectionRequest, IReturn<User[]>
+    public class UserCollectionParameters : CollectionFilterParameters
     {
         /// <summary>
-        /// The default <see cref="UserCollectionRequest"/> returning all available <see cref="User"/>s.
+        /// The default <see cref="UserCollectionParameters"/> returning all available <see cref="User"/>s.
         /// </summary>
-        public static UserCollectionRequest Default
+        public static UserCollectionParameters Default
         {
             get
             {
-                return new UserCollectionRequest();
+                return new UserCollectionParameters();
             }
         }
     }

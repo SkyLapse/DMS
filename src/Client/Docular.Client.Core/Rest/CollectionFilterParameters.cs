@@ -6,13 +6,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Docular.Client.Rest.Requests
+namespace Docular.Client.Rest
 {
     /// <summary>
     /// Defines the default parameters for any REST collection request.
     /// </summary>
     [DataContract]
-    public abstract class CollectionRequest
+    public abstract class CollectionFilterParameters
     {
         /// <summary>
         /// The index to start searching at.
@@ -21,25 +21,10 @@ namespace Docular.Client.Rest.Requests
         public int Start { get; set; }
 
         /// <summary>
-        /// Backing field.
-        /// </summary>
-        private int _Count = 0;
-
-        /// <summary>
         /// The amount of results to return.
         /// </summary>
         [DataMember]
-        public int Count
-        {
-            get
-            {
-                return _Count;
-            }
-            set
-            {
-                _Count = value;
-            }
-        }
+        public int Count { get; set; }
 
         /// <summary>
         /// Backing field.
@@ -84,5 +69,10 @@ namespace Docular.Client.Rest.Requests
                 _Order = value;
             }
         }
+
+        /// <summary>
+        /// Returns items created by that given user only.
+        /// </summary>
+        public String UserId { get; set; }
     }
 }

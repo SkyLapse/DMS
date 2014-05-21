@@ -106,46 +106,16 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Rest\CategoryCollectionParameters.cs" />
     <Compile Include="Rest\DocularCache.cs" />
+    <Compile Include="Rest\DocumentCollectionParameters.cs" />
     <Compile Include="Rest\ICache.cs" />
-    <Compile Include="Rest\Requests\ApiKeyRequest.cs" />
-    <Compile Include="Rest\Requests\ApiKeyValidateRequest.cs" />
-    <Compile Include="Rest\Requests\CategoryAddRequest.cs" />
-    <Compile Include="Rest\Requests\DocumentSizeRequest.cs" />
-    <Compile Include="Rest\Requests\DocumentUpdatePayloadRequest.cs" />
     <Compile Include="Rest\IApiKeyManager.cs" />
-    <Compile Include="Rest\Requests\UserCurrentRequest.cs" />
-    <Compile Include="Rest\Requests\UserRequest.cs" />
-    <Compile Include="Rest\Requests\UserDeleteRequest.cs" />
-    <Compile Include="Rest\Requests\UserCountRequest.cs" />
-    <Compile Include="Rest\Requests\UserCollectionRequest.cs" />
-    <Compile Include="Rest\Requests\UserAddRequest.cs" />
-    <Compile Include="Rest\Requests\TagAddRequest.cs" />
-    <Compile Include="Rest\Requests\TagCollectionRequest.cs" />
-    <Compile Include="Rest\Requests\CategoryCollectionRequest.cs" />
-    <Compile Include="Rest\Requests\DocumentCountRequest.cs" />
-    <Compile Include="Rest\Requests\TagCountRequest.cs" />
-    <Compile Include="Rest\Requests\CategoryCountRequest.cs" />
-    <Compile Include="Rest\Requests\DocumentDeleteRequest.cs" />
-    <Compile Include="Rest\Requests\TagDeleteRequest.cs" />
-    <Compile Include="Rest\Requests\TagRequest.cs" />
-    <Compile Include="Rest\Requests\CategoryRequest.cs" />
-    <Compile Include="Rest\Requests\CollectionRequest.cs" />
-    <Compile Include="Rest\Requests\CategoryDeleteRequest.cs" />
+    <Compile Include="Rest\CollectionFilterParameters.cs" />
     <Compile Include="Rest\DocularClient.cs" />
-    <Compile Include="Rest\Requests\DocumentAddRequest.cs" />
-    <Compile Include="Rest\Requests\DocumentCollectionRequest.cs" />
-    <Compile Include="Rest\Requests\DocumentThumbnailRequest.cs" />
-    <Compile Include="Rest\Requests\DocumentPayloadRequest.cs" />
-    <Compile Include="Rest\Requests\DocumentRequest.cs" />
     <Compile Include="Rest\ICategoryManager.cs" />
-    <Compile Include="Rest\Requests\IdVoidRequest.cs" />
     <Compile Include="Rest\IDocumentManager.cs" />
-    <Compile Include="Rest\Requests\IdRequest.cs" />
     <Compile Include="Rest\ITagManager.cs" />
     <Compile Include="Rest\IUserManager.cs" />
     <Compile Include="Model\Buzzword.cs" />
@@ -159,6 +129,8 @@
     <Compile Include="ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rest\IDocularClient.cs" />
+    <Compile Include="Rest\TagCollectionParameters.cs" />
+    <Compile Include="Rest\UserCollectionParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PCLStorage">

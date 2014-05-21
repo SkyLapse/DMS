@@ -4,7 +4,6 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Rest.Requests;
 
 namespace Docular.Client.Rest
 {
@@ -17,16 +16,18 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Gets a new key from the server.
         /// </summary>
-        /// <param name="keyRequest">The REST request used to obtain the key.</param>
+        /// <param name="machineName">The name of the current machine.</param>
+        /// <param name="password">The user's password.</param>
+        /// <param name="username">The user's name.</param>
         /// <returns>A new API key.</returns>
-        Task<String> GetKey(ApiKeyRequest keyRequest);
+        Task<String> GetKey(String username, String password, String machineName);
 
         /// <summary>
         /// Checks whether the specified API key is still valid.
         /// </summary>
-        /// <param name="validateRequest">A REST request containing the key to be validated.</param>
+        /// <param name="key">The key to validate.</param>
         /// <returns><c>true</c> if the key is valid, otherwise <c>false</c>.</returns>
-        Task<bool> ValidateKey(ApiKeyValidateRequest validateRequest); 
+        Task<bool> ValidateKey(String key); 
     }
 
     /// <summary>
@@ -38,12 +39,11 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<String> IApiKeyManager.GetKey(ApiKeyRequest keyRequest)
+        Task<String> IApiKeyManager.GetKey(String username, String password, String machineName)
         {
-            Contract.Requires<ArgumentNullException>(keyRequest != null);
-            Contract.Requires<ArgumentException>(keyRequest.MachineName != null);
-            Contract.Requires<ArgumentException>(keyRequest.Password != null);
-            Contract.Requires<ArgumentException>(keyRequest.Username != null);
+            Contract.Requires<ArgumentException>(machineName != null);
+            Contract.Requires<ArgumentException>(password != null);
+            Contract.Requires<ArgumentException>(username != null);
 
             return null;
         }
@@ -51,10 +51,9 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Contains contract definitions, not for actual use.
         /// </summary>
-        Task<bool> IApiKeyManager.ValidateKey(ApiKeyValidateRequest validateRequest)
+        Task<bool> IApiKeyManager.ValidateKey(String key)
         {
-            Contract.Requires<ArgumentNullException>(validateRequest != null);
-            Contract.Requires<ArgumentException>(validateRequest.Key != null);
+            Contract.Requires<ArgumentNullException>(key != null);
 
             return null;
         }
