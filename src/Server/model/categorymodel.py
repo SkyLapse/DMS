@@ -7,7 +7,7 @@ class CategoryModel(BaseModel):
     def get_collection(self):
         return self.db['categories']
 
-    def populate(self, item):
+    def _populate(self, item):
         return {
             "name": item["name"],
             "description": item["description"],

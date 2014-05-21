@@ -7,7 +7,9 @@ class AppKeyModel(BaseModel):
     def get_collection(self):
         return self.db['appkeys']
 
-    def populate(self, item):
+    def _populate(self, item):
         return {
-            "machineName": item["machineName"]
+            "key": item["key"],
+            "machineName": item["machineName"],
+            "user": item["user"]
         }

@@ -7,7 +7,7 @@ class DocumentModel(BaseModel):
     def get_collection(self):
         return self.db['documents']
 
-    def populate(self, item):
+    def _populate(self, item):
         return {
             "name": item["name"],
             "documentPath": item["documentPath"],

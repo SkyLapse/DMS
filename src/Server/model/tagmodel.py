@@ -6,7 +6,7 @@ class TagModel(BaseModel):
     def get_collection(self):
         return self.db['tags']
 
-    def populate(self, item):
+    def _populate(self, item):
         return {
             "name": item["name"],
             "description": item["description"],

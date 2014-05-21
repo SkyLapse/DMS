@@ -6,5 +6,5 @@ class UserModel(BaseModel):
     def get_collection(self):
         return self.db['documents']
 
-    def populate(self, item):
+    def _populate(self, item):
         return { }

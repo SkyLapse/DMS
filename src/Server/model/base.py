@@ -12,7 +12,7 @@ class Base():
         try:
             self.config = config_util.Config(config_path)
             self.client = MongoClient(self.config['host'], self.config['port'], self.config['maxPoolSize'])
-            self.db = self.client[self.config['database']]
+            self.db = self.client[self.config['databaseName']]
         except errors.ConnectionFailure:
             logger.critical("Could not connect to the MongoDB server at %s:%s" % (self.config['host'], self.config['port']))
             exit(1)

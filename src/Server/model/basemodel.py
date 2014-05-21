@@ -15,8 +15,8 @@ class BaseModel():
         self.client = client
         self.db = db
 
-    def get(self, spec = None, limit = 0):
-        return self.get_collection().find(spec, limit = limit)
+    def get(self, spec=None, limit=0):
+        return self.get_collection().find(spec, limit=limit)
 
     @abstractmethod
     def get_collection(self):
@@ -26,10 +26,10 @@ class BaseModel():
         return self.get_collection().find_one(spec)
 
     def insert(self, data):
-        return self.get_collection().insert(self.populate(data))
+        return self.get_collection().insert(self._populate(data))
 
     @abstractmethod
-    def populate(self, item):
+    def _populate(self, item):
         pass
 
     def update(self, spec, data):
@@ -38,7 +38,7 @@ class BaseModel():
         :param data:
         :return:
         """
-        return self.get_collection().update(spec, self.populate(data))
+        return self.get_collection().update(spec, self._populate(data))
 
     def resolve_object_ids(self, mongo_object):
         if mongo_object is None:
