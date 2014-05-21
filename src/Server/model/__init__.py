@@ -2,12 +2,12 @@ import os
 
 __author__ = 'leobernard'
 
-from model.appkeys import Appkeys
-from model.documents import Documents
-from model.categories import Categories
-from model.tags import Tags
-from model.users import Users
+from model.appkeymodel import AppKeyModel
+from model.documentmodel import DocumentModel
+from model.categorymodel import CategoryModel
+from model.tagmodel import TagModel
+from model.usermodel import UserModel
 
-__all__ = ["Appkeys", "Documents", "Categories", "Tags", "Users"]
+__all__ = ["AppKeyModel", "DocumentModel", "CategoryModel", "TagModel", "UserModel"]
 
-current_dir =  os.path.dirname(__file__)
+current_dir = os.path.dirname(__file__)

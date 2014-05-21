@@ -1,5 +1,3 @@
-import sys
-
 __author__ = 'leobernard'
 
 # Import Flask and Extensions
@@ -11,7 +9,6 @@ import model.base as modelbase
 from controllers.documents import DocumentsController, PayloadController
 from controllers.categories import CategoriesController
 import workers.contentextractor
-
 
 # Import logging tools
 import logging
@@ -44,12 +41,10 @@ api.add_resource(DocumentsController, "/api/documents", "/api/documents/<string:
 api.add_resource(PayloadController, "/api/documents/<string:id>/payload", "/api/documents/<string:id>/thumbnail")
 api.add_resource(CategoriesController, "/api/categories", "/api/categories/<string:id>")
 
-
 # Set the index page
 @app.errorhandler(404)
-def index(arg):
+def serve_index(arg):
     return app.send_static_file('index.html')
-
 
 try:
     # Start the HTTP server
@@ -58,5 +53,5 @@ try:
         app.run(debug=True, host='0.0.0.0', port=5002)
 except KeyboardInterrupt:
     pass
-except Exception:
-    app.logger.exception(sys.exc_info()[0])
+except Exception as ex:
+    app.logger.exception(ex)

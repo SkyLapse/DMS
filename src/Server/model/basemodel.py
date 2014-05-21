@@ -15,14 +15,14 @@ class BaseModel():
         self.client = client
         self.db = db
 
-    def get(self, spec=None, limit=0):
-        return self.get_collection().find(spec, limit=limit)
+    def get(self, spec = None, limit = 0):
+        return self.get_collection().find(spec, limit = limit)
 
     @abstractmethod
     def get_collection(self):
         pass
 
-    def get_single(self, spec=None):
+    def get_single(self, spec = None):
         return self.get_collection().find_one(spec)
 
     def insert(self, data):
@@ -45,7 +45,7 @@ class BaseModel():
             return None
 
         if type(mongo_object) is "dict":
-            result = {}
+            result = { }
             for key in mongo_object:
                 result[key] = self.resolve_object_ids(mongo_object[key]) if key is not "_id" else mongo_object[key]
             return result

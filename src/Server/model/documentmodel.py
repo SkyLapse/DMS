@@ -3,15 +3,17 @@ from model.basemodel import BaseModel
 from datetime import datetime
 
 
-class Categories(BaseModel):
+class DocumentModel(BaseModel):
     def get_collection(self):
-        return self.db['categories']
+        return self.db['documents']
 
     def populate(self, item):
         return {
             "name": item["name"],
-            "description": item["description"],
-            "parent": item["parent"],
+            "documentPath": item["documentPath"],
+            "thumbnailPath": item["thumbnailPath"],
+            "size": item["size"],
+            "mime": item["mime"],
             "createInfo": {
                 "date": item["createInfo"]["date"],
                 "user": item["createInfo"]["user"]
@@ -20,5 +22,9 @@ class Categories(BaseModel):
                 "date": item["editInfo"]["date"],
                 "user": item["editInfo"]["user"]
             },
+            "content": item["content"],
+            "category": item["category"],
+            "tags": item["tags"],
+            "buzzwords": item["buzzwords"],
             "customFields": item["customFields"]
         }

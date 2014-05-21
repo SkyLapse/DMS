@@ -1,15 +1,17 @@
 __author__ = 'leobernard'
 from model.basemodel import BaseModel
+from datetime import datetime
 
 
-class Tags(BaseModel):
+class CategoryModel(BaseModel):
     def get_collection(self):
-        return self.db['tags']
+        return self.db['categories']
 
     def populate(self, item):
         return {
             "name": item["name"],
             "description": item["description"],
+            "parent": item["parent"],
             "createInfo": {
                 "date": item["createInfo"]["date"],
                 "user": item["createInfo"]["user"]

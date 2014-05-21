@@ -5,10 +5,10 @@ __author__ = 'leobernard'
 
 
 def run(file_path, file_type):
-    print "Hi"
+    print("Hi")
     time.sleep(2)
-    print file_path
-    print file_type
+    print(file_path)
+    print(file_type)
     pass
 
 

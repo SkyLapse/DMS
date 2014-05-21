@@ -1,10 +1,11 @@
 __author__ = 'leobernard'
+
 from model.basemodel import BaseModel
 
 
-class Users(BaseModel):
+class AppKeyModel(BaseModel):
     def get_collection(self):
-        return self.db['documents']
+        return self.db['appkeys']
 
     def populate(self, item):
-        return {}
+        return { }

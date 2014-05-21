@@ -40,7 +40,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Backing field.
         /// </summary>
-        private ChangeInfo _CreateInfo;
+        private ChangeInfo _CreateInfo = new ChangeInfo(null, DateTime.Now);
 
         /// <summary>
         /// Gets information about the creation of the <see cref="DocularObject"/>.
@@ -145,10 +145,7 @@ namespace Docular.Client.Model
         /// <summary>
         /// Initializes a new <see cref="DocularObject"/>.
         /// </summary>
-        protected DocularObject() 
-        {
-            this.CreateInfo = new ChangeInfo(null, DateTime.Now);
-        }
+        protected DocularObject() { }
 
         /// <summary>
         /// Initializes static properties.
