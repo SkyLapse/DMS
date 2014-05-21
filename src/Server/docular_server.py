@@ -4,6 +4,9 @@ __author__ = 'leobernard'
 from flask import Flask
 from flask.ext import restful
 
+# Import config
+from app_utils import config_util
+
 # Import Models, Controllers, Workers
 import model.base as modelbase
 from controllers.documents import DocumentsController, PayloadController
@@ -19,16 +22,17 @@ app = Flask(__name__)
 api = restful.Api(app)
 
 # Initialize logger
-log_formatter = logging.Formatter("[%(asctime)s] [%(filename)s:%(lineno)d] [%(levelname)s] %(message)s")
-handler1 = RotatingFileHandler('docular_server.log', maxBytes=10000, backupCount=1)
+logging_config = config_util.Config("./config/logging.json")
+log_formatter = logging.Formatter(logging_config["formatting"])
+handler1 = RotatingFileHandler(logging_config["logFileName"], maxBytes=logging_config["maxLogSize"], backupCount=logging_config["rollingLogFileCount"])
 handler2 = logging.StreamHandler()
 handler1.setFormatter(log_formatter)
 handler2.setFormatter(log_formatter)
 app.logger.addHandler(handler1)
 app.logger.addHandler(handler2)
-handler1.setLevel(logging.DEBUG)
-handler2.setLevel(logging.DEBUG)
-app.logger.setLevel(logging.DEBUG)
+handler1.setLevel(logging_config["level"])
+handler2.setLevel(logging_config["level"])
+app.logger.setLevel(logging_config["level"])
 
 # Initialize the models and workers
 app.logger.info("Loading Models...")
@@ -55,3 +59,4 @@ except KeyboardInterrupt:
     pass
 except Exception as ex:
     app.logger.exception(ex)
+    exit(1)

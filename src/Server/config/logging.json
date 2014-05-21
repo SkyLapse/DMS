@@ -1,0 +1,7 @@
+{
+    "level": 10,
+    "formatting": "[%(asctime)s] [%(filename)s:%(lineno)d] [%(levelname)s] %(message)s",
+    "logFileName": "docular_server.log"
+    "maxLogSize": 1073741824,
+    "rollingLogFileCount": 5
+}
