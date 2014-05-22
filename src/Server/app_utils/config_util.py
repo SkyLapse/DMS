@@ -2,7 +2,7 @@ import json
 import os
 import threading
 
-__author__ = 'leobernard'
+__author__ = 'SkyLapse'
 
 
 class Config():

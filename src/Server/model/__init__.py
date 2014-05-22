@@ -1,6 +1,6 @@
 import os
 
-__author__ = 'leobernard'
+__author__ = 'SkyLapse'
 
 from model.appkeymodel import AppKeyModel
 from model.documentmodel import DocumentModel

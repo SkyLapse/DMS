@@ -1,4 +1,4 @@
-__author__ = 'leobernard'
+__author__ = 'SkyLapse'
 
 import base64
 import calendar

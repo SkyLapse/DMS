@@ -21,7 +21,6 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Initializes a new <see cref="DocumentViewModel"/>.
         /// </summary>
-        [PreferredConstructor]
         public TagViewModel() : base(Resources.Strings.General.DocumentsCaption, (Path)System.Windows.Application.Current.Resources["BoxIcon"]) { }
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Items = new ObservableCollection<Tag>(await this.Client.GetTagsAsync(TagCollectionRequest.Default));
+                this.Items = new ObservableCollection<Tag>(await this.Client.GetTagsAsync(TagCollectionParameters.Default));
             }
         }
     }

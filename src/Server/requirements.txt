@@ -1,3 +1,4 @@
+bson
 Flask
 flask-restful
 pymongo

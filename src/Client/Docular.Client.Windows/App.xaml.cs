@@ -141,7 +141,6 @@ namespace Docular.Client
 
                     section = new T();
                     config.Sections.Add(sectionName, section);
-                    config.Save(ConfigurationSaveMode.Full);
                     return section;
                 }
                 else

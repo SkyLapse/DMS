@@ -1,7 +1,7 @@
 import time
 from workers.baseworker import BaseWorker
 
-__author__ = 'leobernard'
+__author__ = 'SkyLapse'
 
 
 def run(file_path, file_type):

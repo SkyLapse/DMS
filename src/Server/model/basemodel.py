@@ -1,7 +1,7 @@
 from bson import DBRef
 from pymongo.database import Database
 
-__author__ = 'leobernard'
+__author__ = 'SkyLapse'
 
 from abc import ABCMeta, abstractmethod
 

@@ -1,6 +1,6 @@
 import os
 
-__author__ = 'leobernard'
+__author__ = 'SkyLapse'
 
 from app_utils import config_util
 from model import *

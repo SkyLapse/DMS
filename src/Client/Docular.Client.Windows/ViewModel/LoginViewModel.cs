@@ -15,11 +15,6 @@ namespace Docular.Client.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         /// <summary>
-        /// The <see cref="IKeyStore"/> to fill.
-        /// </summary>
-        private IKeyStore keyStore;
-
-        /// <summary>
         /// The <see cref="Uri"/> to the remote docular DB.
         /// </summary>
         private Uri docularUri;
@@ -89,7 +84,7 @@ namespace Docular.Client.ViewModel
                         // This is a little bit dirty (since we're referencing the View from the ViewModel) but there's no other way.
                         this.Password = ((System.Windows.Controls.PasswordBox)p).Password;
                         await this.Login();
-                        this.Password = null; // Assign null to avoid unnecessary references
+                        this.Password = null; // Assign null to avoid unnecessary references to password in memory
                     }
                     catch (Exception)
                     {
@@ -97,7 +92,7 @@ namespace Docular.Client.ViewModel
                         throw;
                     }
                 },
-                p => !String.IsNullOrEmpty(this.Username) && !String.IsNullOrEmpty(this.Password) && (this.docularUri != null) && (this.keyStore != null));
+                p => (!String.IsNullOrEmpty(this.Username) && !String.IsNullOrEmpty(this.Password) && (this.docularUri != null)));
             }
         }
 
@@ -113,21 +108,6 @@ namespace Docular.Client.ViewModel
                     p => this.docularUri != null
                 );
             }
-        }
-
-        /// <summary>
-        /// Initializes a new <see cref="LoginViewModel"/>.
-        /// </summary>
-        /// <param name="docularUri">The <see cref="Uri"/> of the remote docular DB. Not the /api url!</param>
-        /// <param name="keyStore">The <see cref="IKeyStore"/> to store the obtained key in.</param>
-        public LoginViewModel(IKeyStore keyStore, Uri docularUri)
-            : base(Resources.Strings.LoginView.LoginCaption)
-        {
-            Contract.Requires<ArgumentNullException>(keyStore != null && docularUri != null);
-            Contract.Requires<ArgumentException>(docularUri.AbsoluteUri.EndsWith("api/"));
-
-            this.keyStore = keyStore;
-            this.docularUri = docularUri;
         }
 
         /// <summary>
@@ -156,7 +136,7 @@ namespace Docular.Client.ViewModel
         /// </summary>
         public void ForgotPassword()
         {
-            System.Diagnostics.Process.Start(this.docularUri.Combine("resetpassword/").ToString());
+
         }
 
         /// <summary>
@@ -166,7 +146,6 @@ namespace Docular.Client.ViewModel
         private void ObjectInvariant()
         {
             Contract.Invariant(this.docularUri != null);
-            Contract.Invariant(this.keyStore != null);
         }
     }
 }
