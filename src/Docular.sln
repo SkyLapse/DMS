@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Core", "Clie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Windows", "Client\Docular.Client.Windows\Docular.Client.Windows.csproj", "{7B0D509B-7A5E-4BBA-8B1E-9E347A6CE5AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Core.Test", "Docular.Client.Core.Test\Docular.Client.Core.Test.csproj", "{70960146-2EDD-4CF4-A957-2E7C3260B4E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Docular.Client.Core.Test", "Client\Docular.Client.Core.Test\Docular.Client.Core.Test.csproj", "{70960146-2EDD-4CF4-A957-2E7C3260B4E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
