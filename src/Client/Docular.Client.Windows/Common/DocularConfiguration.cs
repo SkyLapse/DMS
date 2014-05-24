@@ -131,7 +131,7 @@ namespace Docular.Client
         /// <returns>The value inside the configuration file.</returns>
         private T GetValue<T>(String key)
         {
-            T value = (T)this[key];
+            T value = (T)(this[key] ?? default(T));
             eventSource.ValueRetreived(key, value);
             return value;
         }

@@ -73,6 +73,7 @@ namespace Docular.Client.Events
         public void ConfigurationSaveFailed(Configuration configuration, Exception ex)
         {
             Contract.Requires<ArgumentNullException>(ex != null);
+            Contract.Requires<ArgumentNullException>(configuration != null);
 
             this.WriteEvent(
                 100, 
