@@ -18,7 +18,7 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// An instance of <see cref="Random"/>.
         /// </summary>
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         /// <summary>
         /// Backing field.
@@ -48,10 +48,11 @@ namespace Docular.Client.ViewModel
         {
             get
             {
+                User currentUser = this.CurrentUser;
                 return String.Format(
                     StartView.WelcomeFormatText,
                     this.GetRandomGreetingWord(),
-                    this.CurrentUser.Name
+                    (currentUser != null) ? currentUser.Name : null
                 );
             }
         }
@@ -73,7 +74,7 @@ namespace Docular.Client.ViewModel
         private String GetRandomGreetingWord()
         {
             String[] words = StartView.WelcomeExpressions.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            return words.ElementAt(random.Next(1, words.Length));
+            return words.ElementAt(random.Next(0, words.Length));
         }
     }
 }

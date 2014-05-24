@@ -18,7 +18,7 @@ namespace Docular.Client.Rest
     public class DocularCache : ICache
     {
         /// <summary>
-        /// The <see cref="EventSource"/> used to trace cache events.
+        /// The <see cref="CacheEventSource"/> used to trace cache events.
         /// </summary>
         private static CacheEventSource cacheEventSource = new CacheEventSource();
 
@@ -36,8 +36,30 @@ namespace Docular.Client.Rest
         /// <returns>A <see cref="Task"/> representing the asynchronous caching operation.</returns>
         public async Task Add(String name, Stream content, String store = null)
         {
-            await this.WriteToFileAsync(content, await this.OpenStore(store), name);
-            cacheEventSource.ItemStored(name, store, content.Length);
+            System.Runtime.ExceptionServices.ExceptionDispatchInfo exceptionInfo = null;
+            try
+            {
+                long length = content.Length;
+                await this.WriteToFileAsync(content, await this.OpenStore(store), name);
+                cacheEventSource.ItemStored(name, store, length);
+            }
+            catch (IOException ex)
+            {
+                exceptionInfo = System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex);
+            }
+            
+            if (exceptionInfo != null) // Little hacky (but required!) as we can't use async / await inside a catch-block
+            {
+                int hresult = exceptionInfo.SourceException.HResult & 0xFFFF;
+                if (hresult == 0x70 || hresult == 0x27) // HResults for disk full.
+                {
+                    await this.Invalidate();
+                }
+                else
+                {
+                    exceptionInfo.Throw();
+                }
+            }
         }
 
         /// <summary>

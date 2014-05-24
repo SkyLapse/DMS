@@ -21,7 +21,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// The <see cref="JsonServiceClient"/> executing the requests.
         /// </summary>
-        private readonly JsonServiceClient client = new JsonServiceClient();
+        private readonly JsonServiceClient client;
 
         /// <summary>
         /// The <see cref="ICache"/> used to cache the payloads and thumbnails.
@@ -48,7 +48,7 @@ namespace Docular.Client.Rest
             Contract.Requires<ArgumentNullException>(apiUri != null && cache != null);
 
             this.cache = cache;
-            this.client.BaseUri = apiUri;
+            this.client = new JsonServiceClient(apiUri);
         }
 
         #region Authorization

@@ -24,7 +24,7 @@ namespace Docular.Client.ViewModel
         private static CollectionViewModelEventSource _EventSource = new CollectionViewModelEventSource();
 
         /// <summary>
-        /// The <see cref="CollectionEventSource"/> used to trace <see cref="CollectionViewModel{T}"/> events.
+        /// The <see cref="CollectionViewModelEventSource"/> used to trace <see cref="CollectionViewModel{T}"/> events.
         /// </summary>
         protected static new CollectionViewModelEventSource EventSource
         {
@@ -61,7 +61,7 @@ namespace Docular.Client.ViewModel
         }
 
         /// <summary>
-        /// The <see cref="ICommand"/> used to load additional data into the ViewModel.
+        /// The <see cref="RelayCommand"/> used to load additional data into the ViewModel.
         /// </summary>
         public RelayCommand LoadMoreCommand
         {

@@ -19,9 +19,9 @@ namespace Docular.Client.ViewModel
     public class SettingsViewModel : BaseViewModel
     {
         /// <summary>
-        /// The <see cref="RemoteDbSection"/> to edit.
+        /// The <see cref="DocularConfiguration"/> to edit.
         /// </summary>
-        private DocularConfiguration config;
+        private DocularConfiguration config = DocularConfiguration.Default;
 
         /// <summary>
         /// Backing field.
@@ -66,11 +66,7 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Initializes a new <see cref="SettingsViewModel"/>.
         /// </summary>
-        public SettingsViewModel()
-            : base(Resources.Strings.General.SettingsCaption, (Path)System.Windows.Application.Current.Resources["SettingsIcon"])
-        {
-            this.config = DocularConfiguration.Default;
-        }
+        public SettingsViewModel() : base(Resources.Strings.General.SettingsCaption, (Path)System.Windows.Application.Current.Resources["SettingsIcon"]) { }
 
         /// <summary>
         /// Loads the data into the model.
@@ -88,6 +84,8 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher switcher = this.StartBusySection())
             {
+                Contract.Assume(this.config.CurrentConfiguration != null);
+
                 this.config.CurrentConfiguration.Save();
             }
         }

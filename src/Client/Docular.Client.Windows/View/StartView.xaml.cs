@@ -20,6 +20,9 @@ namespace Docular.Client.View
     /// </summary>
     public partial class StartView : UserControl
     {
+        /// <summary>
+        /// Initializes a new <see cref="StartView"/>.
+        /// </summary>
         public StartView()
         {
             InitializeComponent();

@@ -123,7 +123,7 @@ namespace Docular.Client.ViewModel
         /// Logs the user in.
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous login operation.</returns>
-        public async Task<bool> Login()
+        public Task<bool> Login()
         {
             using (IsBusySwitcher switcher = this.StartBusySection())
             {

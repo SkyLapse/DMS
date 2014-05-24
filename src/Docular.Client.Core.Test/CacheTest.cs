@@ -13,23 +13,26 @@ namespace Docular.Client.Core.Test
         public const String TestSentence = "Hello, this is a test.";
 
         [TestMethod]
-        public async Task TestStoreAndRetreive()
+        public async Task TestCacheStoreAndRetreive()
         {
             ICache cache = new DocularCache();
-            await this.WriteTestFile(cache, "TestStoreAndRetreive");
+            await this.WriteTestFileToCache(cache, "TestStoreAndRetreive");
 
             using (Stream s = await cache.Get("TestStoreAndRetreive"))
-            using (StreamReader sr = new StreamReader(s))
             {
-                Assert.AreEqual(TestSentence, sr.ReadToEnd(), "The retreived text was not the same!");
+                Assert.IsNotNull(s, "The received file was null, meaning it was deleted while the test ran.");
+                using (StreamReader sr = new StreamReader(s))
+                {
+                    Assert.AreEqual(TestSentence, sr.ReadToEnd(), "The retreived text was not the same!");
+                }
             }
         }
 
         [TestMethod]
-        public async Task TestInvalidation()
+        public async Task TestCacheInvalidation()
         {
             ICache cache = new DocularCache();
-            await this.WriteTestFile(cache, "TestInvalidation");
+            await this.WriteTestFileToCache(cache, "TestInvalidation");
             await cache.Invalidate();
 
             using (Stream s = await cache.Get("TestInvalidation"))
@@ -38,7 +41,7 @@ namespace Docular.Client.Core.Test
             }
         }
 
-        private Task WriteTestFile(ICache cache, String fileName, String storeName = null)
+        private Task WriteTestFileToCache(ICache cache, String fileName, String storeName = null)
         {
             using (MemoryStream ms = new MemoryStream())
             using (StreamWriter sw = new StreamWriter(ms))

@@ -36,6 +36,9 @@ namespace Docular.Client.ViewModel
             return Task.FromResult<object>(null);
         }
 
+        /// <summary>
+        /// Does nothing.
+        /// </summary>
         public override Task LoadMore(int count)
         {
             return Task.FromResult((object)null);

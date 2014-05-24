@@ -60,6 +60,8 @@ namespace Docular.Client.ViewModel
         /// </summary>
         public MainViewModel() 
         {
+            Contract.Assume(Messenger.Default != null);
+
             Messenger.Default.Register<ChangeViewModelMessage>(
                 this,
                 m =>

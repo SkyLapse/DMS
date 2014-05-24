@@ -48,6 +48,7 @@ namespace Docular.Client
                     config.Sections.Add(SectionXmlKey, section);
                 }
 
+                Contract.Assume(section.CurrentConfiguration != null);
                 eventSource.ConfigurationLoaded(section.CurrentConfiguration.FilePath);
                 return section;
             }
