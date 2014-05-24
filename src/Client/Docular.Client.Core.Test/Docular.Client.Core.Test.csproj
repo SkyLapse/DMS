@@ -138,7 +138,7 @@
     <Compile Include="ApiKeyManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Client\Docular.Client.Core\Docular.Client.Core.csproj">
+    <ProjectReference Include="..\Docular.Client.Core\Docular.Client.Core.csproj">
       <Project>{0dfb7644-0d72-42c0-adfb-891753921158}</Project>
       <Name>Docular.Client.Core</Name>
     </ProjectReference>
