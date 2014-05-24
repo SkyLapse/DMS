@@ -38,9 +38,33 @@ namespace Docular.Client.ViewModel
         /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
         public override async Task LoadData()
         {
+            try
+            {
+                using (IsBusySwitcher section = this.StartBusySection())
+                {
+                    this.Items = new ObservableCollection<Category>(await this.Client.GetCategoriesAsync(new CategoryCollectionParameters() { Count = 100 }));
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Loads more data (e.g. if the user is scrolling down) into the model.
+        /// </summary>
+        /// <param name="count">The amount of additional items to load.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
+        public override async Task LoadMore(int count)
+        {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Items = new ObservableCollection<Category>(await this.Client.GetCategoriesAsync(CategoryCollectionParameters.Default));
+                foreach (Category cat in await this.Client.GetCategoriesAsync(new CategoryCollectionParameters() { Start = this.Items.Count, Count = 100}))
+                {
+                    this.Items.Add(cat);
+                }
             }
         }
     }

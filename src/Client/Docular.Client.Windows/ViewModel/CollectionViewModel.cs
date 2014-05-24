@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
+using Docular.Client.Events;
 using Docular.Client.Rest;
 
 namespace Docular.Client.ViewModel
@@ -17,6 +18,20 @@ namespace Docular.Client.ViewModel
     /// <typeparam name="T">The <see cref="Type"/> of items to store.</typeparam>
     public abstract class CollectionViewModel<T> : BaseViewModel
     {
+        private CollectionViewModelEventSource _EventSource = new CollectionViewModelEventSource();
+
+        protected new CollectionViewModelEventSource EventSource
+        {
+            get
+            {
+                return _EventSource;
+            }
+            set
+            {
+                _EventSource = value;
+            }
+        }
+
         /// <summary>
         /// Backing field.
         /// </summary>
@@ -36,6 +51,20 @@ namespace Docular.Client.ViewModel
                 Contract.Requires<ArgumentNullException>(value != null);
 
                 this.SetProperty(ref _Items, value);
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="ICommand"/> used to load additional data into the ViewModel.
+        /// </summary>
+        public RelayCommand LoadMoreCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                    async p => await this.LoadMore((int)p),
+                    p => (p != null) && (p is int)
+                );
             }
         }
 
@@ -77,6 +106,17 @@ namespace Docular.Client.ViewModel
         /// <param name="name">The <see cref="CollectionViewModel{T}"/>s name.</param>
         /// <param name="icon">The <see cref="CollectionViewModel{T}"/>'s icon.</param>
         protected CollectionViewModel(IDocularClient client, String name, Path icon) : base(client, name, icon) { }
+
+        /// <summary>
+        /// Loads more data (e.g. if the user is scrolling down) into the model.
+        /// </summary>
+        /// <param name="count">The amount of additional items to load.</param>
+        /// <remarks>
+        /// IT IS ABSOLUTELY CRUCIAL THAT THIS METHOD DOES NOT THROW ANY EXCEPTIONS AS THEY CANNOT BE CAUGHT EXCEPT FOR CATCHING
+        /// UNHANDLED EXCEPTIONS USING <see cref="AppDomain.UnhandledException"/> WHEN THIS IS FIRED FROM AN ASYNC VOID EVENT HANDLER!
+        /// </remarks>
+        /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
+        public abstract Task LoadMore(int count);
 
         /// <summary>
         /// Contains Contract.Invariant definitions.

@@ -60,7 +60,14 @@ namespace Docular.Client.ViewModel
         /// </summary>
         public MainViewModel() 
         {
-            Messenger.Default.Register<ChangeViewModelMessage>(this, m => this.ContentViewModel = (m.NewViewModel != null) ? m.NewViewModel : this.ContentViewModel);
+            Messenger.Default.Register<ChangeViewModelMessage>(
+                this,
+                m =>
+                {
+                    this.ContentViewModel = m.NewViewModel;
+                    this.ContentViewModel.LoadData();
+                }
+            );
 
             this.NavigationViewModel = new SidebarViewModel();
             this.ContentViewModel = ((SidebarViewModel)this.NavigationViewModel).Items.FirstOrDefault();

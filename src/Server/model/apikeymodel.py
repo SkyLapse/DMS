@@ -3,9 +3,9 @@ __author__ = 'SkyLapse'
 from model.basemodel import BaseModel
 
 
-class AppKeyModel(BaseModel):
+class ApiKeyModel(BaseModel):
     def get_collection(self):
-        return self.db['appkeys']
+        return self.db['apikeys']
 
     def _populate(self, item):
         return {

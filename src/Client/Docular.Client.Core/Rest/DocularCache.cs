@@ -33,10 +33,17 @@ namespace Docular.Client.Rest
         /// </summary>
         /// <param name="storeName">The name of the store storing the cache data.</param>
         /// <param name="name">The name of the cache item.</param>
-        /// <returns>The cached data.</returns>
+        /// <returns>The cached data or null if the file could not be found.</returns>
         public async Task<Stream> Get(String name, String storeName = null)
         {
-            return await (await (await this.OpenStore(storeName)).GetFileAsync(name)).OpenAsync(FileAccess.Read);
+            try
+            {
+                return await (await (await this.OpenStore(storeName)).GetFileAsync(name)).OpenAsync(FileAccess.Read);
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
         }
 
         /// <summary>

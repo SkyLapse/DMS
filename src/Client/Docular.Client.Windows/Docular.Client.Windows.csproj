@@ -177,8 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Common\ConfigurationEventSource.cs" />
-    <Compile Include="Common\GeneralSection.cs" />
+    <Compile Include="Events\CollectionViewModelEventSource.cs" />
+    <Compile Include="Events\ViewModelEventSource.cs" />
+    <Compile Include="Events\ConfigurationEventSource.cs" />
+    <Compile Include="Common\DocularConfiguration.cs" />
     <Compile Include="Resources\Strings\General.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -259,7 +261,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Common\RemoteDbSection.cs" />
     <Compile Include="Resources\Strings\SettingsView.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

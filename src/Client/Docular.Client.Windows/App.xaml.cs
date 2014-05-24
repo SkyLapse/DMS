@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
+using Docular.Client.Events;
 
 namespace Docular.Client
 {
@@ -17,11 +18,6 @@ namespace Docular.Client
     /// </summary>
     public partial class App : Application
     {
-        /// <summary>
-        /// Used for locking.
-        /// </summary>
-        private static object configMethodLock = new object();
-
         /// <summary>
         /// The <see cref="Uri"/> of the default skin.
         /// </summary>
@@ -38,7 +34,7 @@ namespace Docular.Client
         public App()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            GeneralSection section = (GeneralSection)config.GetSection(RemoteDbSection.SectionXmlKey);
+            DocularConfiguration section = (DocularConfiguration)config.GetSection(DocularConfiguration.SectionXmlKey);
 
             Contract.Assume(section != null);
             ((App)Application.Current).UpdateSkin(section.Skin);
@@ -115,37 +111,6 @@ namespace Docular.Client
                         current.MergedDictionaries[i] = newDict;
                     }
                     ReplaceResourceDictonaries(current.MergedDictionaries[i], newDict, predicate);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the <see cref="ConfigurationSection"/> with the specified name.
-        /// </summary>
-        /// <typeparam name="T">The <see cref="Type"/> of <see cref="ConfigurationSection"/> to get.</typeparam>
-        /// <param name="sectionName">The name of the <see cref="ConfigurationSection"/> to get.</param>
-        /// <returns>The <see cref="ConfigurationSection"/>. If it can't be found, it will be created.</returns>
-        internal static T GetConfigurationSection<T>(String sectionName)
-            where T : ConfigurationSection, new()
-        {
-            Contract.Requires<ArgumentNullException>(sectionName != null);
-            Contract.Ensures(Contract.Result<T>() != null);
-
-            lock (configMethodLock)
-            {
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
-                T section = config.GetSection(sectionName) as T;
-                if (section == null)
-                {
-                    configEventSource.SectionNotFound(typeof(RemoteDbSection).AssemblyQualifiedName, sectionName);
-
-                    section = new T();
-                    config.Sections.Add(sectionName, section);
-                    return section;
-                }
-                else
-                {
-                    return section;
                 }
             }
         }

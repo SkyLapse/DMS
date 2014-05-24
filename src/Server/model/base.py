@@ -21,4 +21,4 @@ class Base():
             self.categories = CategoryModel(self, self.config, self.client, self.db)
             self.tags = TagModel(self, self.config, self.client, self.db)
             self.users = UserModel(self, self.config, self.client, self.db)
-            self.appkeys = AppKeyModel(self, self.config, self.client, self.db)
+            self.appkeys = ApiKeyModel(self, self.config, self.client, self.db)

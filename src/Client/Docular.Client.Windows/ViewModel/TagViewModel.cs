@@ -41,7 +41,23 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher section = this.StartBusySection())
             {
-                this.Items = new ObservableCollection<Tag>(await this.Client.GetTagsAsync(TagCollectionParameters.Default));
+                this.Items = new ObservableCollection<Tag>(await this.Client.GetTagsAsync(new TagCollectionParameters() { Count = 100 }));
+            }
+        }
+
+        /// <summary>
+        /// Loads more data (e.g. if the user is scrolling down) into the model.
+        /// </summary>
+        /// <param name="count">The amount of additional items to load.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous loading operation.</returns>
+        public override async Task LoadMore(int count)
+        {
+            using (IsBusySwitcher section = this.StartBusySection())
+            {
+                foreach (Tag tag in await this.Client.GetTagsAsync(new TagCollectionParameters() { Start = this.Items.Count, Count = 100 }))
+                {
+                    this.Items.Add(tag);
+                }
             }
         }
     }

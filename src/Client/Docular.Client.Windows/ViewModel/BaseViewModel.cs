@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shapes;
 using Docular.Client;
+using Docular.Client.Events;
 using Docular.Client.Rest;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -17,6 +18,11 @@ namespace Docular.Client.ViewModel
     [ContractClass(typeof(BaseViewModelContracts))]
     public abstract class BaseViewModel : ObservableObject
     {
+        /// <summary>
+        /// The <see cref="ViewModelEventSource"/> tracing events.
+        /// </summary>
+        protected virtual ViewModelEventSource EventSource { get; set; }
+
         /// <summary>
         /// The <see cref="IDocularClient"/> used to fetch the data.
         /// </summary>
@@ -90,13 +96,17 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Initializes a new <see cref="BaseViewModel"/>.
         /// </summary>
-        protected BaseViewModel() { }
+        protected BaseViewModel() : this((String)null) { }
 
         /// <summary>
         /// Initializes a new <see cref="BaseViewModel"/>.
         /// </summary>
         /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
-        protected BaseViewModel(String name) : base(name) { }
+        protected BaseViewModel(String name)
+            : base(name)
+        {
+            this.EventSource.Initialized(this.GetType(), name);
+        }
 
         /// <summary>
         /// Initializes a new <see cref="BaseViewModel"/>.
@@ -114,6 +124,7 @@ namespace Docular.Client.ViewModel
         /// </summary>
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
         protected BaseViewModel(IDocularClient client)
+            : this((String)null)
         {
             this.Client = client;
         }
@@ -124,7 +135,7 @@ namespace Docular.Client.ViewModel
         /// <param name="client">An <see cref="IDocularClient"/> used to fetch the data.</param>
         /// <param name="name">The <see cref="BaseViewModel"/>s name.</param>
         protected BaseViewModel(IDocularClient client, String name)
-            : base(name)
+            : this(name)
         {
             this.Client = client;
         }

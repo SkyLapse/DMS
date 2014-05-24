@@ -3,45 +3,55 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Docular.Client.Events;
 
 namespace Docular.Client
 {
     /// <summary>
-    /// Contains configuration data for the docular remote database.
+    /// Contains general configuration data.
     /// </summary>
-    public class RemoteDbSection : ConfigurationSection
+    public class DocularConfiguration : ConfigurationSection
     {
         /// <summary>
-        /// The key used to identify the default <see cref="RemoteDbSection"/> instance in the configuration XML file.
+        /// A machine-specific salt.
         /// </summary>
-        public const String SectionXmlKey = "RemoteDbConfiguration";
-
-        /// <summary>
-        /// Gets the an instance of the <see cref="RemoteDbSection"/>.
-        /// </summary>
-        public static RemoteDbSection Default
-        {
-            get
-            {
-                Contract.Ensures(Contract.Result<RemoteDbSection>() != null);
-
-                return App.GetConfigurationSection<RemoteDbSection>(SectionXmlKey);
-            }
-        }
-
-        /// <summary>
-        /// A PC specific salt.
-        /// </summary>
-        private static byte[] entropy = Encoding.UTF8.GetBytes(Environment.MachineName);
+        private static readonly byte[] entropy = Encoding.UTF8.GetBytes(Environment.MachineName);
 
         /// <summary>
         /// The <see cref="ConfigurationEventSource"/> used for logging.
         /// </summary>
-        private readonly ConfigurationEventSource eventSource = new ConfigurationEventSource();
+        private static readonly ConfigurationEventSource eventSource = new ConfigurationEventSource();
+
+        /// <summary>
+        /// The key used to identify the default <see cref="DocularConfiguration"/> instance in the configuration XML file.
+        /// </summary>
+        public const String SectionXmlKey = "DocularWindows";
+
+        /// <summary>
+        /// Gets the an instance of the <see cref="DocularConfiguration"/>.
+        /// </summary>
+        public static DocularConfiguration Default
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<DocularConfiguration>() != null);
+
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
+                DocularConfiguration section = (DocularConfiguration)config.GetSection(SectionXmlKey);
+
+                if (section == null)
+                {
+                    section = new DocularConfiguration();
+                    config.Sections.Add(SectionXmlKey, section);
+                }
+
+                eventSource.ConfigurationLoaded(section.CurrentConfiguration.FilePath);
+                return section;
+            }
+        }
 
         /// <summary>
         /// The API key string. Will be encrypted upon save and decrypted upon access.
@@ -51,25 +61,12 @@ namespace Docular.Client
         {
             get
             {
-                String encryptedKeyString = (String)this["ApiKey"];
-                if (encryptedKeyString == null)
-                {
-                    return null;
-                }
-
-                try
-                {
-                    return DPAPIDecryptToString(encryptedKeyString);
-                }
-                catch (Exception ex)
-                {
-                    this.eventSource.DecryptFailed(encryptedKeyString, ex);
-                    return null;
-                }
+                String apiKey = this.GetValue<String>("ApiKey");
+                return (apiKey != null) ? DPAPIDecryptToString(apiKey) : null;
             }
             set
             {
-                this["ApiKey"] = (value != null) ? DPAPIEncrypt(value) : null;
+                this.SetValue("ApiKey", (value != null) ? DPAPIEncrypt(value) : null);
             }
         }
 
@@ -77,23 +74,40 @@ namespace Docular.Client
         /// The path to the docular remote DB.
         /// </summary>
         [StringValidator(MinLength = 12)]
-        [ConfigurationProperty("DocularUri", DefaultValue = "http://example.com/api/", IsRequired = true)]
+        [ConfigurationProperty("DocularApiUri", IsRequired = true)]
         public String DocularApiUri
         {
             get
             {
-                return (String)this["DocularUri"] ?? "http://example.com/api/";
+                return this.GetValue<String>("DocularApiUri");
             }
             set
             {
-                this["DocularUri"] = value ?? "http://example.com/api/";
+                this.SetValue("DocularApiUri", value);
             }
         }
 
         /// <summary>
-        /// Initializes a new <see cref="RemoteDbSection"/>.
+        /// Gets or sets the application skin to use on startup.
         /// </summary>
-        public RemoteDbSection()
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty("Skin", DefaultValue = "Default", IsRequired = true)]
+        public String Skin
+        {
+            get
+            {
+                return this.GetValue<String>("Skin") ?? "Default";
+            }
+            set
+            {
+                this.SetValue("Skin", value ?? "Default");
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new <see cref="DocularConfiguration"/>.
+        /// </summary>
+        public DocularConfiguration()
         {
             this.SectionInformation.AllowDefinition = ConfigurationAllowDefinition.Everywhere;
             this.SectionInformation.AllowExeDefinition = ConfigurationAllowExeDefinition.MachineToRoamingUser;
@@ -101,13 +115,39 @@ namespace Docular.Client
         }
 
         /// <summary>
-        /// Indicates whether the <see cref="RemoteDbSection"/> is read-only.
+        /// Indicates whether the <see cref="DocularConfiguration"/> is read-only.
         /// </summary>
         /// <returns><c>false</c>, the section is always writable.</returns>
         public override bool IsReadOnly()
         {
             return false;
         }
+
+        /// <summary>
+        /// Retreives a value from the configuration file.
+        /// </summary>
+        /// <typeparam name="T">The <see cref="Type"/> of the value to retreive.</typeparam>
+        /// <param name="key">The key of the value.</param>
+        /// <returns>The value inside the configuration file.</returns>
+        private T GetValue<T>(String key)
+        {
+            T value = (T)this[key];
+            eventSource.ValueRetreived(key, value);
+            return value;
+        }
+
+        /// <summary>
+        /// Sets a value in the configuration file.
+        /// </summary>
+        /// <param name="key">The key of the value.</param>
+        /// <param name="value">The new value.</param>
+        private void SetValue(String key, object value)
+        {
+            this[key] = value;
+            eventSource.ValueSet(key, value);
+        }
+
+        #region DPAPI
 
         /// <summary>
         /// Decrypts the specified base-64 encoded DPAPI protected string into its original form.
@@ -181,5 +221,7 @@ namespace Docular.Client
             byte[] encryptedKey = ProtectedData.Protect(data, entropy, DataProtectionScope.CurrentUser);
             return Convert.ToBase64String(encryptedKey);
         }
+
+        #endregion
     }
 }

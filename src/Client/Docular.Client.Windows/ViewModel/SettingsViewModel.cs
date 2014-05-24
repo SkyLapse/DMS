@@ -21,12 +21,7 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// The <see cref="RemoteDbSection"/> to edit.
         /// </summary>
-        private RemoteDbSection remoteDbSection;
-
-        /// <summary>
-        /// The <see cref="RemoteDbSection"/> to edit.
-        /// </summary>
-        private GeneralSection generalSection;
+        private DocularConfiguration config;
 
         /// <summary>
         /// Backing field.
@@ -74,8 +69,7 @@ namespace Docular.Client.ViewModel
         public SettingsViewModel()
             : base(Resources.Strings.General.SettingsCaption, (Path)System.Windows.Application.Current.Resources["SettingsIcon"])
         {
-            this.remoteDbSection = RemoteDbSection.Default;
-            this.generalSection = GeneralSection.Default;
+            this.config = DocularConfiguration.Default;
         }
 
         /// <summary>
@@ -94,7 +88,7 @@ namespace Docular.Client.ViewModel
         {
             using (IsBusySwitcher switcher = this.StartBusySection())
             {
-                this.remoteDbSection.CurrentConfiguration.Save();
+                this.config.CurrentConfiguration.Save();
             }
         }
     }

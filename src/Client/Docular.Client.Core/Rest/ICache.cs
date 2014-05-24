@@ -30,7 +30,7 @@ namespace Docular.Client.Rest
         /// </summary>
         /// <param name="name">The name of the cache item.</param>
         /// <param name="store">The store storing the cache data. If null is specified, the default store will be opened.</param>
-        /// <returns>The cached data.</returns>
+        /// <returns>The cached data or <c>null</c> if the file could not be found.</returns>
         Task<Stream> Get(String name, String store = null);
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace Docular.Client.Rest
         /// </summary>
         public Task Add(String name, Stream content, String store = null)
         {
-            Contract.Requires<ArgumentNullException>(store != null);
             Contract.Requires<ArgumentNullException>(name != null);
             Contract.Requires<ArgumentNullException>(content != null);
+            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }
@@ -78,8 +78,8 @@ namespace Docular.Client.Rest
         /// </summary>
         public Task<Stream> Get(String name, String store = null)
         {
-            Contract.Requires<ArgumentNullException>(store != null);
             Contract.Requires<ArgumentNullException>(name != null);
+            Contract.Ensures(Contract.Result<Task<Stream>>() != null);
 
             return null;
         }
@@ -89,6 +89,8 @@ namespace Docular.Client.Rest
         /// </summary>
         public Task Invalidate()
         {
+            Contract.Ensures(Contract.Result<Task>() != null);
+
             return null;
         }
 
@@ -97,6 +99,8 @@ namespace Docular.Client.Rest
         /// </summary>
         public Task Invalidate(String store)
         {
+            Contract.Ensures(Contract.Result<Task>() != null);
+
             return null;
         }
     }
