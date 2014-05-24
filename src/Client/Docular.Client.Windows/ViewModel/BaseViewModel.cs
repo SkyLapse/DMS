@@ -36,7 +36,7 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Indicates whether the model is currently busy / performing background work.
         /// </summary>
-        public bool IsBusy
+        public bool IsBusy // TODO: Replace IsBusy by "refcount"-System incrementing a value if something is done and decremeting it if it is finished.
         {
             get
             {
