@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Docular.Client.Core.Test
 {
     [TestClass]
-    public class DocularCacheTest
+    public class CacheTest
     {
         public const String TestSentence = "Hello, this is a test.";
 
@@ -38,7 +38,7 @@ namespace Docular.Client.Core.Test
             }
         }
 
-        private async Task WriteTestFile(ICache cache, String fileName, String storeName = null)
+        private Task WriteTestFile(ICache cache, String fileName, String storeName = null)
         {
             using (MemoryStream ms = new MemoryStream())
             using (StreamWriter sw = new StreamWriter(ms))
@@ -47,7 +47,7 @@ namespace Docular.Client.Core.Test
                 sw.Flush();
                 ms.Position = 0;
 
-                await cache.Add(fileName, ms, storeName);
+                return cache.Add(fileName, ms, storeName);
             }
         }
     }

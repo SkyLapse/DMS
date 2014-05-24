@@ -133,9 +133,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DocularCacheTest.cs" />
+    <Compile Include="CacheTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DocularClientTest.cs" />
+    <Compile Include="ApiKeyManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Client\Docular.Client.Core\Docular.Client.Core.csproj">

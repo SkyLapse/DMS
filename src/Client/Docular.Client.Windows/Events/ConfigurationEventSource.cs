@@ -41,7 +41,7 @@ namespace Docular.Client.Events
         /// <param name="value">The value that was retreived.</param>
         [Event(001, 
                Message = "The value '{0}' was retreived from the configuration. It's value was '{1}'.",
-               Level = EventLevel.Informational,
+               Level = EventLevel.Verbose,
                Opcode = EventOpcode.Receive)]
         public void ValueRetreived(String entryName, object value)
         {
@@ -55,7 +55,7 @@ namespace Docular.Client.Events
         /// <param name="value">The new value.</param>
         [Event(002,
                Message = "The value '{0}' was set to '{1}'.",
-               Level = EventLevel.Informational,
+               Level = EventLevel.Verbose,
                Opcode = EventOpcode.Receive)]
         public void ValueSet(String entryName, object value)
         {

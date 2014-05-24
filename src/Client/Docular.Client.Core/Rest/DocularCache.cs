@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Docular.Client.Events;
 using Docular.Client.Model;
 using PCLStorage;
 
@@ -17,6 +18,16 @@ namespace Docular.Client.Rest
     public class DocularCache : ICache
     {
         /// <summary>
+        /// The <see cref="EventSource"/> used to trace cache events.
+        /// </summary>
+        private static CacheEventSource cacheEventSource = new CacheEventSource();
+
+        /// <summary>
+        /// Initializes a new <see cref="DocularCache"/>.
+        /// </summary>
+        public DocularCache() { }
+
+        /// <summary>
         /// Adds an item to the cache.
         /// </summary>
         /// <param name="store">The store storing the cache data.</param>
@@ -26,6 +37,7 @@ namespace Docular.Client.Rest
         public async Task Add(String name, Stream content, String store = null)
         {
             await this.WriteToFileAsync(content, await this.OpenStore(store), name);
+            cacheEventSource.ItemStored(name, store, content.Length);
         }
 
         /// <summary>
@@ -38,10 +50,13 @@ namespace Docular.Client.Rest
         {
             try
             {
-                return await (await (await this.OpenStore(storeName)).GetFileAsync(name)).OpenAsync(FileAccess.Read);
+                Stream data = await (await (await this.OpenStore(storeName)).GetFileAsync(name)).OpenAsync(FileAccess.Read);
+                cacheEventSource.ItemReceived(name, storeName, data.Length);
+                return data;
             }
             catch (FileNotFoundException)
             {
+                cacheEventSource.ItemNotFound(name, storeName);
                 return null;
             }
         }
@@ -78,10 +93,10 @@ namespace Docular.Client.Rest
         /// <returns>A <see cref="Task"/> representing the asynchronous invalidating operation.</returns>
         public async Task Invalidate(IFolder store)
         {
-            if (store != null)
-            {
-                await Task.WhenAll((await store.GetFilesAsync()).Select(file => file.DeleteAsync()));
-            }
+            Contract.Requires<ArgumentNullException>(store != null);
+
+            await Task.WhenAll((await store.GetFilesAsync()).Select(file => file.DeleteAsync()));
+            cacheEventSource.Invalidated(store.Name);
         }
 
         /// <summary>
@@ -117,19 +132,7 @@ namespace Docular.Client.Rest
         {
             Contract.Requires<ArgumentNullException>(content != null && folder != null && fileName != null);
 
-            await this.WriteToFileAsync(content, await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting));
-        }
-
-        /// <summary>
-        /// Writes the specified byte data to the specified <see cref="IFile"/>.
-        /// </summary>
-        /// <param name="content">The new file content.</param>
-        /// <param name="file">The <see cref="IFile"/> to write to.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous writing process.</returns>
-        private async Task WriteToFileAsync(Stream content, IFile file)
-        {
-            Contract.Requires<ArgumentNullException>(content != null && file != null);
-
+            IFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             using (Stream fs = await file.OpenAsync(FileAccess.ReadAndWrite))
             {
                 await content.CopyToAsync(fs);

@@ -73,6 +73,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Returns items created by that given user only.
         /// </summary>
+        [DataMember]
         public String UserId { get; set; }
     }
 }

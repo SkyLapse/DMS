@@ -15,6 +15,11 @@ namespace Docular.Client.Events
     public class ViewModelEventSource : EventSource
     {
         /// <summary>
+        /// Initializes a new <see cref="ViewModelEventSource"/>.
+        /// </summary>
+        public ViewModelEventSource() : base(false) { }
+
+        /// <summary>
         /// Logs the initialization of a new ViewModel.
         /// </summary>
         /// <param name="viewModelType">The <see cref="Type"/> of the ViewModel that was initialzed.</param>

@@ -18,9 +18,15 @@ namespace Docular.Client.ViewModel
     /// <typeparam name="T">The <see cref="Type"/> of items to store.</typeparam>
     public abstract class CollectionViewModel<T> : BaseViewModel
     {
-        private CollectionViewModelEventSource _EventSource = new CollectionViewModelEventSource();
+        /// <summary>
+        /// Backing field.
+        /// </summary>
+        private static CollectionViewModelEventSource _EventSource = new CollectionViewModelEventSource();
 
-        protected new CollectionViewModelEventSource EventSource
+        /// <summary>
+        /// The <see cref="CollectionEventSource"/> used to trace <see cref="CollectionViewModel{T}"/> events.
+        /// </summary>
+        protected static new CollectionViewModelEventSource EventSource
         {
             get
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Docular.Client.Model;
@@ -26,6 +27,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// Returns <see cref="Category"/>s with that specified parent only.
         /// </summary>
+        [DataMember]
         public String ParentId { get; set; }
     }
 }

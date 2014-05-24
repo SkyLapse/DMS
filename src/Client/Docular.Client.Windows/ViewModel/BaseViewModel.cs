@@ -19,9 +19,24 @@ namespace Docular.Client.ViewModel
     public abstract class BaseViewModel : ObservableObject
     {
         /// <summary>
+        /// Backing field.
+        /// </summary>
+        private static ViewModelEventSource _EventSource = new ViewModelEventSource();
+
+        /// <summary>
         /// The <see cref="ViewModelEventSource"/> tracing events.
         /// </summary>
-        protected virtual ViewModelEventSource EventSource { get; set; }
+        protected static ViewModelEventSource EventSource
+        {
+            get
+            {
+                return _EventSource;
+            }
+            private set
+            {
+                _EventSource = value;
+            }
+        }
 
         /// <summary>
         /// The <see cref="IDocularClient"/> used to fetch the data.
@@ -105,7 +120,7 @@ namespace Docular.Client.ViewModel
         protected BaseViewModel(String name)
             : base(name)
         {
-            this.EventSource.Initialized(this.GetType(), name);
+            EventSource.Initialized(this.GetType(), name);
         }
 
         /// <summary>
