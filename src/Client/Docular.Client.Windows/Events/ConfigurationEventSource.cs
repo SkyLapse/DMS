@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Diagnostics.Tracing;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace Docular.Client.Events
         /// </summary>
         /// <param name="entryName">The key of the setting value that was retreived.</param>
         /// <param name="value">The value that was retreived.</param>
+        [Conditional("LOGGING_VERBOSE")]
         [Event(001, 
                Message = "The value '{0}' was retreived from the configuration. It's value was '{1}'.",
                Level = EventLevel.Verbose,
@@ -53,6 +55,7 @@ namespace Docular.Client.Events
         /// </summary>
         /// <param name="entryName">The name of the entry.</param>
         /// <param name="value">The new value.</param>
+        [Conditional("LOGGING_VERBOSE")]
         [Event(002,
                Message = "The value '{0}' was set to '{1}'.",
                Level = EventLevel.Verbose,

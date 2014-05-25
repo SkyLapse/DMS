@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Docular.Client.Cache;
 using Docular.Client.Core;
 using Docular.Client.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,19 +26,6 @@ namespace Docular.Client.Core.Test
                 {
                     Assert.AreEqual(TestSentence, sr.ReadToEnd(), "The retreived text was not the same!");
                 }
-            }
-        }
-
-        [TestMethod]
-        public async Task TestCacheInvalidation()
-        {
-            ICache cache = new DocularCache();
-            await this.WriteTestFileToCache(cache, "TestInvalidation");
-            await cache.Invalidate();
-
-            using (Stream s = await cache.Get("TestInvalidation"))
-            {
-                Assert.AreEqual(null, s, "The retreived Stream was not null (as it should've been after invalidation).");
             }
         }
 

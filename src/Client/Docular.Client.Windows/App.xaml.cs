@@ -33,11 +33,7 @@ namespace Docular.Client
         /// </summary>
         public App()
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            DocularConfiguration section = (DocularConfiguration)config.GetSection(DocularConfiguration.SectionXmlKey);
-
-            Contract.Assume(section != null);
-            ((App)Application.Current).UpdateSkin(section.Skin);
+            //this.UpdateSkin(DocularConfiguration.Default.Skin);
         }
 
         /// <summary>

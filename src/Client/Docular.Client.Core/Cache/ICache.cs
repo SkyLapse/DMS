@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Docular.Client.Model;
 using PCLStorage;
 
-namespace Docular.Client.Rest
+namespace Docular.Client.Cache
 {
     /// <summary>
     /// Defines mechanisms to locally cache data.
@@ -32,27 +32,6 @@ namespace Docular.Client.Rest
         /// <param name="store">The store storing the cache data. If null is specified, the default store will be opened.</param>
         /// <returns>The cached data or <c>null</c> if the file could not be found.</returns>
         Task<Stream> Get(String name, String store = null);
-
-        /// <summary>
-        /// Invaliates all of the locally stored data deleting it from the device. See remarks.
-        /// </summary>
-        /// <remarks>
-        /// Due to thread-safety, the method only deletes the files that were present when it was called, it does not make
-        /// sure the cache folder is emptied completely.
-        /// </remarks>
-        /// <returns>A <see cref="Task"/> representing the asynchronous deleting operation.</returns>
-        Task Invalidate();
-
-        /// <summary>
-        /// Invaliates the locally stored data deleting it from the device. See remarks.
-        /// </summary>
-        /// <param name="store">The cache store to invalidate. If <c>null</c> is specified, nothing will be invalidated.</param>
-        /// <remarks>
-        /// Due to thread-safety, the method only deletes the files that were present when it was called, it does not make
-        /// sure the cache folder is emptied completely.
-        /// </remarks>
-        /// <returns>A <see cref="Task"/> representing the asynchronous deleting operation.</returns>
-        Task Invalidate(String store);
     }
 
     /// <summary>
@@ -80,26 +59,6 @@ namespace Docular.Client.Rest
         {
             Contract.Requires<ArgumentNullException>(name != null);
             Contract.Ensures(Contract.Result<Task<Stream>>() != null);
-
-            return null;
-        }
-
-        /// <summary>
-        /// Contains contract definitions, not for actual use.
-        /// </summary>
-        public Task Invalidate()
-        {
-            Contract.Ensures(Contract.Result<Task>() != null);
-
-            return null;
-        }
-
-        /// <summary>
-        /// Contains contract definitions, not for actual use.
-        /// </summary>
-        public Task Invalidate(String store)
-        {
-            Contract.Ensures(Contract.Result<Task>() != null);
 
             return null;
         }

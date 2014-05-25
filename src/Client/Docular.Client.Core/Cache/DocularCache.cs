@@ -10,7 +10,7 @@ using Docular.Client.Events;
 using Docular.Client.Model;
 using PCLStorage;
 
-namespace Docular.Client.Rest
+namespace Docular.Client.Cache
 {
     /// <summary>
     /// Represents a cache.

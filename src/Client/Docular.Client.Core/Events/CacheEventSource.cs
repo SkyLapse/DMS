@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace Docular.Client.Events
         /// <param name="itemName">The name of the item.</param>
         /// <param name="storeName">The name of the store the item was stored in.</param>
         /// <param name="itemSize">The size of the item in bytes.</param>
+        [Conditional("LOGGING_VERBOSE")]
         [Event(000,
                Message = "An item '{0}' (size: {1} bytes) was stored in store '{2}'.",
                Level = EventLevel.Verbose,
@@ -39,6 +41,7 @@ namespace Docular.Client.Events
         /// <param name="itemName">The name of the item.</param>
         /// <param name="storeName">The name of the store the item was stored in.</param>
         /// <param name="itemSize">The size of the item in bytes.</param>
+        [Conditional("LOGGING_VERBOSE")]
         [Event(001,
                Message = "An item '{0}' (size: {1} bytes) was retreived from store '{2}'.",
                Level = EventLevel.Verbose,

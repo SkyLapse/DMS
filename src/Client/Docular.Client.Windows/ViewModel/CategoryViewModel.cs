@@ -20,7 +20,7 @@ namespace Docular.Client.ViewModel
         /// <summary>
         /// Initializes a new <see cref="DocumentViewModel"/>.
         /// </summary>
-        public CategoryViewModel() : base(Resources.Strings.General.DocumentsCaption, (Path)System.Windows.Application.Current.Resources["BoxIcon"]) { }
+        public CategoryViewModel() : base(Resources.Strings.General.DocumentsCaption, (Path)System.Windows.Application.Current.Resources["FolderIcon"]) { }
 
         /// <summary>
         /// Initializes a new <see cref="CategoryViewModel"/>.
@@ -42,9 +42,12 @@ namespace Docular.Client.ViewModel
             {
                 using (IsBusySwitcher section = this.StartBusySection())
                 {
-                    this.Items = new ObservableCollection<Category>(await this.Client.GetCategoriesAsync(new CategoryCollectionParameters() { Count = 100 }));
+                    this.Items = new ObservableCollection<Category>(
+                        await this.Client.GetCategoriesAsync(
+                            new CategoryCollectionParameters() { Count = 100 }
+                        )
+                    );
                 }
-
             }
             catch (Exception)
             {

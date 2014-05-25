@@ -28,7 +28,7 @@ namespace Docular.Client
         /// <summary>
         /// The key used to identify the default <see cref="DocularConfiguration"/> instance in the configuration XML file.
         /// </summary>
-        public const String SectionXmlKey = "DocularWindows";
+        public const String SectionXmlKey = "Docular.Client.Windows";
 
         /// <summary>
         /// Gets the an instance of the <see cref="DocularConfiguration"/>.
@@ -44,6 +44,7 @@ namespace Docular.Client
 
                 if (section == null)
                 {
+                    eventSource.SectionNotFound(typeof(DocularConfiguration).AssemblyQualifiedName, SectionXmlKey);
                     section = new DocularConfiguration();
                     config.Sections.Add(SectionXmlKey, section);
                 }
@@ -63,18 +64,17 @@ namespace Docular.Client
             get
             {
                 String apiKey = this.GetValue<String>("ApiKey");
-                return (apiKey != null) ? DPAPIDecryptToString(apiKey) : null;
+                return !String.IsNullOrWhiteSpace(apiKey) ? DPAPIDecryptToString(apiKey) : null;
             }
             set
             {
-                this.SetValue("ApiKey", (value != null) ? DPAPIEncrypt(value) : null);
+                this.SetValue("ApiKey", !String.IsNullOrWhiteSpace(value) ? DPAPIEncrypt(value) : null);
             }
         }
 
         /// <summary>
         /// The path to the docular remote DB.
         /// </summary>
-        [StringValidator(MinLength = 12)]
         [ConfigurationProperty("DocularApiUri", IsRequired = true)]
         public String DocularApiUri
         {
@@ -91,17 +91,17 @@ namespace Docular.Client
         /// <summary>
         /// Gets or sets the application skin to use on startup.
         /// </summary>
-        [StringValidator(MinLength = 1)]
         [ConfigurationProperty("Skin", DefaultValue = "Default", IsRequired = true)]
         public String Skin
         {
             get
             {
-                return this.GetValue<String>("Skin") ?? "Default";
+                String skin = this.GetValue<String>("Skin");
+                return !String.IsNullOrWhiteSpace(skin) ? skin : "Default";
             }
             set
             {
-                this.SetValue("Skin", value ?? "Default");
+                this.SetValue("Skin", value);
             }
         }
 

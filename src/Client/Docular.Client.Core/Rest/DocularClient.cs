@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Docular.Client.Cache;
 using Docular.Client.Model;
 using PCLStorage;
 using ServiceStack;
