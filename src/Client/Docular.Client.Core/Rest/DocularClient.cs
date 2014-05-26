@@ -6,7 +6,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using Docular.Client.Cache;
 using Docular.Client.Model;
 using PCLStorage;
 using ServiceStack;
@@ -27,7 +26,7 @@ namespace Docular.Client.Rest
         /// <summary>
         /// The <see cref="ICache"/> used to cache the payloads and thumbnails.
         /// </summary>
-        private readonly ICache cache;
+        private readonly DocularCache cache;
 
         /// <summary>
         /// Initializes a new <see cref="DocularClient"/>.
@@ -44,7 +43,7 @@ namespace Docular.Client.Rest
         /// </summary>
         /// <param name="apiUri">The base URL of the remote docular host's API.</param>
         /// <param name="cache">The <see cref="ICache"/> used to cache thumbnails and payloads.</param>
-        public DocularClient(String apiUri, ICache cache)
+        internal DocularClient(String apiUri, DocularCache cache)
         {
             Contract.Requires<ArgumentNullException>(apiUri != null && cache != null);
 

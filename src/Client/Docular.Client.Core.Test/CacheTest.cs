@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using Docular.Client.Cache;
 using Docular.Client.Core;
 using Docular.Client.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,10 +15,10 @@ namespace Docular.Client.Core.Test
         [TestMethod]
         public async Task TestCacheStoreAndRetreive()
         {
-            ICache cache = new DocularCache();
-            await this.WriteTestFileToCache(cache, "TestStoreAndRetreive");
+            DocularCache cache = new DocularCache();
+            await this.WriteTestFileToCache(cache, "TestStoreAndRetreive", "Default");
 
-            using (Stream s = await cache.Get("TestStoreAndRetreive"))
+            using (Stream s = await cache.Get("TestStoreAndRetreive", "Default"))
             {
                 Assert.IsNotNull(s, "The received file was null, meaning it was deleted while the test ran.");
                 using (StreamReader sr = new StreamReader(s))
@@ -29,7 +28,7 @@ namespace Docular.Client.Core.Test
             }
         }
 
-        private Task WriteTestFileToCache(ICache cache, String fileName, String storeName = null)
+        private Task WriteTestFileToCache(DocularCache cache, String fileName, String storeName)
         {
             using (MemoryStream ms = new MemoryStream())
             using (StreamWriter sw = new StreamWriter(ms))

@@ -10,12 +10,17 @@ using Docular.Client.Events;
 using Docular.Client.Model;
 using PCLStorage;
 
-namespace Docular.Client.Cache
+namespace Docular.Client.Rest
 {
     /// <summary>
     /// Represents a cache.
     /// </summary>
-    public class DocularCache : ICache
+#if DEBUG
+    public
+#elif RELEASE
+    internal 
+#endif
+    class DocularCache
     {
         /// <summary>
         /// The <see cref="CacheEventSource"/> used to trace cache events.
@@ -34,8 +39,12 @@ namespace Docular.Client.Cache
         /// <param name="name">The name of the cache item.</param>
         /// <param name="content">The cached data.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous caching operation.</returns>
-        public async Task Add(String name, Stream content, String store = null)
+        public async Task Add(String name, Stream content, String store)
         {
+            Contract.Requires<ArgumentNullException>(name != null);
+            Contract.Requires<ArgumentNullException>(content != null);
+            Contract.Requires<ArgumentNullException>(store != null);
+
             System.Runtime.ExceptionServices.ExceptionDispatchInfo exceptionInfo = null;
             try
             {
@@ -68,8 +77,11 @@ namespace Docular.Client.Cache
         /// <param name="storeName">The name of the store storing the cache data.</param>
         /// <param name="name">The name of the cache item.</param>
         /// <returns>The cached data or null if the file could not be found.</returns>
-        public async Task<Stream> Get(String name, String storeName = null)
+        public async Task<Stream> Get(String name, String storeName)
         {
+            Contract.Requires<ArgumentNullException>(name != null);
+            Contract.Requires<ArgumentNullException>(storeName != null);
+
             try
             {
                 Stream data = await (await (await this.OpenStore(storeName)).GetFileAsync(name)).OpenAsync(FileAccess.Read);
@@ -140,7 +152,9 @@ namespace Docular.Client.Cache
         /// <returns>The cache store.</returns>
         private async Task<IFolder> OpenStore(String name)
         {
-            return await (await this.OpenCacheFolder()).CreateFolderAsync(name ?? "Default", CreationCollisionOption.OpenIfExists);
+            Contract.Requires<ArgumentNullException>(name != null);
+
+            return await (await this.OpenCacheFolder()).CreateFolderAsync(name, CreationCollisionOption.OpenIfExists);
         }
 
         /// <summary>

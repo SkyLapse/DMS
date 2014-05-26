@@ -106,16 +106,13 @@
     <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DataSource\DataSourceItem.cs" />
-    <Compile Include="DataSource\IDataSource.cs" />
     <Compile Include="Events\CacheEventSource.cs" />
     <Compile Include="Model\BinaryObject.cs" />
     <Compile Include="Model\Payload.cs" />
     <Compile Include="Model\Thumbnail.cs" />
     <Compile Include="Rest\CategoryCollectionParameters.cs" />
-    <Compile Include="Cache\DocularCache.cs" />
+    <Compile Include="Rest\DocularCache.cs" />
     <Compile Include="Rest\DocumentCollectionParameters.cs" />
-    <Compile Include="Cache\ICache.cs" />
     <Compile Include="Rest\IApiKeyManager.cs" />
     <Compile Include="Rest\CollectionFilterParameters.cs" />
     <Compile Include="Rest\DocularClient.cs" />
